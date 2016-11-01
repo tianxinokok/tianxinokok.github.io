@@ -1,1 +1,18 @@
 baseurl:/tianxinokok.github.io
+#future: true
+#permalink: /:title/
+#url: http://tianxinokok.github.io
+name: TT
+author: tianxin
+#qq: 505268168
+email: tianxinokok@163.com
+#beian: 
+#cnzz:
+pygments: true
+safe: true
+auto: true 
+github: tianxinokok
+paginate: 20
+#highlighter: rouge
+#truncate: true
+#about: "TT"
