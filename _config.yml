@@ -13,6 +13,19 @@ safe: true
 auto: true 
 github: tianxinokok
 paginate: 20
+#### Markdown Processors
+markdown: redcarpet
+redcarpet:
+  extensions:
+    - hard_wrap
+    - no_intra_emphasis
+    - autolink
+    - strikethrough
+    - tables
+    - lax_spacing
+    - with_toc_data
+
+
 #highlighter: rouge
 #truncate: true
 #about: "TT"

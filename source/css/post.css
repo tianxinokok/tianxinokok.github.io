@@ -1,0 +1,18 @@
+html,body,div,p,span,img,a,ol,ul,li,table,caption,thead,tbody,tfoot,th,td,tr{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration:none;
+	font-family:"Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+}html{
+	font-size: 62.5%;
+}
+h2{
+	font-weight: normal;
+}
+.content{
+	position: absolute;
+	width: 80%;
+	left: 10%;
+	font-size: 1.6rem;
+}

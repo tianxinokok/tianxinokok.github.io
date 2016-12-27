@@ -1,12 +1,13 @@
 html,body,div,p,span,img,a,ol,ul,li,table,caption,thead,tbody,tfoot,th,td,tr{
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	list-style: none;
 	text-decoration:none;
 	font-family:"Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
 }
 html{
 	font-size: 62.5%;
+	font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
 }
 a:link{
 	color: #489393;/*#87A350*/;
@@ -17,9 +18,13 @@ a:visited{
 a:hover{
 	color:#000;
 }
+.container{
+	left:10%;
+}
 .nav{
 	position: relative;
-	left: 20%;
+	width: 80%;
+	left: 10%;
 	font-size: 1.3rem;
 	height: 50px;
 	letter-spacing: 0.15rem;
@@ -35,7 +40,7 @@ a:hover{
 }
 .listing-item{
 	position: relative;
-	left:20%;
+	left:10%;
 	letter-spacing: 0.1rem;
 	font-size: 1.6rem;
 }
@@ -56,4 +61,10 @@ a:hover{
 .page{
 	color: #000;
 	font-size: 1.6rem;
+}
+/*//////////////////////////////*/
+.content{
+	position:absolute;
+	width: 80%;
+	left:10%;
 }
