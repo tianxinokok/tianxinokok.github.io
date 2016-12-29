@@ -10,21 +10,18 @@ email: tianxinokok@163.com
 #cnzz:
 pygments: true
 safe: true
-auto: true 
+auto: true
 github: tianxinokok
 paginate: 20
 #### Markdown Processors
-markdown: redcarpet
-redcarpet:
-  extensions:
-    - hard_wrap
-    - no_intra_emphasis
-    - autolink
-    - strikethrough
-    - tables
-    - lax_spacing
-    - with_toc_data
-
+markdown: kramdown
+#### Menu
+menu:
+  Home:/
+  分类:/
+  About:/about
+###### css/js
+source:/source
 
 #highlighter: rouge
 #truncate: true

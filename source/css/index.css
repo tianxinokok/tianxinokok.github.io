@@ -9,62 +9,80 @@ html{
 	font-size: 62.5%;
 	font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
 }
-a:link{
-	color: #489393;/*#87A350*/;
+body{
+	font-family: "Helvetica Neue","Helvetica","Microsoft YaHei","WenQuanYi Micro Hei",Arial,sans-serif;
+	font-weight: inherit;
+    font-style: inherit;
+    font-family: inherit
 }
-a:visited{
-	color:#489393;
+a{
+	color: #7292b1;
 }
-a:hover{
-	color:#000;
+.header{
+	position: relative;
+	width:100%;
+	background-image:url(../img/header_image.jpg);
+	background-color: #6fa9d0;
+	background-position:50% 50%;
+	background-size:cover;
+	
 }
-.container{
-	left:10%;
-}
+	.header_cover{
+		position: relative;
+		background-color:rgba(0,0,0,0.2);
+		height: 100px;
+		padding: 12rem 1rem; 
+	}
+		.head_title{
+			font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+			font-size: 1.6rem;
+			color:#fff;
+			text-align: center;
+			text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;
+		}
 .nav{
-	position: relative;
-	width: 80%;
-	left: 10%;
-	font-size: 1.3rem;
-	height: 50px;
-	letter-spacing: 0.15rem;
-	line-height: 50px;
-	border-bottom: 1px solid #9F9F9F;
-
+	position: absolute;
+	right:0px;
+	bottom:0px;
+	height:50px;
 }
-.nav > span {
-	margin-right: 5%;
-}
-.nav > span > a{
-	color:#787878;
-}
-.listing-item{
-	position: relative;
-	left:10%;
-	letter-spacing: 0.1rem;
-	font-size: 1.6rem;
-}
-/*.listing-item p:nth-child(2){
-	letter-spacing: 0.15rem;
-}*/
-.listing-item a{
-	padding-left: 1em;
-	letter-spacing: 0;
-
-}
-.times{
-	color:#9B9B9B;
-	/*--background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgba(51, 51, 51,1)), to(rgba(194, 194, 194, 1)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;*/
-}
-.page{
-	color: #000;
-	font-size: 1.6rem;
-}
-/*//////////////////////////////*/
+		.nav > ul > li {
+			float:left;
+			font-size: 1.8rem;
+			color:#fff;
+			width:100px;
+		}
 .content{
-	position:absolute;
-	width: 80%;
-	left:10%;
+	font-size: 1.6rem;
 }
+	.post_list{
+		width: 60%;
+		margin: 0 auto;
+	}
+		.post_list > li {
+			margin:2rem 0;
+			border-bottom: 1px solid #EDEDED; 
+		}	
+			.post_title{
+				margin-bottom:2rem; 
+			}	.post_title > h2 {
+					margin-bottom:0; 
+				}
+				.post_message{
+					margin-top:0.5rem; 
+					font-size: 1.2rem;
+					color:#999999;
+				}
+				.post-excerpt{
+					margin-bottom:2rem;
+				}
+					.yl{
+						text-align:justify;
+						text-justify:inter-word; 
+					}
+					.ydqw{
+						margin-top:0.5rem; 
+					}
+					.ydqw > a {
+						 color:#9EBCD8;
+					}

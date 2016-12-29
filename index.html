@@ -1,17 +1,4 @@
 ---
 layout: default
-title: My Blog
 ---
-
-<ul>
-{% for post in site.posts %}
-{% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-  <li class="listing-item">
-    　<p class="times"><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time></p>
-     <p class="page">{{ post.title }} &raquo;
-  	  <a href="{{ post.url }}">read more...</a>
-  	 </p>
-  </li>
-{% endfor %}
-</ul>
-
+{% include index.html %}
