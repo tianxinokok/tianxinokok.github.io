@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 如何使用 Jacman 主题
+description: 我是为赴一个梦而来，然而梦中的那人终未现身。
 tags:
 - Jekyll
 - Jacman

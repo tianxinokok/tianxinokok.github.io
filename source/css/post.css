@@ -16,3 +16,11 @@ h2{
 	left: 10%;
 	font-size: 1.6rem;
 }
+.highlighter-rouge{
+	background: #2d2d2d;
+	padding: 2px;
+	border-radius: 5px;
+}
+.highlight{
+
+}
