@@ -64,9 +64,7 @@ body{
 	background-size:cover;
 	}
 	.head_title{
-			position: relative;
-			top:40px;
-			text-align: center;
+			display:none;
 		}
 	.nav{
 			position: absolute;
@@ -111,9 +109,7 @@ body{
 	background-size:cover;
 	}
 	.head_title{
-			position: relative;
-			top:40px;
-			text-align: center;
+			display:none;
 		}
 	.nav{
 			position: absolute;
@@ -156,9 +152,7 @@ body{
 	background-size:cover;
 	}
 	.head_title{
-			position: relative;
-			top:40px;
-			text-align: center;
+			display:none;
 		}
 	.nav{
 			position: absolute;
@@ -300,9 +294,6 @@ body{
 		.nav a {
 				color:#444;
 			}
-	.content{
-	font-size: 1.6rem;
-}
 	
 		.post_list > li {
 			margin:2rem 0;

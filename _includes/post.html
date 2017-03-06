@@ -1,4 +1,13 @@
-{% assign item = page %}
-{% assign index = false %}
-{% assign table = true %}
-{% include _partial/post/article.html %}
+{% include _partial/post/head.html %}
+  <body>
+    <div class="container" id="container">
+      <header class="header">
+  		<h1>{{page.title}}</h1>
+  	  </header>
+      <div class="content">
+      	{{ content }}
+      </div>
+      <footer></footer>
+    </div>
+  </body>
+ </html>
