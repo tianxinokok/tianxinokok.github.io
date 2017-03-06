@@ -3,18 +3,13 @@ html,body,div,p,span,img,a,ol,ul,li,table,caption,thead,tbody,tfoot,th,td,tr{
 	padding: 0px;
 	list-style: none;
 	text-decoration:none;
-	font-family:"Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+	font-family: "Helvetica Neue","Helvetica","Microsoft YaHei","WenQuanYi Micro Hei",Arial,sans-serif;
 }
 html{
 	font-size: 62.5%;
-	font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
 	height:100%;
 }
 body{
-	font-family: "Helvetica Neue","Helvetica","Microsoft YaHei","WenQuanYi Micro Hei",Arial,sans-serif;
-	font-weight: inherit;
-    font-style: inherit;
-    font-family: inherit;
     height:100%;
 }
 
@@ -249,7 +244,7 @@ body{
 	font-size: 1.6rem;
 }
 .post_list{
-		width: 60%;
+		width: 80%;
 		margin: 0 auto;
 }
 .header{
@@ -265,14 +260,15 @@ body{
 		position: relative;
 		background-color:rgba(0,0,0,0.2);
 		height: 100px;
-		padding: 12rem 1rem; 
+		padding: 4rem 1rem; 
 	}
 		.head_title{
-			font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-			font-size: 1.6rem;
+			/*font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+			font-size: 1rem;
 			color:#fff;
 			text-align: center;
-			text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;
+			text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;*/
+			display:none;
 		}
 .nav{
 	position: absolute;
