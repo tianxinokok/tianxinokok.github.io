@@ -57,13 +57,16 @@ p{
 	padding:15px 0px;
 }
 .highlighter-rouge{
-	background: #2d2d2d;
 	margin: 2px;
 	border-radius: 5px;
 	font-size:14px;
 	color:#fff;
 }
 .highlight{
+	background-color: #002b36;
+	overflow-x: auto;
+}
+.hljs{
 	overflow-x: auto;
 }
 
