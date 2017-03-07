@@ -35,6 +35,24 @@ body{
 	margin-top:10px;
 	margin-bottom: 10px;
 }
+.footer{
+	position: relative;
+	width:900px;
+	margin:0 auto;
+}
+.chakan{
+	color:#7292b1;
+	padding: 30px 40px;
+}
+#uyan_frame{
+	position: relative;
+	display: none;
+	width:80%;
+	margin: 25px auto;
+}
+.show{
+	display: block !important;
+}
 p{
 	padding:15px 0px;
 }

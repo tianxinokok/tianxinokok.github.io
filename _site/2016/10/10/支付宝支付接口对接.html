@@ -165,8 +165,9 @@ $config = array (
 
 
       </div>
-      <footer>
+      <footer class="footer">
         <!-- UY BEGIN -->
+        <div class="chakan">查看评论</div>
         <div id="uyan_frame"></div>
         <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
         <!-- UY END -->
@@ -175,5 +176,14 @@ $config = array (
   </body>
   <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized_dark.min.css">
   <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      $('.chakan').on('click',function(){
+         $('#uyan_frame').toggleClass('show');
+      })
+    })
+  </script>
+
  </html>
