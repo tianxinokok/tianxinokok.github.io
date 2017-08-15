@@ -1,0 +1,28 @@
+baseurl:/tianxinokok.github.io
+#future: true
+#permalink: /:title/
+#url: http://tianxinokok.github.io
+name: TT
+author: tianxin
+#qq: 505268168
+email: tianxinokok@163.com
+#beian: 
+#cnzz:
+pygments: true
+safe: true
+auto: true
+github: tianxinokok
+paginate: 20
+#### Markdown Processors
+markdown: kramdown
+#### Menu
+menu:
+  Home:/
+  分类:/
+  About:/about
+###### css/js
+source:/source
+
+#highlighter: rouge
+#truncate: true
+#about: "TT"
