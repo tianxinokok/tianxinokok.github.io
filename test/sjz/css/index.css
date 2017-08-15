@@ -1,16 +1,46 @@
-html, body, div, p, span, img, a, ol, ul, li, table, caption, thead, tbody, tfoot, th, td, tr, h3, h2,h1 {
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-  text-decoration: none;
-  font-family: "Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif; }
-
+/**
+ * css reset
+ */
 body{
+    line-height:1.4;
+    color:#333;
+    font-family:arial;
+    font-size: 12px;
 }
+input,textarea,select{
+    font-size:100%;    
+    font-family:inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
+    margin:0;
+}
+h1{
+	font-size: 2.5em;
+}
+h2{
+	font-size: 2em;
+}
+h3{
+	font-size: 1.5em;
+}
+h4,h5,h6{
+    font-size:1em;
+}
+ul,ol{
+    padding-left:0; 
+    list-style-type:none;
+}
+/*image with no-border*/
+img{border:0;}
+a{text-decoration: none;}
+
+/**
+ * 
+ */
+
 .container{
 	position: relative;
 	padding:50px 0px;
-	width:100%;
 	min-height: 720px;
 	background: url(../source/img/bg1.png) repeat;
 }
@@ -31,11 +61,6 @@ body{
 	color: #7292b1;
 	background: url(../source/img/clock.png) no-repeat left top;
 }
-.year{
-	position: relative;
-	display: block;
-	z-index: 100;
-}
 .year > h2 {
 	width:200px;
 	height: 40px;
@@ -47,12 +72,6 @@ body{
 }
 .year > h2 i{
 	margin-left: 20px;   /*如果这里用padding,则添加动画效果的时候会不以元素中心为原点*/
-}
-.list{
-	position: relative;
-	height: 1800px;
-	margin: 10px 0;
-	overflow: hidden;
 }
 .list > ul > li{
 	padding: 30px 0px;
