@@ -1,0 +1,28 @@
+
+  {% include _partial/head.html %}
+  <body>
+<<<<<<< HEAD
+   <div class="container">
+      <header>
+          {% include _partial/header.html %}
+      </header>
+      <div class="content_box">
+        {{ content }}
+      </div>
+      <footer>{% include _partial/footer.html %}</footer>
+    </div>
+  </body>
+  <script type="text/javascript" src="../source/js/jquery.js"></script>
+  <script type="text/javascript" src="../source/js/index.js"></script>
+=======
+    <header>
+        {% include _partial/header.html %}
+    </header>
+    <div id="container">
+      {{ content }}
+    </div>
+    <footer>{% include _partial/footer.html %}</footer>
+    {% include _partial/after_footer.html %}
+  </body>
+>>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
+ </html>

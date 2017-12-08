@@ -1,0 +1,133 @@
+/**
+ * css reset
+ */
+body{
+    line-height:1.4;
+    color:#333;
+    font-family:arial;
+    font-size: 12px;
+}
+input,textarea,select{
+    font-size:100%;    
+    font-family:inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
+    margin:0;
+}
+h1{
+	font-size: 2.5em;
+}
+h2{
+	font-size: 2em;
+}
+h3{
+	font-size: 1.5em;
+}
+h4,h5,h6{
+    font-size:1em;
+}
+h2,h3{
+    font-family: "Source Han Sans CN", 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', SimHei;
+}
+ul,ol{
+    padding-left:0; 
+    list-style-type:none;
+}
+/*image with no-border*/
+img{border:0;}
+a{text-decoration: none;}
+/**
+ * 
+ */
+html{
+	overflow-y:scroll;
+}
+body{
+    margin: 0;
+    font:caption;
+    background:#fff;
+    color:#333;
+    font-family:  "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.container{
+	background-color: #fff;
+	box-shadow: 0 0 5px;
+}
+.content_title{
+	text-align: center;
+	padding:40px 60px 40px 60px;
+	word-wrap: break-word;
+}
+.content{
+	width:75%;
+	margin: 50px 30px 20px 10px;
+	padding: 20px;
+	box-shadow:0 0 5px;
+}
+.sidebar{
+	position: relative;
+	top: 50px;
+	padding: 20px;
+	box-shadow: 0px 0px 5px;
+}
+/* 清除浮 动*/
+.fix{*zoom:1;}
+.fix:after{display:table; content:''; clear:both;}
+/* 左浮动 */
+.l{
+	float: left;
+}
+/*常用margin值*/
+.mr15{margin-right:15px;}
+.mr20{margin-right:20px;}
+.mr30{margin-right:30px;}
+/* 基于display:table-cell的自适应布局 */
+.cell{display:table-cell; *display:inline-block; width:2000px; *width:auto;}
+/* 双栏自适应cell部分连续英文字符换行 */
+.cell_bk{display:table; width:100%; table-layout:fixed; word-wrap:break-word;}
+
+.comment_box{
+	position: relative;
+	width: 75%;
+}
+.chakan{
+	color:#7292b1;
+	padding: 30px 40px;
+}
+#uyan_frame{
+	display: none;
+}
+.show{
+	display: block !important;
+}
+p{
+	margin: 16px 0 ;
+	font-size: 14px;
+	word-break: break-all;
+	text-align: justify;
+
+}
+p .s{
+	font-size:12px;
+	color: #999;
+}
+.highlighter-rouge{
+	margin: 2px;
+	font-size:14px;
+	border: 1px solid #EAEAEA;
+    background-color: #F8F8F8;
+    border-radius: 3px;
+    padding: 0 4px;
+    margin-left: 2px;
+    margin-right: 2px;
+    font-family: Consolas,monospace;
+}
+.highlight{
+	/*background-color: #002b36;*/
+	overflow-x: auto;
+}
+.hljs{
+	overflow-x: auto;
+	background:#C7C4C4;
+}
+

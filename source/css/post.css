@@ -1,0 +1,112 @@
+<<<<<<< HEAD
+/**
+ * css reset
+ */
+body{
+    line-height:1.4;
+    color:#333;
+    font-family:arial;
+    font-size: 12px;
+}
+input,textarea,select{
+    font-size:100%;    
+    font-family:inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
+    margin:0;
+}
+h4,h5,h6{
+    font-size:1em;
+}
+ul,ol{
+    padding-left:0; 
+    list-style-type:none;
+}
+/*image with no-border*/
+img{border:0;}
+a{text-decoration: none;}
+/**
+ * 
+ */
+=======
+html,body,div,p,span,img,a,ol,ul,table,caption,thead,tbody,tfoot,th,td,tr,h3,h2,h4{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-decoration:none;
+	font-family:"Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+}
+html{
+
+}
+>>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
+body{
+	background-color: #f5f5f5;
+	
+    line-height: 1.85em;
+    letter-spacing: .01em;
+    -webkit-font-smoothing: subpixel-antialiased;
+   	word-wrap:break-word;
+}
+.container{
+	width:900px;
+	background-color: #fff;
+<<<<<<< HEAD
+	margin-top: 40px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 0 0 5px;
+=======
+	margin:0 auto;
+>>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
+}
+.header{
+	text-align: center;
+	padding:40px 60px 40px 60px;
+	word-wrap: break-word;
+}
+.content{
+	padding: 30px 40px;
+}
+.content > h2{
+	border-bottom: 2px solid #eee;
+	padding-bottom: 10px;
+	margin-top:10px;
+	margin-bottom: 10px;
+}
+.footer{
+	position: relative;
+	width:900px;
+	margin:0 auto;
+}
+.chakan{
+	color:#7292b1;
+	padding: 30px 40px;
+}
+#uyan_frame{
+	position: relative;
+	display: none;
+	width:80%;
+	margin: 25px auto;
+}
+.show{
+	display: block !important;
+}
+p{
+	padding:15px 0px;
+}
+.highlighter-rouge{
+	margin: 2px;
+	border-radius: 5px;
+	font-size:14px;
+	color:#fff;
+}
+.highlight{
+	background-color: #002b36;
+	overflow-x: auto;
+}
+.hljs{
+	overflow-x: auto;
+}
+
