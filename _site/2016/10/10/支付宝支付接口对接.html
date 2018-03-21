@@ -1,19 +1,42 @@
-<!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="UTF-8">
-    <link rel="stylesheet" href="/source/css/post.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
 </head>
 
-  <body>
-    <div class="container" id="container">
-      <header class="header">
-  		<h1>支付宝支付接口对接的那些事</h1>
-  	  </header>
-      <div class="content">
-      	<h2 id="准备工作">准备工作</h2>
+   <div class="container">
+       <header>
+          <div class="header">
+	<div class="poster_img gray">
+		<!--<img class="poster_img_lala gray" src="/source/img/index_left.jpeg">-->
+	</div>
+	<div class="header_cover">
+		<div class="nav">
+			<ul class="nav_ul">
+				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
+				<li data-subtitle="技术"><a href="/"><i class="fa fa-html5"></i></a></li>
+				<li data-subtitle="瞎扯"><a href="/"><i class="fa fa-heart"></i></a></li>
+				<li data-subtitle="联系"><a href="/"><i class="fa fa-comments"></i></a></li>
+				<li data-subtitle="夜间模式"><a href="/"><i class="fa fa-moon-o"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>支付宝支付接口对接的那些事</h1>
+                  <span><time datetime=""></time></span>
+                </div>
+                  <h2 id="准备工作">准备工作</h2>
 
 <ul>
   <li>1.注册一个支付宝账号，这个大家应该都有的</li>
@@ -82,7 +105,7 @@
 
 <p><img src="/source/img/tu_2.png" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>&lt;?php
+<pre><code>&lt;?php
 $config = array (	
 	//应用ID,您的APPID。
 	'app_id' =&gt; "2016080400166887", 
@@ -109,7 +132,6 @@ $config = array (
 );
 ?&gt;
 </code></pre>
-</div>
 
 <h2 id="开始运行测试">开始运行测试</h2>
 <blockquote>
@@ -164,19 +186,20 @@ $config = array (
 </blockquote>
 
 
-      </div>
-      <footer class="footer">
-        <!-- UY BEGIN -->
-        <div class="chakan">查看评论</div>
-        <div id="uyan_frame"></div>
-        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
-        <!-- UY END -->
-      </footer>
+                <div class="comment_box">
+                    <!-- UY BEGIN -->
+                    <div class="chakan">查看评论</div>
+                    <div id="uyan_frame"></div>
+                    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
+                    <!-- UY END -->
+                </div>
+            </div>
+          </div>
+       </div>
     </div>
-  </body>
-  <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/rainbow.min.css">
   <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
   <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
@@ -185,5 +208,4 @@ $config = array (
       })
     })
   </script>
-
- </html>
+</html>

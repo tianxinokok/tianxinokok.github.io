@@ -1,16 +1,46 @@
-html, body, div, p, span, img, a, ol, ul, li, table, caption, thead, tbody, tfoot, th, td, tr, h3, h2,h1 {
-  margin: 0px;
-  padding: 0px;
-  list-style: none;
-  text-decoration: none;
-  font-family: "Trebuchet MS","Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif; }
-
+/**
+ * css reset
+ */
 body{
+    line-height:1.4;
+    color:#333;
+    font-family:arial;
+    font-size: 12px;
 }
+input,textarea,select{
+    font-size:100%;    
+    font-family:inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
+    margin:0;
+}
+h1{
+	font-size: 2.5em;
+}
+h2{
+	font-size: 2em;
+}
+h3{
+	font-size: 1.5em;
+}
+h4,h5,h6{
+    font-size:1em;
+}
+ul,ol{
+    padding-left:0; 
+    list-style-type:none;
+}
+/*image with no-border*/
+img{border:0;}
+a{text-decoration: none;}
+
+/**
+ * 
+ */
+
 .container{
 	position: relative;
 	padding:50px 0px;
-	width:100%;
 	min-height: 720px;
 	background: url(../source/img/bg1.png) repeat;
 }
@@ -31,11 +61,6 @@ body{
 	color: #7292b1;
 	background: url(../source/img/clock.png) no-repeat left top;
 }
-.year{
-	position: relative;
-	display: block;
-	z-index: 100;
-}
 .year > h2 {
 	width:200px;
 	height: 40px;
@@ -48,35 +73,19 @@ body{
 .year > h2 i{
 	margin-left: 20px;   /*如果这里用padding,则添加动画效果的时候会不以元素中心为原点*/
 }
-.list{
-	position: relative;
-	height: 1800px;
-	margin: 10px 0;
-	overflow: hidden;
-}
 .list > ul > li{
-	padding: 30px 0px;
-}
-.md:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+	padding: 30px 0;
 }
 .date{
-	float: left;
-	display: block;
-	width: 200px;
-	clear: left;
+	display: inline-block;
+	width: 197px;
 	text-align: right;
 	font-size: 18px;
     line-height: 32px;
     color: #ec6a13;
 }
 .intro{
-	float: left;
-    display: block;
+	display: inline-block;
     width: 400px;
     padding-left: 100px;
     font-size: 18px;
@@ -84,49 +93,38 @@ body{
     color: #ec6a13;
     background: url(../source/img/circle-h.png) no-repeat 35px 0;
 }
-.version{
-	float: left;
-    display: block;
-    clear: left;
-    width: 200px;
-   	font-size: 18px;
-    line-height: 32px;
-    text-align: right;
-}
 .more{
-	float: left;
-    display: block;
     width: 400px;
-    margin-left: 100px;
+    margin-left: 306px;
     line-height: 24px;
     font-size: 12px;
 }
-.container .main .year h2 i{
-	
+h2 i{
 	-webkit-transition:.5s;
 	-moz-transition:.5s;
 	-ms-transition:.5s;
 	-o-transition:.5s;
 	transition:.5s;
 }
-.container .main .year .list{
+ .list{
 	margin:10px 0;
-	position:relative;overflow:hidden;
+	position:relative;
+	overflow:hidden;
 	-webkit-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;
 	-moz-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;
 	-ms-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;
 	-o-transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s;
 	transition:height 1s cubic-bezier(0.025,0.025,0.000,1.115),opacity 1s
 }
-.container .main .year.close h2 i{
+.close h2 i{
 	transform:rotate(-90deg);
 	-webkit-transform:rotate(-90deg);
 	-moz-transform:rotate(-90deg);
 	-ms-transform:rotate(-90deg);
 	-o-transform:rotate(-90deg)
 }
-.container .main .year.close .list{
-	opacity:0;height:0!important;
+.close .list{
+	opacity:0;height:0px !important;
 }
 
 

@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
 </head>
@@ -11,21 +14,18 @@
   <body>
    <div class="container">
       <header>
-          <div class="poster_img"></div>
-<div class="header">
+          <div class="header">
+	<div class="poster_img gray">
+		<!--<img class="poster_img_lala gray" src="/source/img/index_left.jpeg">-->
+	</div>
 	<div class="header_cover">
-		<div class="head_title">
-			<h2>缘深缘浅，缘聚缘散，该分手时分手，该重逢时重逢 </h2>
-			<div>
-				<span>Let 's make a good friend</span>
-			</div>
-		</div>
 		<div class="nav">
-			<ul>
-				<li><a href="/">html/css/js</a></li>
-				<li><a href="#">life</a></li>
-				<li><a href="#">photo</a></li>
-				<li><a href="/about/">about me</a></li>
+			<ul class="nav_ul">
+				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
+				<li data-subtitle="技术"><a href="/"><i class="fa fa-html5"></i></a></li>
+				<li data-subtitle="瞎扯"><a href="/"><i class="fa fa-heart"></i></a></li>
+				<li data-subtitle="联系"><a href="/"><i class="fa fa-comments"></i></a></li>
+				<li data-subtitle="夜间模式"><a href="/"><i class="fa fa-moon-o"></i></a></li>
 			</ul>
 		</div>
 	</div>
@@ -36,63 +36,78 @@
 	<ul class="post_list">
 		
 		<li>
-			<div class="post_title">
-				<h2><a class="post-link" href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88.html">可以伸缩的时间轴效果</a></h2>
+			<div class="post_text">
+				<div class="post_title">
+				<h2><a class="post-link" href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88-%E5%89%AF%E6%9C%AC.html" data-post-href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88-%E5%89%AF%E6%9C%AC.html">可以伸缩的时间轴效果</a></h2>
 				<div class="post_message">
 					<span><time datetime="2017-08-10">2017年08月10日</time></span>
 				</div>
+				</div>
+			    <section class="post-excerpt" itemprop="description">
+			    	<p class="yl">一个好看的时间轴效果，简单实用。</p>
+			      <!--<p class="yl">一、适用场景...</p>-->
+			      <!--<p class="ydqw"><a href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88-%E5%89%AF%E6%9C%AC.html">阅读全文...</a></p>-->
+			    </section>
 			</div>
-		    <section class="post-excerpt" itemprop="description">
-		    	<p class="yl">一个好看的时间轴效果，简单实用。</p>
-		      <!--<p class="yl">一、适用场景...</p>-->
-		      <!--<p class="ydqw"><a href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88.html">阅读全文...</a></p>-->
-		    </section>
+		    <div class="post_img"><img class="gray" src=" ../source/img/header_image.jpg " filter="url(#grayscale)"><span class="alpha_img"></span></div>
+		    <!--<div class="post_img">
+		    <svg ><image class="gray" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../source/img/header_image.jpg" filter="url(#grayscale)"></image></svg>
+		    <span class="alpha_img"></span>
+		    </div>-->
 		</li>
+
 		
 		<li>
-			<div class="post_title">
-				<h2><a class="post-link" href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html">canvas实现满天繁星运动效果</a></h2>
+			<div class="post_text">
+				<div class="post_title">
+				<h2><a class="post-link" href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html" data-post-href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html">canvas实现满天繁星运动效果</a></h2>
 				<div class="post_message">
 					<span><time datetime="2017-07-31">2017年07月31日</time></span>
 				</div>
+				</div>
+			    <section class="post-excerpt" itemprop="description">
+			    	<p class="yl">canvas作为一个html5中一个非常实用的动画属性，已经成为前端开发人员必须熟悉和掌握的技能。</p>
+			      <!--<p class="yl">一、写在前面的逼逼叨...</p>-->
+			      <!--<p class="ydqw"><a href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html">阅读全文...</a></p>-->
+			    </section>
 			</div>
-		    <section class="post-excerpt" itemprop="description">
-		    	<p class="yl">canvas作为一个html5中一个非常实用的动画属性，已经成为前端开发人员必须熟悉和掌握的技能。</p>
-		      <!--<p class="yl">一、写在前面的逼逼叨...</p>-->
-		      <!--<p class="ydqw"><a href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html">阅读全文...</a></p>-->
-		    </section>
+		    <div class="post_img"><img class="gray" src=" ../source/img/header_image.jpg " filter="url(#grayscale)"><span class="alpha_img"></span></div>
+		    <!--<div class="post_img">
+		    <svg ><image class="gray" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../source/img/header_image.jpg" filter="url(#grayscale)"></image></svg>
+		    <span class="alpha_img"></span>
+		    </div>-->
 		</li>
+
 		
 		<li>
-			<div class="post_title">
-				<h2><a class="post-link" href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">支付宝支付接口对接的那些事</a></h2>
+			<div class="post_text">
+				<div class="post_title">
+				<h2><a class="post-link" href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html" data-post-href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">支付宝支付接口对接的那些事</a></h2>
 				<div class="post_message">
 					<span><time datetime="2016-10-10">2016年10月10日</time></span>
 				</div>
-			</div>
-		    <section class="post-excerpt" itemprop="description">
-		    	<p class="yl">教你如何在不懂任何后台语言的情况下接入支付功能</p>
-		      <!--<p class="yl">准备工作...</p>-->
-		      <!--<p class="ydqw"><a href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">阅读全文...</a></p>-->
-		    </section>
-		</li>
-		
-		<li>
-			<div class="post_title">
-				<h2><a class="post-link" href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5(beifen).html">支付宝支付接口对接的那些事</a></h2>
-				<div class="post_message">
-					<span><time datetime="2016-10-10">2016年10月10日</time></span>
 				</div>
+			    <section class="post-excerpt" itemprop="description">
+			    	<p class="yl">教你如何在不懂任何后台语言的情况下接入支付功能</p>
+			      <!--<p class="yl">准备工作...</p>-->
+			      <!--<p class="ydqw"><a href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">阅读全文...</a></p>-->
+			    </section>
 			</div>
-		    <section class="post-excerpt" itemprop="description">
-		    	<p class="yl">什么意思 ？</p>
-		      <!--<p class="yl">准备工作...</p>-->
-		      <!--<p class="ydqw"><a href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5(beifen).html">阅读全文...</a></p>-->
-		    </section>
+		    <div class="post_img"><img class="gray" src=" ../source/img/header_image.jpg " filter="url(#grayscale)"><span class="alpha_img"></span></div>
+		    <!--<div class="post_img">
+		    <svg ><image class="gray" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="../source/img/header_image.jpg" filter="url(#grayscale)"></image></svg>
+		    <span class="alpha_img"></span>
+		    </div>-->
 		</li>
+
 		
 	</ul>
 </div>
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/index.js"></script>
+<script type="text/javascript">
+</script>
+
       </div>
       <footer>
 </footer>

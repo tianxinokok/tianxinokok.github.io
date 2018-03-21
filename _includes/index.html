@@ -2,18 +2,30 @@
 	<ul class="post_list">
 		{% for post in site.posts %}
 		<li>
-			<div class="post_title">
-				<h2><a class="post-link" href="{{ post.url }}">{{ post.title }}</a></h2>
+			<div class="post_text">
+				<div class="post_title">
+				<h2><a class="post-link" href="{{ post.url }}" data-post-href="{{ post.url }}">{{ post.title }}</a></h2>
 				<div class="post_message">
 					<span><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y年%m月%d日" }}</time></span>
 				</div>
+				</div>
+			    <section class="post-excerpt" itemprop="description">
+			    	<p class="yl">{{ post.description }}</p>
+			      <!--<p class="yl">{{ post.content | strip_html | truncatewords: 0 }}</p>-->
+			      <!--<p class="ydqw"><a href="{{ post.url }}">阅读全文...</a></p>-->
+			    </section>
 			</div>
-		    <section class="post-excerpt" itemprop="description">
-		    	<p class="yl">{{ post.description }}</p>
-		      <!--<p class="yl">{{ post.content | strip_html | truncatewords: 0 }}</p>-->
-		      <!--<p class="ydqw"><a href="{{ post.url }}">阅读全文...</a></p>-->
-		    </section>
+		    <div class="post_img"><img class="gray" src=" {{ post.imgs }} " filter="url(#grayscale)"><span class="alpha_img"></span></div>
+		    <!--<div class="post_img">
+		    <svg ><image class="gray" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ post.imgs }}" filter="url(#grayscale)"></image></svg>
+		    <span class="alpha_img"></span>
+		    </div>-->
 		</li>
+
 		{% endfor %}
 	</ul>
 </div>
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/index.js"></script>
+<script type="text/javascript">
+</script>

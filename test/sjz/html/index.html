@@ -17,10 +17,9 @@
 						<h2><a href="">2015年<i class="fa fa-caret-down" aria-hidden="true"></i></a></h2>
 						<div class="list">
 							<ul>
-								<li class="md">
+								<li class="md haha">
 									<p class="date">3月1日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -33,7 +32,6 @@
 								<li class="md">
 									<p class="date">2月25日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -46,7 +44,6 @@
 								<li class="md">
 									<p class="date">2月10日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -66,7 +63,6 @@
 								<li class="md">
 									<p class="date">3月3日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -79,7 +75,6 @@
 								<li class="md">
 									<p class="date">2月28日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -92,7 +87,6 @@
 								<li class="md">
 									<p class="date">2月7日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -112,7 +106,6 @@
 								<li class="md">
 									<p class="date">3月3日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -132,7 +125,6 @@
 								<li class="md">
 									<p class="date">3月3日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -152,7 +144,6 @@
 								<li class="md">
 									<p class="date">3月3日</p>
 									<p class="intro">关于支付宝支付接口的对接</p>
-									<p class="version">&nbsp;</p>
 									<div class="more">
 										<p>对接支付宝支付接口需要的条件</p>
 										<p>总体思路</p>
@@ -173,11 +164,11 @@
 </html>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript">
-//计算每年高度，让他飘起来
+//计算每年高度
 $(".main .year .list").each(function(e, target){
 	var $target=  $(target),
 	$ul = $target.find("ul");
-	$target.height($ul.outerHeight()), $ul.css("position", "absolute");
+	$target.height($ul.outerHeight());
 }); 
 //打开闭合
 $(".main .year>h2>a").click(function(e){
@@ -186,7 +177,6 @@ $(".main .year>h2>a").click(function(e){
 });
 //除了最近一年其它都关闭
 $(".year:not(:first)").each(function(i){
-	console.log($(this));
 	$(this).addClass('close');
 });
 </script>
