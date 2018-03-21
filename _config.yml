@@ -1,4 +1,4 @@
-baseurl: /tianxinokok.github.io
+baseurl:/tianxinokok.github.io
 #future: true
 #permalink: /:title/
 #url: http://tianxinokok.github.io
@@ -8,7 +8,7 @@ author: tianxin
 email: tianxinokok@163.com
 #beian: 
 #cnzz:
-sidebar_image: /source/img/index_left.jpg
+sidebar_image:/source/img/index_left.jpg
 pygments: true
 safe: true
 auto: true
