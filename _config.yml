@@ -1,4 +1,5 @@
 baseurl:/tianxinokok.github.io
+<<<<<<< HEAD
 #future: true
 #permalink: /:title/
 #url: http://tianxinokok.github.io
@@ -33,3 +34,5 @@ source:/source
 #highlighter: rouge
 #truncate: true
 #about: "TT"
+=======
+>>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636

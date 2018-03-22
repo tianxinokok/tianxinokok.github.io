@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -321,4 +322,166 @@ body{
 })()
 </script>
 >>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>满天繁星</title>
+<style type="text/css">
+body{
+	background-color: #000;
+}
+.header{
+	position: relative;
+	background: url(img/area.jpg)center center no-repeat;
+	height: 800px;
+	overflow: hidden;
+}
+.mycanvas{
+	position: absolute;
+	width: 1920px;
+	height: 800px;
+	left: 50%;
+	margin-left: -960px;
+}
+</style>
+</head>
+<body>
+	<div class="header">
+		<canvas id="mycanvas" width="1920" height="800" class="mycanvas"></canvas>
+	</div>
+</body>
+<script type="text/javascript">
+(function(){
+	var canvas = document.getElementById('mycanvas');
+	var content = canvas.getContext("2d");
+	var stars = {};
+	var particleIndex = 0;
+	var set = {
+		r 		: 4400,
+		height	:500,
+		density :300,
+		maxleft :100,
+		leftWall:0,
+		rightWall:canvas.width,
+		alpha   :0,
+		maxalpha:1  
+
+	};
+	var getMinRandom = function(){
+		var rand = Math.random();
+		var step = Math.ceil(0.5 / (1 - rand));
+		var arr  = [];
+		for(var i = 0 ; i <step; i++){
+			arr.push(Math.random());
+		}
+		return Math.min.apply(null,arr);
+	};
+	function resizeCanvas(){
+		canvas.width  = 1920;
+		canvas.height = 800;
+		set.rightWall = canvas.width;
+		set.height    = 500;
+		redraw();
+	}
+	resizeCanvas();
+	window.addEventListener('resize',resizeCanvas);
+	function redraw(){
+		content.clearRect(0,0,canvas.width,canvas.height);
+		content.fillStyle = "rgba(0,0,0,0)";
+		content.fillRect(0,0,canvas.width,canvas.height);
+	};
+	function Star(){
+		//圆的轨迹方程:(x-a)²+(y-b)²=r²
+		//一直x 则y=Math.sqrt(r² - (x-a)²)) + b
+		var a = canvas.width / 2,
+			b = canvas.height - set.height + set.r;
+		//横坐标随机
+		this.x = Math.floor(Math.random() * canvas.width);
+		//纵坐标在圆弧往上
+		//越往上，越稀疏
+		this.offsety =　getMinRandom() * (canvas.height - set.height);
+		this.y = b - Math.sqrt(set.r * set.r - (this.x - a)*(this.x - a) ) - this.offsety;
+
+		this.vx = Math.random() * 0.05 + 0.025;
+
+		//星星的尺寸
+		this.particleSize = 0.5 + (Math.random() + 0.1/4);
+		particleIndex ++ ;
+		stars[particleIndex] = this;
+		this.alpha = 0;
+		this.maxalpha = 0.3 + (this.y/canvas.height) * Math.random() * 0.8;
+		this.alphaAction = 1;
+
+
+	}
+	Star.prototype.draw = function(){
+		this.x += this.vx;
+
+		this.y =canvas.height - set.height + set.r - Math.sqrt(set.r * set.r - (this.x - canvas.width/2) * (this.x - canvas.width/2)) - this.offsety;
+		//透明度慢慢起来
+		if(this.alphaAction == 1){
+			if(this.alpha < this.maxalpha){
+				this.alpha += 0.005;
+			}else{
+				this.alphaAction = -1;
+			}
+		}else{
+			if(this.alpha > 0.2){
+				this.alpha -= 0.002;
+			}else{
+				this.alphaAction = 1;
+			}
+		}
+
+		if(this.x + (this.particleSize*2) >= set.rightWall){
+			this.x = this.x - set.rightWall ; 
+		}
+		//绘制星星
+		content.beginPath();
+		content.fillStyle = "rgba(255,255,255, "+ this.alpha.toString()+")";
+		content.arc(this.x,this.y,this.particleSize,0,Math.PI*2,true);
+		content.closePath();
+		content.fill();
+	}
+
+	function render(){
+		redraw();
+		// 星星的数目
+        // IE下CUP性能有限，数目小
+        var length = 400;
+        if (!history.pushState) {
+			// IE9
+            length = 200;
+        } else if (document.msHidden != undefined) {
+			// IE10+
+            length = 300;
+        }
+     
+        if ( Object.keys(stars).length > length ) {
+            set.density = 0;
+        }
+
+		for(var i =0 ;i<set.density ; i++){
+			if( Math.random() > 0.97){
+				new Star();
+			}
+		}
+
+		for(var i in stars){
+			stars[i].draw();
+		}
+		requestAnimationFrame(render);
+	}
+	if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = function(fn) {
+            setTimeout(fn, 17);
+        };
+    }
+	render();
+
+})()
+</script>
+>>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
 </html>

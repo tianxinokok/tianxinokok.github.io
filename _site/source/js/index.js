@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (window.ActiveXObject || "ActiveXObject" in window){
 	$('.post_list li').on('mouseover',function(e){
 		$(this).find('img').attr('class','gray img_over_ie');
@@ -66,3 +67,8 @@ $('.post_list li').on('click',function(e){
 
 })()
 >>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
+=======
+(function(){
+
+})()
+>>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
