@@ -51,7 +51,7 @@
 <p>布局没什么难点和坑的地方，我贴一个大概骨架的代码，要不全都是重复的列表，想要详细的在demo中右键查看吧。</p>
 
 <p>html</p>
-<pre><code>&lt;ul&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;ul&gt;
   &lt;li class="year"&gt;
     &lt;h2&gt;&lt;a href=""&gt;2015年&lt;i class="fa fa-caret-down" aria-hidden="true"&gt;&lt;/i&gt;&lt;/a&gt;&lt;/h2&gt;
 	&lt;div class="list"&gt;
@@ -73,9 +73,10 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
+</div>
 <p>css部分
 布局就是最常规的布局，就是注意小圆点和轴线摆放整齐就可以了。这个时间轴点击年份打开和闭合的效果的同时伴随着年份后面的一个方向指示小三角，所以我们需要一个控制动画的close类，同时控制高度和小三角的变化就可以了。如下代码。</p>
-<pre><code>.list{
+<div class="highlighter-rouge"><pre class="highlight"><code>.list{
 	margin:10px 0;
 	position:relative;
 	overflow:hidden;
@@ -96,25 +97,28 @@ close h2 i{
 	opacity:0;height:0px !important;
 }
 </code></pre>
+</div>
 <p>cubic-bezier()这个东西叫做贝塞尔曲线，很多animation动画中的效果都是用这个贝塞尔曲线生成的。我们这里的效果是高度变化的时候有一个先快后慢的效果，这个贝塞尔曲线要说可要说一箩筐，这里就不展开了，以后会单独一篇介绍。</p>
 
 <p>js主要要做两件事：</p>
 
 <p>1.计算每年的列表高度并赋值。</p>
-<pre><code>//计算每年高度
+<div class="highlighter-rouge"><pre class="highlight"><code>//计算每年高度
 $(".main .year .list").each(function(e, target){
 	var $target=  $(target),
 	$ul = $target.find("ul");
 	$target.height($ul.outerHeight());
 }); 
 </code></pre>
+</div>
 <p>2.给dom节点添加事件，点击切换准备好的动画类。</p>
-<pre><code>//打开闭合
+<div class="highlighter-rouge"><pre class="highlight"><code>//打开闭合
 $(".main .year&gt;h2&gt;a").click(function(e){
 	e.preventDefault();
 	$(this).parents(".year").toggleClass("close");
 });
 </code></pre>
+</div>
 
 <h3 id="三结束了">三、结束了</h3>
 <p>其实demo中有一个效果是有bug的，关闭每年列表的时候，原本在小圆点后面的轴线会有一瞬间跑到周线上面，也就是z轴的层级变高了，这个bug的原因是close类里面我设置了改变opacity透明度，为什么加上它就会有这个问题？呵呵，不想解释了，如果看着不爽直接把改变opacity值去掉就可以了，我这里留着，因为涉及一些关键知识点，日后会整理一篇关于dom层级知识点的问题，方便知识点归类，本篇就是为了快速简单的做出一个时间轴的效果，重点强调简单，不用去网上找一堆复杂的看不懂的效果直接用，不想搬砖。哼哼。</p>

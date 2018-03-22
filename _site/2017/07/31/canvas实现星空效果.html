@@ -37,7 +37,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="一写在前面的逼逼叨">一、写在前面的逼逼叨</h3>
-<p>话说作为一个学习计算机专业的学生，大学一定上过动效制作类的课程（课程名字可能不同），我的印象中就有这么一个场景，一个胖胖的女老师，在讲台上温柔的告诉你，学好flash动画，你才能做出酷炫的网页，如果学不好flash，你做的网页就跟一潭死水一样，没有酷酷的效果，那时正是css3刚刚提起，还没有定版的时候，短短几年，随着前端技术的不断发展，想要在网站上实现动画效果，已经有多种方案供我们选择，并且性能上有质的飞跃，让flash在制作网页动画方面慢慢退出历史舞台，不知道曾经的老师，是不是还在教用flash做动画，毕竟老师教什么教材，不是老师决定的，逼逼叨到此结束，今天的主角是<code>&lt;canvas&gt;</code>，一个牛逼赫赫的神秘男子。</p>
+<p>话说作为一个学习计算机专业的学生，大学一定上过动效制作类的课程（课程名字可能不同），我的印象中就有这么一个场景，一个胖胖的女老师，在讲台上温柔的告诉你，学好flash动画，你才能做出酷炫的网页，如果学不好flash，你做的网页就跟一潭死水一样，没有酷酷的效果，那时正是css3刚刚提起，还没有定版的时候，短短几年，随着前端技术的不断发展，想要在网站上实现动画效果，已经有多种方案供我们选择，并且性能上有质的飞跃，让flash在制作网页动画方面慢慢退出历史舞台，不知道曾经的老师，是不是还在教用flash做动画，毕竟老师教什么教材，不是老师决定的，逼逼叨到此结束，今天的主角是<code class="highlighter-rouge">&lt;canvas&gt;</code>，一个牛逼赫赫的神秘男子。</p>
 
 <h3 id="二管他神秘不神秘">二、管他神秘不神秘</h3>
 <p>是骡子是马，拉出来溜溜，说了这么多它的好话，具体怎么用，好不好用应该是说的重点，毕竟我是个实用主义者，不喜欢华而不实的东东。canvas你可以称之为画布，画布这个词听过吧，啥?没听过，去死吧，有了画布，在上面画出我们想要的图画，再用橡皮擦掉，再画上一幅图画，再擦，再画，再擦，重复上述过程，动画不就出来了嘛，就像童年时期玩的动画小人书。</p>
@@ -46,7 +46,7 @@
 
 <p><span class="s">//连环画是很多张画布，canvas是只有一张画布，快速重复绘图-擦掉-绘图-擦的过程,此处仅仅是为了展示动画效果。<span></span></span></p>
 <h3 id="三从基础开始">三、从基础开始</h3>
-<p><code>&lt;canvas&gt;</code>是这个html属性是为客户端矢量图形而设计的，他自己本身没有画图能力，本身只提供一张画布，但他会把整个绘图API展现给javascript，让javascript在他的画布内创作出我们想要的图像。让我们来看看他提供了哪些API供我们绘图。</p>
+<p><code class="highlighter-rouge">&lt;canvas&gt;</code>是这个html属性是为客户端矢量图形而设计的，他自己本身没有画图能力，本身只提供一张画布，但他会把整个绘图API展现给javascript，让javascript在他的画布内创作出我们想要的图像。让我们来看看他提供了哪些API供我们绘图。</p>
 
 <p><span class="s">//篇幅有限，仅展示一些常用API</span></p>
 
@@ -54,14 +54,16 @@
 
 <p>html</p>
 
-<pre><code>&lt;canvas id="rect"&gt;&lt;/canvas&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;canvas id="rect"&gt;&lt;/canvas&gt;
 </code></pre>
+</div>
 <p>js</p>
 
-<pre><code>var mycanvas = document.getElementById('rect');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('rect');
 var content     = mycanvas.context();
 content.Rect(0,0,100,50);
 </code></pre>
+</div>
 <div>
 <canvas id="rect" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -76,10 +78,11 @@ content.rect(0,0,100,50);
 <p><strong>fillRect(矩形左上角x坐标，矩形左上角y坐标，矩形宽度，矩形高度)</strong>：看这个英文名称就知道了，充满-矩形，所以他的作用就是把我们绘制的矩形路径给填充填色，既然填充颜色了肯定就能看见了吧。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('fillrect');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('fillrect');
 var content     = mycanvas.getContext('2d');
 content.fillRect(0,0,200,100);
 </code></pre>
+</div>
 
 <div>
 <canvas id="fillrect" style="border:1px solid #d3d3d3;"></canvas>
@@ -91,13 +94,14 @@ content.fillRect(0,0,200,100);
 </div>
 <p>这样我们就绘制填充了一个左上角坐标为（0，0），宽度200px, 高度100px，默认为黑色的矩形。</p>
 
-<p><strong>strokeRect(矩形左上角x坐标，矩形左上角y坐标，矩形宽度，矩形高度)</strong>：这个方法跟<code>fillRect</code>对比记忆就可以了，<code>fillRect()</code>是为矩形填充颜色，充满整个矩形，<code>strokeRect()</code>就是为矩形画个框框，里面不填充。</p>
+<p><strong>strokeRect(矩形左上角x坐标，矩形左上角y坐标，矩形宽度，矩形高度)</strong>：这个方法跟<code class="highlighter-rouge">fillRect</code>对比记忆就可以了，<code class="highlighter-rouge">fillRect()</code>是为矩形填充颜色，充满整个矩形，<code class="highlighter-rouge">strokeRect()</code>就是为矩形画个框框，里面不填充。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('strokerect');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('strokerect');
 var content     = mycanvas.getContext('2d');
 content.strokeRect(0,0,200,100);
 </code></pre>
+</div>
 
 <div>
 <canvas id="strokerect" style="border:1px solid #d3d3d3;"></canvas>
@@ -110,11 +114,12 @@ content.strokeRect(0,0,200,100);
 <p><strong>clearRect(要清除的矩形左上角的 x 坐标，要清除的矩形左上角的 y 坐标，要清除的矩形的高度，要清除的矩形的高度)</strong>：前面都是绘制，填充矩形，这个方法是在指定的一个举行内扣除一个矩形。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('clearrect');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('clearrect');
 var content     = mycanvas.getContext('2d');
 content.fillRect(0,0,200,100);
 content.clearRect(20,20,100,50);
 </code></pre>
+</div>
 <div>
 <canvas id="clearrect" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -129,11 +134,12 @@ content.clearRect(20,20,100,50);
 <p><strong>fill()</strong>：这个字面意义就理解了，填充嘛，就是为所创建的路径填充颜色的。因为既然是填充，就应该是一个封闭的路径，所以说如果路径不封闭，fill()方法会从路径结束点到路径开始点之间添加一条线，以关闭该路径，再填充路径。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('fill');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('fill');
 var content     = mycanvas.getContext('2d');
 content.rect(0,0,200,100);//还记得第一个例子中rect()是创建一个路径对吧，路径是看不见的，我们用fill()给填充下就能看到矩形了。
 content.fill(); 
 </code></pre>
+</div>
 
 <div>
 <canvas id="fill" style="border:1px solid #d3d3d3;"></canvas>
@@ -154,12 +160,12 @@ content.fill();
 
 <p><strong>lineTo(目标位置的x坐标，目标位置的y坐标)</strong>：该方法添加一个新的点，创建从该点到画布中最后指定点的路径。</p>
 
-<p>因为都是关于路径的，还记得前面说过的，路径不可见，所以演示肯定就看不到效果，跟下一个要介绍的<code>stroke</code>方法一起演示才有效果。</p>
+<p>因为都是关于路径的，还记得前面说过的，路径不可见，所以演示肯定就看不到效果，跟下一个要介绍的<code class="highlighter-rouge">stroke</code>方法一起演示才有效果。</p>
 
-<p><strong>stroke()</strong>：此方法是实际的绘制出已经定义的路径，注意<code>实际</code>二字了吧，前面那写moveTo(),lineTo()创建的路径都是不可见的，此方法就是让那些不可见的路径浮出水面。很牛逼的赶脚。</p>
+<p><strong>stroke()</strong>：此方法是实际的绘制出已经定义的路径，注意<code class="highlighter-rouge">实际</code>二字了吧，前面那写moveTo(),lineTo()创建的路径都是不可见的，此方法就是让那些不可见的路径浮出水面。很牛逼的赶脚。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('four_canvas');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('four_canvas');
 var content     = mycanvas.getContext('2d');
 content.beginPath();
 content.moveTo(20,20);//我把原点移动到了（20，20）
@@ -168,6 +174,7 @@ content.lineTo(50,100);//我创建了最后一个新的点
 content.closePath();//那条斜边的路径就是我创建的
 content.stroke();  //你们创建了那么多，没有我还不是看不到
 </code></pre>
+</div>
 <div>
 <canvas id="four_canvas" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -181,14 +188,15 @@ content.closePath();
 content.stroke();
 </script>
 </div>
-<p><strong>arc(圆心的x坐标，圆心的y坐标，圆半径，起始角以弧度计，结束角以弧度计，可选顺时针绘图或者逆时针绘图)</strong> ：前面介绍了很多创建矩形路径的，这个方法是创建弧/曲线（圆或部分圆）的路径，如果要创建圆，请把起始角参数设置为0，结束角参数设置为2*Math.PI，起始角和结束角都以弧度记，<em>(人们规定360度为2PI，PI就是180度，用这样的方法换算就可以了)</em>，同样也是绘制的路径，要想可见，要配合<code>fill()</code>或者<code>stroke()</code>绘制实际的弧。</p>
+<p><strong>arc(圆心的x坐标，圆心的y坐标，圆半径，起始角以弧度计，结束角以弧度计，可选顺时针绘图或者逆时针绘图)</strong> ：前面介绍了很多创建矩形路径的，这个方法是创建弧/曲线（圆或部分圆）的路径，如果要创建圆，请把起始角参数设置为0，结束角参数设置为2*Math.PI，起始角和结束角都以弧度记，<em>(人们规定360度为2PI，PI就是180度，用这样的方法换算就可以了)</em>，同样也是绘制的路径，要想可见，要配合<code class="highlighter-rouge">fill()</code>或者<code class="highlighter-rouge">stroke()</code>绘制实际的弧。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('arc');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('arc');
 var content     = mycanvas.getContext('2d');
 content.arc(100,80,50,0,2*Math.PI);
 content.stroke();
 </code></pre>
+</div>
 <div>
 <canvas id="arc" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -217,11 +225,12 @@ content.arc(460,80,50,0,Math.PI/3);
 content.stroke();
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('arc_fill');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('arc_fill');
 var content     = mycanvas.getContext('2d');
 content.arc(100,80,50,0,2*Math.PI);
 content.fill();
 </code></pre>
+</div>
 <div>
 <canvas id="arc_fill" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -253,18 +262,19 @@ content.fill();
 
 <p>上面介绍的方法都是在画布上画图形，或者线条的方法，也就是素描的样子，没有色彩，下面就介绍一些给画面添加颜色的属性和方法。给我们的画面上色。</p>
 
-<p><strong>createLinearGradient(渐变开始点的 x 坐标，渐变开始点的 y 坐标，	渐变结束点的 x 坐标，渐变结束点的 y 坐标)，createRadialGradient(渐变开始点的 x 坐标，渐变开始点的 y 坐标，	渐变结束点的 x 坐标，渐变结束点的 y 坐标)</strong>：这两个方法都是创建渐变用的，<code>createLinearGradient()</code>是创建线性渐变，<code>createRadialGradient()</code>是创建放射性渐变，这两个方法必须和下一个<code>addColorStop()</code>方法和下下个fillStyle()或者strokeStyle()属性配合使用才能看到渐变色的效果。</p>
+<p><strong>createLinearGradient(渐变开始点的 x 坐标，渐变开始点的 y 坐标，	渐变结束点的 x 坐标，渐变结束点的 y 坐标)，createRadialGradient(渐变开始点的 x 坐标，渐变开始点的 y 坐标，	渐变结束点的 x 坐标，渐变结束点的 y 坐标)</strong>：这两个方法都是创建渐变用的，<code class="highlighter-rouge">createLinearGradient()</code>是创建线性渐变，<code class="highlighter-rouge">createRadialGradient()</code>是创建放射性渐变，这两个方法必须和下一个<code class="highlighter-rouge">addColorStop()</code>方法和下下个fillStyle()或者strokeStyle()属性配合使用才能看到渐变色的效果。</p>
 
 <p><strong>addColorStop(介于 0.0 与 1.0 之间的值，表示渐变中开始与结束之间的位置，在结束位置显示的 CSS 颜色值)</strong>：学习渐变的时候就说过，有渐变就一定要创建渐变的开始点和结束点，开始颜色和结束颜色，如果不对渐变（gradient）对象使用该方法，那么渐变将不可见，所以说为了渐变可见，我们需要创建至少一个色标。</p>
 
-<p><strong>fillStyle(),strokeStyle()</strong> : 这两个属性是设置我们绘制图像要填充的颜色，渐变或者模式。现在我们创建了渐变<code>createLinearGradient()</code>,并且为渐变添加了色标<code>addColorStop()</code>,但是要在canvas绘制出一个渐变色的图形，要通过这个两个属性告诉canvas我们确定要用渐变绘图，他才能知道我们要使用渐变绘图。前面所有创建的黑色矩形或者是黑色圆圈，都是因为这个属性的默认值是#000000，语法为：<code>context.fillStyle=color|gradient|pattern</code></p>
+<p><strong>fillStyle(),strokeStyle()</strong> : 这两个属性是设置我们绘制图像要填充的颜色，渐变或者模式。现在我们创建了渐变<code class="highlighter-rouge">createLinearGradient()</code>,并且为渐变添加了色标<code class="highlighter-rouge">addColorStop()</code>,但是要在canvas绘制出一个渐变色的图形，要通过这个两个属性告诉canvas我们确定要用渐变绘图，他才能知道我们要使用渐变绘图。前面所有创建的黑色矩形或者是黑色圆圈，都是因为这个属性的默认值是#000000，语法为：<code class="highlighter-rouge">context.fillStyle=color|gradient|pattern</code></p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('fillstyle');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('fillstyle');
 var content     = mycanvas.getContext('2d');
 content.fillStyle = "green";  //只用单色填充
 content.fillRect(0,0,200,100);
 </code></pre>
+</div>
 <div>
 <canvas id="fillstyle" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -274,11 +284,12 @@ content.fillStyle = "green";
 content.fillRect(0,0,200,100);
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('strokestyle');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('strokestyle');
 var content     = mycanvas.getContext('2d');
 content.strokeStyle = "green"; //只用单色绘制，可以理解为用绿色的铅笔画图
 content.strokeRect(0,0,200,100);
 </code></pre>
+</div>
 <div>
 <canvas id="strokestyle" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -288,7 +299,7 @@ content.strokeStyle = "green";
 content.strokeRect(0,0,200,100);
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('gradient');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('gradient');
 var content     = mycanvas.getContext('2d');
 var grd = content.createLinearGradient(0,0,170,0);
 grd.addColorStop(0,"#8D0DA8");
@@ -297,6 +308,7 @@ grd.addColorStop(1,"#40AB51");
 content.fillStyle = grd;   //使用渐变色填充
 content.fillRect(0,0,200,100);
 </code></pre>
+</div>
 <div>
 <canvas id="fillgradient" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -310,7 +322,7 @@ content.fillStyle = grd;
 content.fillRect(0,0,200,100);
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('strokestyle');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('strokestyle');
 var content     = mycanvas.getContext('2d');
 var grd = content.createLinearGradient(0,0,170,0); //创建一个线性渐变，开始坐标为（0，0），结束坐标为（170，0）。
 grd.addColorStop(0,"#8D0DA8");// 添加一个色标
@@ -319,6 +331,7 @@ grd.addColorStop(1,"#40AB51");  //最后一个色标
 content.strokeStyle = grd;  //使用渐变色绘制，可以理解为渐变色的画笔。
 content.strokeRect(0,0,200,100);  //实际绘制
 </code></pre>
+</div>
 <div>
 <canvas id="strokegradient" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -332,16 +345,17 @@ content.strokeStyle = grd;
 content.strokeRect(0,0,200,100);
 </script>
 </div>
-<p><strong>font</strong>：这个属性就理解成css中的font属性就可以，规定文字的字体，大小，粗细。语法为：	<code>context.font="italic small-caps bold 12px arial";</code></p>
+<p><strong>font</strong>：这个属性就理解成css中的font属性就可以，规定文字的字体，大小，粗细。语法为：	<code class="highlighter-rouge">context.font="italic small-caps bold 12px arial";</code></p>
 
 <p><strong>fillText()，strokeText()</strong>：这两个方法就是用来在canvas绘制文字用的。</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('font');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('font');
 var content     = mycanvas.getContext('2d');
 content.font = "40px KaiTi";
 content.fillText("我是canvas绘制出的文字",20,50);
 </code></pre>
+</div>
 <div>
 <canvas id="fillText" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -351,11 +365,12 @@ content.font = "40px KaiTi";
 content.fillText("我是canvas绘制出的文字",20,50);
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('font');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('font');
 var content     = mycanvas.getContext('2d');
 content.font = "40px KaiTi";
 content.strokeText("我是canvas绘制出的文字",20,50);
 </code></pre>
+</div>
 <div>
 <canvas id="strokeText" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -366,10 +381,10 @@ content.strokeText("我是canvas绘制出的文字",20,50);
 </script>
 </div>
 
-<p>如果配合前面的<code>fillStyle()</code>,<code>strokeStyle()</code>填充样式和绘制样式，就能画出很漂亮的文字</p>
+<p>如果配合前面的<code class="highlighter-rouge">fillStyle()</code>,<code class="highlighter-rouge">strokeStyle()</code>填充样式和绘制样式，就能画出很漂亮的文字</p>
 
 <p>js</p>
-<pre><code>var mycanvas = document.getElementById('textstyle');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('textstyle');
 var content     = mycanvas.getContext('2d');
 var grd           = content.createLinearGradient(0,0,mycanvas.width,0);
 grd.addColorStop(0,'#8919B7');
@@ -379,6 +394,7 @@ content.font = "40px KaiTi";
 content.fillStyle  = grd;
 content.fillText("我是canvas绘制出的文字",20,50);
 </code></pre>
+</div>
 <div>
 <canvas id="textstyle" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -393,7 +409,7 @@ content.fillStyle  = grd;
 content.fillText("我是canvas绘制出的文字",20,50);
 </script>
 </div>
-<pre><code>var mycanvas = document.getElementById('textstyle2');
+<div class="highlighter-rouge"><pre class="highlight"><code>var mycanvas = document.getElementById('textstyle2');
 var content     = mycanvas.getContext('2d');
 var grd           = content.createLinearGradient(0,0,mycanvas.width,0);
 grd.addColorStop(0,'#8919B7');
@@ -403,6 +419,7 @@ content.font = "40px KaiTi";
 content.strokeStyle  = grd;
 content.strokeText("我是canvas绘制出的文字",20,50);
 </code></pre>
+</div>
 <div>
 <canvas id="textstyle2" width="600px" style="border:1px solid #d3d3d3;"></canvas>
 <script>
@@ -436,10 +453,11 @@ content.strokeText("我是canvas绘制出的文字",20,50);
 <p>难点在于：越靠近屏幕上面天空越黑，星星越稠密，反之，余晖附近，星星很少。</p>
 
 <p>html</p>
-<pre><code>&lt;canvas id="mycanvas" class="mycanvas"&gt;&lt;/canvas&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;canvas id="mycanvas" class="mycanvas"&gt;&lt;/canvas&gt;
 </code></pre>
+</div>
 <p>css</p>
-<pre><code>body{
+<div class="highlighter-rouge"><pre class="highlight"><code>body{
 	background: url(img/area.jpg) no-repeat;
 	background-color: #000;
 	background-size:cover;
@@ -452,9 +470,10 @@ content.strokeText("我是canvas绘制出的文字",20,50);
 	margin-left: -960px;
 }
 </code></pre>
+</div>
 
 <p>必要的js</p>
-<pre><code>var getMinRandom = function(){   //此函数大概率返回一个数值较大的值。因此就有了越往上越稠密的分布。
+<div class="highlighter-rouge"><pre class="highlight"><code>var getMinRandom = function(){   //此函数大概率返回一个数值较大的值。因此就有了越往上越稠密的分布。
 		var rand = Math.random();
 		//step的大小决定了往上的聚拢程度。
 		var step = Math.ceil(1 / (1 - rand));
@@ -465,6 +484,7 @@ content.strokeText("我是canvas绘制出的文字",20,50);
 		return Math.max.apply(null,arr);
 	};
 </code></pre>
+</div>
 
 <p>其他详细js代码就不贴了，如果有需要的话直接在demo中右键查看吧。</p>
 

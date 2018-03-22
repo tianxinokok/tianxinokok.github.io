@@ -19,6 +19,7 @@ if (window.ActiveXObject || "ActiveXObject" in window){
 	$('.header').on('mouseout',function(e){
 		$(this).find('.poster_img').attr('class','poster_img gray');
 	});
+	
 
 }
 	var pathname = window.document.location.pathname;
