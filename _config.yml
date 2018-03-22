@@ -8,10 +8,7 @@ author: tianxin
 email: tianxinokok@163.com
 #beian: 
 #cnzz:
-<<<<<<< HEAD
 sidebar_image:/source/img/index_left.jpg
-=======
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 pygments: true
 safe: true
 auto: true
@@ -25,11 +22,5 @@ menu:
   分类:/
   About:/about
 ###### css/js
-<<<<<<< HEAD
-=======
 source:/source
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 
-#highlighter: rouge
-#truncate: true
-#about: "TT"

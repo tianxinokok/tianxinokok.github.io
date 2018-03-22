@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 if (window.ActiveXObject || "ActiveXObject" in window){
 	$('.post_list li').on('mouseover',function(e){
 		$(this).find('img').attr('class','gray img_over_ie');
@@ -23,25 +22,6 @@ if (window.ActiveXObject || "ActiveXObject" in window){
 	
 
 }
-	var pathname = window.document.location.pathname;
-		var json = {a:1};
-		var currentPage = 5;
-	function go(d) {
-     setupPage(currentPage + d);
-     history.pushState(currentPage, document.title, '?x=' + currentPage);
- }
- onpopstate = function(event) {
-     setupPage(event.state);
- }
- function setupPage(page) {
-     currentPage = page;
-     //document.title = 'Line Game - ' + currentPage;
-     //document.getElementById('coord').textContent = currentPage;
-     this.href = '?x=' + (currentPage+1);
-     //document.links[0].textContent = 'Advance to ' + (currentPage+1);
-    // document.links[1].href = '?x=' + (currentPage-1);
-    // document.links[1].textContent = 'retreat to ' + (currentPage-1);
- }
 $('.post_list li').on('click',function(e){
 	e.preventDefault();
 	var lala  = $(this).find('a').attr('data-post-href');
@@ -61,8 +41,3 @@ $('.post_list li').on('click',function(e){
 	return false;
 
 });
-=======
-(function(){
-
-})()
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221

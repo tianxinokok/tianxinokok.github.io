@@ -4,10 +4,6 @@
 body{
     line-height:1.4;
     color:#333;
-<<<<<<< HEAD
-=======
-    font-family:arial;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
     font-size: 12px;
 }
 input,textarea,select{
@@ -17,21 +13,6 @@ input,textarea,select{
 body,h1,h2,h3,h4,h5,h6,p,ul,ol,form{
     margin:0;
 }
-<<<<<<< HEAD
-=======
-h1{
-	font-size: 2.5em;
-}
-h2{
-	font-size: 2em;
-}
-h3{
-	font-size: 1.5em;
-}
-h4,h5,h6{
-    font-size:1em;
-}
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 ul,ol{
     padding-left:0; 
     list-style-type:none;
@@ -52,66 +33,32 @@ body{
     font:caption;
     background:#fff;
     color:#333;
-<<<<<<< HEAD
     /*font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;*/
     font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans GB','Microsoft YaHei', sans-serif;
     background: url(/source/img/bg1.jpg) repeat;
-=======
-    font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;
-    font-weight: bold;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 }
 .container{
 	width: 100%;
 	overflow: hidden;
 }
 @media screen and (min-width:500px){
-<<<<<<< HEAD
 .header{
 	position: fixed;
 	width: 30%;
 	height: 100%;
 }
-=======
-
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 .poster_img{
 	position: fixed;
 	top:0px;
 	left: 0px;
 	width:30%;
 	height:100%;
-<<<<<<< HEAD
 	background: url(/source/img/index_left.jpg);
 	background-size: cover;
-}
-.poster_img_lala{
-	width: 100%;
-	height: 100%;
-}
-.nav{
-	position: relative;
-=======
-	background: url(../img/index_left.jpeg) no-repeat ;
-	background-size:cover;
-}
-.header{
-	height:80px;
-}
-.head_title{
-	display:none;
-}
-.nav{
-	position: absolute;
-	top:20px;
-	right: 50px;
-	text-align: center;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 }
 .nav a {
 	color:#444;
 }
-<<<<<<< HEAD
 .nav_ul{
 	margin-top: 100px;
 	text-align: center;
@@ -148,35 +95,13 @@ body{
 .nav_ul> li:hover:after{
 	opacity: 1;
 }
-.content_box{
-
-}
 .content{
 	width: 64%;
 	margin-left: 35%;
 	font-size: 1.6rem;
 }
-.post_list{
-}
 .post_list > li {
 	margin:48px 0 50px 0;
-=======
-.nav > ul > li {
-	display: inline-block;
-	font-size: 1.4rem;
-	color:#fff;
-	margin-left: 15px;
-}
-.content{
-	font-size: 1.6rem;
-}
-.post_list{
-	width: 50%;
-	margin-left:40%;
-}
-.post_list > li {
-	margin:0 0 70px 0;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 }
 .post_title{
 	margin-bottom:2rem; 
@@ -185,20 +110,14 @@ body{
 	margin-bottom:0;
 }
 .post_title > h2 > a{					
-<<<<<<< HEAD
 	font-size: 2.4rem;
 	color: #434242;
-=======
-	font-size: 2.2rem;
-	color: #444;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 }
 .post_message{
 	margin-top:5px; 
 	font-size: 1.2rem;
 	color:#999999;
 }
-<<<<<<< HEAD
 .post_text{
 	width: 64%;
 	vertical-align: middle;
@@ -289,27 +208,44 @@ body{
 }
 
 }  /*media*/
-=======
-.yl{
-	font-size:1.4rem;
-	text-align:justify;
-	text-justify:inter-word;
-	color:#999; 
-}
-.post-link:hover{
-	color:#4483A3;
-}
-/*.ydqw{
-	margin-top:0.5rem; 
-}
-.ydqw > a {
-	color:#9EBCD8;
-}*/
-
-}
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
-
 @media only screen and (max-width: 500px){
+
+
+	
+			.post_title{
+				margin-bottom:2rem; 
+			}	.post_title > h2 {
+					margin-bottom:0;
+
+				}
+					.post_title > h2 > a{
+						/*font-family: '微软雅黑';*/
+						font-size: 2rem;
+						color: #444;
+					}
+				.post_message{
+					margin-top:0.5rem; 
+					font-size: 1.2rem;
+					color:#999999;
+				}
+				.post-excerpt{
+					margin-bottom:2rem;
+				}
+					.yl{
+						width:100%;
+						font-size:1.4rem;
+						text-align:justify;
+						text-justify:inter-word;
+						color:#999; 
+					}
+					.ydqw{
+						margin-top:0.5rem; 
+					}
+					.ydqw > a {
+						 color:#9EBCD8;
+					}
+}
+@media only screen and (max-width: 479px){
 .content{
 	font-size: 1.6rem;
 }
@@ -333,6 +269,11 @@ body{
 		padding: 4rem 1rem; 
 	}
 		.head_title{
+			/*font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+			font-size: 1rem;
+			color:#fff;
+			text-align: center;
+			text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;*/
 			display:none;
 		}
 .nav{
@@ -381,11 +322,7 @@ body{
 				}
 					.yl{
 						width:100%;
-<<<<<<< HEAD
 						font-size:1.6rem;
-=======
-						font-size:1.4rem;
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 						text-align:justify;
 						text-justify:inter-word;
 						color:#999; 
