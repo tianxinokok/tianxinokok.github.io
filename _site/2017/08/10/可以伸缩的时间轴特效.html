@@ -1,22 +1,42 @@
-<!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="UTF-8">
-    <link rel="stylesheet" href="/source/css/post_tec.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
 </head>
 
-  <body>
-    <div class="container" id="container">
-      <header class="header">
-  	  </header>
-      <div class="content_box fix">
-        <div class="content l mr30" >
-          <div class="content_title">
-            <h2>可以伸缩的时间轴效果</h2>
-          </div>
-          <h3 id="一适用场景">一、适用场景</h3>
+   <div class="container">
+       <header>
+          <div class="header">
+	<div class="poster_img gray">
+		<!--<img class="poster_img_lala gray" src="/source/img/index_left.jpeg">-->
+	</div>
+	<div class="header_cover">
+		<div class="nav">
+			<ul class="nav_ul">
+				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
+				<li data-subtitle="技术"><a href="/"><i class="fa fa-html5"></i></a></li>
+				<li data-subtitle="瞎扯"><a href="/"><i class="fa fa-heart"></i></a></li>
+				<li data-subtitle="联系"><a href="/"><i class="fa fa-comments"></i></a></li>
+				<li data-subtitle="夜间模式"><a href="/"><i class="fa fa-moon-o"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>可以伸缩的时间轴效果</h1>
+                  <span><time datetime=""></time></span>
+                </div>
+                  <h3 id="一适用场景">一、适用场景</h3>
 <p>时间轴的效果对于要突出表现时间节点的信息是一个不错的显示方法，类似公司的发展史，软件的版本更新，类似这样的信息，都可以用时间轴来显示，时间和事件突出，并且可以带有交互效果，我们的项目上，老板发话要用这种方式显示，谁敢不从，赶紧动手做吧。先看下demo：<a href="/test/sjz/html/index.html" target="_blank">时间轴demo</a></p>
 
 <h3 id="二思路">二、思路</h3>
@@ -103,35 +123,20 @@ $(".main .year&gt;h2&gt;a").click(function(e){
 <h3 id="三结束了">三、结束了</h3>
 <p>其实demo中有一个效果是有bug的，关闭每年列表的时候，原本在小圆点后面的轴线会有一瞬间跑到周线上面，也就是z轴的层级变高了，这个bug的原因是close类里面我设置了改变opacity透明度，为什么加上它就会有这个问题？呵呵，不想解释了，如果看着不爽直接把改变opacity值去掉就可以了，我这里留着，因为涉及一些关键知识点，日后会整理一篇关于dom层级知识点的问题，方便知识点归类，本篇就是为了快速简单的做出一个时间轴的效果，重点强调简单，不用去网上找一堆复杂的看不懂的效果直接用，不想搬砖。哼哼。</p>
 
-          <div class="comment_box">
-            <!-- UY BEGIN -->
-            <div class="chakan">查看评论</div>
-            <div id="uyan_frame"></div>
-            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
-            <!-- UY END -->
+                <div class="comment_box">
+                    <!-- UY BEGIN -->
+                    <div class="chakan">查看评论</div>
+                    <div id="uyan_frame"></div>
+                    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
+                    <!-- UY END -->
+                </div>
+            </div>
           </div>
-        </div>
-        <div class="sidebar cell">
-          <h4>最新文章</h4>
-          <ul>
-          
-          <li><a href="/2017/08/10/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4%E7%89%B9%E6%95%88.html">可以伸缩的时间轴效果</a></li>
-          
-          <li><a href="/2017/07/31/canvas%E5%AE%9E%E7%8E%B0%E6%98%9F%E7%A9%BA%E6%95%88%E6%9E%9C.html">canvas实现满天繁星运动效果</a></li>
-          
-          <li><a href="/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">支付宝支付接口对接的那些事</a></li>
-          
-          </ul>
-        </div>
-      </div>
+       </div>
     </div>
-  </body>
-  <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
-  <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/ir_black.min.css">-->
-  <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/github.min.css">-->  
-  <!--<link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/foundation.min.css">-->
   <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
   <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
@@ -140,5 +145,3 @@ $(".main .year&gt;h2&gt;a").click(function(e){
       })
     })
   </script>
-
- </html>

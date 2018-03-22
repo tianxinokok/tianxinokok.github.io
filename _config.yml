@@ -1,5 +1,4 @@
 baseurl:/tianxinokok.github.io
-<<<<<<< HEAD
 #future: true
 #permalink: /:title/
 #url: http://tianxinokok.github.io
@@ -9,10 +8,7 @@ author: tianxin
 email: tianxinokok@163.com
 #beian: 
 #cnzz:
-<<<<<<< HEAD
 sidebar_image:/source/img/index_left.jpg
-=======
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 pygments: true
 safe: true
 auto: true
@@ -26,13 +22,5 @@ menu:
   分类:/
   About:/about
 ###### css/js
-<<<<<<< HEAD
-=======
 source:/source
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
 
-#highlighter: rouge
-#truncate: true
-#about: "TT"
-=======
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636

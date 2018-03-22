@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
  <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,24 +6,10 @@
     <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
     <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
-=======
-=======
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="UTF-8">
-    <link rel="stylesheet" href="/source/css/post.css" type="text/css">
-<<<<<<< HEAD
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
-=======
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
    <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
 </head>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
    <div class="container">
        <header>
           <div class="header">
@@ -53,25 +37,6 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h2 id="准备工作">准备工作</h2>
-=======
-=======
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
-  <body>
-    <div class="container" id="container">
-      <header class="header">
-  		<h1>支付宝支付接口对接的那些事</h1>
-  	  </header>
-      <div class="content">
-<<<<<<< HEAD
-      	<h2 id="准备工作">准备工作</h2>
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
-=======
-<<<<<<< HEAD
-      	<h2 id="准备工作">准备工作</h2>
-=======
-      	<h2 id="section">准备工作</h2>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
 
 <ul>
   <li>1.注册一个支付宝账号，这个大家应该都有的</li>
@@ -79,15 +44,7 @@
   <li>3.下载支付宝开发文档中demo备用<a href="https://doc.open.alipay.com/docs/doc.htm?treeId=203&amp;articleId=105288&amp;docType=1">https://doc.open.alipay.com/docs/doc.htm?treeId=203&amp;articleId=105288&amp;docType=1</a></li>
 </ul>
 
-<<<<<<< HEAD
 <h2 id="整体思路">整体思路</h2>
-=======
-<<<<<<< HEAD
-<h2 id="整体思路">整体思路</h2>
-=======
-<h2 id="section-1">整体思路</h2>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
 <ul>
   <li>1.获取appid,所谓appid可以理解为我们网页的身份证。</li>
   <li>2.然后我们需要一些钥匙(所谓的钥匙就是官网教程中所说的公钥和密钥),把钥匙配置到我们的支付宝,有了这个钥匙我们才能让支付者打开我们的门，把钱付到我们这里来。</li>
@@ -95,21 +52,9 @@
   <li>4.前端把付款的金额和一些必要的参数通过表单传到sdk中,调取支付宝的后台之后,就会走上付款的光明大道了so easy～吧</li>
 </ul>
 
-<<<<<<< HEAD
 <h2 id="具体步骤">具体步骤</h2>
 <blockquote>
   <h3 id="第一步创建应用获取appid">第一步:创建应用获取appid</h3>
-=======
-<<<<<<< HEAD
-<h2 id="具体步骤">具体步骤</h2>
-<blockquote>
-  <h3 id="第一步创建应用获取appid">第一步:创建应用获取appid</h3>
-=======
-<h2 id="section-2">具体步骤</h2>
-<blockquote>
-  <h3 id="appid">第一步:创建应用获取appid</h3>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
   <p>点击创建，按步骤一步一步创建你的应用</p>
 </blockquote>
 
@@ -126,15 +71,7 @@
 </blockquote>
 
 <blockquote>
-<<<<<<< HEAD
   <h3 id="第二步生成rsa密钥">第二步:生成RSA密钥</h3>
-=======
-<<<<<<< HEAD
-  <h3 id="第二步生成rsa密钥">第二步:生成RSA密钥</h3>
-=======
-  <h3 id="rsa">第二步:生成RSA密钥</h3>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
   <p>首先下载一个生成密钥的工具
 <a href="https://doc.open.alipay.com/docs/doc.htm?treeId=291&amp;articleId=105971&amp;docType=1">https://doc.open.alipay.com/docs/doc.htm?treeId=291&amp;articleId=105971&amp;docType=1</a></p>
 
@@ -151,15 +88,7 @@
 </blockquote>
 
 <blockquote>
-<<<<<<< HEAD
   <h3 id="第三步-配置支付宝公钥">第三步 配置支付宝公钥</h3>
-=======
-<<<<<<< HEAD
-  <h3 id="第三步-配置支付宝公钥">第三步 配置支付宝公钥</h3>
-=======
-  <h3 id="section-3">第三步 配置支付宝公钥</h3>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
   <p>将我们刚才生成的公钥复制一下
 <img src="/source/img/zhifu_4.png" alt="" /></p>
 </blockquote>
@@ -170,15 +99,7 @@
 
 <blockquote>
   <p><img src="/source/img/zhifu_6.png" alt="" /></p>
-<<<<<<< HEAD
   <h3 id="第四步-客户端参数配置">第四步 客户端参数配置</h3>
-=======
-<<<<<<< HEAD
-  <h3 id="第四步-客户端参数配置">第四步 客户端参数配置</h3>
-=======
-  <h3 id="section-4">第四步 客户端参数配置</h3>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
   <p><img src="/source/img/tu_1.png" alt="" /></p>
 </blockquote>
 
@@ -213,15 +134,7 @@ $config = array (
 </code></pre>
 </div>
 
-<<<<<<< HEAD
 <h2 id="开始运行测试">开始运行测试</h2>
-=======
-<<<<<<< HEAD
-<h2 id="开始运行测试">开始运行测试</h2>
-=======
-<h2 id="section-5">开始运行测试</h2>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
 <blockquote>
   <p>支付宝提供了沙箱测试环境，该环境的搭建请看这里<a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.INGnMB&amp;treeId=200&amp;articleId=105311&amp;docType=1">https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.INGnMB&amp;treeId=200&amp;articleId=105311&amp;docType=1</a>
 用带有php环境的测试环境打开demo中的index.php页面点击支付就会跳到支付宝的登陆页面了
@@ -248,15 +161,7 @@ $config = array (
   <p><img src="/source/img/zhifu_15.png" alt="" /></p>
 </blockquote>
 
-<<<<<<< HEAD
 <h2 id="结语">结语</h2>
-=======
-<<<<<<< HEAD
-<h2 id="结语">结语</h2>
-=======
-<h2 id="section-6">结语</h2>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
 <blockquote>
   <p>其实大家看支付宝官网的教程就能学个八九不离十了,不要被官网贴出的后台代码所吓到,其实demo中很多都是写好了的,我们只是需要一些配置就可以了,配置的过程当中,对于刚刚接触这块的同学，会有几个名称会被官网教程搞晕(支付宝公钥,支付宝私钥,密钥等等一系列),耐心一点你就能捋清楚了。</p>
 </blockquote>
@@ -282,8 +187,6 @@ $config = array (
 </blockquote>
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <div class="comment_box">
                     <!-- UY BEGIN -->
                     <div class="chakan">查看评论</div>
@@ -298,34 +201,6 @@ $config = array (
   <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
   <script type="text/javascript" src="/source/js/jquery.js"></script>
   <script type="text/javascript" src="/source/js/index.js"></script>
-=======
-=======
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
-      </div>
-      <footer class="footer">
-        <!-- UY BEGIN -->
-        <div class="chakan">查看评论</div>
-        <div id="uyan_frame"></div>
-        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
-        <!-- UY END -->
-      </footer>
-    </div>
-  </body>
-<<<<<<< HEAD
-  <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/rainbow.min.css">
-  <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
-  <script type="text/javascript" src="/source/js/jquery.js"></script>
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
-=======
-<<<<<<< HEAD
-  <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/rainbow.min.css">
-  <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
-=======
-  <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized_dark.min.css">
-  <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
->>>>>>> 88cd4fa98fa3d7c3f4950858a3644309962089eb
-  <script type="text/javascript" src="/source/js/jquery.js"></script>
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
@@ -334,14 +209,3 @@ $config = array (
       })
     })
   </script>
-<<<<<<< HEAD
-<<<<<<< HEAD
-</html>
-=======
-
- </html>
->>>>>>> 5d4e353f4fdf785248196093a1ae0ec0a84c8221
-=======
-
- </html>
->>>>>>> 4006a03c6a87402aebff97455c2d5f53432de636
