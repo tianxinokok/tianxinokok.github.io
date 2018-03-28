@@ -1,0 +1,198 @@
+ <!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/obsidian.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+   <div class="container">
+       <header>
+          <svg style="display: none"  version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grayscale">
+        <feColorMatrix type="matrix"  id="ie_svg" values="0.3333 0.3333 0.3333 0 0
+                                             0.3333 0.3333 0.3333 0 0 
+                                             0.3333 0.3333 0.3333 0 0 
+                                             0 0 0 1 0"/>
+    </filter>
+</svg>
+<div class="header">
+	<div class="poster_img gray">
+	<svg class="box_svg" width="100%" height="100%" >
+		<image  class="img_svg" xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"></image>
+	</svg>	
+	</div>
+	<div class="header_cover">
+		<div class="nav">
+			<ul class="nav_ul">
+				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
+				<li data-subtitle="技术"><a href="/"><i class="fa fa-html5"></i></a></li>
+				<li data-subtitle="瞎扯"><a href="/"><i class="fa fa-heart"></i></a></li>
+				<li data-subtitle="联系"><a href="/"><i class="fa fa-comments"></i></a></li>
+				<li data-subtitle="夜间模式"><a href="/"><i class="fa fa-moon-o"></i></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>grayscale(灰度)效果兼容IE10+</h1>
+                  <span><time datetime=""></time></span>
+                </div>
+                  <h3 id="一为啥">一、为啥？</h3>
+<p>做本博客的封面， 有一个图片灰度（grayscale）渐变的效果，实现的方式是用W3C的filter（滤镜），filter在IE4~ IE10(不包括IE10)中称为私有滤镜，从IE10开始抛弃了私有滤镜的支持，但是还是没有提供W3C标准下的filter支持，so，IE10+的Hack问题也就随着带出来了，先记下W3c下的filter笔记，再说IE10+的区分。</p>
+
+<h3 id="二别啰嗦">二、别啰嗦</h3>
+<p>css</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.gray {
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;                   /* IE 6-9 */              /*没测试*/
+    filter: url(blur.svg#grayscale) /*低版本火狐*/
+}
+</code></pre>
+</div>
+<p>配合transition就能实现从灰色到彩色的过渡效果啦。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.gray {
+     -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+	
+    transition:filter 3s;
+    -moz-transition:filter 3s;
+    -webkit-transition:filter 3s;
+    -o-transition:filter 3s;
+}
+.gray:hover {
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    filter: grayscale(0);
+}
+</code></pre>
+</div>
+<p>碰我一下试试</p>
+<style>
+.gray1 {
+	width:300px;
+	height:200px;
+	background: url(/source/img/dog/dog1.jpg);
+	background-size: cover;
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;
+	transition:filter 3s;
+	-moz-transition:filter 3s;
+	-webkit-transition:filter 3s;
+	-o-transition:filter 3s;
+
+}
+.gray1:hover{
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    filter: grayscale(0);
+    filter: gray;            
+}
+</style>
+
+<div class="gray1"></div>
+<h3 id="三用svg实现ie10的兼容">三、用svg实现IE10+的兼容</h3>
+<p>按理说IE10+也是支持svg的滤镜的，所以filter(url)这种兼容Firefox4+的写法应该也行，可是并不可以，貌似是因为IE不支持css的这种filter(url)写法。</p>
+
+<p>准备一段灰度的svg代码是必须的，可内嵌可直接写到html里，既然filter(url)不支持 ，那就直接把图片标签直接写到svg里。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;svg version="1.1" xmlns="http://www.w3.org/2000/svg"&gt;
+    &lt;filter id="grayscale"&gt;
+        &lt;feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/&gt;
+    &lt;/filter&gt;
+&lt;/svg&gt;
+</code></pre>
+</div>
+
+<p>再把图片嵌入到svg里id（grayscale）对应上。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;svg  width="100%" height="100%" &gt;
+   &lt;image  xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"&gt;&lt;/image&gt;
+&lt;/svg&gt;	
+</code></pre>
+</div>
+
+<p>这里做的时候发现IE10+确实图片变灰了，but，图片在容器内的尺寸不好控制（默认图片会保持长宽比例）,我要的效果是充满容器，也就是background-size:cover;效果。又一顿搜搜搜 ，preserveAspectRatio这个东西就被搜出来了，preserveAspectRatio=”xMinYMin slice” 也就实现了cover的效果。</p>
+
+<p>用这种方法实现的一个不完美就是不能像chome一样用transition实现平滑的过渡效果，把灰色变彩色还是可以的，就是瞬间过渡有点愣， 借助js改变svg中feColorMatrix标签的value属性就可以了。</p>
+
+<h3 id="四filter还能实现图片的什么效果">四、filter还能实现图片的什么效果？</h3>
+<p>小手一搜</p>
+
+<p>filter: none、 blur() 、 brightness() 、contrast() 、 drop-shadow() 、 grayscale() 、 hue-rotate() 、 invert() 、 opacity() 、 saturate() 、 sepia() 、url();</p>
+
+<p>none：默认值 没效果</p>
+
+<p>blur()：高斯模糊</p>
+
+<p>brightness() ：应该是photoshop里的曲线，给图片补光，让图片看起来更亮或者更暗</p>
+
+<p>contrast() ：对比度</p>
+
+<p>drop-shadow()：阴影（看着眼熟）</p>
+
+<p>grayscale() ：灰度（好像刚说完）</p>
+
+<p>hue-rotate()：给图像应用色相旋转（what？）</p>
+
+<p>invert()：反转输入图像（what ? +1）</p>
+
+<p>opacity()：透明度</p>
+
+<p>saturate()：饱和度</p>
+
+<p>sepia()：将图片转为深褐色</p>
+
+<p>url()：接受一个xml文件，也就是svg的实现方法</p>
+
+<p><a href="/test/filter/filter.html" target="_blank">其他filter效果demo</a></p>
+
+<h3 id="五其他方法">五、其他方法</h3>
+<p>网上有个grayscale.js的插件，原理是用的canvas的getImageData，对每个像素点转化，对于小图片这个插件还挺给力的，兼容性完美，博客封面的图片这种大图片用这个自然就有点慢，所有就放弃了。</p>
+
+
+                <div class="comment_box">
+                    <!-- UY BEGIN -->
+                    <div class="chakan">查看评论</div>
+                    <div id="uyan_frame"></div>
+                    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
+                    <!-- UY END -->
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  <script src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      $('.chakan').on('click',function(){
+         $('#uyan_frame').toggleClass('show');
+      })
+    })
+  </script>

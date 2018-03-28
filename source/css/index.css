@@ -160,9 +160,9 @@ body{
 
 
     transition: opacity 2s ,filter 12s;
-	-moz-transition: opacity 2s ,filter 12s;	/* Firefox 4 */
-	-webkit-transition: opacity 2s ,filter 12s;	/* Safari 和 Chrome */
-	-o-transition: opacity 2s ,filter 12s;	/* Opera */
+	-moz-transition: opacity 2s ,filter 12s;
+	-webkit-transition: opacity 2s ,filter 12s;
+	-o-transition: opacity 2s ,filter 12s;
 }
 .img_over{
 	-webkit-filter: grayscale(0);
@@ -179,9 +179,9 @@ body{
     opacity: 1\0;
     *opacity: 1;
 	transition: opacity 2s;
-	-moz-transition: opacity 2s;	/* Firefox 4 */
-	-webkit-transition: opacity 2s;	/* Safari 和 Chrome */
-	-o-transition: opacity 2s;	/* Opera */
+	-moz-transition: opacity 2s;
+	-webkit-transition: opacity 2s;
+	-o-transition: opacity 2s;
 }
 .post_list li:hover{
 	cursor: pointer;

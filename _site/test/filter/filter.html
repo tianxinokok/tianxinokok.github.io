@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Document</title>
+ <style>
+    img{
+        border:0;
+    }
+    .box{
+        display: inline-block;
+        width: 300px;
+        height: 200px;
+        margin-left: 30px;
+    }
+    .img_blur {
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+    }
+    .img_brightness {
+        -webkit-filter: brightness(200%); 
+        filter: brightness(200%);
+    }
+    .img_contrast {
+        -webkit-filter: contrast(200%); 
+        filter: contrast(200%);
+    }
+    .img_drop-shadow{
+        -webkit-filter: drop-shadow(8px 8px 10px #000); 
+        filter: drop-shadow(8px 8px 10px #000);
+    }
+    .img_hue-rotate{
+        -webkit-filter: hue-rotate(90deg); 
+        filter: hue-rotate(90deg);
+    }
+    .img_invert{
+        -webkit-filter: invert(100%); 
+        filter: invert(100%);
+    }
+    .img_opacity{
+        -webkit-filter: opacity(30%); 
+        filter: opacity(30%);
+    }
+    .img_saturate{
+        -webkit-filter: saturate(800%); 
+        filter: saturate(800%);
+    }
+    .img_sepia{
+        -webkit-filter: sepia(100%); 
+        filter: sepia(100%);
+    }
+ </style>
+</head>
+<body>
+<div class="box" >
+    <h4>blur()</h4>
+    <img class="img_blur" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>brightness()</h4>
+    <img class="img_brightness" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>contrast()</h4>
+    <img class="img_contrast" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>drop-shadow()</h4>
+    <img class="img_drop-shadow" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>hue-rotate()</h4>
+    <img class="img_hue-rotate" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>invert()</h4>
+    <img class="img_invert" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>opacity()</h4>
+    <img class="img_opacity" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>saturate()</h4>
+    <img class="img_saturate" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+
+ <div class="box" >
+    <h4>sepia()</h4>
+    <img class="img_sepia" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ </div>
+</body>
+</html>
