@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 function IEVersion() {
             var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
             var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
@@ -28,7 +26,6 @@ function IEVersion() {
                 return -1;//不是ie浏览器
             }
 };
->>>>>>> gh-pages
 if (window.ActiveXObject || "ActiveXObject" in window){
 	$('.post_list li').on('mouseover',function(e){
 		$(this).find('img').attr('class','gray img_over_ie');
