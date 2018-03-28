@@ -15,11 +15,10 @@
 			      <!--<p class="ydqw"><a href="{{ post.url }}">阅读全文...</a></p>-->
 			    </section>
 			</div>
-		    <div class="post_img"><img class="gray" src=" {{ post.imgs }} " filter="url(#grayscale)"><span class="alpha_img"></span></div>
-		    <!--<div class="post_img">
-		    <svg ><image class="gray" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="{{ post.imgs }}" filter="url(#grayscale)"></image></svg>
-		    <span class="alpha_img"></span>
-		    </div>-->
+		    <div class="post_img">
+			   <img class="gray noie" src=" {{ post.imgs }} " filter="url(#grayscale)"><i class="mark"></i>
+			   <span class="alpha_img"></span>
+		    </div>
 		</li>
 
 		{% endfor %}
