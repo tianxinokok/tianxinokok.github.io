@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Document</title>
+    <title>filter</title>
  <style>
     img{
         border:0;
@@ -11,26 +11,26 @@
         display: inline-block;
         width: 300px;
         height: 200px;
-        margin-left: 30px;
+        margin-left: 30px;   
     }
-    .img_blur {
-        -webkit-filter: blur(5px);
+    .img_blur{
+        -webkit-filter: blur(5px); 
         filter: blur(5px);
     }
-    .img_brightness {
+    .img_brightness{
         -webkit-filter: brightness(200%); 
         filter: brightness(200%);
     }
-    .img_contrast {
+    .img_contrast{
         -webkit-filter: contrast(200%); 
         filter: contrast(200%);
     }
     .img_drop-shadow{
-        -webkit-filter: drop-shadow(8px 8px 10px #000); 
-        filter: drop-shadow(8px 8px 10px #000);
+        -webkit-filter: drop-shadow(8px 8px 10px red); 
+        filter: drop-shadow(8px 8px 10px red);
     }
     .img_hue-rotate{
-        -webkit-filter: hue-rotate(90deg); 
+         -webkit-filter: hue-rotate(90deg); 
         filter: hue-rotate(90deg);
     }
     .img_invert{
@@ -42,7 +42,7 @@
         filter: opacity(30%);
     }
     .img_saturate{
-        -webkit-filter: saturate(800%); 
+       -webkit-filter: saturate(800%); 
         filter: saturate(800%);
     }
     .img_sepia{
@@ -52,49 +52,49 @@
  </style>
 </head>
 <body>
-<div class="box" >
-    <h4>blur()</h4>
-    <img class="img_blur" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+<div class="box">
+    <h4>blur()高斯模糊</h4>
+    <img class="img_blur" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>brightness()</h4>
-    <img class="img_brightness" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>brightness()变亮变暗</h4>
+    <img class="img_brightness" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>contrast()</h4>
-    <img class="img_contrast" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>contrast()对比度</h4>
+    <img class="img_contrast" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>drop-shadow()</h4>
-    <img class="img_drop-shadow" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>drop-shadow()阴影</h4>
+    <img class="img_drop-shadow" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>hue-rotate()</h4>
-    <img class="img_hue-rotate" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>hue-rotate()色相旋转</h4>
+    <img class="img_hue-rotate" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>invert()</h4>
-    <img class="img_invert" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>invert()反转输入图像</h4>
+    <img class="img_invert" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>opacity()</h4>
-    <img class="img_opacity" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>opacity()透明度</h4>
+    <img class="img_opacity" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>saturate()</h4>
-    <img class="img_saturate" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>saturate()饱和度</h4>
+    <img class="img_saturate" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 
- <div class="box" >
-    <h4>sepia()</h4>
-    <img class="img_sepia" width="100%" height="100%" src="/source/img/dog/dog2.jpg">
+ <div class="box">
+    <h4>sepia()把图片转为深褐色</h4>
+    <img class="img_sepia" src="/source/img/dog/dog2.jpg" width="100%" height="100%" >
  </div>
 </body>
 </html>
