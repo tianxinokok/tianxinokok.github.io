@@ -109,7 +109,7 @@ $('.post_list li').on('click',function(e){
 	return false;
 
 });
-$('.fa-moon-o').on('click',function(e){
+$('.fa-moon-o').parent().on('click',function(e){
 	e.preventDefault();
 	$('html').toggleClass("night-mode");
 	if($('html').attr('class') == "night-mode"){
