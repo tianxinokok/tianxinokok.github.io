@@ -31,15 +31,29 @@ body{
     height:100%;
     margin: 0;
     font:caption;
-    background:#fff;
+    background-color:#fff;
     color:#333;
     /*font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;*/
     font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans GB','Microsoft YaHei', sans-serif;
-    background: url(/source/img/bg1.jpg) repeat;
+    background-image: url(/source/img/bg1.jpg);
+    transition: background-color 1s;
 }
 .container{
 	width: 100%;
 	overflow: hidden;
+}
+html.night-mode,
+html.night-mode body {
+	background-color: #151518!important;
+	color: #aaa;
+	background-image: none;
+}
+html.night-mode .content p a:not([href$="jpg"]):not([href$="gif"]):not([href$="png"]) {
+	border-bottom: dotted 1px #5793bb;
+	color: #5793bb;
+}
+html.night-mode .highlighter-rouge{
+	background-color:#646262;
 }
 @media screen and (min-width:500px){
 .header{
