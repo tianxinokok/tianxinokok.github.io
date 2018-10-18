@@ -266,7 +266,7 @@ html.night-mode .highlighter-rouge{
     transition-delay: .3s;
 }
 .post_list > li {
-	margin:2rem 0;
+	margin: 4rem 0;
 }
 .post_title{
 	margin-bottom:0.5rem; 
