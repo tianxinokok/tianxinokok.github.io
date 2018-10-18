@@ -95,19 +95,6 @@ $('.post_list li').on('click',function(e){
 	e.preventDefault();
 	var lala  = $(this).find('a').attr('data-post-href');
 	window.location.href = lala;
-	/*
-	无刷新跳转
-	 */
-	/*console.log(window.location.href);
-	console.log(location.hash);
-	var state = {
-				    title: window.document.title,
-				    url: window.location.href,
-				    time:new Date().getTime()
-				};
-	window.history.pushState(state, document.title, lala);*/
-	return false;
-
 });
 $('.fa-moon-o').parent().on('click',function(e){
 	e.preventDefault();
@@ -119,4 +106,4 @@ $('.fa-moon-o').parent().on('click',function(e){
 		setCookie('night',"",-1,"/");
 		setCookie('night',-1,1,"/");
 	}
-})
+});

@@ -38,6 +38,9 @@ body{
     background-image: url(/source/img/bg1.jpg);
     transition: background-color 1s;
 }
+h1,h2{
+	font-family:x-locale-heading-primary,zillaslab,Palatino,"Palatino Linotype",x-locale-heading-secondary,'Source Han Serif SC', STZhongsong, "Source Han Sans CN", 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', SimHei;
+}
 .container{
 	width: 100%;
 	overflow: hidden;
@@ -55,7 +58,8 @@ html.night-mode .content p a:not([href$="jpg"]):not([href$="gif"]):not([href$="p
 html.night-mode .highlighter-rouge{
 	background-color:#646262;
 }
-@media screen and (min-width:500px){
+/*>479px*/
+@media screen and (min-width:479px){
 .header{
 	position: fixed;
 	width: 30%;
@@ -201,130 +205,100 @@ html.night-mode .highlighter-rouge{
 	cursor: pointer;
 }
 
-}  /*media*/
-@media only screen and (max-width: 500px){
-
-
-	
-			.post_title{
-				margin-bottom:2rem; 
-			}	.post_title > h2 {
-					margin-bottom:0;
-
-				}
-					.post_title > h2 > a{
-						/*font-family: '微软雅黑';*/
-						font-size: 2rem;
-						color: #444;
-					}
-				.post_message{
-					margin-top:0.5rem; 
-					font-size: 1.2rem;
-					color:#999999;
-				}
-				.post-excerpt{
-					margin-bottom:2rem;
-				}
-					.yl{
-						width:100%;
-						font-size:1.4rem;
-						text-align:justify;
-						text-justify:inter-word;
-						color:#999; 
-					}
-					.ydqw{
-						margin-top:0.5rem; 
-					}
-					.ydqw > a {
-						 color:#9EBCD8;
-					}
-}
+}  
+/*<479px*/
 @media only screen and (max-width: 479px){
 .content{
 	font-size: 1.6rem;
-}
-.post_list{
-		width: 80%;
-		margin: 0 auto;
 }
 .header{
 	position: relative;
 	width:100%;
 	background-image:url(../img/header_image.jpg);
-	background-color: #6fa9d0;
 	background-position:50% 50%;
 	background-size:cover;
-	
 }
-	.header_cover{
-		position: relative;
-		background-color:rgba(0,0,0,0.2);
-		height: 100px;
-		padding: 4rem 1rem; 
-	}
-		.head_title{
-			/*font-family: "Roboto Slab", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-			font-size: 1rem;
-			color:#fff;
-			text-align: center;
-			text-shadow: 0 2px 1px rgba(0, 0, 0, 0.67) !important;*/
-			display:none;
-		}
+.post_list{
+	width: 80%;
+	margin: 0 auto;
+}
+.post_img{
+	display: none;
+}
 .nav{
 	position: absolute;
-	bottom:-60px;
-	height:50px;
-	width:100%;
-	text-align: center;
-	margin:0 auto;
+	width: 100%;
+	margin-top: -77px;
 }
-		.post_title{
-			margin-top: 60px;
-		}
-		.nav > ul > li {
-			width:24%;
-			float:left;
-			font-size: 1.8rem;
-			color:#444;
-		}
-		.nav a {
-				color:#444;
-			}
-	
-		.post_list > li {
-			margin:2rem 0;
-			border-bottom: 1px solid #EDEDED; 
-		}
+.nav a {
+	color:#444;
+}
+.nav_ul{
+	text-align: center;
+}
+.nav_ul> li {
+	position: relative;
+	line-height: 1;
+	display: inline-block;
+	border: 1px solid #fff;
+	margin:0 0.25em;
+	padding: 6px;
+	font-size: 1.2rem;
+	border-radius: 100%;
+	letter-spacing: .5px;
+	background-color: rgba(255,255,255,0.7);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 6px 18px rgba(0, 0, 0, 0.8);
+}
+.nav_ul> li:after{
+	position: absolute;
+	content: attr(data-subtitle);
+	width: 100px;
+	top: 33px;
+    left: -50px;
+    margin-left: 50%;
+	font-size: 1.2rem;
+	color: #fff;
+	font-weight: bold;
+	text-shadow:0 0 0.2em #000,
+                -0 -0 0.2em #000;
+    opacity: 0;
+    transition: opacity ease-out .5s;
+    transition-delay: .3s;
+}
+.post_list > li {
+	margin:2rem 0;
+	border-bottom: 1px solid #EDEDED; 
+}
 .post_title{
-				margin-bottom:2rem; 
-			}	.post_title > h2 {
-					margin-bottom:0;
-
-				}
-					.post_title > h2 > a{
-						/*font-family: '微软雅黑';*/
-						font-size: 2rem;
-						color: #444;
-					}
-				.post_message{
-					margin-top:0.5rem; 
-					font-size: 1.2rem;
-					color:#999999;
-				}
-				.post-excerpt{
-					margin-bottom:2rem;
-				}
-					.yl{
-						width:100%;
-						font-size:1.6rem;
-						text-align:justify;
-						text-justify:inter-word;
-						color:#999; 
-					}
-					.ydqw{
-						margin-top:0.5rem; 
-					}
-					.ydqw > a {
-						 color:#9EBCD8;
-					}
+	margin-bottom:0.5rem; 
+}	
+.post_title > h2 {
+	margin-bottom:0;
+}
+.post_title > h2 > a{
+	/*font-family: '微软雅黑';*/
+	font-size: 2rem;
+	color: #444;
+}
+.post_message{
+	margin-top:0.5rem; 
+	font-size: 1.2rem;
+	color:#999999;
+}
+.post-excerpt{
+	margin-bottom:2rem;
+}
+.yl{
+	width:100%;
+	font-size:1.6rem;
+	text-align:justify;
+	text-justify:inter-word;
+	color:#999; 
+}
+.ydqw{
+	margin-top:0.5rem; 
+}
+.ydqw > a {
+	color:#9EBCD8;
+}
 }
