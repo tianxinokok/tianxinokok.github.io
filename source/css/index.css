@@ -249,10 +249,12 @@ src: url('../img/zt/impact.ttf'),
      url('../img/zt/impact.eot'); /* IE9+ */
 }
 
-body{
+html,body{
+	position: relative;
 	background:url(../img/h_bg.jpg);
 	background-size: 50%;
 	background-attachment: fixed;
+	z-index: 1;
 }
 .poster_img{
 	display: none;
