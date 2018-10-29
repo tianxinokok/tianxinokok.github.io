@@ -243,6 +243,13 @@ body{
 /*<479px*/
 @media only screen and (max-width: 479px){
 
+@font-face
+{
+font-family: dayfont;
+src: url('../img/zt/impact.ttf'),
+     url('../img/zt/impact.eot'); /* IE9+ */
+}
+
 body {
 	background:url(../img/h_bg.jpg);
 	background-size: 50%;
@@ -371,7 +378,7 @@ body {
 .day{
 	position: relative;
 	margin-right: 10px;
-	font-family: 'impact';
+	font-family: dayfont;
 	font-size: 4.5rem;
 	top: 5px;
 
