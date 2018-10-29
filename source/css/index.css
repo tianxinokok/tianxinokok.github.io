@@ -250,7 +250,6 @@ src: url('../img/zt/impact.ttf'),
 }
 
 html,body{
-	position: relative;
 	background:url(../img/h_bg.jpg);
 	background-size: 50%;
 	background-attachment: fixed;
@@ -318,6 +317,8 @@ html,body{
 }
 .content{
 	position: relative;
+	background:url(../img/h_bg.jpg);
+	background-size: 50%;
 	font-size: 1.6rem;
 	margin-top: 100px;
 	overflow-y: scroll;
