@@ -262,8 +262,8 @@ body:before {
   right: 0;
   bottom: 0;
   left: 0;
-  background: url(../img/h_bg.jpg) center 0 no-repeat;
-  background-size: cover;
+  background: url(../img/h_bg.jpg);
+
 }
 .poster_img{
 	display: none;
