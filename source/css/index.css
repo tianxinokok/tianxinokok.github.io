@@ -385,7 +385,7 @@ body:before {
 .year{
 	position: absolute;
 	margin-top: 54px;
-	margin-left: 2px;
+	margin-right: 12px;
 	font-size: 0.8rem;
 }
 .day{
