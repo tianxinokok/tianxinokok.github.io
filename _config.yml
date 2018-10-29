@@ -16,6 +16,10 @@ github: tianxinokok
 paginate: 20
 #### Markdown Processors
 markdown: kramdown
+
+### Livere评论系统
+Livere:
+livere_uid: MTAyMC80MDQ4OS8xNzAxNg
 #### Menu
 menu:
   Home:/

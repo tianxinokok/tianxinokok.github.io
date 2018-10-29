@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<div class="content">
+	<ul class="post_list">
+		{% for post in site.categories.prose %}
+		<li>
+			<div class="post_text">
+				<div class="post_title">
+				<h2><a class="post-link" href="{{ post.url }}" data-post-href="{{ post.url }}">{{ post.title }}</a></h2>
+				<div class="post_message">
+					<span><time datetime="{{ post.date | date:"%Y-%m-%d" }}"><span class="year">{{ post.date | date:"%Y.%m" }}</span>
+					<span class="day">{{ post.date | date:"%d" }}
+					</span>
+					</time></span>
+				</div>
+				</div>
+			    <div class="post-excerpt" itemprop="description">
+			    	<p class="yl">{{ post.description }}</p>
+			      <!--<p class="yl">{{ post.content | strip_html | truncatewords: 0 }}</p>-->
+			      <!--<p class="ydqw"><a href="{{ post.url }}">阅读全文...</a></p>-->
+			    </div>
+			</div>
+		    <div class="post_img">
+			   <img class="gray noie" src=" {{ post.imgs }} " filter="url(#grayscale)">
+			   <span class="alpha_img"></span>
+		    </div>
+		</li>
+
+		{% endfor %}
+	</ul>
+</div>

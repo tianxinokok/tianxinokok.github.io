@@ -8,15 +8,29 @@
           <div class="content" >
             <div class="post_content">
                 <div class="content_title">
-                  <h1>{{page.title}}</h1>
+                  <h1>{{page.title}}</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y年%m月%d日" }}</time></span>
                 </div>
                   {{ content }}
-                <!-- <div class="comment_box">
-                    <div class="chakan">查看评论</div>
-                    <div id="uyan_frame"></div>
-                    <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2126846"></script>
-                </div> -->
+               <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
+                <script type="text/javascript">
+                 (function(d, s) {
+                     var j, e = d.getElementsByTagName(s)[0];
+
+                     if (typeof LivereTower === 'function') { return; }
+
+                     j = d.createElement(s);
+                     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                     j.async = true;
+
+                     e.parentNode.insertBefore(j, e);
+
+                 })(document, 'script');
+                </script>
+                <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
             </div>
           </div>
        </div>
@@ -30,7 +44,11 @@
     $(document).ready(function(){
       $('.chakan').on('click',function(){
          $('#uyan_frame').toggleClass('show');
-      })
+      });
     })
+     window.onload = function () {
+          var test = document.getElementsByTagName("iframe");
+          console.log(test);
+      };
   </script>
 </html>

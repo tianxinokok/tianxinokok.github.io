@@ -1,0 +1,59 @@
+---
+layout: default
+---
+<div class="content_book">
+	<ul class="book_list">
+		{% for post in site.categories.book %}
+		<li><a class="post-link" href="{{ post.url }}" data-post-href="{{ post.url }}"> 
+			   <img class="gray noie" src=" {{ post.imgs }} " filter="url(#grayscale)" />
+			   <div class="book_message">
+			   		<div class="book_date"><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y.%m.%d" }}</div>
+			   		<div class="book_title">{{ post.title }}</div>
+			   </div>	  
+		</a></li>
+		{% endfor %}
+	</ul>
+</div>
+ <script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript">
+var config ={
+	interfaces:{
+		booklist:"../source/interface/booklist.json"
+	}
+};
+var str2 =  '<div id="lv-container" class="book_comment" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">'+
+               ' <script type="text/javascript">'+
+                ' (function(d, s) {'+
+                    ' var j, e = d.getElementsByTagName(s)[0];'+
+                     'if (typeof LivereTower === "function") { return; }'+
+                     'j = d.createElement(s);'+
+                     'j.src = "http://cdn-city.livere.com/js/embed.dist.js";'+
+                     'j.async = true;'+
+                     'e.parentNode.insertBefore(j, e);'+
+                 '})(document, "script");'+ '</'+'script>'+
+                '<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>'+
+                '</div>';
+function getBookData(url){
+	$.ajax({
+		type:'get',
+		url:url,
+		success:function(data){
+			if(typeof data == 'string'){
+				data = JSON.parse(data);
+			}
+			console.log(data);
+			var data = data.data;
+			var str = '';
+			for(let i = 0 ;i<data.length;i++){
+				str+='<li>'+'<img src="'+data[i].BOOK_IMG + '" class="gray">'+'</li>';
+			}
+			str+=str2;
+			$('.book_list').html(str);
+		},
+		error:function(){
+			console.log("获取书籍数据失败");
+		}
+	})
+};
+//getBookData(config.interfaces.booklist);
+</script>

@@ -1,3 +1,8 @@
+var config ={
+	interfaces:{
+		booklist:"../source/interface/booklist.json"
+	}
+};
 function IEVersion() {
             var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
             var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
@@ -51,6 +56,7 @@ function checkCookie(){
 	night == 1 ? $('html').attr('class','night-mode') : $('html').attr('class','');
 }
 checkCookie();
+
 if (window.ActiveXObject || "ActiveXObject" in window){
 	$('.post_list li').on('mouseover',function(e){
 		$(this).find('img').attr('class','gray img_over_ie');
@@ -106,4 +112,16 @@ $('.fa-moon-o').parent().on('click',function(e){
 		setCookie('night',"",-1,"/");
 		setCookie('night',-1,1,"/");
 	}
+});
+$(document).ready(function(){
+
+//获取浏览器宽度
+var _width = $(window).width(); 
+if(_width < 479){
+	var Arr = ["#5fcdc7","#ff8a00","#70d5b3","#ea5480"];  
+	var n = Math.floor(Math.random() * Arr.length + 1)-1;  
+	$('.post_list').find('li:first').css({
+	   	"background-color":Arr[n]
+	})
+}
 });
