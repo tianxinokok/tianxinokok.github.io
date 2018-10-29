@@ -251,6 +251,7 @@ src: url('../img/zt/impact.ttf'),
 
 body{
 	background-image:url(../img/h_bg.jpg);
+	background:url(../img/h_bg.jpg);
 	background-size: 50%;
 	background-attachment: fixed;
 }
