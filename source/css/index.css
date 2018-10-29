@@ -385,8 +385,8 @@ body:before {
 .year{
 	position: absolute;
 	margin-top: 54px;
-	margin-right: 0px;
-	font-size: 0.8rem;
+	margin-left: 12px;
+	font-size: 1rem;
 }
 .day{
 	position: relative;
