@@ -43,9 +43,6 @@ h1,h2{
 	width: 100%;
 	overflow: hidden;
 }
-
-/*>479px*/
-@media screen and (min-width:479px){
 html.night-mode,
 html.night-mode body {
 	background-color: #151518!important;
@@ -59,6 +56,8 @@ html.night-mode .content p a:not([href$="jpg"]):not([href$="gif"]):not([href$="p
 html.night-mode .highlighter-rouge{
 	background-color:#646262;
 }
+/*>479px*/
+@media screen and (min-width:479px){
 body{
  	background-image: url(/source/img/bg1.jpg);
 }
@@ -251,7 +250,7 @@ src: url('../img/zt/impact.ttf'),
 }
 
 body {
-	background:url(../img/h_bg.jpg);
+	background-image:url(../img/h_bg.jpg);
 	background-size: 50%;
 	background-attachment: fixed;
 }
@@ -373,7 +372,7 @@ body {
 	position: absolute;
 	margin-top: 54px;
 	margin-left: 2px;
-	font-size: 0.5rem;
+	font-size: 1rem;
 }
 .day{
 	position: relative;
