@@ -57,6 +57,7 @@
 <p>读完很久，感受只剩碎片，看能回忆起啥，再来补上。</p>
 
 
+                <div class="comments">查看评论</div>
                <!-- 来必力City版安装代码 -->
                 <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
                 <script type="text/javascript">
@@ -87,13 +88,11 @@
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
-      $('.chakan').on('click',function(){
-         $('#uyan_frame').toggleClass('show');
-      });
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
     })
-     window.onload = function () {
-          var test = document.getElementsByTagName("iframe");
-          console.log(test);
-      };
   </script>
 </html>

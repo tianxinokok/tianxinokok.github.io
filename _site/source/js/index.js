@@ -127,4 +127,10 @@ if(_width < 479){
 		"background-color":Arr[n]
 	})
 }
+function log(){
+	console.log('本站访客数:' + $('#busuanzi_value_site_uv').html());
+	console.log('总点击量:' + $('#busuanzi_value_site_pv').html());
+	console.log('本页面点击人数:' + $('#busuanzi_value_page_pv').html());	
+};
+log();
 });

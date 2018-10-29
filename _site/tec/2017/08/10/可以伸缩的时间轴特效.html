@@ -135,6 +135,7 @@ $(".main .year&gt;h2&gt;a").click(function(e){
 <h3 id="三结束了">三、结束了</h3>
 <p>其实demo中有一个效果是有bug的，关闭每年列表的时候，原本在小圆点后面的轴线会有一瞬间跑到周线上面，也就是z轴的层级变高了，这个bug的原因是close类里面我设置了改变opacity透明度，为什么加上它就会有这个问题？呵呵，不想解释了，如果看着不爽直接把改变opacity值去掉就可以了，我这里留着，因为涉及一些关键知识点，日后会整理一篇关于dom层级知识点的问题，方便知识点归类，本篇就是为了快速简单的做出一个时间轴的效果，重点强调简单，不用去网上找一堆复杂的看不懂的效果直接用，不想搬砖。哼哼。</p>
 
+                <div class="comments">查看评论</div>
                <!-- 来必力City版安装代码 -->
                 <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
                 <script type="text/javascript">
@@ -165,13 +166,11 @@ $(".main .year&gt;h2&gt;a").click(function(e){
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
-      $('.chakan').on('click',function(){
-         $('#uyan_frame').toggleClass('show');
-      });
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
     })
-     window.onload = function () {
-          var test = document.getElementsByTagName("iframe");
-          console.log(test);
-      };
   </script>
 </html>

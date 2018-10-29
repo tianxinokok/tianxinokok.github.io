@@ -175,6 +175,7 @@
 <p>网上有个grayscale.js的插件，原理是用的canvas的getImageData，对每个像素点转化，对于小图片这个插件还挺给力的，兼容性完美，博客封面的图片这种大图片用这个自然就有点慢，所有就放弃了。</p>
 
 
+                <div class="comments">查看评论</div>
                <!-- 来必力City版安装代码 -->
                 <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
                 <script type="text/javascript">
@@ -205,13 +206,11 @@
   <script>
     hljs.initHighlightingOnLoad();
     $(document).ready(function(){
-      $('.chakan').on('click',function(){
-         $('#uyan_frame').toggleClass('show');
-      });
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
     })
-     window.onload = function () {
-          var test = document.getElementsByTagName("iframe");
-          console.log(test);
-      };
   </script>
 </html>
