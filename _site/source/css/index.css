@@ -206,6 +206,9 @@ body{
 .post_list li:hover{
 	cursor: pointer;
 }
+.bottom_line{
+	display: none;
+}
 /*book*/
 .content_book{
 	width: 64%;
@@ -249,15 +252,21 @@ src: url('../img/zt/impact.ttf'),
      url('../img/zt/impact.eot'); /* IE9+ */
 }
 
-html {
+body{
 	background-image:url(../img/h_bg.jpg);
 	background-size: 50%;
-	margin:0px auto;
-	padding:0px;
-	width:100%;
-	height:100%;
-	float: left;
 	background-attachment: fixed;
+}
+body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/h_bg.jpg);
+  background-size: 50%;
 }
 .poster_img{
 	display: none;
@@ -348,7 +357,7 @@ html {
 
 .post_title > h2 {
 	position: absolute;
-	margin-top: 54px;
+	margin-top: 57px;
 	padding-right: 10px;
 	right: 0px;
 	font-weight: normal;
@@ -401,6 +410,14 @@ html {
 }
 .ydqw > a {
 	color:#9EBCD8;
+}
+.bottom_line{
+	height: 5px;
+	position: fixed;
+	background-color: #5fcdc7;
+	bottom: 0px;
+	width: 100%;
+	z-index: 100;
 }
 /*book*/
 .content_book{

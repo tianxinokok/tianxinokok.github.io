@@ -123,5 +123,8 @@ if(_width < 479){
 	$('.post_list').find('li:first').css({
 	   	"background-color":Arr[n]
 	})
+	$('.bottom_line').css({
+		"background-color":Arr[n]
+	})
 }
 });

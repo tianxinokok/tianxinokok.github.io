@@ -206,6 +206,9 @@ body{
 .post_list li:hover{
 	cursor: pointer;
 }
+.bottom_line{
+	display: none;
+}
 /*book*/
 .content_book{
 	width: 64%;
@@ -354,7 +357,7 @@ body:before {
 
 .post_title > h2 {
 	position: absolute;
-	margin-top: 54px;
+	margin-top: 57px;
 	padding-right: 10px;
 	right: 0px;
 	font-weight: normal;
@@ -407,6 +410,14 @@ body:before {
 }
 .ydqw > a {
 	color:#9EBCD8;
+}
+.bottom_line{
+	height: 5px;
+	position: fixed;
+	background-color: #5fcdc7;
+	bottom: 0px;
+	width: 100%;
+	z-index: 100;
 }
 /*book*/
 .content_book{
