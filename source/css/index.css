@@ -277,6 +277,7 @@ body:before {
 	width:100%;
 	background:url(../img/h_bg.jpg);
 	background-size: 50%; 
+	border-bottom: 1px solid #333;
 	z-index: 1;
 }
 
@@ -455,7 +456,7 @@ body:before {
 }
 .book_list > li > a > img{
 	width: 100%;
-	height: 78%;
+	height: 76%;
 	-webkit-filter: grayscale(1);
     -moz-filter: grayscale(1);
     -ms-filter: grayscale(1);

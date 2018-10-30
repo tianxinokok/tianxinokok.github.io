@@ -118,7 +118,7 @@ $(document).ready(function(){
 //获取浏览器宽度
 var _width = $(window).width(); 
 if(_width < 479){
-	var Arr = ["#5fcdc7","#ff8a00","#70d5b3","#ea5480"];  
+	var Arr = ["#5fcdc7","#ff8a00","#70d5b3","#ee2746","#7de87d"];  
 	var n = Math.floor(Math.random() * Arr.length + 1)-1;  
 	$('.post_list').find('li:first').css({
 	   	"background-color":Arr[n]
