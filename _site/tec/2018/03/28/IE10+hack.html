@@ -50,10 +50,10 @@
                   <h1>grayscale(灰度)效果兼容IE10+</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一为啥">一、为啥？</h3>
+                  <h3 id="一开始">一、开始</h3>
 <p>做本博客的封面， 有一个图片灰度（grayscale）渐变的效果，实现的方式是用W3C的filter（滤镜），filter在IE4~ IE10(不包括IE10)中称为私有滤镜，从IE10开始抛弃了私有滤镜的支持，但是还是没有提供W3C标准下的filter支持，so，IE10+的Hack问题也就随着带出来了，先记下W3c下的filter笔记，再说IE10+的区分。</p>
 
-<h3 id="二别啰嗦">二、别啰嗦</h3>
+<h3 id="二上代码">二、上代码</h3>
 <p>css</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>.gray {
     -webkit-filter: grayscale(1);
