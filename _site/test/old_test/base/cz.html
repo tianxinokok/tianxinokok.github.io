@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function类型没有重载</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+function num(num1,num2){   
+	return num1 + num2;
+}
+alert(num(10,10));
+
+var anotherSum = num ;  //num不加括号就是访问函数指针  anotherSum和num指向同一个函数 
+alert(anotherSum(10,10));
+
+sum = null;                //由于函数其实是一个对象，那么函数名其实就是指向函数对象的指针，不会与某个函数绑定
+
+alert(anotherSum(10,10));
+
+//没有重载
+function addNumber(num){
+	return num + 100;
+}
+
+function addNumber(num){   
+	return num + 200;
+}
+
+var result = addNumber(100);
+alert(result);  //300  后面的函数执行 ，由于函数名仅仅是函数对象的指针，所以前面函数的函数名指针被后面的函数名指针覆盖掉了 ，所以执行了后面的函数 。 
+</script>

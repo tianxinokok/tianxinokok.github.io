@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组迭代filter()</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+var numbers = [1,2,3,4,5,4,3,2,1];
+var everyResult = numbers.filter(function(item,index,array){  //filter()对数组的每一项运行给定函数，返回该函数会返回true的项组成的数组。
+	return (item > 2);
+})
+alert(everyResult);  //3,4,5,4,3
+</script>

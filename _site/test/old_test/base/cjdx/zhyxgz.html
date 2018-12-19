@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>组合使用构造函数模式和原型模式创建对象(6.2.4)</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	function A(name,age,job){
+		this.name = name;
+		this.age  = age;
+		this.job  = job;
+		this.colors = ["red","blue","yellow"];
+	}
+	A.prototype={
+		constructor:A,
+		getName:function(){
+			alert(this.name);
+		}
+	}
+
+	var person1 = new A("tianxin",22,"web");
+	var person2 = new A("jiangli",23,"doctor");
+		person1.colors.push("black");
+
+	 alert(person1.colors);   //"red","blue","yellow","black"
+	 alert(person2.colors);	  //"red","blue","yellow"
+
+	 alert(person1.colors === person2.colors); //false
+	 alert(person2.getName === person2.getName) // true
+
+</script>
+</html>

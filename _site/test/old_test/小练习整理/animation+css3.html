@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>animation+css3属性</title>
+</head>
+<style type="text/css">
+/*
+Transitions平滑的改变css的值
+
+transition-property :指定过渡的性质，比如transition-property:backgrond 就是指backgound参与这个过渡
+transition-duration:指定这个过渡的持续时间
+transition-delay: 延迟过渡时间
+transition-timing-function:指定过渡类型，有ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier
+*/
+@keyframes glow{
+	0%{
+		box-shadow: 0 0 12px rgba(72, 106, 170, 0.5);
+		border-color: rgba(160, 179, 214, 0.5); 
+	}
+	100%{
+		box-shadow: 0 0 12px rgba(72, 106, 170, 1), 0 0 18px rgba(0, 140, 255, 1.0);
+		 border-color: rgba(160, 179, 214, 1.0); 
+	}
+}
+.anim_image {
+
+    padding:3px;
+    border:1px solid #beceeb;
+    background-color:white;
+    -moz-box-shadow: 0 0 8px rgba(72, 106, 170, 0.5);
+    -webkit-box-shadow: 0 0 8px rgba(72, 106, 170, 0.5);
+    box-shadow: 0 0 8px rgba(72, 106, 170, 0.5);
+}
+.anim_image:hover{
+	  background-color:#f0f3f9;
+	  -webkit-animation:glow 1s infinite alternate ease-in-out;
+	  -moz-animation:glow 1s infinite alternate ease-in-out;
+	  -o-animation:glow 1s infinite alternate ease-in-out;
+	  animation:glow 1s infinite alternate ease-in-out;
+}
+</style>
+<body>
+	<div >
+		<img class="anim_image" src="14.jpeg">
+	</div>
+</body>
+</html>

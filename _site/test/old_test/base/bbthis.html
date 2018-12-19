@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包-this</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+var name = 'the window';
+
+var object = {
+	name : 'tianxin',
+	getNameFun:function(){
+		return function(){
+			return this.name;
+		};
+	}
+};
+
+alert(object.getNameFun()());  //the window 这里
+
+var object2 = {
+	name : 'tianxin',
+	getNameFun:function(){
+		var that = this;
+		return function(){
+			return that.name;
+		};
+	}
+};
+
+alert(object2.getNameFun()());
+
+</script>

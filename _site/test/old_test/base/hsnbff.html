@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数内部方法call(),apply()</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+
+//allay()接收两个参数:一个是在其中运行函数的作用域，第二个是参数数组，第二个可以是Array的实例，也可以是arguments对象
+//call()跟apply一样，仅仅是第二个参数的传参方式不一样，call()第二个传给函数的参数需要逐个列举出来。
+function sum(num1,num2){
+	return num1 + num2 ; 
+}
+function callsum1(num1,num2){
+	return sum.apply(this,arguments);
+}
+function callsum2(num1,num2){
+	return sum.apply(this,[num1,num2]);
+}
+alert(callsum1(10,10));
+alert(callsum2(10,10));
+//注意：在严格模式下：未指定环境对象而调用函数，则this值不会转型为window，除非明确把函数添加到某个对象或者调用appay(),call()。否则this值将是undifined
+
+
+
+window.color = 'red';
+var o  = {color:'blue'};
+
+function sayColor(){
+	alert(this.color);
+}
+
+sayColor();               //red
+sayColor.call(this);      //red
+sayColor.call(window);    //red
+sayColor.call(o);         //blue   //这里函数的执行环境变成了o对象，this指向了o，于是结果就显示blue
+
+
+var objectSaycolor = sayColor.bind(o);   //bind()方法会创建一个函数的实例，其this值会被绑定到传给bind的值 支持浏览器：IE9+ 火狐4+
+objectSaycolor();  //blue
+
+  
+
+</script>

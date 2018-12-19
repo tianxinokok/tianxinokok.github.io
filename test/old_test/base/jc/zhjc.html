@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>组合继承(原型链＋构造函数)[利用原型链实现原型属性和方法的继承，利用构造函数实现实例属性的继承]</title>
+</head>
+<body>
+		
+</body>
+<script type="text/javascript">
+	function A(name){
+		this.name = name;
+		this.colors = ["red","blue","yellow"];
+	}
+	A.prototype.getName = function(){
+		return this.name;
+	}
+	function B(name,age){
+		A.call(this,name);     // 继承属性
+		this.age = age;
+	}
+	B.prototype = new A();     //继承方法
+	B.prototype.getAge = function(){
+		return this.age;
+	}
+
+	var instance = new B("tianxin",22);
+		instance.colors.push("black");
+		alert(instance.colors);
+		alert(instance.getName());
+		alert(instance.getAge());
+	var instance2 = new B("jiangli",24);
+		alert(instance2.colors);
+		alert(instance2.getName());
+		alert(instance2.getAge());
+</script>
+</html>	

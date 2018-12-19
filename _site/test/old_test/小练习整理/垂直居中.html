@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>垂直居中</title>
+<style type="text/css">
+#warpper{
+	width:800px;
+	height: 400px;
+	position: relative;
+	background: red;
+}
+#content{
+	width:200px;
+	height: 200px;
+	background: yellow;
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin-top:-100px;
+	margin-left: -100px; 
+}		
+</style>
+</head>
+<body>
+	<div id="warpper">
+		<div id="content">
+			IE: trident内核<br>
+		　　Firefox：gecko内核<br>
+		　　Safari：webkit内核<br>
+		　　Opera：以前是presto内核,<br>Opera现已改用Google Chrome的Blink内核<br>
+		　　Chrome：Blink(基于webkit，Google与Opera Software共同开发)
+		</div>
+	</div>
+</body>
+</html>

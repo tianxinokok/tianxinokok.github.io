@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包-内存泄漏</title>
+</head>
+<body>
+	<button id="test">内存泄漏</button>
+	<button id="test2">内存泄漏2</button>
+</body>
+</html>
+<script type="text/javascript">
+//ie9之前的版本这种写法会导致内存泄漏
+function ncxl(){
+	var element = document.getElementById('test');
+
+	element.onclick = function(){
+		alert(element.id);
+	}
+};
+ncxl();
+//这种写法就可以让内存收集机制正常回收内存 
+function ncxl2(){
+	var element = document.getElementById('test2');
+
+	var id = element.id;    //存一个变量
+
+	element.onclick = function(){
+		alert(id);  //消除了element循环引用
+	};
+	element = null;   //闭包会引用包含函数的整个活动对象，其中包含着element，即使闭包不直接引用element，包含函数的活动对象，也仍然会保存一个引用，因此有必要把element变量设置为null，这样就可以消除对dom的引用，减少引用数，确保正常回收占用的内存。
+}
+ncxl2();
+</script>

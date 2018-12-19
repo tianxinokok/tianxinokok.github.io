@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>构造函数继承(解决含有引用类型值的原型属性会被所有实例共享问题)</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	function A(){
+		this.colors = ["red","blue","yellow"];
+	}
+	function B(){         //B的每个实例都会具有colors属性副本了。
+		A.call(this);
+	}
+
+	var instance = new B();
+		instance.colors.push("black");
+		alert(instance.colors);
+
+	var instance2 = new B();      
+		alert(instance2.colors);
+
+
+
+	
+</script>
+</html>

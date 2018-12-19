@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>构造函数模式创建对象</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	function A(name,age,job){
+		this.name = name;
+		this.age  = age ;
+		this.job  =job;
+		this.sayName = function(){
+			alert(this.name);
+		}
+	} 
+
+	var B1 = new A("tianxin",22,"web");
+		B1.sayName();
+	var B2 = new A("jiangli",23,"doctor");
+		B2.sayName();
+
+  　//将构造函数当作普通函数来用，区别仅在于调用他们的方式
+/*  	1.var B1 = new A("tianxin",22,"web")    当作构造函数使用
+  		2.A("tianxin",22,"web")                 当作普通函数使用
+  		3.var o = new Object();  A.call(o,this,"tianxin",22,"web")  o.sayName();在另一个对象的作用域中调用
+  		这里在对象o的作用域中调用，因此调用后o就拥有了A的所有属性和方法了
+*/
+</script>
+</html>

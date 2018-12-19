@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>querySelector(),querySelectorAll()</title>
+<style type="text/css">
+.bg{
+	color:red;
+}
+</style>
+</head>
+<body>
+<div class="querySelector">
+	<div id="mydiv"></div>
+	<div class="selected"></div>
+</div>
+</body>
+<div>
+	<ul id="querySelectorall">
+		<li>querySelectorAll下的li</li>
+		<li>querySelectorAll下的li</li>
+		<li>querySelectorAll下的li</li>
+		<li>querySelectorAll下的li</li>
+	</ul>
+</div>
+</html>
+<script type="text/javascript">
+//querySelector()方法接收一个css选择符，返回与该模式匹配的第一个元素，如果没有匹配元素，返回null
+//取得body元素
+var  body = document.querySelector('body');
+alert(body);
+var mydiv = document.querySelector('#mydiv');
+alert(mydiv);
+var selected = document.querySelector('.selected');
+alert(selected);
+
+//querySelectorAll()方法接收一个css选择符，返回所有匹配的元素，返回的是一个NodeList的实例。
+//取得id为querySelectorall元素下的所有li元素
+var lis = document.getElementById('querySelectorall').querySelectorAll('li');
+alert(lis);
+
+//要取得querySelectorAll()返回的NodeList中的每一个元素，可以使用item()方法，也可以使用方括号语法。如下：
+var i,len,strong;
+for(i =0 , len = lis.length ; i<len ;i++){
+	strong = lis[i]; //或者lis.item(i);
+	strong.className = 'bg';
+	alert(strong);
+}
+
+</script>

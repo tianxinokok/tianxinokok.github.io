@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>window.open()</title>
+</head>
+<body>
+<button id="btn">导航和打开窗口</button>
+<button id="btn2">可以操作新窗口</button>
+</body>
+</html>
+<script type="text/javascript">
+
+
+
+var btn = document.getElementById('btn');
+var btn2 = document.getElementById('btn2');
+var btn3 = document.getElementById('btn3');
+btn.onclick = function(){
+	newwindow.resizable(800,800);
+	window.open('https://www.baidu.com/','top123','height=400,width=400,top=10,left=10,resizable=no'); //接收四个参数 1.跳转的url 2.窗口目标 3.一个特性字符串4.是否取代当前页面历史纪录的布尔值
+	//特性字符出(第三个参数)中不可以出现空格
+};
+btn2.onclick = function(){
+	var newwindow  = window.open('http://127.0.0.1:4000/test/old_test/base/ckdx.html','top123','height=400,width=400,top=10,left=10,resizable=no');
+
+		newwindow.resizeTo(800,800); //window.open()有返回值可以让我们进行一些控制如：改变大小，移动位置，关闭有open打开的窗口等
+		newwindow.moveTo(100,100);
+
+		setTimeout(function(){
+			newwindow.close()
+		},3000);
+};
+</script>

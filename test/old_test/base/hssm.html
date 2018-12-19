@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数声明与函数表达式</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+alert(num(10,10));   		//20 可以正常执行，原因：解析器在向执行环境中加载数据时，会率先读取函数声明，是其在执行任何代码之前可以访问，
+function num(num1,num2){
+	return num1 + num2;
+}
+
+
+alert(sum(10,10));   //报错 , 函数表达式不会像函数声明一样，在当前执行环境中优先读取，只能等到执行到函数表达式这一样才能变得可用
+var sum = function (sum1,sum2){
+	return sum1 + sum2;
+}
+</script>

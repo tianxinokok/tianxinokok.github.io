@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>队列方法</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+var colors = ['red','yellow'];
+colors.push('black');
+alert(colors);   
+colors.shift();  //shitf()方法可以移除数组的第一项，返回该项，数组长度-1,结合使用shift和push 可以模拟队列。
+alert(colors);
+
+var colors2 = ['red','yellow'];
+colors2.unshift('black');  //unshift()方法的作用跟shift()相反，是向数组的最前面依次添加任意项，并返回数组的长度
+alert(colors2);
+colors2.pop();           //unshift()配合pop()配合可以从相反方向模拟队列
+alert(colors2);
+</script>

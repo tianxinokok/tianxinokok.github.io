@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>静态变量-模块模式</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+var singleton = {           //通常 js通过对象字面量的方式创建单例对象
+	name:value,
+	method:function(){
+
+	}
+};
+var singleton2 = function(){  //模块模式通过为单例添加私有变量和特权方法使其得到加强
+	var privateVariable = 10;
+
+	function privateFunction(){
+		return false ; 
+	}
+
+	//特权，公有属性和方法
+	return {                                   //将一个对象字面量作为函数的值返回，返回的对象字面量只包含可以公开的属性和方法，由于这个对象是在匿名函数内部定义的，因此他的公有方法有权访问私有变量和函数，这个对象字面量定义的是单例的公共接口，这种模式在需要对单例进行某些初始化，同时又需要维护其私有变量是非常有用的。
+		publicProperty : true,
+		puclicMethod : function(){
+			privateVariable ++ ;
+			return privateFunction();
+		}
+	};
+}();
+</script>

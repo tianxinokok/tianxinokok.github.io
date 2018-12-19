@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>原型模式创建对象</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	function A(){
+		A.prototype.name = 'tianxin';
+		A.prototype.age  =22;
+		A.prototype.job  ='web';
+		A.prototype.getName = function(){
+			alert(this.name);
+		}
+	}
+
+	var person1 = new A();
+		person1.name = 'jiangli';
+		alert(person1.name)   // jiangli 来自实例
+		alert(person1.hasOwnProperty("name")); // true:hasOwnProperty判断如果给定属性存在于对象实例中会返回true
+
+	var person2 = new A();
+		alert(person2.name)   // tianxin 来自原型
+		alert(person2.hasOwnProperty("name"));  //false
+
+		
+</script>
+</html>

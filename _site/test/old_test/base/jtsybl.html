@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>静态私有变量</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+(function(){
+var name = '';
+Person = function(value){   //Person构造函数与getName和setName一样，都有权访问私有变量name，在这种模式下，name就变成了一个静态的，由所有实例共享的变量。也就是说，在一个实例上调用setName()会影响所有实例，调用setName或者新建一个Person实例，都会赋予name属性一个新值，结果就是所有实例都返回相同的值。
+//以这种方式创建静态私有变量会因为使用原型而增加代码复用，但每个实例都没有自己的私有变量
+	name = value;
+};
+Person.prototype.getName = function(){
+	return name;
+};
+Person.prototype.setName = function(value){
+	name = value;
+};
+
+})();
+
+var person1 = new Person('tianxin');
+alert(person1.getName());
+person1.setName('jiangli');
+alert(person1.getName());
+
+var person2 = new Person('person2的名字'); //新建一个Person实例后
+alert(person1.getName());   //其他实例都会受影响
+alert(person2.getName());
+</script>

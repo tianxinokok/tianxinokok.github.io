@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fireCheck</title>
+</head>
+<style type="text/css">
+.container{
+	width:40px;
+}
+.switch{
+        display:none;
+    }
+    .switch_label{
+        position:relative;
+        display: block;
+        padding: 1px;
+        border-radius: 24px;
+        height: 22px;
+        margin-bottom: 15px;
+        background-color: #eee;
+        cursor: pointer;
+        vertical-align: top;
+        -webkit-user-select: none;
+    }
+    .switch_label:before{
+        content: '';
+        display: block;
+        border-radius: 24px;
+        height: 22px;
+        background-color: white;
+        -webkit-transform: scale(1, 1);
+        -webkit-transition: all 0.3s ease;
+    }
+    .switch_label:after{
+        content: '';
+        position: absolute;
+        top: 50%;  
+        left: 50%;  
+        margin-top: -11px;  
+        margin-left: -11px;
+        width: 22px;
+        height: 22px;
+        border-radius: 22px;
+        background-color: white;
+        box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.08);
+        -webkit-transform: translateX(-9px);
+        -webkit-transition: all 0.3s ease;
+    }
+    .switch:checked~.switch_label:after{
+        -webkit-transform: translateX(9px);
+    }
+    
+    .switch:checked~.switch_label:before{
+        background-color:green;
+    }  
+</style>
+<body>
+	<div class="container">
+        <div class="bg_con">
+            <input id="checked_1" type="checkbox" class="switch" />
+            <label for="checked_1" class="switch_label"></label>
+        </div>
+    </div>	
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数内部属性</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+function factorial(num){
+	if(num <= 1){
+		return 1;
+	}else{
+		return num * factorial(num-1);   //这里如果要函数名，这个函数就与函数名耦合在一起。
+	}
+}
+function factorial(num){
+	if(num <= 1){
+		return 1;
+	}else{
+		return num * arguments.callee(num -1);  //这么写就解耦了  arguments是一个类数组对象存储着所有函数的参数。  callee是一个指针 ，指向拥有这个arguments对象的函数
+	}
+}
+var trueFactorial = factorial ;     //这里定义一个变量指向factorial函数对象的地址，如果factorial函数不用callee解耦，当factorial重新定义之后，trueFactorial也就指向了重新定义的函数，所以会返回0
+factorial = function(){
+	return 0;
+};
+
+alert(trueFactorial(5));
+
+</script>

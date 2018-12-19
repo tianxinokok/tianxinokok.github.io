@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>递归</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+
+function factorial(num){
+	if(num <= 1){
+		return 1;
+	}else{
+		return num * factorial(num -1);
+	}
+}
+ 
+var anotherFactorial = factorial;
+factorial = null;
+//alert(anotherFactorial(4));  //出错
+
+function factorial(num){
+	if(num <= 1){
+		return 1;
+	}else{
+		return num * arguments.callee(num -1);  //arguments.callee是一个指向正在执行的函数的指针。但是在严格模式下会报错，另一种替代方法是：使用命名函数表达式。
+	}
+}
+
+alert(anotherFactorial(4));  //24
+
+//使用命名函数表达式代替arguments.callee
+var factorial2 = (function f(num){
+	if(num <=1){
+		return 1;
+	}else{
+		return num * f(num - 1);
+	}
+})
+alert(factorial2(4)); //24
+
+
+</script>

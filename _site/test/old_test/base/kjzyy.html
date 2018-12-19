@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js模拟块级作用域</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+function outNumbers(){
+	for(var i = 0;i<3;i++){
+		alert(i);
+	}
+	alert(i);  //for循环之后i并不会被销毁 js中没有块级作用域，i是定义在outNumbers的活动对象中的
+	var i;    //即使错误的重新声明
+	alert(i); //也不会改变他的值
+}
+outNumbers();
+
+function outNumbers2(count){
+	(function(){
+		for(var i = 0;i<count;i++){
+			alert(i)
+		}
+	})();
+	alert(i);  //报错，上面for循环外面用了私有作用域，所以执行完for之后就被销毁了，for循环之所以能访问变量count，是因为这个匿名函数是一个闭包，从而可以访问包含作用域中的所有变量。
+	//这种写法经常被用在全局作用域函数外部，这样可以减少向全局作用域中添加全局变量和函数，避免污染。
+	//这种写法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用，所以待函数执行完毕，就可以销毁其作用域链了。
+}
+outNumbers2(3);
+</script>

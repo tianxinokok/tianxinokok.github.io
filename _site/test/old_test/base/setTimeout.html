@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeout()模拟setInterval()</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+var num = 0;
+var max = 3;
+var intervalID = null;
+
+function incrementNumber(){
+	num ++;
+
+	if(num == max){                //达到条件之后取消间歇性调用，用setInterval()的不足之处就是需要时刻跟踪setInterval的id，如果不取消的话，setInterval()会一直重复执行到页面关闭。
+		clearInterval(intervalID);  
+		alert('setInterval Done');
+	}
+}
+intervalID = setInterval(incrementNumber,500);
+
+//用setTimeout()模拟setInterval();
+
+function incrementNumber2(){
+	num ++;
+
+	if(num < max){
+		setTimeout(incrementNumber2,500);    //用setTimeout没有必要跟踪setTimeout的ID ，如果不设置再一次调用，调用就会自动停止，用setTimeout模拟setInterval()是一种最佳模式，原因是后一个setInterval()的调用会在前一个setInterval()调用之前启动。如果用setTimeout()就可以避免这一点。
+	}else{
+		alert('setTimeout Done');
+	}
+}
+setTimeout(incrementNumber2,500);
+</script>

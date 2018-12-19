@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组迭代some()</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+var numbers = [1,2,3,4,5,4,3,2,1];
+var everyResult = numbers.some(function(item,index,array){  //some()对数组的每一项运行给定函数，如果该函数对任意一项返回true,则返回true
+	return (item > 2);
+})
+alert(everyResult);  //true
+</script>

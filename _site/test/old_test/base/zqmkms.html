@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>静态变量-增强的模块模式</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+var singleton = function(){  //模块模式通过为单例添加私有变量和特权方法使其得到加强
+	//私有变量
+	var privateVariable = 10;
+	//私有属性
+	function privateFunction(){
+		return false ; 
+	}
+	//创建对象
+	var object = new CustomType();
+	//添加特权/公有属性 ，方法
+	object.puclicProperty = true;
+	object.publicMethod = function(){
+		privateVariable ++ ;
+		return privateFunction();
+	};
+	//返回这个对象
+	return object;
+}();
+</script>

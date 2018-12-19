@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>slice,splice</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+//spice
+var colors = ['red','yellow','black'];
+var colors2 = colors.slice(1);
+alert(colors2); //yellow,baack
+var color3 = colors.slice(1,2);   
+//slice基于当前数组创建一个新数组,不影响当前数组，接收两个参数,截取数组中第一个参数到第二个参数位置的项，不包括第二个参数
+alert(color3); //yellow
+
+//splice
+var colors_t = ['red','yellow','black','blue'];
+var removed = colors_t.splice(0,1);  //splice传入两个参数：第一项-起始位置，第二项-要删除的项数
+alert(colors_t); //yellow,black,blue
+alert(removed); //red
+
+removed = colors_t.splice(1,0,'oriange','white'); //splice传入两个参数：第一项-起始位置，第二项-要删除的项数, 第三项-要插入的项
+alert(colors_t); //yellow,oriange,white,black,blue
+alert(removed);  //返回空数组
+
+removed = colors_t.splice(1,1,'red','purple');  //splice传入两个参数：第一项-起始位置，第二项-要删除的项数, 第三项-要插入的项
+alert(colors_t);   
+alert(removed); //oriange  删除的项
+</script>

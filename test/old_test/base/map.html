@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组迭代map()</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+var numbers = [1,2,3,4,5,4,3,2,1];
+var everyResult = numbers.map(function(item,index,array){  //map()对数组的每一项运行给定函数，返回一个数组，返回的数组中的每一项都对应原数组的每一项执行函数后的结果
+	return item*2;
+})
+alert(everyResult); //2,4,6,8,10,8,6,4,2
+</script>

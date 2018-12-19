@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>BFC特性自适应布局</title>
+    <link rel="stylesheet" type="text/css" href="root_package/css/lib.css">
+</head>
+<style type="text/css">
+.container{
+
+}
+.flow-box{
+    background-color: #0074D9;
+}
+.flow-content{
+     background-color:#3D9970;
+}
+</style>
+<body>
+	<div class="container">
+        <div class="flow-box fix">
+            <img src="mm2.jpg" width="128" class="l mr20">
+            <div class="flow-content cell">低版本IE浏览器有个hasLayout的概念，不过这玩意太老生常谈，而且也过时了，我现在无力再吐槽。总而言之，言而总之，就特性表现而言，很多时候和BFC这个概念很像。</div>
+        </div>
+    </div>	
+</body>
+</html>

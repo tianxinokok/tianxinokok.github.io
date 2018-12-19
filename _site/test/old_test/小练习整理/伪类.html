@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>伪类</title>
+<style type="text/css">
+a:link{
+	color: #F140DA;
+}
+a:visited{
+	color: #C9D70F;
+}
+
+
+.div-hover:hover{
+	color: #E75454;
+	font-weight: bolder;
+}
+.div-active:active{
+	color: #49D00F;
+	font-weight: bolder;
+}
+.div-focus:focus{
+	color: #C24C0E;
+	font-weight: bolder;
+}
+.lianjie a:hover{
+	color: #096686;
+	font-weight: bolder;
+}
+.lianjie a:visited:hover{
+	color: #FB08F9;
+	font-weight: bolder;
+}
+</style>
+</head>
+<body>
+	<h2>伪类</h2>
+	<div>
+		<h3>:link和:visited称为链接伪类,只能用于锚元素<h3>
+		<a href="https://tianxinokok.github.io">我的博客</a>
+		<a href="https://tianxinokok.github.io">我的博客</a>
+		<a href="https://tianxinokok.github.io">我的博客</a>
+	</div>
+	<p>-----------------------------------------------------------------------------------------------------</p>
+	<div>
+		<h3>:hover, :active, :focus称为动态伪类,理论上可以应用到任何元素上，但是IE6只支持锚链接的:active 和 ：hover ,不支持：focus</h3>
+		<h3>IE7在任何元素上都支持：hover ，但是不支持：active和：focus</h3>
+		<div class="div-hover">:hover</div>
+		<div class="div-active">:active</div>
+		<div>:focus <input class="div-focus"></input></div>
+	</div>
+	<p>-----------------------------------------------------------------------------------------------------</p>
+	<div class="lianjie">
+		<h3>通过把伪类连接在一起，在已访问链接和未访问链接上实现不同的鼠标悬停效果</h3>
+		<a href="https://tianxinokok.github.io">已访问的我的博客</a>
+		<a href="baidu.com">未访问的我的博客</a>
+	</div>
+</body>
+</html>

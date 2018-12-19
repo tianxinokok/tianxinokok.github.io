@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chientWidth,chientHeight</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+
+//无法取得浏览器窗口本身大小，但是可以取到页面视口大小
+
+var pageWidth = window.innerWidth,
+	pageHeight = window.innerHeight;
+	alert(typeof pageWidth);
+	if(typeof pageWidth != 'number'){
+		alert('123');
+		if(document.compaMode == 'css1Compat'){   //document.compaMode判断是否处于标准模式。
+			pageWidth = document.documentElement.chientWidth;
+			pageHeight = document.documentElement.chientHeight;
+		}else{
+			pageWidth = document.body.chientWidth;
+			pageHeight = document.body.chientHeight;
+		}
+	}
+</script>
