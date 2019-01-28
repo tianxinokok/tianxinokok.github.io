@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cookie</title>
+<style type="text/css">
+.div1, .div2{
+	position: relative;
+	width: 200px;
+	background-color: red;
+	margin-top: 10px;
+	left: 0px;
+}
+</style>
+</head>
+<body>
+<button id="setcookie">设置cookie</button>
+<button id="getcookie">获取cookie</button>
+<button id="delcookie">删除cookie</button>
+</body>
+</html>
+<script type="text/javascript">
+//cookie操作 
+var CookieUtil = {
+	get:function(name){
+		var cookieName = encodeURIComponent(name) + '=' ,
+			cookieStart = document.cookie.indexOf(cookieName),
+			cookieValue = null;
+
+		if(cookieStart > -1){
+			var cookieEnd = document.cookie.indexOf(";" , cookieStart);
+			if(cookieEnd == -1){
+				cookieEnd = document.cookie.length;
+			}
+			cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length,cookieEnd));
+		}
+		return cookieValue;
+
+	},
+	set:function(name,value,expires,path,domain,secure){
+		var cookieText = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+		if(expires instanceof Date){
+			cookieText += "; expires=" + expires.toGMTString();
+		}
+		if(path){
+			cookieText += "; path=" + path;
+		}
+		if(domain){
+			cookieText += "; domain=" + domain;
+		}
+		if(secure){
+			cookieText += "; secure=";
+		}
+		document.cookie = cookieText;
+	},
+	unset:function(name,path,domain,secure){
+		this.set(name,"",new Date(0), path , domain , secure);
+	}
+};
+
+var setcookie = document.getElementById('setcookie');
+var getcookie = document.getElementById('getcookie');
+var delcookie = document.getElementById('delcookie');
+
+setcookie.onclick = function(){
+	CookieUtil.set("tianxin",25);
+};
+getcookie.onclick = function(){
+	alert(CookieUtil.get("tianxin"));
+};
+delcookie.onclick = function(){
+	CookieUtil.unset('tianxin');
+};
+</script>

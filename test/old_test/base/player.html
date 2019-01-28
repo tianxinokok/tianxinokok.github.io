@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义媒体播放器</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div class="meidaplayer">
+ <div class="video">
+ 	<video id="player" src="/source/img/movie.ogg" width="300" height="200">Video player not available</video>
+ </div>
+ <div class="controls">
+ 	<input type="button" value="Play" id="video-btn">
+ 	<span id="curtime">0</span>/<span id="duration">0</span>
+ </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var player = document.getElementById('player'),
+	btn  = document.getElementById('video-btn'),
+	curtime = document.getElementById('curtime'),
+	duration = document.getElementById('duration');
+
+//更新播放时间
+duration.innerHTML = player.duration;
+
+//为按钮添加事件处理程序
+btn.onclick =  function(e){
+	if(player.paused){
+		player.play();
+		btn.value = "Pause";
+	}else{
+		player.pause();
+		btn.value = "Play";
+	}
+};
+
+//定时更新当前时间
+setInterval(function(){
+	curtime.innerHTML = player.currentTime;
+},250)
+</script>

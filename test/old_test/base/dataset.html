@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取自定义属性:dataset</title>
+<style type="text/css">
+.bg{
+	color:red;
+}
+</style>
+</head>
+<body>
+<div class="querySelector">
+	<div id="mydiv"></div>
+	<div class="selected"></div>
+</div>
+</body>
+<div id="test" data-myname="myname">我是自定义属性的文字</div>
+</html>
+<script type="text/javascript">
+var test = document.getElementById('test');
+alert(test.dataset.myname);           //添加了自定义属性之后，可以通过元素的dataset属性来访问自定义属性的值，每个data-形式的属性都会有一个对应的属性，只不过属性名没有data-前缀，例如：自定义属性是data-myname ，那dateset后面就是.myname 
+
+//设置值
+test.dataset.myname = 'jiangli';
+alert(test.dataset.myname);
+</script>

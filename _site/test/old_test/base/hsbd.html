@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数绑定</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div>
+	<button id="btn1">有问题</button>
+</div>
+<div>
+	<button id="btn2">第一个解决办法-闭包</button>
+</div>
+<div>
+	<button id="btn3">第二个解决办法-自定义绑定函数bind()</button>
+</div>
+<div>
+	<button id="btn4">第二3解决办法-原生函数bind()</button>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+//跨浏览器的事件处理函数
+var EventUtil = {
+	addHandler:function(element,type,handler){
+		if(element.addEventListener){
+			element.addEventListener(type,handler,false)
+		}else if(element.attachEvent){
+			element.attachEvent("on" + type, handler);
+		}else{
+			element["on" + type] = handler;
+		}
+	},
+	removeHandler:function(element,type,handler){
+		if(element.removeEventListener){
+			element.removeEventListener(type,handler,false);
+		}else if(element.detachEvent){
+			element.detachEvent("on" + type ,handler);
+		}else{
+			element["on" + type] = null;
+		}
+	}
+};
+
+var handler = {
+	message : 'event handled',
+	handleClick : function(event){
+		alert(this.message + ':'+ event.type);
+	}
+};
+
+var btn1 = document.getElementById('btn1');
+EventUtil.addHandler(btn1,'click',handler.handleClick); //undifined 原因：没有保存handler.handleClick的环境，所以this指向的是dom ，并不是handler 。 
+
+var btn2 = document.getElementById('btn2');
+EventUtil.addHandler(btn2,'click',function(e){
+	handler.handleClick(e);                             //event handled
+});
+
+//自定义bind()
+function bind2(fn,context){
+	return function(){
+		return fn.apply(context,arguments);
+	};
+}
+var btn3 = document.getElementById('btn3');
+EventUtil.addHandler(btn3,'click',bind2(handler.handleClick,handler)); //event handled
+
+
+var btn4 = document.getElementById('btn4');
+EventUtil.addHandler(btn4,'click',handler.handleClick.bind(handler)); //event handled 支持原生bind()方法的浏览器有IE9+ 火狐4+ chrome
+
+//只要将某个函数指针以值的方式进行传递，同时该函数必须在特定环境中执行，被绑定函数的效用就凸显出来了
+//函数绑定主要用于事件处理程序，setInterval(),setTimeout()
+</script>

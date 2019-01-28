@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>indexedDB数据库</title>
+<style type="text/css">
+.db_title{
+	text-align: center;
+}
+.result{
+	width: 40%;
+	margin: 0 auto;
+}
+.result > table {
+	width: 100%;
+	border: 1px solid #D1D1D1;
+	border-collapse: collapse;
+    border-spacing: 0;
+}
+.result > table > thead {
+
+}
+.result > table > thead > tr > th{
+	padding: 10px;
+	text-align: center;
+	background-color: #DDDDDD;
+}
+.result > table > tbody> tr > td{
+	border-bottom: 1px solid #D1D1D1;
+	padding: 10px;
+	text-align: center;
+}
+.add_box{
+	width: 40%;
+	margin: 0 auto;
+}
+label{
+	display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+
+}
+input{
+	display: block;
+    width: 100%;
+    padding: 6px 0px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+textarea{
+	display: block;
+    width: 100%;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	vertical-align: top;
+}
+.add_btn{
+	color: #fff;
+    background-color: #337ab7;
+}
+.log{
+	display: none;
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<h2 class="db_title">indexedDB数据库增删改查</h2>
+<div id="result" class="result">
+	<table>
+		<thead>
+			<tr>
+				<th>书名</th>
+				<th>出版日期</th>
+				<th>作者</th>
+				<th>简介</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="tbody_box">
+			
+		</tbody>
+	</table>
+	<div id="log" class="log">加载中...</div>
+</div>
+<div class="add_box">
+	<h3>添加图书</h3>
+	<form id="form">
+		<p><label>书名</label><input type="text" name="name" placeholder="必填" autocomplete="off" required></p>
+		<p><label>出版日期</label><input type="date" name="publish_time" value="2018-12-30" required></p>
+		<p><label>作者</label><input type="text" name="author" placeholder="必填" autocomplete="off" required></p>
+		<p><label>简介</label><textarea rows="5" placeholder="非必填" name="introduction"></textarea></p>
+		<input class="add_btn" type="submit" value="添加">
+	</form>
+</div>
+<script type="text/template" id="add_book_template" >
+	<tr>
+		<td data-key="name" data-id="$id$" contenteditable="true">$name$</td>
+		<td data-key="publish_time" data-id="$id$" contenteditable="true">$publish_time$</td>
+		<td data-key="author" data-id="$id$" contenteditable="true">$author$</td>
+		<td data-key="introduction" data-id="$id$" contenteditable="true">$introduction$</td>
+		<td><button data-id="$id$" class="del_btn">删除</button></td>
+	</tr>
+</script>
+<script type="text/javascript">
+(function(){
+	var domForm  = document.getElementById('form');
+	var domTbody = document.getElementById('tbody_box');
+	var domLog   = document.getElementById('log');
+
+	var book_template = document.getElementById('add_book_template').innerHTML;
+
+	var log = function(info){
+		domLog.style.display = 'block';
+		domLog.innerHTML = info;
+	};
+
+	String.prototype.temp = function(obj) {
+        return this.replace(/\$\w+\$/gi, function(matchs) {        
+            return obj[matchs.replace(/\$/g, "")] || '';
+        });
+    };
+
+    var dbName = 'bookSQL';
+    var version = 1 ;
+    var db ;
+
+    var indexedDB = window.indexedDB || window.msIndexedDB || window.mozIndexedDB || window.webkitIndexedDB;
+    //打开数据库
+    var dbOpenRequest = indexedDB.open(dbName,version);
+
+
+	    dbOpenRequest.onsuccess = function(event){
+			//存储数据结果
+			db = dbOpenRequest.result;
+			method.show();
+	    };
+	    dbOpenRequest.onerror = function(event){
+	    	log('数据库打开失败');
+	    };
+    // 下面事情执行于：数据库首次创建版本，或者window.indexedDB.open传递的新版本（版本数值要比现在的高）
+    dbOpenRequest.onupgradeneeded = function(event){
+    	var db = event.target.result;
+
+    	db.onerror = function(event){
+    		log('初次创建失败');
+    	};
+        var objectStore ;
+        if(!db.objectStoreNames.contains(dbName)){
+                objectStore = db.createObjectStore(dbName,{
+                keyPath : 'id',
+                autoIncrement : true
+            });
+
+        }
+
+    	//定义存储数据
+    	objectStore.createIndex('id','id',{
+    		unique : true
+    	});
+    	objectStore.createIndex('name','name');
+    	objectStore.createIndex('publish_time','publish_time');
+    	objectStore.createIndex('author','author');
+    	objectStore.createIndex('introduction','introduction');
+
+    };
+
+    var method = {
+    	add:function(newItem){
+    		var transaction = db.transaction([dbName],'readwrite');
+    		//打开已经存储的数据对象
+    		var objectStore = transaction.objectStore(dbName);
+    		//添加到数据对象中
+    		var objectStoreRequest = objectStore.add(newItem);
+    		objectStoreRequest.onsuccess = function(event){
+    			method.show();
+    		};
+    	},
+    	edit:function(id,data){
+    		var transaction = db.transaction([dbName],'readwrite');
+    		//打开已经存储的数据对象
+    		var objectStore = transaction.objectStore(dbName);
+    		//获取存储的对应键的存储对象
+    		var objectStoreRequest = objectStore.get(parseInt(id));
+    		console.log(objectStoreRequest);
+    		objectStoreRequest.onsuccess = function(event){
+    			//当前数据
+    			var myRecord = this.result;
+    			//遍历替换
+    			for(var key in data){
+    				if(typeof myRecord[key] != 'undefined'){
+    					myRecord[key] = data[key];
+    				}
+    			}
+    			objectStore.put(myRecord);
+    		};
+
+    	},
+    	del:function(id){
+    		// 打开已经存储的数据对象
+            var objectStore = db.transaction([dbName], "readwrite").objectStore(dbName);            
+            // 直接删除            
+            var objectStoreRequest = objectStore.delete(id);
+            // 删除成功后
+            objectStoreRequest.onsuccess = function() {
+                method.show();
+            };
+    	},
+    	show:function(){
+    		//最终要展示的html数据
+    		var htmlList = '';
+    		//打开对象存储，获得游标列表
+    		var objectStore = db.transaction(dbName).objectStore(dbName);
+    		objectStore.openCursor().onsuccess = function(event){
+    			var cursor = event.target.result;
+    			//如果游标没有遍历完，继续下面的逻辑
+    			if(cursor){
+    				htmlList = htmlList + book_template.temp(cursor.value);
+    				//继续下一个游标项
+    				cursor.continue();
+    				//遍历完毕
+    			}else{
+    				log('');
+    				domTbody.innerHTML = htmlList;
+
+    				if(htmlList == ''){
+    					log('暂无数据');
+    				}
+    			}
+    		};
+    		objectStore.openCursor().onerror = function(event){
+    			log('打开存储对象失败');
+    		};
+    	}
+    };
+    //新增
+    domForm.addEventListener('submit',function(event){
+    	event.preventDefault(); 
+    	let formData = {};
+       	let domForm = this.querySelectorAll('input,textarea');
+
+        Array.from(domForm).forEach(function (ele) {
+            if (ele.name) {
+                formData[ele.name] = ele.value;    
+            }
+        });
+            
+        // 添加新的数据
+        method.add(formData);
+        
+        this.reset();
+    });
+    //编辑
+    domTbody.addEventListener('focusout',function(event){
+    	event.preventDefault();
+    	var eleTd = event.target;
+    	//获取id，也就是获得主键 
+    	var id = eleTd.getAttribute('data-id');
+    	if (!id || !/TD/.test(eleTd.tagName)) { return; }
+
+    	// 这是要替换的数据
+        var data = {
+            id: id * 1    
+        };
+        // 获得现在的数据
+        var domTd = eleTd.parentElement.querySelectorAll('td[data-key]');
+
+        Array.from(domTd).forEach(function (td) {
+            var key = td.getAttribute('data-key');
+            var value = td.innerText || td.textContent || '';
+            
+            data[key] = value;
+        });
+        // 更新本地数据库
+        console.log(data);
+        method.edit(id, data);
+
+    });
+    //删除
+    domTbody.addEventListener('click',function(event){
+    	var eleBtn = event.target, id = '';
+        if (eleBtn && eleBtn.classList.contains('del_btn') && (id = eleBtn.getAttribute('data-id'))) {
+            method.del(id * 1);    
+            event.preventDefault();        
+        }
+    });
+})();	
+</script>
+</body>
+</html>

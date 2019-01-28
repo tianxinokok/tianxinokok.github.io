@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数节流</title>
+<style type="text/css">
+.div1, .div2{
+	position: relative;
+	width: 200px;
+	background-color: red;
+	margin-top: 10px;
+	left: 0px;
+}
+</style>
+</head>
+<body>
+改变浏览器大小运行代码。
+<div id="div1" class="div1">没有考虑函数节流</div>
+<div id="div2" class="div2">考虑函数节流</div>
+</body>
+</html>
+<script type="text/javascript">
+
+function throttle(method/*要执行的函数*/,context/*在哪个作用域中执行*/){
+	clearTimeout(method.tId);
+	method.tId = setTimeout(function(){
+		method.call(context);
+	},100);
+
+}
+
+window.onresize = function(){
+	var div1 =document.getElementById('div1');  //节流在resize事件中是最常用的，如果你基于该事件改变布局，最好控制频率，以确保浏览器不会在极短的时间内进行过多计算。
+	div1.style.height = div1.offsetWidth + 'px';
+
+	throttle(resizeDiv); //函数节流做法
+}
+
+function resizeDiv(){
+	var div2 =document.getElementById('div2');       //这个例子有两点会造成浏览器运行缓慢 1.要计算offsetWidth 2.设置某个元素的高度需要对页面进行回流来令改动生效。
+	div2.style.height = div2.offsetWidth + 'px';
+}
+
+</script>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM中的事件对象</title>
+<style type="text/css">
+.bg{
+	color:red;
+}
+.div1{
+	width: 200px;
+	height: 100px;
+	border:1px solid red;
+}
+</style>
+</head>
+<body>
+<div id="div1" class="div1">在这里发生不同的事件(点击/移出/移入)</div>
+<div><a id="testlink" href="www.baidu.com">点击我--这里阻止了默认跳转行为</a></div>
+<div id="div2">点击我--阻止事件捕获或者冒泡</div>
+<div id="div3">惦记我--利用事件对象的eventPhase属性，可以确定事件当前正位于事件流的哪个阶段</div>
+</body>
+</html>
+<script type="text/javascript">
+
+var div1 = document.getElementById('div1');
+var mylink = document.getElementById('testlink');
+var div2  = document.getElementById('div2');
+var div3  = document.getElementById('div3');
+//
+var handler = function(event){
+	switch(event.type){
+		case "click":
+		alert("clicked");
+		break;
+
+		case "mouseover":
+		event.target.style.backgroundColor = 'red';
+		break;
+
+		case "mouseout":
+		event.target.style.backgroundColor = '';
+		break;
+	}
+};
+div1.onclick = handler;
+div1.onmouseover = handler;
+div1.onmouseout = handler;
+
+//
+mylink.onclick = function(event){
+	event.preventDefault();           //只有cancelable属性设置为true的事件,才可以使用preventDefault()来取消其默认行为.
+};
+
+
+//
+div2.onclick = function(event){
+	alert('div2被点击了');
+	event.stopPropagation();
+};
+document.body.onclick = function(event){
+	alert('事件传播到document.body这里了');
+};
+
+//
+div3.onclick = function(event){
+	alert('值为' + event.eventPhase + ' 处于目标阶段');
+};
+document.body.addEventListener("click",function(event){
+	alert('值为' + event.eventPhase + ' 事件捕获阶段');
+},true);
+document.body.onclick = function(event){
+	alert('值为' +  event.eventPhase + ' 事件冒泡阶段');
+};
+</script>

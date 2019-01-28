@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数柯里化</title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+function add(num1,num2){
+	return num1 + num2;
+}
+function curriedAdd(num2){
+	return add(5,num2);
+}
+alert(curriedAdd(3));         //8
+//柯里化函数创建
+function curry(fn){
+	var args = Array.prototype.slice.call(arguments,1);
+	return function(){
+		var innerArgs = Array.prototype.slice.call(arguments);
+		var finalArgs = args.concat(innerArgs);
+		return fn.apply(null,finalArgs);
+	}
+}
+
+var curriedAdd2 = curry(add,5);
+alert(curriedAdd2(3));        //8
+
+
+</script>

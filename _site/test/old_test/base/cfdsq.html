@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>解决重复定时器(setInterval())的两个问题</title>
+<style type="text/css">
+.div1{
+	position: relative;
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	left: 0px;
+}
+</style>
+</head>
+<body>
+<div id="div1" class="div1"></div>
+</body>
+</html>
+<script type="text/javascript">
+//setInterval() 有两个问题： 1.某些间隔会被跳过。 2. 多个定时器的代码执行之间的间隔可能会比预期的小
+
+//为了避免setInterval()的这两个问题，可以使用链式setTimeout()调用。
+var div1 = document.getElementById('div1');
+	div1.style.left = '0px';
+setTimeout(function(){
+	left = parseInt(div1.style.left) + 5;
+	div1.style.left = left + 'px';
+	if(left < 200){
+		setTimeout(arguments.callee,50);
+	}
+},50);
+</script>

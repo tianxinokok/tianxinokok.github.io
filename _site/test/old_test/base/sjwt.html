@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件委托</title>
+<style type="text/css">
+.bg{
+	color:red;
+}
+.div1{
+	width: 200px;
+	height: 100px;
+	border:1px solid red;
+}
+</style>
+</head>
+<body>
+<ul>
+	<li>传统低性能的做法</li>
+	<li id="gosomeWhere">传统方式-Go someWhere</li>
+	<li id="dosomeThing">传统方式-Do someWhere</li>
+	<li id="sayName">传统方式-sayName</li>
+</ul>
+<ul id="list">
+	<li>高性能的做法</li>
+	<li id="gosomeWhere2">事件委托-Go someWhere</li>
+	<li id="dosomeThing2">事件委托-Do someWhere</li>
+	<li id="sayName2">事件委托-sayName</li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+
+//传统低性能的做法
+var Li1 = document.getElementById('gosomeWhere');
+var Li2 = document.getElementById('dosomeThing');
+var Li3 = document.getElementById('sayName');
+var list = document.getElementById('list');
+
+Li1.onclick = function(e){
+	alert('gosomeWhere');
+};
+Li2.onclick = function(e){
+	alert('dosomeThing');
+};
+Li3.onclick = function(e){
+	alert('sayName');
+};
+
+//利用事件冒泡采用事件委托提升性能
+function getEvent(event){
+	return event || window.event;
+}
+function getTarget(event){
+	return event.target || event.srcElement ; 
+}
+list.onclick = function(e){
+	e = getEvent(e);
+	var target = getTarget(e);
+	var target = getTarget(event);
+	switch(target.id){
+		case 'gosomeWhere2':
+		alert('gosomeWhere2');
+		break ;
+		case 'dosomeThing2':
+		alert('dosomeThing2');
+		break;
+		case 'sayName2':
+		alert('sayName2');
+		break;
+	}
+};
+</script>

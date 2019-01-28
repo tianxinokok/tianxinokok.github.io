@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>innerHTML性能问题</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<ul class="ul1" id="ul1">
+	
+</ul>
+<ul class="ul2" id="ul2">
+	
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+var ul1 = document.getElementById('ul1');
+var ul2 = document.getElementById('ul2');
+
+for(var i = 0 ; i<5 ;i++){
+	ul1.innerHTML += '<li>' + '我是低性能的插入节点' + '</li>'; //循环设置innerHTML的效率很低。而且每次循环还要读取信息，也就是每次循环要访问两次innerHTML。
+}
+
+var str = '';
+for(var j= 0 ;j<5;j++){
+	str += '<li>' + '我是高性能的插入节点' + '</li>';
+}
+ul2.innerHTML = str;   //一次性赋值，效率高。
+</script>

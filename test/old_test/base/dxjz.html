@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>惰性载入函数</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+惰性加载的两种实现方式--右键查看源码
+</body>
+</html>
+<script type="text/javascript">
+function createXHR(){
+	if(typeof XMLHttpRequest != 'undefined'){
+		return new XMLHttpRequest();
+	}else if(typeof ActiveXObject != 'undefined'){
+		if(typeof arguments.callee.activeXString != 'string'){
+			var versions = ["MSXML2.XMLHttp.6.0","MSXML2.XMLHttp.3.0","MSXML2.XMLHttp"],
+				i,len;
+			for( i = 0 , len = versions.length ; i<len;i++){
+				try{
+					new ActiveXObject(versions[i]);
+					arguments.callee.activeXString = versions[i];
+					break;
+				}catch(ex){
+
+				}
+			}
+		}
+		return new ActiveXObject(arguments.callee.activeXString);
+	}else{
+		throw new Error("NO XML object available");
+	}
+}
+createXHR();
+//惰性载入表示函数执行的分支仅会发生一次，有两种实现惰性载入的方式 
+//第一种：在函数被调用时再处理函数
+function createXHR2(){
+	if(typeof XMLHttpRequest != 'undefined'){
+		createXHR = function(){
+			return new XMLHttpRequest();
+		};
+	}else if(typeof ActiveXObject != 'undefined'){
+		createXHR = function(){
+			if(typeof arguments.callee.activeXString != 'string'){
+				var versions = ["MSXML2.XMLHttp.6.0","MSXML2.XMLHttp.3.0","MSXML2.XMLHttp"],
+					i,len;
+				for( i = 0 , len = versions.length ; i<len;i++){
+					try{
+						new ActiveXObject(versions[i]);
+						arguments.callee.activeXString = versions[i];
+						break;
+					}catch(ex){
+
+					}
+				}
+			}
+			return new ActiveXObject(arguments.callee.activeXString);
+		};
+	}else{
+		createXHR = function(){
+			throw new Error("NO XML object available");
+		};
+	}
+	return createXHR();
+}
+//第二种：声明函数时就指定适当的函数
+var createXHR3 = (function(){
+	if(typeof XMLHttpRequest != 'undefined'){
+		return function(){
+			return new XMLHttpRequest();
+		};
+	}else if(typeof ActiveXObject != 'undefined'){
+		return function(){
+			if(typeof arguments.callee.activeXString != 'string'){
+				var versions = ["MSXML2.XMLHttp.6.0","MSXML2.XMLHttp.3.0","MSXML2.XMLHttp"],
+					i,len;
+				for( i = 0 , len = versions.length ; i<len;i++){
+					try{
+						new ActiveXObject(versions[i]);
+						arguments.callee.activeXString = versions[i];
+						break;
+					}catch(ex){
+
+					}
+				}
+			}
+			return new ActiveXObject(arguments.callee.activeXString);
+		};
+	}else{
+		return function(){
+			throw new Error("NO XML object available");
+		};
+	}
+})();
+</script>

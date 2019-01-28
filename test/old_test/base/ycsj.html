@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移除事件处理程序</title>
+<style type="text/css">
+</style>
+</head>
+<body>
+<div id="div">
+ <input type="button" name="" id="btn" value="低性能做法">
+</div>
+
+<div id="div2">
+	<input type="button" name="" id="btn2" value="高性能做法">
+</div>
+
+<div id="div3">
+	<input type="button" name="" id="btn3" value="高性能做法(事件委托)">
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var btn = document.getElementById('btn');
+btn.onclick = function(){
+  document.getElementById('div').innerHTML = '加载中....'; //这里虽然替换了按钮元素，但是按钮元素与事件处理程序依旧保持引用关系，依旧保存在内存中，需要手工移除事件处理程序
+};
+
+var btn2 = document.getElementById('div2');
+btn2.onclick = function(){
+	btn2.onclick = null;   //移除事件处理程序
+	 document.getElementById('div2').innerHTML = '加载中....';
+
+};
+
+//采用事件委托也可以解决这个问题，如果事先知道会用innerHTML替换掉页面的一部分，那么就可以不往这些元素上添加事件，而把事件添加到高层次的元素中，同样能够处理该区域的事件。
+var div3 = document.getElementById('div3');
+div3.onclick = function(){
+	document.getElementById('div3').innerHTML = '加载中....';
+};
+</script>

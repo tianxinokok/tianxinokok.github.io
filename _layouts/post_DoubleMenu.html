@@ -1,0 +1,26 @@
+{% include _partial/head.html %}
+ <body>
+   <div class="container">
+       <header>
+          {% include _partial/header.html %}
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>{{page.title}}</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y年%m月%d日" }}</time></span>
+                </div>
+                  {{ content }}
+            </div>
+          </div>
+       </div>
+    </div>
+  </body>
+  <script src="/source/js/highlight.min.js"></script>
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+</html>

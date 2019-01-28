@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/obsidian.min.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摆渡先生</title>
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+ <body>
+   <div class="container">
+       <header>
+          <svg style="display: none"  version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <filter id="grayscale">
+        <feColorMatrix type="matrix"  id="ie_svg" values="0.3333 0.3333 0.3333 0 0
+                                             0.3333 0.3333 0.3333 0 0 
+                                             0.3333 0.3333 0.3333 0 0 
+                                             0 0 0 1 0"/>
+    </filter>
+</svg>
+<div class="header">
+	<div class="poster_img gray">
+	<svg class="box_svg" width="100%" height="100%" >
+		<image  class="img_svg" xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"></image>
+	</svg>	
+	</div>
+	<div class="header_cover">
+		<div class="nav">
+			<ul class="nav_ul">
+				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
+				<li data-subtitle="自留地"><a href="/prose"><i class="fa fa-heart"></i></a></li>
+				<li data-subtitle="书籍"><a href="/book"><i class="fa fa-book" ></i></a></li>
+				<li data-subtitle="微信"><a href="/contact"><i class="fa fa-comments"></i></a></li>
+				<li data-subtitle="夜间模式"><i class="fa fa-moon-o"></i></li>
+			</ul>
+		</div>
+	</div>
+	<div style="display: none;">
+		本站访客数：<span id="busuanzi_value_site_uv"></span>人次
+		本站总访问量：<span id="busuanzi_value_site_pv"></span>次
+		本文总阅读量：<span id="busuanzi_value_page_pv"></span>次
+	</div>
+	<div style="display: none;">
+			<script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=52zqlc4vy2q&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+	</div>
+</div>
+<div class="bottom_line"></div>
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>H5-indexedDB数据库的增删改查</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime=""></time></span>
+                </div>
+                  <p>demo先放着： <a href="/test/old_test/base/indexedDB.html" target="_blank">indexedDB增删改查</a></p>
+<h2 id="一与关系型数据库的对比">一.与关系型数据库的对比</h2>
+<p>首先indexedDB是为了替代前端的关系型数据库–Web SQL Database而出现的。浅显的对比一下他们的区别，因为对关系型数据库了解的也不深。</p>
+
+<p>1.indexedDB使用对象保存数据，而不是使用表保存数据。</p>
+
+<p>2.锁表发生的场景不一样，关系型数据库发生在表，行读写的时候。indexedDB的锁表发生在数据库版本变更，事务或者存储对象”只读”，”读写”事务的时候。</p>
+
+<p>3.大小不同，某些浏览器对indexDB有大小限制（不低于250MB）。谷歌对单条数据的大小限制在130MB以下 （备注：没有验证）。</p>
+
+<h2 id="二打开数据库">二.打开数据库</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>//兼容处理
+ var indexedDB =indexedDB = window.indexedDB || window.msIndexedDB ||      window.mozIndexedDB || window.webkitIndexedDB;
+//打开方式
+ var dbOpenRequest = indexedDB.open(dbName,version);
+</code></pre>
+</div>
+<p>indexedDB.open接收两个参数，第一个参数dbName是数据库的名称，第二个参数是数据库的版本，如果第二个参数不填，默认打开当前数据库版本。</p>
+
+<h2 id="三新建数据库">三.新建数据库</h2>
+<p>把新建写在打开后面就是因为新建数据库跟打开数据库用的方法一模一样。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> var indexedDB =indexedDB = window.indexedDB || window.msIndexedDB ||      window.mozIndexedDB || window.webkitIndexedDB;
+ var dbOpenRequest = indexedDB.open(dbName,version);
+</code></pre>
+</div>
+<p>当打开的数据库不存在或者版本不一样的时候就会新建数据库。跟打开的区别在于，创建会触发upgradeneeded事件。</p>
+
+<h2 id="四upgradeneeded事件">四.upgradeneeded事件</h2>
+<p>数据库首次创建版本，或者indexedDB.open传递的新版本（版本数值要比现在的高）就会触发upgradeneeded事件。</p>
+
+<p>触发upgradeneeded事件之后第一件事要新建对象仓库(也就是传统的新建表)</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>    dbOpenRequest.onupgradeneeded = function(event){
+    	var db = event.target.result;
+        var objectStore ;
+        if(!db.objectStoreNames.contains(dbName)){  
+                objectStore = db.createObjectStore(dbName,{
+                keyPath : 'id',
+                autoIncrement : true
+            });
+        }
+    };
+</code></pre>
+</div>
+<p>对象仓库建好之后（表建好），就应该定义存储数据了（索引）需要调用createIndex()方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>   dbOpenRequest.onupgradeneeded = function(event){
+    	var db = event.target.result;
+        var objectStore ;
+        if(!db.objectStoreNames.contains(dbName)){
+                objectStore = db.createObjectStore(dbName,{
+                keyPath : 'id',
+                autoIncrement : true
+            });
+        }
+    	//定义存储数据
+    	objectStore.createIndex('id','id',{
+    		unique : true
+    	});
+    	objectStore.createIndex('name','name');
+    	objectStore.createIndex('publish_time','publish_time');
+    	objectStore.createIndex('author','author');
+    	objectStore.createIndex('introduction','introduction');
+    };
+</code></pre>
+</div>
+<h2 id="五新增编辑删除">五.新增、编辑、删除</h2>
+<p>这三个操作都是同一个模式，新建一个事务（transaction() →通过事务拿到存储对象→拿到存储对象后进行相应操作</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//新建事务
+var transaction = db.transaction([dbName],'readwrite'); 
+//拿到存储对象
+var objectStore = transaction.objectStore(dbName);
+
+//新增add()
+var objectStoreRequest = objectStore.add(newItem);
+//编辑put()
+var objectStoreRequest = objectStore.get(parseInt(id)); //编辑多一步查找，即要编辑的那个。
+objectStoreRequest.onsuccess = function(event){
+	//当前数据
+	var myRecord = this.result;
+	//遍历替换
+	for(var key in data){
+		if(typeof myRecord[key] != 'undefined'){
+			myRecord[key] = data[key];
+		}
+	}
+	objectStore.put(myRecord);
+};
+//删除delete()
+var objectStoreRequest = objectStore.delete(id);
+</code></pre>
+</div>
+<h2 id="五查看">五.查看</h2>
+<p>查看分两种情况：</p>
+
+<p>1.查询单个对象→get(键)。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var transaction = db.transaction([dbName],'readwrite'); 
+var objectStore = transaction.objectStore(dbName);
+var objectStoreRequest = objectStore.get(parseInt(id)); 
+</code></pre>
+</div>
+<p>2.检索多个对象要使用创建游标的方式，也就是一个结果集的指针→openCursor()</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var transaction = db.transaction([dbName],'readwrite'); 
+var objectStore = transaction.objectStore(dbName);
+objectStore.openCursor().onsuccess = function(event){
+	var cursor = event.target.result;
+	if(cursor){   一定要检查
+		......
+		cursor.continue();    //继续下一个游标项
+		//遍历完毕
+	}else{
+		......
+	}
+};
+</code></pre>
+</div>
+<p>openCursor()请求对象成功后，event.target.result会拿到存储空间的下一个对象，在结果集有下一项时，event.target.result中会保存一个IDBCursor的实例，cursor.continue()会执行继续遍历，在没有下一项时，这个结果会保存一个null，会进入else，相当于遍历结束。所以例子中的if(cursor){}条件一定要有。</p>
+
+<h2 id="六总结">六.总结</h2>
+<p>再遇到需要前端存储一些不敏感信息的需求，或者需要频繁请求接口获取数据的场景，可以获取一次，通过indexedDB存储到本地，减少对服务器的请求频率，对于优化性能，和提高体验方面还是挺有意义的。重要的时浏览器的支持也是非常不错。完事。</p>
+
+
+                <div class="comments">查看评论</div>
+               <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
+                <script type="text/javascript">
+                 (function(d, s) {
+                     var j, e = d.getElementsByTagName(s)[0];
+
+                     if (typeof LivereTower === 'function') { return; }
+
+                     j = d.createElement(s);
+                     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                     j.async = true;
+
+                     e.parentNode.insertBefore(j, e);
+
+                 })(document, 'script');
+                </script>
+                <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+            </div>
+          </div>
+       </div>
+    </div>
+  </body>
+  <script src="/source/js/highlight.min.js"></script>
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
+    })
+  </script>
+</html>
