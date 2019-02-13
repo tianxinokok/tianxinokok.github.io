@@ -66,6 +66,7 @@
     margin-right: 2px;
     font-family: Consolas,monospace;
     letter-spacing: 0.35px;
+    line-height:1.3; 
 }
 .highlight{
 	/*background-color: #002b36;*/

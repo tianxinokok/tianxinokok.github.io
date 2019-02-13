@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>let和const</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+/*
+ *
+ */
+(function(){
+{
+  var a = 10;
+  let b = 10;
+}
+// console.log(a) // 10
+// console.log(b) // b is not defined
+for(var i =0 ;i<5;i++){
+
+}
+//console.log(i); //5
+for(let j = 0 ;j<5;j++){
+
+}
+//console.log(j); //j is not defined
+})();
+/*
+ *
+ */
+(function(){
+var a =[];
+for(var  i = 0;i< 10 ;i++){
+	//console.log(i);
+    a[i] = function(){
+    	//console.log(i);
+    };
+}
+a[6]();
+
+var b = [];
+for(let i = 0;i<10;i++){
+	//console.log(i);
+	b[i] = function(){
+		//console.log(i);
+	};
+}
+b[6]();
+
+})();
+/*
+ *
+ */
+ (function(){
+function func(){
+	let a = 10; 
+	let a = 1 ;
+}
+//func(); //Identifier 'a' has already been declared
+ })();
+ /*
+ *
+ */
+(function(){
+function func(arg = 1){
+	if(true){
+		let arg = 2;
+	}
+}
+//func(); //不报错
+})();
+ /*
+ *
+ */
+(function(){
+for(var i =0;i<5;i++){
+
+}
+console.log(i);
+function func(){
+	let a = 1;
+	if(true){
+		let a = 2;
+	}
+	console.log(a); //1
+}
+//func();
+})();
+ /*
+ *
+ */
+
+
+let  a = 1;
+console.log(window.a);
+const b = 1;
+console.log(window.b);
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>document.hidden,visibilitychange事件</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<h4>检测浏览器是否支持document.hidden和visibilityChange()事件</h4>
+<h5>最小化浏览器或者切换浏览器窗口会有打印</h5>
+<div id="msg">
+	
+</div>
+<script type="text/javascript">
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+} else if (typeof document.mozHidden !== "undefined") {
+    hidden = "mozHidden";
+    visibilityChange = "mozvisibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+}
+document.getElementById('msg').innerHTML = 'document.hidden : ' + hidden ; 
+//添加监听器
+document.addEventListener(visibilityChange, function() {
+    console.log("当前页面是否被隐藏：" + document[hidden]);
+    document.getElementById('msg').innerHTML+= "<br>当前页面是否被隐藏：" + document[hidden];
+}, false);
+</script>
+</body>
+</html>

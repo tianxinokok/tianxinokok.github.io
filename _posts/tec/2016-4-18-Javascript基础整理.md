@@ -107,3 +107,7 @@ imgs: '../source/img/post/basic.jpg'
 [函数节流](/test/old_test/base/hsjl.html)
 
 [cookie](/test/old_test/base/cookie.html)
+
+[利用文档碎片(createDocumentFragment()优化dom交互)](/test/old_test/base/yhdom.html)
+
+[H5-document.hidden属性和visibilitychange()事件](/test/old_test/base/document.hidden.html)

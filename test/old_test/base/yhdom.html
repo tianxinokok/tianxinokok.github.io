@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>利用createDocumentFragment()优化dom交互</title>
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<ul id="ul1">
+    
+</ul>
+<ul id="ul2">
+    
+</ul>
+<script type="text/javascript">
+//低性能
+var ul1 = document.getElementById('ul1'),
+    item ;
+for(var i = 0 ;i<5;i++){
+    item  = document.createElement('li');
+    ul1.appendChild(item);
+    item.appendChild(document.createTextNode('低性能的dom交互'));
+}
+//高性能
+var ul2 = document.getElementById('ul2'),
+    fragment = document.createDocumentFragment(),  //文档碎片
+    item;
+for(var j = 0; j<5;j++){
+    item = document.createElement('li');
+    fragment.appendChild(item);
+    item.appendChild(document.createTextNode('高性能的dom交互'));
+}
+ul2.appendChild(fragment);
+</script>
+</body>
+</html>
