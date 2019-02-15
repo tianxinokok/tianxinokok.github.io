@@ -8,9 +8,13 @@
 	
 </body>
 <script type="text/javascript">
-function func([x,y]){
-	return x + y;
-}
-console.log(func([1,2]));
+let jsonData = {
+	name:'tianxin',
+	old : 24,
+	listdata:[1,3,5,7]
+
+};
+let {name,old,listdata} = jsonData;
+console.log(listdata);
 </script>
 </html>
