@@ -250,7 +250,137 @@
                     <time datetime=""></time>
                     </span>
                   </div>
-                   <h3 id="一字符串的扩展">一、字符串的扩展</h3>
+                   <h3 id="一">一、</h3>
+<h3 id="二">二、</h3>
+<h3 id="三">三、</h3>
+<h3 id="四字符串的遍历接口">四、字符串的遍历接口</h3>
+<p>ES6为字符串添加了遍历器接口，详见《Iterator》一章，使得可以被for…of遍历。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>for(let i of 'hello'){
+	console.log(i);
+}
+</code></pre>
+</div>
+<p>除了遍历字符串，这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let text = String.fromCodePoint(0x20BB7);
+for (let i = 0; i &lt; text.length; i++) {
+  console.log(text[i]);
+}
+// " "
+// " "
+
+for (let i of text) {
+  console.log(i);
+}
+// "𠮷"
+</code></pre>
+</div>
+<p>上面代码中，字符串text只是一个字符，但是以往的for循环认为他包含两个字符，并且不可打印，而for…of可以正确识别这一字符。</p>
+<h3 id="五includes-startswith-endswith">五、includes(), startsWith(), endsWith()</h3>
+<p>ES5中，只有indexOf()方法，可以确定某个字符出是否包含在另一个字符串中，ES6又提供了三种方法。</p>
+
+<p>1.includes()：返回布尔值，表示是否找到了参数字符串。</p>
+
+<p>2.startsWith()：返回布尔值，表示要查找的字符串是否在原字符串的头部。</p>
+
+<p>3.endsWith()：返回布尔值，表示要查找的字符出是否在原字符串的尾部。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>let str = 'hello';
+str.includes('h');//true
+
+let str = 'hello';
+str.startsWith('h');//true
+
+let str = 'hello';
+console.log(str.endsWith('h'));//false
+console.log(str.endsWith('o'));//true
+</code></pre>
+</div>
+<p>这三个方法都支持第二个参数，表示开始搜索的位置。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let str = 'hello';
+console.log(str.includes('h',2));//false
+console.log(str.startsWith('hell',4));//false
+console.log(str.endsWith('hell',4));//true
+</code></pre>
+</div>
+<p>从上面代码可以看出，includes()和startsWith()第二个参数是从第n个位置到结束位置，而endsWith()方法的第二个参数的意思是代表前n个位置。</p>
+<h3 id="七repeat">七、repeat()</h3>
+<p>repeat()方法返回一个新字符串，表示将原字符串重复n次。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(2);
+console.log(s);//hellohello
+
+let s = 'hello'.repeat(1);
+console.log(s);//hello
+
+let s = 'hello'.repeat(0);
+console.log(s);//空字符串
+</code></pre>
+</div>
+<p>如果参数是小数，会被向下自动取整。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(2.1);
+console.log(s);//hellohello
+
+let s = 'hello'.repeat(2.9);
+console.log(s);//hellohello
+</code></pre>
+</div>
+<p>如果参数是复数或者Infinity，会报错。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(-2);//报错
+let s = 'hello'.repeat(Infinity);//报错
+</code></pre>
+</div>
+<p>如果参数是0到-1之间的小数，则等于0，这是因为会先进行取整运算，0到-1之间的小数，取整之后是-0；repeat视它为0。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>'hello'.repeat(0) === 'hello'.repeat(-0.8); //true
+</code></pre>
+</div>
+<p>如果参数是NaN，也是等同于0。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>'hello'.repeat(0) === 'hello'.repeat(NaN);//true
+</code></pre>
+</div>
+<p>如果参数是字符串，会先转化为数字。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat('2');
+console.log(s);//hellohello
+
+let s = 'hello'.repeat('tx');
+console.log(s);//空字符串
+</code></pre>
+</div>
+<h3 id="八padstartpadend">八、padStart()，padEnd()</h3>
+<p>这两个方法用于补全字符串长度，padStart()用于在字符串头部补全，padEnd()用于在字符串尾部补全。返回补全后的字符串。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7,'h'); //hehello
+let s = 'hello'.padStart(7,'hello');//hehello
+
+let s = 'hello'.padEnd(7,'h');//hellohh
+let s = 'hello'.padEnd(7,'hello');//hellohe
+</code></pre>
+</div>
+<p>上面代码中，padStart()，padEnd(）接收两个参数，第一个参数是字符串补全后的最大长度，第二个参数是用来补全的字符串。</p>
+
+<p>如果原字符串的长度，等于或者大于最大长度，则字符串补全不生效，返回原字符串。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(5,'h'); //hello
+let s = 'hello'.padEnd(5,'h'); //hello
+</code></pre>
+</div>
+<p>如果用来补全的字符串与原字符串的长度相加大于最大长度，则会截掉超出位数的补全字符串。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7,'hello'); //hehello
+</code></pre>
+</div>
+<p>如果省略第二个参数，默认使用空格补全剩余长度。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7); 
+console.log(s);//hhollo;// '  hello'
+console.log(s.length);7
+</code></pre>
+</div>
+<p>padStart()的常见用途是为数值补全指定位数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = '1'.padStart(10,'0');//0000000001
+</code></pre>
+</div>
+<p>另一个用途是提示字符出格式。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = '12'.padStart(10,'YYYY-MM-DD');//YYYY-MM-12
+let s = '07-12'.padStart(10,'YYYY-MM-DD');//YYYY-07-12
+</code></pre>
+</div>
+<h3 id="九matchall">九、matchAll()</h3>
+<p>matchAll()方法返回一个正则表达式在当前字符串的所有匹配，详见《正则的扩展》一张。</p>
 
 
                 </div>
