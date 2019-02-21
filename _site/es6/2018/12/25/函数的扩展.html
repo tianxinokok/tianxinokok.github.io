@@ -250,7 +250,132 @@
                     <time datetime=""></time>
                     </span>
                   </div>
-                   <h3 id="一es6基础小练习">一、ES6基础小练习。</h3>
+                   <h3 id="一函数参数的默认值">一、函数参数的默认值</h3>
+<h4 id="基本用法">基本用法</h4>
+<p>ES6之前，不能直接为函数的参数指定默认值，只能采用变通的方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function log(x,y){
+  y = y || 'world';
+  console.log(x,y);
+}
+log() //undefined world
+log('Hello') // Hello world
+log('Hello', 'abc') // Hello abc
+log('Hello', '') // Hello world
+</code></pre>
+</div>
+<p>上面代码检查函数的参数y有没有赋值，如果没有，则指定默认值为world。这种写法的缺点是：如果参数y赋值了，但是对应的布尔值为false，则该赋值不起作用，log(‘Hello’,’‘)中y传入空字符串，结果被改为默认值。</p>
+
+<p>为了避免这个问题，通常需要先判断一下参数y是否被赋值，如果没有，再等于默认值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function log(x,y){
+  if (typeof y === 'undefined') {
+  y = 'World';
+ }
+  console.log(x,y);
+}
+log('hello');                //hello world
+log('hello' , '');           //hello
+log('hello' , 'abc');        //hello abc
+log('hello' , undefined);    //hello world
+log('hello' , 'undefined');  //hello undefined
+</code></pre>
+</div>
+<p>ES6允许为函数的参数设置默认值，即直接写在参数定义的后面。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function log(x,y = 'world'){
+  console.log(x,y);
+}
+log();                       //undefined "world"
+log('hello');                //hello world
+log('hello' , '');           //hello
+log('hello' , 'abc');        //hello abc
+log('hello' , undefined);    //hello world
+log('hello' , 'undefined');  //hello undefined
+</code></pre>
+</div>
+<p>ES6的写法比ES5简单很多。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x = 0,y = 0){
+	this.x = x;
+	this.y = y;
+}
+const abc = new func();
+console.log(abc);
+</code></pre>
+</div>
+<p>除了写法简洁明了之外，ES6的写法还有两个好处：1.阅读代码的人，可以立刻意识到哪些参数是可以省略的，不用查看函数体 2. 有利于将来的代码优化，即使代码在未来彻底拿掉这个参数，也不会导致以前的代码无法运行。
+【】最后一句啥意思 ? 是执行的时候拿掉参数 ？，声明的时候拿掉参数代码还能运行么？</p>
+
+<p>参数变量默认是声明的，所以不能用let或者const再次声明。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x = 0){
+	let x = 1; //报错
+}
+func();
+</code></pre>
+</div>
+<p>使用参数默认值时，函数不能有同名参数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//不报错
+function func(x ,x, y){
+
+}
+//报错
+function func(x,x,y=1){
+
+}
+</code></pre>
+</div>
+<p>注意：参数默认值不是传值的，而是每次都重新计算默认值表达式的值。也就是说，参数默认值是惰性求值的。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let a = 1;
+function func(x = a + 1){
+	console.log(x);
+}
+func(); //2
+a = 2;
+func(); //3
+</code></pre>
+</div>
+<p>上面代码中，函数func的参数x的默认值是a + 1，每次执行都会重新计算a + 1的值，而不是一直等于第一次的结果。</p>
+
+<h4 id="与解构赋值默认值结合使用">与解构赋值默认值结合使用</h4>
+<p>参数默认值可以与解构赋值的默认值结合起来使用。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func({x,y=1}){
+	console.log(x,y);
+}
+func({x:1,y:2}); //1,2
+func({x:1}); 	 //1,1
+func({y:2});     //undefined,2
+func({});        //undefined,1
+func();          //报错 Cannot destructure property `x` of 'undefined' or 'null'.
+</code></pre>
+</div>
+<p>上面代码给对象的解构赋值设置了默认值值，并没有给函数参数本身设置默认值，只有当函数的参数是一个对象时，变量x和y才会通过解构赋值生成，如果调用函数时没有传递任何参数，不能通过解构赋值生成变量x和y，导致函数出错。知道了这个原因，如果给函数的参数设置一个默认值，就可以避免这种情况。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func({x,y=1} = {}){
+	console.log(x,y);
+}
+func(); //undefined，1
+</code></pre>
+</div>
+<p>上面代码中，如果没有传递参数，默认值为一个空对象。</p>
+
+<p>下面是一个解构赋值默认值的例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(url,{a,b ='abc',c}){
+	console.log(b);
+}
+func('https://xxxx',{});  //abc
+func('https://xxxx');  //报错
+</code></pre>
+</div>
+<p>上面代码中，函数func的第二个参数是一个对象，可以给这个对象的三个属性设置默认值，这种写法不能省略第二个参数，这时如果给这个对象（函数的第二个参数）一个参数默认值，就可以省略第二个参数。这时，就有了双重默认值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(url,{a,b ='abc',c} = {}){
+	console.log(b);
+}
+func('https://xxxx',{}); //abc
+func('https://xxxx');    //abc
+</code></pre>
+</div>
+<p>上面代码中，函数没有传入第二个参数时，函数参数的默认值开始生效，然后是解构赋值的默认值生效，变量b才会取到默认值。</p>
+
+<p>下面两种写法有什么区别？</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+</code></pre>
+</div>
 
 
                 </div>
