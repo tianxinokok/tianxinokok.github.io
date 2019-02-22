@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin的叠加问题</title>
+<style type="text/css">
+.div1-1{
+	width: 200px;
+	height:200px;
+	margin-bottom: 50px;
+	background-color: red;
+}
+.div1-2{
+	width: 200px;
+	height: 200px;
+	margin-top: 25px;
+	background-color: green;
+}
+</style>
+</head>
+<body>
+	<h2>上面元素的margin-bottom和下面元素的margin-top发生叠加</h2>
+	<div>
+		<div class="div1-1">当两个或多个margin相遇时，叠加后形成一个margin，高度为marign中最大的一个</div>
+		<div class="div1-2">上面的margin-bottom为50，下面的元素margin-top为25，所以他们叠加之后中间的高度为上面元素较大margin：50px;</div>
+	</div>
+</body>
+</html>
