@@ -8,8 +8,13 @@
 	
 </body>
 <script type="text/javascript">
-var func  = function (a,b,c=3){
-};
-console.log(func.length);
+var x = 1;
+function func(x,y = function(){ x = 2;}){
+	x = 3;
+	y();
+	console.log(x);
+}
+func();        //3
+console.log(x) //1
 </script>
 </html>
