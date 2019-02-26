@@ -8,13 +8,7 @@
 	
 </body>
 <script type="text/javascript">
-var x = 1;
-function func(x,y = function(){ x = 2;}){
-	x = 3;
-	y();
-	console.log(x);
-}
-func();        //3
-console.log(x) //1
+var sum = (num1, num2) => { return num1 + num2; }
+console.log(sum(1,2));
 </script>
 </html>
