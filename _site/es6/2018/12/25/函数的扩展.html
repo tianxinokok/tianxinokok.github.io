@@ -735,9 +735,78 @@ let  func = (id) =&gt; ({id:id,name:'tx'}); //{id: 1, name: "tx"}
 <p>这个试过之后，好像对象如果只有一个属性就不会报错，但是也不能返回正确的对象，返回的是undefined。</p>
 
 <p>下面是另一种特殊情况，靠，貌似就是我上面的结论。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>let func = () =&gt; {a:1};
+func();//undefined
 </code></pre>
 </div>
+<p>上面代码中，原意是返回一个对象{a:1}，但是由于引擎认为大括号是一个代码块，所以执行的语句是a:1。这时a可以被解释为语句的标签，因此实际执行的语句是1，然后函数就结束了，没有返回值。</p>
+
+<p>如果箭头函数只有一行语句，且不需要返回值，语句就不用写大括号了。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let func = () =&gt; console.log('123');
+</code></pre>
+</div>
+<p>箭头函数可以与变量解构一起使用。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var person = {
+	name:'jl',
+	age:29
+};
+let func = ({name,age}) =&gt; name + ':' + age ; 
+func({name:'tx',age:25});//tx:25
+func(person);//jl:29
+//相当于
+function func(person){
+	return person.name + ':' + person.age;
+}
+</code></pre>
+</div>
+<p>箭头函数使得表达更加简洁。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let func = n =&gt; n % 2 ===0;
+let func = n =&gt; n*n;
+</code></pre>
+</div>
+<p>上面代码只用了两行，就定义了两个简单的工具函数。如果不用箭头函数，可能就要占用多行，而且还不如现在这样写醒目。</p>
+
+<p>箭头函数的一个用处是简化回调函数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//正常函数
+[1,2,3].map(function(n){
+	return n * n ;
+});
+
+//箭头函数
+[1,2,3].map(n =&gt; n * n);
+</code></pre>
+</div>
+<p>另一个例子:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var values = [1,9,3,2,5];
+//正常函数写法
+var result = values.sort(function(a,b){
+	return a-b;
+});
+console.log(result); //[1, 2, 3, 5, 9]
+//箭头函数写法
+var result2 = values.sort((a,b)=&gt;a-b);
+console.log(result2); //[1, 2, 3, 5, 9]
+</code></pre>
+</div>
+<p>rest参数与箭头函数结合的例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var func = (...values) =&gt; values;
+func([1,2]);     //[1,2]
+func({a:1,b:2}); //[{a:1,b:2}]
+
+let func = (first,...second) =&gt; [first,second];
+func(1,2,3,4);   //[1,[2,3,4]]
+</code></pre>
+</div>
+<h4 id="使用注意点">使用注意点</h4>
+<p>箭头函数有几个使用注意点。</p>
+
+<p>（1）函数体内的this，就是定义时所在的对象，而不是使用时所在的对象。</p>
+
+<p>（2）不可以当作构造函数，不能使用new命令，否则会报错。</p>
+
+<p>（3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用rest参数代替。</p>
+
+<p>（4）不可以使用yield命令，因此箭头函数不能用作 Generator 函数。【】</p>
 
 
                 </div>

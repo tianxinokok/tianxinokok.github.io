@@ -8,7 +8,11 @@
 	
 </body>
 <script type="text/javascript">
-let  func = (id) => ({id:id,name:'tx'});
-console.log(func(1));
+var func = (...values) => values;
+func([1,2]);     //[1,2]
+func({a:1,b:2}); //[{a:1,b:2}]
+
+var func = (first,...second) => [first,second];
+func(1,2,3,4);   //[1,[2,3,4]]
 </script>
 </html>
