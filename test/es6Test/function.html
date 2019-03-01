@@ -8,11 +8,14 @@
 	
 </body>
 <script type="text/javascript">
-var func = (...values) => values;
-func([1,2]);     //[1,2]
-func({a:1,b:2}); //[{a:1,b:2}]
-
-var func = (first,...second) => [first,second];
-func(1,2,3,4);   //[1,[2,3,4]]
+var id = '全局';
+var func = () =>{
+	console.log(this.id);
+};
+var obj = {
+	id:'obj对象'
+};
+func();           //全局
+func.call(obj);   //全局
 </script>
 </html>
