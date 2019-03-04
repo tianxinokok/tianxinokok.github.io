@@ -931,6 +931,174 @@ func.call(obj);   //全局
 <p>长期以来，js语音的this对象一直是一个很蛋疼疼的问题，在封装的对象中使用this要非常小心。箭头函数的this固定，很大程度上解决了这个问题。</p>
 
 <h4 id="不适用场合">不适用场合</h4>
+<p>由于箭头函数没有自己this，不受调用的作用域不同而改变。所以下面两种情况，不应该使用箭头函数。</p>
+
+<p>1.第一个不适合的场景是：定义对象上的方法，并且该方法内有this。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var obj = {
+	id:1,
+	func:() =&gt; {
+	  this.id++;
+	}
+};
+</code></pre>
+</div>
+<p>上面代码中，obj.func()方法是一个箭头函数，导致函数内部的this指向全局，如果是普通函数，这时的this就是指向obj对象，因此this.id++ 不会得到预期的结果。</p>
+
+<p>2.第二个不适合的场景是：需要动态this的时候。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var btn = document.getElementById('btn');
+btn.addEventListener('click', ()=&gt;{
+	console.log(this);  //window
+});
+</code></pre>
+</div>
+<p>上面的代码中btn按钮的监听函数是一个箭头函数，导致里面的this已经固定了（window），而通常我们需要this指向监听的元素，所以这时需要写成普通函数。</p>
+
+<p>另外，如果函数体很复杂，有许多行，后者函数内部有大量的读写操作，不单纯是为了计算值，这时也不应该使用箭头函数，如果用普通函数，可以提高代码可读性。</p>
+
+<h4 id="嵌套的箭头函数">嵌套的箭头函数</h4>
+<p>【】</p>
+<h3 id="六双冒号运算符">六、双冒号运算符</h3>
+<p>箭头函数可以绑定this对象，大大减少了显示绑定this对象的写法(call、apply、bind)，但是，箭头函数并不适用于所有场合，所以现在有一个提案，提出了函数绑定运算符，用来取代call、apply、bind调用。</p>
+
+<p>函数绑定运算符是并排的两个冒号(::)，双冒号左边是一个对象，右边是一个函数。该运算符会自动把左边的对象，上下文执行环境（即this对象）绑定到右边函数上。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>obj::func;
+//等同于
+func.bind(obj);
+
+obj::func(...arguments);
+//相当于
+func.call(obj,arguments);
+</code></pre>
+</div>
+<p>如果双冒号左边为空，右边是一个对象的方法，则等于将该方法绑定在该对象上。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var method = obj::obj.getName;
+//等同于
+var method = ::obj.getName;
+
+let log = ::console.log;
+// 等同于
+var log = console.log.bind(console);
+</code></pre>
+</div>
+<p>如果双冒号运算符的运算结果，还是一个对象，就可以采用链式写法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>import { map, takeWhile, forEach } from "iterlib";
+
+getPlayers()
+::map(x =&gt; x.character())
+::takeWhile(x =&gt; x.strength &gt; 100)
+::forEach(x =&gt; console.log(x));
+</code></pre>
+</div>
+<p>【】直接复制过来。</p>
+<h3 id="七尾调用优化">七、尾调用优化</h3>
+<h4 id="什么是尾调用">什么是尾调用</h4>
+<p>尾调用是函数式编程的一个重要概念，就是指某个函数的最后一步是调用另一个函数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x){
+	return foo(x);
+}
+</code></pre>
+</div>
+<p>上面代码中，函数func的最后一步调用了函数foo，这就叫尾调用。</p>
+
+<p>一下三种情况，都不是尾调用。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//情况1
+function func(x){
+  var y = foo(x);
+  return y;
+}
+//情况2
+function func(x){
+	return foo(x) + 1;
+}
+//情况3
+function func(x){
+	foo(x);
+}
+</code></pre>
+</div>
+<p>第一种情况是调用foo函数后还有赋值操作，所以不属于尾调用，即使语义完全一样。
+情况二也属于调用后还有操作，即使写在一行内也不行。情况三等同于下面的代码。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x){
+	foo(x);
+	return undefined;
+}
+</code></pre>
+</div>
+<p>尾调用不一定出现在函数最后一行，只要是最后一步操作即可。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x){
+	if(x &gt; 0){
+		return m(x);
+	}
+	return n(x);
+}
+</code></pre>
+</div>
+<p>上面代码中，函数m和n都属于尾调用，因为他们都是函数func的最后一步。</p>
+<h4 id="尾调用优化">尾调用优化</h4>
+<p>尾调用之所以与其他调用不同，就在于他特殊的调用位置。</p>
+
+<p>我们知道，函数调用会在内存形成一个”调用记录”，又称”调用帧”，保存调用位置和内部变量等信息。如果在函数A的内部调用函数B，那么在A的调用帧上方，还会形成一个B的调用帧。等到B运行结束，将结果返回给A，B的调用帧才会消失。如果函数B内部还调用函数C，那就还有一个C的调用帧，以此类推。所有的调用帧，就形成一个”调用栈”。</p>
+
+<p>尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用帧，因为调用位置，内部变量等信息都不会再用到了，只要直接用内层函数的调用帧，取代外层函数的调用帧就可以了</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+	let m = 1;
+	let n = 2;
+	return foo(m+n);
+}
+//等同于
+function func(){
+	return foo(3);
+}
+
+//等同于
+foo(3);
+</code></pre>
+</div>
+<p>上面代码中，如果函数foo不是尾调用，函数f就需要保存内部变量m和n、g的调用位置等信息。但由于调用foo之后，函数foo就结束了，所以执行到最后一步，完全可以删除func的调用帧，只保留foo(3)的调用帧。</p>
+
+<p>这就叫”尾调用优化”，即只保留内层函数的调用帧。如果所有函数都是尾调用，那么可以做到每次执行时，调用帧只有一项。这样可以大大节省内存，这就是尾调用优化的意义所在。</p>
+
+<p>注意：只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行尾调用优化。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(a){
+	var x = 1;
+	function inner(b){
+		return b + x ;
+	}
+	return inner(a);
+}
+</code></pre>
+</div>
+<p>上面的函数不会进行尾调用优化，因为内层函数inner用到了外层函数func的变量x。</p>
+<h4 id="尾递归">尾递归</h4>
+<p>函数调用自身，称为递归。如果尾调用自身，就称为尾递归。</p>
+
+<p>递归非常耗费内存，因为需要同时保存成百上千个调用帧，很容易发生”栈溢出”错误。但对于尾递归来说，由于只存在一个调用帧，所以永远不会发生”栈溢出”错误。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(n){
+	if(n &lt; 1){
+		return 1;
+	}else{
+		return n * func(n-1);
+	}
+}
+func(5); //120
+</code></pre>
+</div>
+<p>上面代码是一个阶乘函数，计算n的阶乘，最多需要保存n个调用记录。</p>
+
+<p>如果改成尾递归，只保留一个调用记录。【】</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(n,tal){
+	if(n &lt; 1){
+		return tal;
+	}else{
+		return func(n-1,n*tal)
+	}
+}
+console.log(func(5,1));
+</code></pre>
+</div>
+<p>还有一个著名的例子，就是计算Fibonacci数列，也能充分说明递归优化的重要性。</p>
+
+<p>非尾递归的Fibonacci数列实现如下。</p>
 
 
                 </div>

@@ -5,17 +5,16 @@
 	<title>function</title>
 </head>
 <body>
-	
 </body>
 <script type="text/javascript">
-var id = '全局';
-var func = () =>{
-	console.log(this.id);
-};
-var obj = {
-	id:'obj对象'
-};
-func();           //全局
-func.call(obj);   //全局
+function Fibonacci (n) {
+  if ( n <= 1 ) {return 1};
+
+  return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+//console.log(Fibonacci(10)) // 89
+console.log(Fibonacci(100)) // 堆栈溢出
+// Fibonacci(500) // 堆栈溢出
 </script>
 </html>
