@@ -374,11 +374,248 @@ let [...arr3] = [...arr1];
 </code></pre>
 </div>
 <p>上面两种写法，arr2和arr3都是arr1的克隆。</p>
-<h5 id="2数组合并">(2)数组合并</h5>
+<h5 id="2数组合并">（2）数组合并</h5>
 <p>扩展运算符提供了数组合并的新写法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr1 = [1,2];
+let arr2 = [3];
+let arr3 = [4,5];
+//es5
+let arr4 = arr1.concat(arr2,arr3);
+//es6
+let arr5 = [...arr1,...arr2,...arr3];
 </code></pre>
 </div>
+<p>不过，这两种方法都是浅拷贝，使用的时候需要注意。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr1 = [1,2];
+let arr2 = [3,4];
+
+let arr3 = arr1.concat(arr2);
+let arr4 = [...arr1,...arr2];
+arr3[0] === arr1[0]; //true
+arr4[0] === arr1[0]; //true
+</code></pre>
+</div>
+<p>【】这里阮一峰原文好像有点问题。
+测试结论如下：上面两种方法在原数组是一维（数组内没有嵌套数组）的情况下用concat和扩展运算符拷贝后是深拷贝，修改拷贝后数组的值，不会影响到原数组。但是如果原数组中有嵌套的数组情况就不一样了，看下面代码。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr1 = [1,2,['abc']];
+let arr2 = [3,4];
+
+let arr3 = arr1.concat(arr2);
+let arr4 = [...arr1,...arr2];
+
+arr3[length - 3][0] = 'z'; //这里修改拷贝后数组中嵌套数组的值。
+arr1[2]                    //z  原数组也修改了 
+</code></pre>
+</div>
+<p>从上面的代码可以看出，如果原数组中有数组的嵌套，那么通过concat或者扩展运算符拷贝拷贝新数组后的第一层数组是深拷贝，嵌套的数组是浅拷贝，如果修改新数组内部嵌套数组的值，原数组的值也会发生改变。</p>
+<h5 id="3与解构赋值结合">（3）与解构赋值结合</h5>
+<p>扩展运算符可以与解构赋值结合起来，用于生成数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = [1,2,3,4];
+//es5赋值
+let a = arr[0];
+let b = arr.slice(1);
+//es6
+[a,...b] = arr;
+</code></pre>
+</div>
+<p>下面是另外一些例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = [1,2,3,4];
+[first,...rest] = arr;
+console.log(first); //1
+console.log(rest);  //[2,3,4]
+
+[first,...rest] = [];
+console.log(first); //undefined
+console.log(rest);  //[]
+
+[first,...rest] = ['abc'];
+console.log(first); //abc
+console.log(rest);  //[]
+</code></pre>
+</div>
+<p>如果将扩展运算符用于数组赋值，只能放在参数的最后一位，否则会报错。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>[...rest,first] = arr; //报错：Rest element must be last element
+</code></pre>
+</div>
+<h5 id="4字符串">（4）字符串</h5>
+<p>扩展运算符还可以将字符串转为真正的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>[...'hello']; //["h", "e", "l", "l", "o"]
+</code></pre>
+</div>
+<p>上面的写法有一个好处，那就是能够正确识别四个字节的Unicode字符。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>'x\uD83D\uDE80y'.length      //4
+[...'x\uD83D\uDE80y'].length //4 
+</code></pre>
+</div>
+<p>【】上面第二条用了扩展运算符之后结果还是4，原文打印的是3。？</p>
+<h5 id="5实现了iterator接口的对象">（5）实现了Iterator接口的对象</h5>
+<p>任何定义了遍历器(Iterator)接口的对象，（参阅Iterator一章），都可以用扩展运算符转为真正的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let lis = document.querySelectorAll('li');
+let arr = [...lis]; //[&lt;li&gt;&lt;/li&gt;]
+</code></pre>
+</div>
+<p>上面代码中，querySelectorAll方法返回的是一个NodeList对象。不是数组，而是一个类似数组的对象。这时候如果用扩展运算符既可以将其转为真正的数组，原因就在于NodeList对象实现了Iterator。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.prototype[Symbol.iterator] = function*() {
+  let i = 0;
+  let num = this.valueOf();
+  while (i &lt; num) {
+    yield i++;
+  }
+}
+console.log(...5);//0 1 2 3 4
+</code></pre>
+</div>
+<p>【】Symbol.iterator不懂</p>
+
+<p>实现的结果就是返回0到扩展运算符后面数字（不包括本身）的所有整数。</p>
+
+<p>对于那些没有部署Iterator接口的类似数组的对象，扩展运算符就不能把他们转为真正的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	name : 'tx',
+	length:1
+};
+[...obj]; //报错 obj is not iterable
+</code></pre>
+</div>
+<p>上面代码中，obj是一个对象，但是没有Iterator接口，扩展运算符就会报错。这时可以改为使用Array.from（下面快到了）方法将obj转为真正的数组。</p>
+<h5 id="6map-和-set-结构generator-函数">（6）Map 和 Set 结构，Generator 函数</h5>
+<p>扩展运算符内部调用的是数据结构的Iterator 接口，因此只要是具有Iterator 接口的对象，都可以使用扩展运算符，例如map结构。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let map = new Map([
+	[1,'a'],
+	[2,'b'],
+	[3,'c']
+]);
+let arr = [...map.keys()]; //[1, 2, 3]
+</code></pre>
+</div>
+<p>Generator 函数运行后，返回一个遍历器对象，因此也可以使用扩展运算符。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let go = function*(){
+  yield 1;
+  yield 2;
+  yield 3;
+};
+[...go()] // [1, 2, 3])
+</code></pre>
+</div>
+<p>【】上面函数看不懂</p>
+
+<p>如果对没有Iterator 接口的对象使用扩展运算符，将会报错。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>const obj ={
+	name:"tx",
+	age:12
+};
+[...obj]; //报错
+</code></pre>
+</div>
+
+<h3 id="二arrayfrom">二、Array.from()</h3>
+<p>Array.from方法可以将两类对象转为真正的数组：类似数组的对象和可遍历的(iterable)对象(包括ES6 新增的数据结构 Set 和 Map)。</p>
+
+<p>下面是一个类似数组的对象，Array.from可以把他转为真正的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	"0" : 'tx',
+	"1"  :'25',
+	 length:2
+};
+//es5
+let arr1 = [].slice.call(obj); //["tx", "25"]
+//es6
+let arr2 = Array.from(obj);    //["tx", "25"]
+</code></pre>
+</div>
+<p>实际应用中，常见的类似数组的的对象是DOM返回的的NodeList集合，以及函数内部的arguments对象。Array.from()都可以将他们转为真正的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//NodeList集合
+let lis = document.querySelectorAll('li');
+
+Array.from(lis).filter( li =&gt;{
+	if(li.textContent.length &gt; 1){
+		console.log(li);
+	}
+})
+//arguments对象
+function func(){
+	var args = Array.from(arguments);
+}
+</code></pre>
+</div>
+<p>上面代码中，querySelectorAll方法返回的是一个类似数组的对象，可以将这个对象转为数组，再使用filter方法【】。</p>
+
+<p>只要是部署了Iterator 接口的数据结构，Array.from会返回一个一模一样的新数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var arr = Array.from([1,2,3]); //[1, 2, 3]
+</code></pre>
+</div>
+<p>值得注意的是，扩展运算符也可以将某些数据结构转为数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+	let args = [...arguments];
+}
+
+[...document.querySelectorAll('li')]
+</code></pre>
+</div>
+<p>扩展运算符背后调用的的是遍历器接口(Symbal.iterator)，如果一个对象没有部署这个接口，就无法转换。Array.from方法还支持类似数组的的对象。所谓类似数组的对象，本质特征只有一点，即必须有length属性。因此任何有length属性的对象，都可以通过Array.from方法转为数组，但是这种情况扩展运算符是不能转换的</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>var obj = {
+	"name":"tx",
+	"age" :28,
+	length:2
+};
+var arr = Array.from(obj); //[undefined, undefined]
+
+var obj = {
+	"0":"tx",
+	"1" :28,
+	length:2
+};
+var arr = Array.from(obj); //["tx", 28]
+</code></pre>
+</div>
+<p>上面这种情况，扩展运算符就会报错。</p>
+
+<p>对于还没有部署该方法的环境，可以用Array.prototype.slice方法替代。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let toarray = (()=&gt; 
+	Array.from  ? Array.from : obj=&gt; [].slice.call(obj)
+)();
+</code></pre>
+</div>
+<p>Array.from还可以接受第二个参数，作用跟数组的map方法类似。用来对每个元素进行处理，将处理后的值放入返回的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = Array.from([1,2,3], x =&gt; x*x);      //[1, 4, 9]
+let arr2 = Array.from([1,2,3]).map( x=&gt; x*x); //[1, 4, 9]
+</code></pre>
+</div>
+<p>下面的例子是取出一组dom节点的文本内容。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let lis = document.querySelectorAll('li');
+//map()
+let LiTextcontent = Array.prototype.map.call(lis,x =&gt; x.textContent);
+//Array.from()
+let LiTextcontent2 = Array.from(lis,x=&gt;x.textContent);
+</code></pre>
+</div>
+<p>下面的例子将数组中布尔值为false的成员转为0。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = Array.from([1,,2,false,4], x =&gt; x||0); //[1, 0, 2, 0, 4]
+</code></pre>
+</div>
+<p>下面的例子是返回各种数据的类型。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+	return Array.from(arguments,x =&gt; typeof x);
+}
+datatype(1,NaN,'abc');//["number", "number", "string"]
+</code></pre>
+</div>
+<p>如果map函数里面用到了this，还可以传入Array.from的第三个参数，用来绑定this。【】</p>
+
+<p>Array.from可以将各种值转为真正的数组，并且还提供map功能。这实际上意味着，只要有一个原始的数据结构，就可以点对他的值进行处理，然后转成规范的数组结构，进而就可以使用数组上面的方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = Array.from({length:2}, () =&gt; 'tx') // ["tx", "tx"]
+</code></pre>
+</div>
+<p>上面代码中，Array.from的第一个参数指定了第二个参数运行的次数。这种特性可以让Array.from的用法非常灵活。</p>
+
+<p>Array.from的另一个应用是，将字符串转为数组，然后返回字符出的长度。因为他能正确处理各种Unicode 字符，可以避免js将大于\uFFFF的 Unicode 字符，算作两个字符的 bug。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function countSymbols(string) {
+  return Array.from(string).length;
+}
+countSymbols('x\uD83D\uDE80y'); //3 这里可以正确打印x\uD83D\uDE80y的长度。
+</code></pre>
+</div>
+<p>上面的代码证明了用Array.from转换后可以正确打印Unicode字符的长度，上文中用扩展运算符就不可以。</p>
 
 
                 </div>

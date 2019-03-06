@@ -6,20 +6,12 @@
 </head>
 <body>
 <ul>
-	<li></li>
-	<li></li>
-	<li></li>
+	<li>1</li>
+	<li>2</li>
+	<li>士大夫</li>
 </ul>
 </body>
 <script type="text/javascript">
-let arr1 = [1,2];
-let arr2 = [3];
-let arr3 = [4,5];
-
-let arr4 = arr1.concat(arr2,arr3);
-console.log(arr4);
-
-let arr5 = [...arr1,...arr2,...arr3];
-console.log(arr5);
+let arr = Array.from({length:2}, () => "tx") //["tx", "tx"]
 </script>
 </html>
