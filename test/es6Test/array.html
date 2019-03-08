@@ -12,9 +12,19 @@
 </ul>
 </body>
 <script type="text/javascript">
-let arr =  [, ,,];
-for(let i of arr){
-	console.log(1);
-}
+// entries()
+[...[,'a'].entries()]        // [[0,undefined], [1,"a"]]
+
+// keys()
+[...[,'a'].keys()]           // [0,1]
+
+// values()
+[...[,'a'].values()]         // [undefined,"a"]
+
+// find()
+[,'a'].find(x => true)       // undefined
+
+// findIndex()
+[,'a'].findIndex(x => true)  // 0
 </script>
 </html>
