@@ -1,5 +1,5 @@
 ---
-layout: post_last
+layout: post_tec
 title: JavaScript基础整理
 description: 实习公司带我的架构师带给我最大的影响（感谢云哥）:基础很重要，基础很重要，基础很重要。
 category: tec

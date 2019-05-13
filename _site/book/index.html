@@ -1,12 +1,12 @@
-
   <!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="/source/css/index.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
     <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>摆渡先生</title>
@@ -14,522 +14,1684 @@
 </head>
 
   <body>
-   <div class="container">
+   <div class="">
       <header>
-          <svg style="display: none"  version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <filter id="grayscale">
-        <feColorMatrix type="matrix"  id="ie_svg" values="0.3333 0.3333 0.3333 0 0
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0 0 0 1 0"/>
-    </filter>
+          <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
 </svg>
-<div class="header">
-	<div class="poster_img gray">
-	<svg class="box_svg" width="100%" height="100%" >
-		<image  class="img_svg" xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"></image>
-	</svg>	
-	</div>
-	<div class="header_cover">
-		<div class="nav">
-			<ul class="nav_ul">
-				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
-				<li data-subtitle="自留地"><a href="/prose"><i class="fa fa-heart"></i></a></li>
-				<li data-subtitle="书籍"><a href="/book"><i class="fa fa-book" ></i></a></li>
-				<li data-subtitle="微信"><a href="/contact"><i class="fa fa-comments"></i></a></li>
-				<li data-subtitle="夜间模式"><i class="fa fa-moon-o"></i></li>
-			</ul>
-		</div>
-	</div>
-	<div style="display: none;">
-		本站访客数：<span id="busuanzi_value_site_uv"></span>人次
-		本站总访问量：<span id="busuanzi_value_site_pv"></span>次
-		本文总阅读量：<span id="busuanzi_value_page_pv"></span>次
-	</div>
-	<div style="display: none;">
-			<script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=52zqlc4vy2q&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-	</div>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
 </div>
-<div class="bottom_line"></div>
+
       </header>
       <div>
-        <div class="content_book">
-	<ul class="book_list">
-		
-		<li><a class="post-link" href="/book/2018/03/28/shrm.html" data-post-href="/book/2018/03/28/shrm.html"> 
-			   <img class="gray noie" src=" ../source/img/book/shrm.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-28">2018.03.28</div>
-			   		<div class="book_title">山河入梦</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/28/rmth.html" data-post-href="/book/2018/03/28/rmth.html"> 
-			   <img class="gray noie" src=" ../source/img/book/rmth.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-28">2018.03.28</div>
-			   		<div class="book_title">人面桃花</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/28/cjjn.html" data-post-href="/book/2018/03/28/cjjn.html"> 
-			   <img class="gray noie" src=" ../source/img/book/cjjn.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-28">2018.03.28</div>
-			   		<div class="book_title">春尽江南</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/zyzgc.html" data-post-href="/book/2018/03/27/zyzgc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/zyzgc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">自由在高处</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/zxyznh.html" data-post-href="/book/2018/03/27/zxyznh.html"> 
-			   <img class="gray noie" src=" ../source/img/book/zxyznh.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">在细雨中呐喊</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/zhymz.html" data-post-href="/book/2018/03/27/zhymz.html"> 
-			   <img class="gray noie" src=" ../source/img/book/zhymz.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">智慧与魔咒</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/ylsl.html" data-post-href="/book/2018/03/27/ylsl.html"> 
-			   <img class="gray noie" src=" ../source/img/book/ylsl.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">耶路撒冷</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xyxqr.html" data-post-href="/book/2018/03/27/xyxqr.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xyxqr.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">相约星期二</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xyrxdxs.html" data-post-href="/book/2018/03/27/xyrxdxs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xyr.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">嫌疑人x的献身</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xy.html" data-post-href="/book/2018/03/27/xy.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xy.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">相遇</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xghc.html" data-post-href="/book/2018/03/27/xghc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xghc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">乡关何处</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xd.html" data-post-href="/book/2018/03/27/xd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">兄弟</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/xcz.html" data-post-href="/book/2018/03/27/xcz.html"> 
-			   <img class="gray noie" src=" ../source/img/book/xcz.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">新参者</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/wsbbry.html" data-post-href="/book/2018/03/27/wsbbry.html"> 
-			   <img class="gray noie" src=" ../source/img/book/wsbbry.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">往事并不如烟</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/wj.html" data-post-href="/book/2018/03/27/wj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/wj.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">无价</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/whzz.html" data-post-href="/book/2018/03/27/whzz.html"> 
-			   <img class="gray noie" src=" ../source/img/book/whzz.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">乌合之众</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/wcf.html" data-post-href="/book/2018/03/27/wcf.html"> 
-			   <img class="gray noie" src=" ../source/img/book/wcf.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">望春风</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/wc.html" data-post-href="/book/2018/03/27/wc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/wc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">围城</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/tjzdpk.html" data-post-href="/book/2018/03/27/tjzdpk.html"> 
-			   <img class="gray noie" src=" ../source/img/book/tjzdpk.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">投机者的扑克</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/snykzd.html" data-post-href="/book/2018/03/27/snykzd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/snykzd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">送你一颗子弹</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/sndjj.html" data-post-href="/book/2018/03/27/sndjj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/sndjj.jpg  " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">圣女的救济</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/sbdjh.html" data-post-href="/book/2018/03/27/sbdjh.html"> 
-			   <img class="gray noie" src=" ../source/img/book/sbdjh.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">身边的江湖</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/qtsd.html" data-post-href="/book/2018/03/27/qtsd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/qtsd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">青铜时代</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/qtjs.html" data-post-href="/book/2018/03/27/qtjs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/qtjs.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">囚徒健身</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/pfdsj.html" data-post-href="/book/2018/03/27/pfdsj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/pfdsj.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">平凡的世界(三部)</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/nhjsg.html" data-post-href="/book/2018/03/27/nhjsg.html"> 
-			   <img class="gray noie" src=" ../source/img/book/nhjsg.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">你好旧时光</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/mbhrj.html" data-post-href="/book/2018/03/27/mbhrj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/mbhrj.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">漫步华尔街</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/lxbs.html" data-post-href="/book/2018/03/27/lxbs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/lxbs.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">理想不死</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/lfys.html" data-post-href="/book/2018/03/27/lfys.html"> 
-			   <img class="gray noie" src=" ../source/img/book/lfys.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">陆犯焉识</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/kj.html" data-post-href="/book/2018/03/27/kj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/kj.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">看见</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/jbgjs.html" data-post-href="/book/2018/03/27/jbgjs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/jbgjs.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">夹边沟记事</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/hz.html" data-post-href="/book/2018/03/27/hz.html"> 
-			   <img class="gray noie" src=" ../source/img/book/hz.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">活着</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/hmsqdaq.html" data-post-href="/book/2018/03/27/hmsqdaq.html"> 
-			   <img class="gray noie" src=" ../source/img/book/hlsqdaq.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">霍姆时期的爱情</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/hmhd.html" data-post-href="/book/2018/03/27/hmhd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/hmhd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">好么好的</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/hjsd.html" data-post-href="/book/2018/03/27/hjsd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/hjsd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">黄金时代</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/hazdxs.html" data-post-href="/book/2018/03/27/hazdxs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/hazdxs.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">黑暗中的笑声</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/gydjr.html" data-post-href="/book/2018/03/27/gydjr.html"> 
-			   <img class="gray noie" src=" ../source/img/book/gydjr.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">公羊的节日</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/gmmt.html" data-post-href="/book/2018/03/27/gmmt.html"> 
-			   <img class="gray noie" src=" ../source/img/book/gmmt.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">乖摸摸头</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/glldnh.html" data-post-href="/book/2018/03/27/glldnh.html"> 
-			   <img class="gray noie" src=" ../source/img/book/glldnh.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">阁楼里的女孩</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/fh.html" data-post-href="/book/2018/03/27/fh.html"> 
-			   <img class="gray noie" src=" ../source/img/book/fh.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">芳华</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/ey.html" data-post-href="/book/2018/03/27/ey.html"> 
-			   <img class="gray noie" src=" ../source/img/book/ey.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">恶意</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/emtfmmd.html" data-post-href="/book/2018/03/27/emtfmmd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/emtfmmd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">阿弥陀佛么么哒</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/dxgry.html" data-post-href="/book/2018/03/27/dxgry.html"> 
-			   <img class="gray noie" src=" ../source/img/book/dxgry.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">定西孤儿院</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/dwnc.html" data-post-href="/book/2018/03/27/dwnc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/dwnc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">动物农场</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/djtc.html" data-post-href="/book/2018/03/27/djtc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/djtc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">地久天长</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/cswg.html" data-post-href="/book/2018/03/27/cswg.html"> 
-			   <img class="gray noie" src=" ../source/img/book/cswg.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">尘世.挽歌</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/cmddds.html" data-post-href="/book/2018/03/27/cmddds.html"> 
-			   <img class="gray noie" src=" ../source/img/book/cmddds.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">沉默的大多数</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/byx.html" data-post-href="/book/2018/03/27/byx.html"> 
-			   <img class="gray noie" src=" ../source/img/book/byx.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">白夜行</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/bysd.html" data-post-href="/book/2018/03/27/bysd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/bysd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">白银时代</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/bhs.html" data-post-href="/book/2018/03/27/bhs.html"> 
-			   <img class="gray noie" src=" ../source/img/book/bhs.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">白海参</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/bfdkd.html" data-post-href="/book/2018/03/27/bfdkd.html"> 
-			   <img class="gray noie" src=" ../source/img/book/bfdkd.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">北方的空地</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/bc.html" data-post-href="/book/2018/03/27/bc.html"> 
-			   <img class="gray noie" src=" ../source/img/book/bc.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">边城</div>
-			   </div>	  
-		</a></li>
-		
-		<li><a class="post-link" href="/book/2018/03/27/acjxj.html" data-post-href="/book/2018/03/27/acjxj.html"> 
-			   <img class="gray noie" src=" ../source/img/book/acjxj.jpg " filter="url(#grayscale)" />
-			   <div class="book_message">
-			   		<div class="book_date"><time datetime="2018-03-27">2018.03.27</div>
-			   		<div class="book_title">阿城精选集</div>
-			   </div>	  
-		</a></li>
-		
-	</ul>
+        <div class="container" id="container_3">
+      <div class="slide_img" id="slide_img_3"><div class="slide_img_shade"></div></div>
+      <div>
+        <h2 class="main_title"><span>BOOKS</span></h2>
+      </div>
+      <div class="content book_content" id="content_3">
+        <div class="post_list_false" id="post_list_false_3">
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/shrm.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-28"><span class="day">03`28</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 1</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/28/shrm.html" data-post-href="/book/2018/03/28/shrm.html">山河入梦</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">山河入梦</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/28/shrm.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/rmth.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-28"><span class="day">03`28</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 2</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/28/rmth.html" data-post-href="/book/2018/03/28/rmth.html">人面桃花</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">人面桃花</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/28/rmth.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/cjjn.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-28"><span class="day">03`28</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 3</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/28/cjjn.html" data-post-href="/book/2018/03/28/cjjn.html">春尽江南</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">改版博客的时候用到了css3的grayscale（灰度）把图片变灰和反向变彩色，实现的过程中发现奇葩IE和其他浏览器实现上的差异，好一个折腾，记下笔记，忘了回来瞅瞅？</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/28/cjjn.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/zyzgc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 4</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/zyzgc.html" data-post-href="/book/2018/03/27/zyzgc.html">自由在高处</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">自由在高处</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/zyzgc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/zxyznh.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 5</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/zxyznh.html" data-post-href="/book/2018/03/27/zxyznh.html">在细雨中呐喊</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">在细雨中呐喊</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/zxyznh.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/zhymz.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 6</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/zhymz.html" data-post-href="/book/2018/03/27/zhymz.html">智慧与魔咒</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">智慧与魔咒</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/zhymz.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/ylsl.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 7</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/ylsl.html" data-post-href="/book/2018/03/27/ylsl.html">耶路撒冷</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">耶路撒冷</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/ylsl.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xyxqr.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 8</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xyxqr.html" data-post-href="/book/2018/03/27/xyxqr.html">相约星期二</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">相约星期二</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xyxqr.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xyr.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 9</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xyrxdxs.html" data-post-href="/book/2018/03/27/xyrxdxs.html">嫌疑人x的献身</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">嫌疑人x的献身</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xyrxdxs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xy.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 10</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xy.html" data-post-href="/book/2018/03/27/xy.html">相遇</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">相遇</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xy.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xghc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 11</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xghc.html" data-post-href="/book/2018/03/27/xghc.html">乡关何处</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">乡关何处</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xghc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 12</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xd.html" data-post-href="/book/2018/03/27/xd.html">兄弟</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">兄弟</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/xcz.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 13</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/xcz.html" data-post-href="/book/2018/03/27/xcz.html">新参者</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">新参者</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/xcz.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/wsbbry.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 14</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/wsbbry.html" data-post-href="/book/2018/03/27/wsbbry.html">往事并不如烟</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">往事并不如烟</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/wsbbry.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/wj.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 15</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/wj.html" data-post-href="/book/2018/03/27/wj.html">无价</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">无价</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/wj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/whzz.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 16</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/whzz.html" data-post-href="/book/2018/03/27/whzz.html">乌合之众</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">乌合之众</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/whzz.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/wcf.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 17</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/wcf.html" data-post-href="/book/2018/03/27/wcf.html">望春风</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">望春风</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/wcf.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/wc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 18</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/wc.html" data-post-href="/book/2018/03/27/wc.html">围城</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">围城</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/wc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/tjzdpk.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 19</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/tjzdpk.html" data-post-href="/book/2018/03/27/tjzdpk.html">投机者的扑克</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">投机者的扑克</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/tjzdpk.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/snykzd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 20</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/snykzd.html" data-post-href="/book/2018/03/27/snykzd.html">送你一颗子弹</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">送你一颗子弹</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/snykzd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/sndjj.jpg  " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 21</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/sndjj.html" data-post-href="/book/2018/03/27/sndjj.html">圣女的救济</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">圣女的救济</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/sndjj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/sbdjh.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 22</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/sbdjh.html" data-post-href="/book/2018/03/27/sbdjh.html">身边的江湖</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">身边的江湖</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/sbdjh.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/qtsd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 23</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/qtsd.html" data-post-href="/book/2018/03/27/qtsd.html">青铜时代</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">青铜时代</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/qtsd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/qtjs.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 24</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/qtjs.html" data-post-href="/book/2018/03/27/qtjs.html">囚徒健身</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">囚徒健身</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/qtjs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/pfdsj.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 25</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/pfdsj.html" data-post-href="/book/2018/03/27/pfdsj.html">平凡的世界(三部)</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">平凡的世界</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/pfdsj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/nhjsg.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 26</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/nhjsg.html" data-post-href="/book/2018/03/27/nhjsg.html">你好旧时光</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">你好旧时光</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/nhjsg.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/mbhrj.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 27</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/mbhrj.html" data-post-href="/book/2018/03/27/mbhrj.html">漫步华尔街</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">漫步华尔街</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/mbhrj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/lxbs.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 28</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/lxbs.html" data-post-href="/book/2018/03/27/lxbs.html">理想不死</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">理想不死</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/lxbs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/lfys.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 29</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/lfys.html" data-post-href="/book/2018/03/27/lfys.html">陆犯焉识</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">陆犯焉识</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/lfys.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/kj.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 30</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/kj.html" data-post-href="/book/2018/03/27/kj.html">看见</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">看见</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/kj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/jbgjs.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 31</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/jbgjs.html" data-post-href="/book/2018/03/27/jbgjs.html">夹边沟记事</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">夹边沟记事</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/jbgjs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/hz.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 32</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/hz.html" data-post-href="/book/2018/03/27/hz.html">活着</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">活着</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/hz.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/hlsqdaq.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 33</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/hmsqdaq.html" data-post-href="/book/2018/03/27/hmsqdaq.html">霍姆时期的爱情</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">霍姆时期的爱情</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/hmsqdaq.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/hmhd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 34</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/hmhd.html" data-post-href="/book/2018/03/27/hmhd.html">好么好的</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">好么好的</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/hmhd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/hjsd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 35</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/hjsd.html" data-post-href="/book/2018/03/27/hjsd.html">黄金时代</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">黄金时代</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/hjsd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/hazdxs.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 36</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/hazdxs.html" data-post-href="/book/2018/03/27/hazdxs.html">黑暗中的笑声</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">黑暗中的笑声</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/hazdxs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/gydjr.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 37</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/gydjr.html" data-post-href="/book/2018/03/27/gydjr.html">公羊的节日</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">公羊的节日</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/gydjr.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/gmmt.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 38</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/gmmt.html" data-post-href="/book/2018/03/27/gmmt.html">乖摸摸头</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">乖摸摸头</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/gmmt.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/glldnh.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 39</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/glldnh.html" data-post-href="/book/2018/03/27/glldnh.html">阁楼里的女孩</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">阁楼里的女孩</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/glldnh.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/fh.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 40</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/fh.html" data-post-href="/book/2018/03/27/fh.html">芳华</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">芳华</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/fh.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/ey.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 41</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/ey.html" data-post-href="/book/2018/03/27/ey.html">恶意</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">恶意</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/ey.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/emtfmmd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 42</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/emtfmmd.html" data-post-href="/book/2018/03/27/emtfmmd.html">阿弥陀佛么么哒</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">阿弥陀佛么么哒</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/emtfmmd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/dxgry.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 43</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/dxgry.html" data-post-href="/book/2018/03/27/dxgry.html">定西孤儿院</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">定西孤儿院</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/dxgry.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/dwnc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 44</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/dwnc.html" data-post-href="/book/2018/03/27/dwnc.html">动物农场</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">动物农场</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/dwnc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/djtc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 45</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/djtc.html" data-post-href="/book/2018/03/27/djtc.html">地久天长</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">地久天长</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/djtc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/cswg.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 46</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/cswg.html" data-post-href="/book/2018/03/27/cswg.html">尘世.挽歌</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">尘世.挽歌</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/cswg.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/cmddds.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 47</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/cmddds.html" data-post-href="/book/2018/03/27/cmddds.html">沉默的大多数</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">沉默的大多数</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/cmddds.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/byx.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 48</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/byx.html" data-post-href="/book/2018/03/27/byx.html">白夜行</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">白夜行</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/byx.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/bysd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 49</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/bysd.html" data-post-href="/book/2018/03/27/bysd.html">白银时代</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">白银时代</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/bysd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/bhs.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 50</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/bhs.html" data-post-href="/book/2018/03/27/bhs.html">白海参</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">白海参</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/bhs.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/bfdkd.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 51</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/bfdkd.html" data-post-href="/book/2018/03/27/bfdkd.html">北方的空地</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">北方的空地</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/bfdkd.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/bc.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 52</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/bc.html" data-post-href="/book/2018/03/27/bc.html">边城</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">边城</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/bc.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+           <!--  <div class="post_img_box">
+              <img class="gray noie" src=" ../source/img/book/acjxj.jpg " filter="url(#grayscale)">
+              <span class="alpha_img"></span>
+            </div> -->
+            <div class="post_text book_post_text">
+              <div>
+              <div class="post_message book_post_message">
+                <span><time datetime="2018-03-27"><span class="day">03`27</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 53</div> -->
+              <span class="post_title"><a class="post-link book_post_title" href="/book/2018/03/27/acjxj.html" data-post-href="/book/2018/03/27/acjxj.html">阿城精选集</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">阿城精选集</p> -->
+                <!--<p class="yl">作者资料（来源于网络）...</p>-->
+                <!--<p class="ydqw"><a href="/book/2018/03/27/acjxj.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+        </div>
+      </div>
+<div class="btnGroup">
+  <span class="book_prev prev">PREV</span>
+  <span class="book_next next">NEXT</span>
 </div>
- <script type="text/javascript" src="../source/js/jquery.js"></script>
-<script type="text/javascript">
-var config ={
-	interfaces:{
-		booklist:"../source/interface/booklist.json"
-	}
-};
-var str2 =  '<div id="lv-container" class="book_comment" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">'+
-               ' <script type="text/javascript">'+
-                ' (function(d, s) {'+
-                    ' var j, e = d.getElementsByTagName(s)[0];'+
-                     'if (typeof LivereTower === "function") { return; }'+
-                     'j = d.createElement(s);'+
-                     'j.src = "http://cdn-city.livere.com/js/embed.dist.js";'+
-                     'j.async = true;'+
-                     'e.parentNode.insertBefore(j, e);'+
-                 '})(document, "script");'+ '</'+'script>'+
-                '<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>'+
-                '</div>';
-function getBookData(url){
-	$.ajax({
-		type:'get',
-		url:url,
-		success:function(data){
-			if(typeof data == 'string'){
-				data = JSON.parse(data);
-			}
-			console.log(data);
-			var data = data.data;
-			var str = '';
-			for(let i = 0 ;i<data.length;i++){
-				str+='<li>'+'<img src="'+data[i].BOOK_IMG + '" class="gray">'+'</li>';
-			}
-			str+=str2;
-			$('.book_list').html(str);
-		},
-		error:function(){
-			console.log("获取书籍数据失败");
-		}
-	})
-};
-//getBookData(config.interfaces.booklist);
-</script>
+</div>
       </div>
     </div>
   </body>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="../source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="../source/js/tween.js"></script>
+<script type="text/javascript" src="../source/js/animation.js"></script>
+<!-- <script type="text/javascript" src="../source/js/boygirls.js"></script> -->
+<script type="text/javascript" src="../source/js/index.js"></script>
+<script type="text/javascript">
+
 </script>
-  <script type="text/javascript" src="../source/js/jquery.js"></script>
-  <script type="text/javascript" src="../source/js/index.js"></script>
- </html>
+</html>

@@ -1,0 +1,201 @@
+/*  Brand Colours 
+	========================================================================== */
+/*  Dark Colours
+	========================================================================== */
+/*  ==========================================================================
+    Styles
+    ========================================================================== */
+@font-face {
+font-family:"bebas-neue";
+src:url("../fonts/l") format("woff2"),url("../fonts/d.woff") format("woff"),url("../fonts/a") format("opentype");
+font-style:normal;font-weight:400;
+}
+
+.tk-bebas-neue { font-family: "bebas-neue",sans-serif; }	
+	
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background: #1E2D3C;
+  color: #939BA3;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.js-nav--open {
+  visibility: visible;
+}
+
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #F03694;
+}
+
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__logo-link {
+  position: absolute;
+  bottom: 50px;
+  left: calc(50% - 102px);
+  display: block;
+  width: 220px;
+  height: auto;
+  will-change: transition;
+  visibility: hidden;
+}
+
+.main-logo {
+  width: 400px;
+  height: auto;
+}

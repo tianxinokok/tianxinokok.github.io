@@ -1,7 +1,7 @@
 ---
 title: H5-indexedDB数据库的增删改查
 description: 之前没有了解过前端存储，对关系型数据库的了解也只是皮毛中的毛皮，但工作中偶尔会有经理或后端同事问:web能保存数据么？之前都是狠狠的跟人家说：亲~不可哟。了解过indexedDB之后的回答是：亲~，不仅可以存，还能增删改查呦。
-layout: post_last
+layout: post_tec
 category: tec
 imgs: '../source/img/post/indexedDB.png'
 ---

@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="/source/css/index.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
     <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>摆渡先生</title>
@@ -13,46 +14,230 @@
 </head>
 
  <body>
-   <div class="container">
-       <header>
-          <svg style="display: none"  version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <filter id="grayscale">
-        <feColorMatrix type="matrix"  id="ie_svg" values="0.3333 0.3333 0.3333 0 0
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0 0 0 1 0"/>
-    </filter>
+ <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
 </svg>
-<div class="header">
-	<div class="poster_img gray">
-	<svg class="box_svg" width="100%" height="100%" >
-		<image  class="img_svg" xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"></image>
-	</svg>	
-	</div>
-	<div class="header_cover">
-		<div class="nav">
-			<ul class="nav_ul">
-				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
-				<li data-subtitle="自留地"><a href="/prose"><i class="fa fa-heart"></i></a></li>
-				<li data-subtitle="书籍"><a href="/book"><i class="fa fa-book" ></i></a></li>
-				<li data-subtitle="微信"><a href="/contact"><i class="fa fa-comments"></i></a></li>
-				<li data-subtitle="夜间模式"><i class="fa fa-moon-o"></i></li>
-			</ul>
-		</div>
-	</div>
-	<div style="display: none;">
-		本站访客数：<span id="busuanzi_value_site_uv"></span>人次
-		本站总访问量：<span id="busuanzi_value_site_pv"></span>次
-		本文总阅读量：<span id="busuanzi_value_page_pv"></span>次
-	</div>
-	<div style="display: none;">
-			<script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=52zqlc4vy2q&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-	</div>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
 </div>
-<div class="bottom_line"></div>
-      </header> 
-       <div class="content_box">
-          <div class="content" >
+
+   <div class="content_container">
+      <div class="common_box">
+        <div class="slide_img" id="slide_img_3"><div class="slide_img_shade"></div></div>
+        <div class="title_box">
+          <h2 class="main_title"><span>BOOKS</span></h2>
+        </div> 
+      </div>
+      <div class="content_box">
+          <div class="content_content" >
             <div class="post_content">
                 <div class="content_title">
                   <h1>北方的空地</h1><span id="busuanzi_container_page_pv">
@@ -67,33 +252,30 @@
 <p>读完很久，感受只剩碎片，看能回忆起啥，再来补上。</p>
 
 
-                <div class="comments">查看评论</div>
-               <!-- 来必力City版安装代码 -->
-                <div id="lv-container" data-id="city" data-uid="MTAyMC80MDQ4OS8xNzAxNg==">
-                <script type="text/javascript">
-                 (function(d, s) {
-                     var j, e = d.getElementsByTagName(s)[0];
-
-                     if (typeof LivereTower === 'function') { return; }
-
-                     j = d.createElement(s);
-                     j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                     j.async = true;
-
-                     e.parentNode.insertBefore(j, e);
-
-                 })(document, 'script');
-                </script>
-                <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-                </div>
-                <!-- City版安装代码已完成 -->
+   
             </div>
+            
           </div>
+          
+                <div class="next_page_box">
+                  <div class="read_next">阅读下一篇文章</div>
+                  <div class="next_page">
+                    <a class="" href="/book/2018/03/27/bc.html" data-post-href="/book/2018/03/27/bc.html">
+                      <h4>边城</h4>
+                      <div></div>
+                    </a>
+                  </div>
+                </div>
+          
        </div>
     </div>
   </body>
-  <script src="/source/js/highlight.min.js"></script>
-  <script type="text/javascript" src="/source/js/jquery.js"></script>
+<script src="/source/js/highlight.min.js"></script>
+<script type="text/javascript" src="/source/js/jquery.js"></script>
+<script type="text/javascript" src="/source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="/source/js/tween.js"></script>
+<script type="text/javascript" src="/source/js/animation.js"></script>
   <script type="text/javascript" src="/source/js/index.js"></script>
   <script>
     hljs.initHighlightingOnLoad();

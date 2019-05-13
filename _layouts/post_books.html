@@ -1,0 +1,54 @@
+{% include _partial/head.html %}
+ <body>
+ {% include _partial/header.html %}
+   <div class="content_container">
+      <div class="common_box">
+        <div class="slide_img" id="slide_img_3"><div class="slide_img_shade"></div></div>
+        <div class="title_box">
+          <h2 class="main_title"><span>BOOKS</span></h2>
+        </div> 
+      </div>
+      <div class="content_box">
+          <div class="content_content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>{{page.title}}</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y年%m月%d日" }}</time></span>
+                </div>
+                  {{ content }}
+   
+            </div>
+            
+          </div>
+          {% if page.previous %}
+                <div class="next_page_box">
+                  <div class="read_next">阅读下一篇文章</div>
+                  <div class="next_page">
+                    <a class="" href="{{ site.baseurl }}{{ page.previous.url }}" data-post-href="{{ site.baseurl }}{{ page.previous.url }}">
+                      <h4>{% if page.previous.title %}{{ page.previous.title }}{% else %}(no title){% endif %}</h4>
+                      <div>{{page.categories.tec}}{{ page.previous.categorypage}}</div>
+                    </a>
+                  </div>
+                </div>
+          {% endif %}
+       </div>
+    </div>
+  </body>
+<script src="/source/js/highlight.min.js"></script>
+<script type="text/javascript" src="/source/js/jquery.js"></script>
+<script type="text/javascript" src="/source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="/source/js/tween.js"></script>
+<script type="text/javascript" src="/source/js/animation.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
+    })
+  </script>
+</html>

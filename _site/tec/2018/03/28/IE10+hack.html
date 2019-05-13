@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摆渡先生</title>
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+ <body>
+ <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
+</svg>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
+</div>
+
+   <div class="content_container">
+      <div class="common_box">
+        <div class="slide_img" id="slide_img_1"><div class="slide_img_shade"></div></div>
+        <div class="title_box">
+          <h2 class="main_title"><span>WORKS</span></h2>
+        </div> 
+      </div>
+      <div class="content_box">
+          <div class="content_content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>grayscale(灰度)效果兼容IE10+</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime=""></time></span>
+                </div>
+                  <h3 id="一开始">一、开始</h3>
+<p>做本博客的封面， 有一个图片灰度（grayscale）渐变的效果，实现的方式是用W3C的filter（滤镜），filter在IE4~ IE10(不包括IE10)中称为私有滤镜，从IE10开始抛弃了私有滤镜的支持，但是还是没有提供W3C标准下的filter支持，so，IE10+的Hack问题也就随着带出来了，先记下W3c下的filter笔记，再说IE10+的区分。</p>
+
+<h3 id="二上代码">二、上代码</h3>
+<p>css</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.gray {
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;                   /* IE 6-9 */              /*没测试*/
+    filter: url(blur.svg#grayscale) /*低版本火狐*/
+}
+</code></pre>
+</div>
+<p>配合transition就能实现从灰色到彩色的过渡效果啦。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.gray {
+     -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+	
+    transition:filter 3s;
+    -moz-transition:filter 3s;
+    -webkit-transition:filter 3s;
+    -o-transition:filter 3s;
+}
+.gray:hover {
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    filter: grayscale(0);
+}
+</code></pre>
+</div>
+<p>碰我一下试试</p>
+<style>
+.gray1 {
+	width:300px;
+	height:200px;
+	background: url(/source/img/dog/dog1.jpg);
+	background-size: cover;
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;
+	transition:filter 3s;
+	-moz-transition:filter 3s;
+	-webkit-transition:filter 3s;
+	-o-transition:filter 3s;
+
+}
+.gray1:hover{
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    filter: grayscale(0);
+    filter: gray;            
+}
+</style>
+
+<div class="gray1"></div>
+<p><br /></p>
+<h3 id="三用svg实现ie10的兼容">三、用svg实现IE10+的兼容</h3>
+<p>按理说IE10+也是支持svg的滤镜的，所以filter(url)这种兼容Firefox4+的写法应该也行，可是并不可以，貌似是因为IE不支持css的这种filter(url)写法。</p>
+
+<p>准备一段灰度的svg代码是必须的，可内嵌可直接写到html里，既然filter(url)不支持 ，那就直接把图片标签直接写到svg里。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;svg version="1.1" xmlns="http://www.w3.org/2000/svg"&gt;
+    &lt;filter id="grayscale"&gt;
+        &lt;feColorMatrix type="matrix" values="0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0"/&gt;
+    &lt;/filter&gt;
+&lt;/svg&gt;
+</code></pre>
+</div>
+
+<p>再把图片嵌入到svg里id（grayscale）对应上。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;svg  width="100%" height="100%" &gt;
+   &lt;image  xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"&gt;&lt;/image&gt;
+&lt;/svg&gt;	
+</code></pre>
+</div>
+
+<p>这里做的时候发现IE10+确实图片变灰了，but，图片在容器内的尺寸不好控制（默认图片会保持长宽比例）,我要的效果是充满容器，也就是background-size:cover;效果。又一顿搜搜搜 ，preserveAspectRatio这个东西就被搜出来了，preserveAspectRatio=”xMinYMin slice” 也就实现了cover的效果。</p>
+
+<p>用这种方法实现的一个不完美就是不能像chome一样用transition实现平滑的过渡效果，把灰色变彩色还是可以的，就是瞬间过渡有点愣， 借助js改变svg中feColorMatrix标签的value属性就可以了。</p>
+
+<h3 id="四filter还能实现图片的什么效果">四、filter还能实现图片的什么效果？</h3>
+<p>小手一搜</p>
+
+<p>none：默认值 没效果</p>
+
+<p>blur()：高斯模糊</p>
+
+<p>brightness() ：应该是photoshop里的曲线，给图片补光，让图片看起来更亮或者更暗</p>
+
+<p>contrast() ：对比度</p>
+
+<p>drop-shadow()：阴影（看着眼熟）</p>
+
+<p>grayscale() ：灰度（好像刚说完）</p>
+
+<p>hue-rotate()：给图像应用色相旋转（what？）</p>
+
+<p>invert()：反转输入图像（what ? +1）</p>
+
+<p>opacity()：透明度</p>
+
+<p>saturate()：饱和度</p>
+
+<p>sepia()：将图片转为深褐色</p>
+
+<p>url()：接受一个xml文件，也就是svg的实现方法</p>
+
+<p><a href="/test/filter/filter.html" target="_blank">其他filter效果demo</a></p>
+
+<h3 id="五其他方法">五、其他方法</h3>
+<p>网上有个grayscale.js的插件，原理是用的canvas的getImageData，对每个像素点转化，对于小图片这个插件还挺给力的，兼容性完美，博客封面的图片这种大图片用这个自然就有点慢，所有就放弃了。</p>
+
+
+   
+            </div>
+            
+          </div>
+          
+                <div class="next_page_box">
+                  <div class="read_next">阅读下一篇文章</div>
+                  <div class="next_page">
+                    <a class="" href="/book/2018/03/28/shrm.html" data-post-href="/book/2018/03/28/shrm.html">
+                      <h4>山河入梦</h4>
+                      <div></div>
+                    </a>
+                  </div>
+                </div>
+          
+       </div>
+    </div>
+  </body>
+<script src="/source/js/highlight.min.js"></script>
+<script type="text/javascript" src="/source/js/jquery.js"></script>
+<script type="text/javascript" src="/source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="/source/js/tween.js"></script>
+<script type="text/javascript" src="/source/js/animation.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
+    })
+  </script>
+</html>

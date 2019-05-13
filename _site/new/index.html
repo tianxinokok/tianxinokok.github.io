@@ -1,0 +1,288 @@
+  <!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摆渡先生</title>
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+  <body>
+   <div class="">
+      <header>
+          <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
+</svg>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
+</div>
+
+      </header>
+      <div>
+        <div class="container" id="container_2">
+       <div class="slide_img" id="slide_img_2"></div>
+      <div>
+        <h2 class="main_title"><span>NEWS</span></h2>
+      </div>
+      <div class="content prose_content" id="content_2">
+        <div class="post_list_false" id="post_list_false_2">
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-08-30"><span class="day">08`30</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 1</div> -->
+              <span class="post_title"><a class="post-link" href="/prose/2018/08/30/%E8%AF%BA%E5%9F%BA%E4%BA%9A%E7%9A%84%E5%BF%A0%E5%AE%9E%E7%B2%89%E4%B8%9D.html" data-post-href="/prose/2018/08/30/%E8%AF%BA%E5%9F%BA%E4%BA%9A%E7%9A%84%E5%BF%A0%E5%AE%9E%E7%B2%89%E4%B8%9D.html">诺基亚的忠实粉丝</a></span>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">选择诺基亚是选择一种生活方式。</p> -->
+                <!--<p class="yl">我对诺基亚小黑屏这种单纯的喜爱是有一个很长的观察周期的，最早用黑屏诺基是高二的时候，应该是大屏手机刚刚流行，那时候有一个苹果手机是身份的象征，我这等屌丝用的是摩托罗拉V8，大概四五百块钱，既经济实惠又能装逼。突然有一天我的V8歇菜了，我高中室友张帆那会也是个紧跟潮流的小伙子，大屏手机，侧滑，翻盖好像都有，他闲置的一个诺基亚1280就给我应急了，这一用就用到了大学毕业。...</p>-->
+                <!--<p class="ydqw"><a href="/prose/2018/08/30/%E8%AF%BA%E5%9F%BA%E4%BA%9A%E7%9A%84%E5%BF%A0%E5%AE%9E%E7%B2%89%E4%B8%9D.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+        </div>
+      </div>
+<div class="btnGroup">
+  <span class="prose_prev prev">PREV</span>
+  <span class="prose_next next">NEXT</span>
+</div>
+</div>
+      </div>
+    </div>
+  </body>
+<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="../source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="../source/js/tween.js"></script>
+<script type="text/javascript" src="../source/js/animation.js"></script>
+<!-- <script type="text/javascript" src="../source/js/boygirls.js"></script> -->
+<script type="text/javascript" src="../source/js/index.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

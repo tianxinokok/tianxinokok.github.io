@@ -1,12 +1,12 @@
-
   <!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="UTF-8">
     <link rel="stylesheet" href="/source/css/index.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
     <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>摆渡先生</title>
@@ -14,223 +14,680 @@
 </head>
 
   <body>
-   <div class="container">
+   <div class="">
       <header>
-          <svg style="display: none"  version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <filter id="grayscale">
-        <feColorMatrix type="matrix"  id="ie_svg" values="0.3333 0.3333 0.3333 0 0
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0.3333 0.3333 0.3333 0 0 
-                                             0 0 0 1 0"/>
-    </filter>
+          <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
 </svg>
-<div class="header">
-	<div class="poster_img gray">
-	<svg class="box_svg" width="100%" height="100%" >
-		<image  class="img_svg" xlink:href="/source/img/index_left.jpg" x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" filter="url('#grayscale')"></image>
-	</svg>	
-	</div>
-	<div class="header_cover">
-		<div class="nav">
-			<ul class="nav_ul">
-				<li data-subtitle="首页"><a href="/"><i class="fa fa-home"></i></a></li>
-				<li data-subtitle="自留地"><a href="/prose"><i class="fa fa-heart"></i></a></li>
-				<li data-subtitle="书籍"><a href="/book"><i class="fa fa-book" ></i></a></li>
-				<li data-subtitle="微信"><a href="/contact"><i class="fa fa-comments"></i></a></li>
-				<li data-subtitle="夜间模式"><i class="fa fa-moon-o"></i></li>
-			</ul>
-		</div>
-	</div>
-	<div style="display: none;">
-		本站访客数：<span id="busuanzi_value_site_uv"></span>人次
-		本站总访问量：<span id="busuanzi_value_site_pv"></span>次
-		本文总阅读量：<span id="busuanzi_value_page_pv"></span>次
-	</div>
-	<div style="display: none;">
-			<script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=52zqlc4vy2q&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
-	</div>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
 </div>
-<div class="bottom_line"></div>
+
       </header>
       <div>
-        <div class="content">
-	<ul class="post_list">
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2018/12/02/ES6%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html" data-post-href="/tec/2018/12/02/ES6%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">ES6基础整理</a></h2>
-				<div class="post_message">
-					<span><time datetime="2018-12-02"><span class="year">2018.12</span>
-					<span class="day">02
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">要学习angular ，先把阮一峰大叔的es6过一遍。</p>
-			      <!--<p class="yl">一、let命令基本用法...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2018/12/02/ES6%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/basic.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+        <div class="container slide_current" id="container_1">
+      <div class="slide_img" id="slide_img_1"><div class="slide_img_shade"></div></div>
+      <div class="title_box">
+        <h2 class="main_title"><span>WORKS</span></h2>
+      </div>
+      <div class="content work_content" id="content_1">
+        <div class="post_list_false" id="post_list_false_1">
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-24"><span class="day">12`24</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 1</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/24/%E6%95%B0%E7%BB%84%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/tec/2018/12/24/%E6%95%B0%E7%BB%84%E7%9A%84%E6%89%A9%E5%B1%95.html">ES6基础-数组的扩展</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html" data-post-href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html">H5-indexedDB数据库的增删改查</a></h2>
-				<div class="post_message">
-					<span><time datetime="2018-04-20"><span class="year">2018.04</span>
-					<span class="day">20
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">之前没有了解过前端存储，对关系型数据库的了解也只是皮毛中的毛皮，但工作中偶尔会有经理或后端同事问:web能保存数据么？之前都是狠狠的跟人家说：亲~不可哟。了解过indexedDB之后的回答是：亲~，不仅可以存，还能增删改查呦。</p>
-			      <!--<p class="yl">demo先放着：...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/indexedDB.png " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、扩展运算符...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/24/%E6%95%B0%E7%BB%84%E7%9A%84%E6%89%A9%E5%B1%95.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-23"><span class="day">12`23</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 2</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/23/%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/tec/2018/12/23/%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A9%E5%B1%95.html">ES6基础-函数的扩展</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2018/03/28/IE10+hack-%E5%89%AF%E6%9C%AC.html" data-post-href="/tec/2018/03/28/IE10+hack-%E5%89%AF%E6%9C%AC.html">grayscale(灰度)效果兼容IE10+</a></h2>
-				<div class="post_message">
-					<span><time datetime="2018-03-28"><span class="year">2018.03</span>
-					<span class="day">28
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">改版博客的时候用到了css3的grayscale（灰度）把图片变灰和反向变彩色，实现的过程中发现奇葩IE和其他浏览器实现上的差异，好一个折腾，记下笔记，忘了回来瞅瞅？</p>
-			      <!--<p class="yl">一、开始...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2018/03/28/IE10+hack-%E5%89%AF%E6%9C%AC.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/dog1.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、函数参数的默认值...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/23/%E5%87%BD%E6%95%B0%E7%9A%84%E6%89%A9%E5%B1%95.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-22"><span class="day">12`22</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 3</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/22/%E6%AD%A3%E5%88%99%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/tec/2018/12/22/%E6%AD%A3%E5%88%99%E7%9A%84%E6%89%A9%E5%B1%95.html">ES6基础-正则的扩展</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html" data-post-href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html">可以伸缩的时间轴</a></h2>
-				<div class="post_message">
-					<span><time datetime="2017-08-25"><span class="year">2017.08</span>
-					<span class="day">25
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">一个好看的伸缩时间轴，简单实用。</p>
-			      <!--<p class="yl">demo先放着：时间轴demo...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/sjz.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、RegExp构造函数...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/22/%E6%AD%A3%E5%88%99%E7%9A%84%E6%89%A9%E5%B1%95.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-22"><span class="day">12`22</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 4</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/22/%E6%95%B0%E5%80%BC%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/tec/2018/12/22/%E6%95%B0%E5%80%BC%E7%9A%84%E6%89%A9%E5%B1%95.html">ES6基础-数值的扩展</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html" data-post-href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html">canvas满天繁星</a></h2>
-				<div class="post_message">
-					<span><time datetime="2017-07-31"><span class="year">2017.07</span>
-					<span class="day">31
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">canvas作为一个html5中一个非常实用的动画属性，已经成为前端开发人员必须熟悉和掌握的技能。</p>
-			      <!--<p class="yl">demo先放着：漫天繁星...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/mtfx.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、二进制和八进制表示法...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/22/%E6%95%B0%E5%80%BC%E7%9A%84%E6%89%A9%E5%B1%95.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-21"><span class="day">12`21</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 5</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/21/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/tec/2018/12/21/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html">ES6基础-字符串的扩展</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html" data-post-href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">支付宝支付接口对接的那些事</a></h2>
-				<div class="post_message">
-					<span><time datetime="2016-10-10"><span class="year">2016.10</span>
-					<span class="day">10
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">教你如何在不懂任何后台语言的情况下接入支付功能</p>
-			      <!--<p class="yl">准备工作...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/zfb.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/21/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-12-20"><span class="day">12`20</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 6</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/12/20/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC.html" data-post-href="/tec/2018/12/20/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC.html">ES6基础-变量的解构赋值</a></span>
 
-		
-		<li>
-			<div class="post_text">
-				<div class="post_title">
-				<h2><a class="post-link" href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html" data-post-href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">JavaScript基础整理</a></h2>
-				<div class="post_message">
-					<span><time datetime="2016-04-18"><span class="year">2016.04</span>
-					<span class="day">18
-					</span>
-					</time></span>
-				</div>
-				</div>
-			    <div class="post-excerpt" itemprop="description">
-			    	<p class="yl">实习公司带我的架构师带给我最大的影响（感谢云哥）:基础很重要，基础很重要，基础很重要。</p>
-			      <!--<p class="yl">一、JavaScript基础小练习。...</p>-->
-			      <!--<p class="ydqw"><a href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">阅读全文...</a></p>-->
-			    </div>
-			</div>
-		    <div class="post_img">
-			   <img class="gray noie" src=" ../source/img/post/basic.jpg " filter="url(#grayscale)">
-			   <span class="alpha_img"></span>
-		    </div>
-		</li>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，ES6先撸一撸。</p> -->
+                <!--<p class="yl">一、数组的解构赋值...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/12/20/%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-11-15"><span class="day">11`15</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 7</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/11/15/let%E5%92%8Cconst.html" data-post-href="/tec/2018/11/15/let%E5%92%8Cconst.html">ES6基础-let和const</a></span>
 
-		
-	</ul>
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">要学习angular ，先把阮一峰大叔的es6过一遍。</p> -->
+                <!--<p class="yl">一、let命令基本用法...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/11/15/let%E5%92%8Cconst.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-04-20"><span class="day">04`20</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 8</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html" data-post-href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html">H5-indexedDB数据库的增删改查</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">之前没有了解过前端存储，对关系型数据库的了解也只是皮毛中的毛皮，但工作中偶尔会有经理或后端同事问:web能保存数据么？之前都是狠狠的跟人家说：亲~不可哟。了解过indexedDB之后的回答是：亲~，不仅可以存，还能增删改查呦。</p> -->
+                <!--<p class="yl">demo先放着：...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/04/20/H5-indexedDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2018-03-28"><span class="day">03`28</span><br>
+                <span class="year">2018</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 9</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2018/03/28/IE10+hack.html" data-post-href="/tec/2018/03/28/IE10+hack.html">grayscale(灰度)效果兼容IE10+</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">改版博客的时候用到了css3的grayscale（灰度）把图片变灰和反向变彩色，实现的过程中发现奇葩IE和其他浏览器实现上的差异，好一个折腾，记下笔记，忘了回来瞅瞅？</p> -->
+                <!--<p class="yl">一、开始...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2018/03/28/IE10+hack.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2017-08-25"><span class="day">08`25</span><br>
+                <span class="year">2017</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 10</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html" data-post-href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html">可以伸缩的时间轴</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">一个好看的伸缩时间轴，简单实用。</p> -->
+                <!--<p class="yl">demo先放着：时间轴demo...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2017/08/25/%E5%8F%AF%E4%BB%A5%E4%BC%B8%E7%BC%A9%E7%9A%84%E6%97%B6%E9%97%B4%E8%BD%B4.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2017-07-31"><span class="day">07`31</span><br>
+                <span class="year">2017</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 11</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html" data-post-href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html">canvas满天繁星</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">canvas作为一个html5中一个非常实用的动画属性，已经成为前端开发人员必须熟悉和掌握的技能。</p> -->
+                <!--<p class="yl">demo先放着：漫天繁星...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2017/07/31/canvas%E6%BB%A1%E5%A4%A9%E7%B9%81%E6%98%9F.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2016-10-10"><span class="day">10`10</span><br>
+                <span class="year">2016</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 12</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html" data-post-href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">支付宝支付接口对接的那些事</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">教你如何在不懂任何后台语言的情况下接入支付功能</p> -->
+                <!--<p class="yl">准备工作...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2016/10/10/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%AF%B9%E6%8E%A5.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div class="post_text">
+              <div>
+              <div class="post_message">
+                <span><time datetime="2016-04-18"><span class="day">04`18</span><br>
+                <span class="year">2016</span>
+                </time></span>
+              </div>
+             <!--  <div style="color: #000"> 13</div> -->
+              <span class="post_title"><a class="post-link" href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html" data-post-href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">JavaScript基础整理</a></span>
+
+              </div>
+              <div>
+                <i class="more_icon fa fa-plus" aria-hidden="true"></i>
+              </div>
+              <div class="post-excerpt" itemprop="description">
+                <!-- <p class="yl">实习公司带我的架构师带给我最大的影响（感谢云哥）:基础很重要，基础很重要，基础很重要。</p> -->
+                <!--<p class="yl">一、JavaScript基础小练习。...</p>-->
+                <!--<p class="ydqw"><a href="/tec/2016/04/18/Javascript%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86.html">阅读全文...</a></p>-->
+              </div>
+            </div>
+          </li>
+          
+        </div>
+      </div>
+<div>
+<!-- svg_font开始 -->
+<svg width="700" height="100" id="demo" class="svg_font" viewBox="0 0 700 200">
+<rect id="bgBase" width="700" height="100" fill="none" />
+<path id="a1" d="M47,89c0,0,1-4,2-12s-2-9-2-9s7,8,9,8s4-2,8-5s5-1,5-1s-1,16-2,19s-1,3-1,3" fill="none"/>
+<path id="a2" d="M74,73c0,0-2,4,2,7s3,3,3,3s1-1,3-3s2-7,2-7s1,13,0,19s-4,8-5,8" fill="none"/>
+<path id="a3" d="M112,70c0,0,1-3,2-2s1,1,1,1" fill="none"/>
+<path id="a4" d="M115,76c0,0,1,6,1,10s-2,11-2,12s-5,4-7-2" fill="none"/>
+<path id="a5" d="M127,75c0,0-4,4-5,5s-1,9,5,8s8-2,10-5s0-10-5-9S127,75,127,75z" fill="none"/>
+<path id="a6" d="M143,63c0,0,2,3,2,8s1,4,1,9s-1,6,0,8s0,3,0,3" fill="none"/>
+<path id="a7" d="M147,81c0,0,2-4,5-3s8,4,2,7s-7,3-7,3" fill="none"/>
+<path id="a8" d="M179,67c0,0,4,4,5,3" fill="none"/>
+<path id="a9" d="M180,77c0,0,1,0,1,4s0,7,0,8s0,2,0,2" fill="none"/>
+<path id="a10" d="M201,75c0,0-3-3-6-2s-8-1,1,7s5,10,3,10s-13,2-10-1s3-3,3-3" fill="none" />
+<path id="a11" d="M224,72c0,0-1-1,0,3s1,5,1,7s1,16,4,5s4-10,3-12s0,6,1,9s4,4,7-1s4-5,0-10" fill="none"/>
+<path id="a12" d="M246,84c0,0,6,2,10-1s6-3,6-4s0-5-6-4s-8,0-8,3s-2,8,4,9s9,1,11-1" fill="none"/>
+<path id="a13" d="M267,63c0,0,4,14,3,21s0,7,0,7" fill="none"/>
+<path id="a14" d="M271,80c0,0,5-3,7-2s4,2,3,4s-3,3-5,4s-6,2-6,2" fill="none"/>
+<path id="a15" d="M313,74c0,0-1-3-4-1s-5,4-6,7s-2,3,0,6s3,3,6,2s6-6,8-8s1-7,1-10s-2-4-2-6s-2,23-1,27s0,3,0,3" fill="none"/>
+<path id="a16" d="M323,84c0,0,11,0,13-3s2,0,2-2s-3-5-7-4s-5,1-7,4s6,11,11,9s5-2,5-2" fill="none"/>
+<path id="a17" d="M343,74c0,0,8,5,9,11s1,8,1,8s1-7,3-9s5-7,6-9s0-4,0-4" fill="none"/>
+<path id="a18" d="M366,84c0,0,8,1,10-1s5-2,6-5s-8-5-9-4s-7,3-5,7s12,11,15,5" fill="none"/>
+<path id="a19" d="M393,63c0,0-2,1-3,6s-1,6-1,9s0,5,1,8s1,5,3,5s3-2,4-3s1-1,1-1" fill="none"/>
+<path id="a20" d="M409,75c0,0-4,2-5,4s-3,3,0,6s2,4,6,3s6-2,8-5s4-4,1-7S409,75,409,75z" fill="none"/>
+<path id="a21" d="M432,76c0,0,0,2,0,8s-3,17-3,18s0,2,0,2" fill="none"/>
+<path id="a22" d="M425,77c0,0,6-2,11-2s6,0,6,0s2,1-2,5s-7,6-7,6" fill="none"/>
+<path id="a23" d="M446,75c0,0,2,2,3,6s2,4,2,7s0,2,0,2s4-13,6-15s3-1,3-1s1,3,1,8s0,8,0,8s3-15,5-16s4,3,4,6s1,9,1,10" fill="none"/>
+<path id="a24" d="M475,84c0,0,8,0,11-2s4-3,4-3s1-3-3-4s-6,0-8,2s-7,7,2,10s9,0,11-1" fill="none"/>
+<path id="a25" d="M496,73c0,0,5,3,5,9s0,6,0,6s1-7,3-10s6-9,6,1s0,12,0,12" fill="none"/>
+<path id="a26" d="M514,73c0,0,6,3,11,1s6-3,5-4" fill="none"/>
+<path id="a27" d="M521,60c0,0,2,5,2,9s-1,11-1,16s1,9,2,3" fill="none"/>
+<path id="a28" d="M539,95c2,2,2,0,2,0l-2-1V95z" fill="none"/>
+<path id="a29" d="M551,69c0,0,23-1,24-3" fill="none"/>
+<path id="a30" d="M561,66c0,0,2,6,2,10s-1,10-1,11s-1,3-1,4" fill="none"/>
+<path id="a31" d="M579,63c0,0-1,12,0,18s2,8,2,8" fill="none"/>
+<path id="a32" d="M580,81c0,0,4-8,6-6s2,8,2,10s0,3,0,3" fill="none"/>
+<path id="a33" d="M594,68c0,0,3,2,4,2" fill="none"/>
+<path id="a34" d="M595,77c0,0,1,3,1,4s-1,6,0,8s0,2,0,2" fill="none"/>
+<path id="a35" d="M615,76c0,0,0-4-4-3s-7,0-1,6s7,9,7,9s-2,4-8,3s-5,0-5-2s2-2,2-2" fill="none"/>
+<path id="a36" d="M639,68c0,0,3,2,4,2" fill="none"/>
+<path id="a37" d="M640,77c0,0,1-1,1,3s0,9,0,10" fill="none"/>
+<path id="a38" d="M660,75c0,0-1-3-5-2s-6,0-3,3s6,5,8,8s4,5-1,6s-13,1-10-1s3-2,3-2" fill="none"/>
+<path id="a39" d="M682,75c0,0,4,5,5,10s1,5,1,5s-1-6,2-10s3-6,5-6s2,3,2,7s0,6,0,7s0,2,0,2s3-11,4-15s2-2,4,1s3,8,3,11s0,4,0,4"
+   fill="none"/>
+<path id="a40" d="M713,73c0,0,0,5,1,7s2,4,5,1s5-7,4-8s0,6,0,12s0,12-2,14s-5,1-5,1" fill="none"/>
+<path id="a41" d="M746,73c0,0,0-1,1,2s2,7,2,10s0,8,1,8s3-8,4-11s0-6,0-7s1,13,5,12s4-3,5-6s2-7-1-8" fill="none"/>
+<path id="a42" d="M776,75c0,0-5,2-5,5s-2,7,4,8s10-3,11-5s2-8-3-9S776,75,776,75z" fill="none"/>
+<path id="a43" d="M792,73c0,0,7,4,6,11s-1,7-1,7s3-13,6-15s4-3,4-3" fill="none"/>
+<path id="a44" d="M813,58c0,0,0,4,0,9s1,7,1,9s-1,11,0,12s1,1,1,1" fill="none"/>
+<path id="a45" d="M815,77c0,0,5-4,7-3s3,3-2,6s-5,2-5,2v-4c0,0,7,8,9,11s3,2,3,2" fill="none"/>
+<path id="a46" d="M846,72c0,0,5,4,6,8s0,8,0,8s2-10,4-12s5-3,5,3s0,11,0,11l-1,1" fill="none"/>
+<path id="a47" d="M873,75c0,0-8,4-7,7s1,7,7,6s8-3,10-6s-4-9-7-8S873,75,873,75z" fill="none"/>
+<path id="a48" d="M887,74c0,0-1,2,5,1s11-2,12-3s0-3-1-3" fill="none"/>
+<path id="a49" d="M894,60c0,0,2,1,2,5s0,22,0,22s0,11,2,0" fill="none"/>
+<path id="a50" d="M909,84c0,0,8,0,12-2s3-2,3-4s-4-5-7-4s-13,8-2,13s11-1,11-1" fill="none"/>
+<path id="a51" d="M933,95c0,0-1,1,1,1s3,0,2-1s-2-1-2-1L933,95z" fill="none"/>
+</svg>
 </div>
+<!-- svg容器结束 -->
+<div class="btnGroup">
+  <span class="work_prev prev">PREV</span>
+  <span class="work_next next">NEXT</span>
+</div>
+</div>
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="../source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="../source/js/tween.js"></script>
+<script type="text/javascript" src="../source/js/animation.js"></script>
+<script type="text/javascript">
+function abc(){
+console.log('动画开始');
+var demo = document.getElementById("demo");
+var tl = new TimelineMax();
+var ease = Linear.easeNone;
+TweenMax.set(demo, {autoAlpha:1});
+TweenMax.set("path", {drawSVG:0, stroke:"#000"});
+
+tl.to("#a1", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a2", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a3", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a4", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a5", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a6", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a7", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a8", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a9", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a10", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a11", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a12", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a13", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a14", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a15", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a16", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a17", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a18", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a19", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a20", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a21", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a22", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a23", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a24", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a25", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a26", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a27", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a28", 0.25, {drawSVG:true, ease:ease});
+
+tl.to("#a29", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a30", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a31", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a32", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a33", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a34", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a35", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a36", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a37", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a38", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a39", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a40", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a41", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a42", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a43", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a44", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a45", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a46", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a47", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a48", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a49", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a50", 0.25, {drawSVG:true, ease:ease});
+tl.to("#a51", 0.25, {drawSVG:true, ease:ease});
+}
+abc();
+</script>
       </div>
     </div>
   </body>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+<script type="text/javascript" src="../source/js/jquery.js"></script>
+<script type="text/javascript" src="../source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="../source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="../source/js/tween.js"></script>
+<script type="text/javascript" src="../source/js/animation.js"></script>
+<!-- <script type="text/javascript" src="../source/js/boygirls.js"></script> -->
+<script type="text/javascript" src="../source/js/index.js"></script>
+<script type="text/javascript">
+
 </script>
-  <script type="text/javascript" src="../source/js/jquery.js"></script>
-  <script type="text/javascript" src="../source/js/index.js"></script>
- </html>
+</html>
