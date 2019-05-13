@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摆渡先生</title>
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+ <body>
+   <div class="container">
+       <header>
+          <style type="text/css">
+
+.nav {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+}
+.nav_open {
+  visibility: visible;
+}
+.nav__list {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__item {
+  position: relative;
+  flex-basis: 25%;
+  margin: 0;
+  padding: 0;
+}
+.nav__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0 0 20%;
+  text-decoration: none;
+  color: white;
+  will-change: transform;
+  transition: color 0.5s;
+}
+.nav__link:hover {
+  color: black;
+}
+.nav__item-line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+.nav__link-content {
+  position: relative;
+  z-index: 3;
+}
+
+.nav__link-base {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 150px);
+  background-color: white;
+  box-shadow: 2px 4px 16px 0 rgba(0, 0, 0, 0.2);
+  will-change: transition;
+  opacity: 0;
+}
+.nav__link:hover .nav__link-base {
+  z-index: 2;
+}
+.nav__link-num {
+  position: absolute;
+  top: 12px;
+  left: -24px;
+  font-size: 16px;
+  font-family: "bebas-neue", sans-serif;
+}
+
+.nav__link-title {
+  font-size: 36px;
+  text-transform: uppercase;
+  font-family: "bebas-neue", sans-serif;
+  margin-bottom: 8px;
+  line-height: 0.8;
+  overflow: hidden;
+}
+
+.nav__link-desc {
+  display: block;
+  font-size: 12px;
+}
+/*btn*/
+.nav-btn {
+  position: fixed;
+  z-index: 101;
+  bottom: 24px;
+  left: 24px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  outline: 0;
+  cursor: pointer;
+}
+.burger {
+  width: 36px;
+  height: 36px;
+}
+
+.burger__stroke {
+  stroke: white;
+}
+
+.burger__plus {
+  fill: #1cb5e0;
+}
+/**/
+.nav__bg {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: auto;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.nav__bg-mask-rect {
+  will-change: transform;
+}
+</style>
+<div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+	</ul>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#1cb5e0" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
+</svg>
+<button class="nav-btn">
+	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+	<g class="burger__plus">
+		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+	</g>
+	</svg>
+</button>
+
+</div>
+
+      </header> 
+       <div class="content_box">
+          <div class="content" >
+            <div class="post_content">
+                <div class="doubleMenuList">
+                    <ul>
+                      
+                      <li>
+                        <div>
+                          <div class="post_title">
+                          <a class="post-link" href="/es6/2018/12/23/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/es6/2018/12/23/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95.html">对象的扩展</a>
+                          </div>
+                        </div>
+                      </li> 
+                      
+                    </ul>
+                </div>
+                <div class="doubleMenuContent">
+                  <div class="content_title">
+                    <h2>对象的扩展</h2>
+                    <span id="busuanzi_container_page_pv">
+                    <time datetime=""></time>
+                    </span>
+                  </div>
+                   <h3 id="一属性的简洁表示法">一、属性的简洁表示法</h3>
+<p>ES6允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let name = 'tx';
+//es6
+let obj = {name};
+console.log(obj); //{name: "tx"}
+//等同于es5
+let obj = {name:name};
+console.log(obj); //{name: "tx"}
+</code></pre>
+</div>
+<p>上面的代码说明，ES6允许在对象之中，直接写变量。这时，属性名为变量名，属性值为变量的值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(x,y){
+	return {x,y}
+}
+func('tx',28);  //{x: "tx", y: 28}
+//相当于
+function func2(x,y){
+	return {
+		x:x,
+		y:y
+	};
+}
+</code></pre>
+</div>
+<p>除了属性简写，方法也可以简写。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+	name:'tx',
+	getName() {
+		console.log(this.name);
+	}
+};
+obj.getName(); //tx
+//等同于
+const obj = {
+	name:'tx',
+	getName:function(){
+		console.log(this.name);
+	}
+};
+</code></pre>
+</div>
+<p>下面是一个实际的例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let age = 25;
+const obj = {
+	name:'tx',
+	age,
+	getName (){ console.log('我的年龄是：' + this.age) ;}
+};
+obj.getName(); //我的年龄是：25
+</code></pre>
+</div>
+<p>这种写法用于函数的返回值，将会非常方便。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+	let x = 1;
+	let y = 2;
+	return {x,y};
+}
+func(); //{x: 1, y: 2}
+</code></pre>
+</div>
+<p>CommonJS模块输出一组变量，就非常合适使用简洁写法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
+function getItem(key){
+	return key in obj ? obj[key] : null;
+}
+
+function setItem(key,value){
+	obj[key] = value;
+}
+function clear(){
+	obj  = {};
+}
+
+module.exports = { getItem, setItem, clear };
+//等同于
+module.exports = {
+	getItem : getItem,
+	setItem : setItem,
+	clear   : clear
+};
+</code></pre>
+</div>
+<p>注意：简洁写法的属性名总是字符串，这会导致一些看上去比较奇怪的结果。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	class (){}
+};
+//相当于
+let obj = {
+	'class':function(){}
+}
+</code></pre>
+</div>
+<p>上面代码中，class是字符串，所以不会因为他是关键字，而导致语法解析报错。</p>
+
+<p>如果某个方法的值是一个Generator 函数，前面需要加上*号。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+  * m() {
+    yield 'hello world';
+  }
+};
+</code></pre>
+</div>
+<p>【】Generator 函数</p>
+
+<h3 id="二属性名表达式">二、属性名表达式</h3>
+<p>js定义对象的属性，有两种方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//第一种
+obj.name = 'tx';
+//第二种
+obj['na' + 'me'] = 'jl';
+</code></pre>
+</div>
+<p>第一种方法是直接用标识符作为属性名，方法二是用表达式作为属性名，这时要将表达式放在括号之内。</p>
+
+
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+  </body>
+  <script src="/source/js/highlight.min.js"></script>
+  <script type="text/javascript" src="/source/js/jquery.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+</html>
