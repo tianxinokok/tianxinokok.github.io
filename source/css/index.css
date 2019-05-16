@@ -83,19 +83,19 @@ body{
     height: 100%;
 }
 #slide_img_1{
-	background: url(/source/img/computerbg.png) no-repeat 50% 50%;
+	background: url(/source/img/computerbg.jpg) no-repeat 50% 50%;
 	background-size: cover;
 }
 #slide_img_2{
-	background: url(/source/img/secai2.png) no-repeat 50% 50%;
+	background: url(/source/img/secai2.jpg) no-repeat 50% 50%;
 	background-size: cover;
 }
 #slide_img_3{
-	background:url(/source/img/computerbg2.png) no-repeat 50% 50%;
+	background:url(/source/img/computerbg2.jpg) no-repeat 50% 50%;
 	background-size: cover;
 }
 #slide_img_4{
-	background:url(/source/img/contact.png) no-repeat 50% 50%;
+	background:url(/source/img/contact.jpg) no-repeat 50% 50%;
 	background-size: cover;
 }
 .slide_img_shade{
