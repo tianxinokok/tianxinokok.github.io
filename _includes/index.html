@@ -1,7 +1,16 @@
 <div class="container slide_current" id="container_1">
-      <div class="slide_img" id="slide_img_1"><div class="slide_img_shade"></div></div>
+      <div class="phone_title">
+          
+      </div>
+      <div class="slide_img gray" id="slide_img_1"><div class="slide_img_shade"></div></div>
       <div class="title_box">
-        <h2 class="main_title"><span>WORKS</span></h2>
+        <h2 class="main_title">
+          <span>WORKS</span>
+          <div class="phone_message">
+            <span>my work note.</span>
+            <span>Details&nbsp;<i class="fa fa-briefcase" aria-hidden="true"></i></span>
+          </div>
+        </h2>
       </div>
       <div class="content work_content" id="content_1">
         <div class="post_list_false" id="post_list_false_1">
@@ -10,14 +19,26 @@
             <div class="post_text">
               <div>
               <div class="post_message">
-                <span><time datetime="{{ post.date | date:"%Y-%m-%d" }}"><span class="day">{{ post.date | date:"%m`%d" }}</span><br>
-                <span class="year">{{ post.date | date:"%Y" }}</span>
-                </time></span>
+                <span>
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">
+                    <span class="day">{{ post.date | date:"%m`%d" }}</span><br>
+                    <span class="year">{{ post.date | date:"%Y" }}</span>
+                  </time>
+                </span>
+              </div>
+              <div class="phone_post_message">
+                <span>
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">
+                    <span class="day">{{ post.date | date:"%d" }}</span>
+                    <span class="year">{{ post.date | date:"%Y.%m" }}</span>
+                 </time>
+                </span>
               </div>
              <!--  <div style="color: #000"> {{forloop.index}}</div> -->
               <span class="post_title"><a class="post-link" href="{{ post.url }}" data-post-href="{{ post.url }}">{{ post.title}}</a></span>
-
+              <span class="details">Details&nbsp;<i class="fa fa-briefcase" aria-hidden="true"></i></span>
               </div>
+
               <div>
                 <i class="more_icon fa fa-plus" aria-hidden="true"></i>
               </div>

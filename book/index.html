@@ -2,9 +2,18 @@
 layout: default
 ---
 <div class="container" id="container_3">
-      <div class="slide_img" id="slide_img_3"><div class="slide_img_shade"></div></div>
-      <div>
-        <h2 class="main_title"><span>BOOKS</span></h2>
+      <div class="phone_title">
+          
+      </div>
+      <div class="slide_img gray" id="slide_img_3"><div class="slide_img_shade"></div></div>
+      <div class="title_box">
+        <h2 class="main_title">
+          <span>BOOKS</span>
+          <div class="phone_message">
+            <span>My book list</span>
+            <span>Details&nbsp;<i class="fa fa-book" aria-hidden="true"></i></span></span>
+          </div>
+        </h2>
       </div>
       <div class="content book_content" id="content_3">
         <div class="post_list_false" id="post_list_false_3">
@@ -21,9 +30,17 @@ layout: default
                 <span class="year">{{ post.date | date:"%Y" }}</span>
                 </time></span>
               </div>
+              <div class="phone_post_message">
+                <span>
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">
+                    <span class="day">{{ post.date | date:"%d" }}</span>
+                    <span class="year">{{ post.date | date:"%Y.%m" }}</span>
+                 </time>
+                </span>
+              </div>
              <!--  <div style="color: #000"> {{forloop.index}}</div> -->
               <span class="post_title"><a class="post-link book_post_title" href="{{ post.url }}" data-post-href="{{ post.url }}">{{ post.title}}</a></span>
-
+              <span class="details">Details&nbsp;<i class="fa fa-book" aria-hidden="true"></i></span>
               </div>
               <div>
                 <i class="more_icon fa fa-plus" aria-hidden="true"></i>

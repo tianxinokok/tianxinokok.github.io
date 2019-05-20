@@ -54,15 +54,6 @@ body{
     font-family: "Arial", sans-serif;
     transition: background-color 1s;
 }
-
-.gray{
-	-webkit-filter: grayscale(1);
-    -moz-filter: grayscale(1);
-    -ms-filter: grayscale(1);
-    -o-filter: grayscale(1);
-    filter: grayscale(1);
-    filter: gray;  /* IE 6-9 */  
-}
 /*>479px*/
 @media screen and (min-width:479px){
 body{
@@ -76,6 +67,9 @@ body{
 	width: 100%;
     height: 100vh;
     overflow: hidden;
+}
+.phone_title{
+	display: none;
 }
 .slide_img{
 	position: absolute;
@@ -354,10 +348,166 @@ body{
 .wechat_h3{
 	font-size: 6vh !important;
 }
+.phone_post_message{
+	display: none;
+}
+.details{
+	display: none;
+}
+.phone_message{
+	display: none;
+}
 }  
 /*<479px*/
 @media only screen and (max-width: 479px){
+@font-face{
+font-family: dayfont;
+src: url('../img/zt/impact.ttf'),
+     url('../img/zt/impact.eot'); /* IE9+ */
+}
+body{
+	background-image:url(../img/h_bg.jpg);
+	background-size: 50%;
+	background-attachment: fixed;
+	width: 100%;
+	overflow-x: hidden;
+}
+body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/h_bg.jpg);
+  background-size: 50%;
+}
+.phone_title{
+	height: 110px;
+}
+.slide_img{
+	position: absolute;
+	width: 50%;
+	left: 50%;
+	top: 110px;
+	height: 110px;
+}
+.post_list_false{
+	width: 0;
+	height: 0;
+	display: none;
+}
+#slide_img_1{
+	background: url(/source/img/computerbg.jpg) no-repeat 50% 50%;
+	background-size: cover;
+}
+#slide_img_2{
+	background: url(/source/img/secai2.jpg) no-repeat 50% 50%;
+	background-size: cover;
+}
+#slide_img_3{
+	background:url(/source/img/computerbg2.jpg) no-repeat 50% 50%;
+	background-size: cover;
+}
+#slide_img_4{
+	background:url(/source/img/contact.jpg) no-repeat 50% 50%;
+	background-size: cover;
+}
+.title_box{
+	position: absolute;
+	width: 50%;
+	top: 110px;
+	height: 110px;
+    background: #7de87d;
+    text-align: right;
+}
+.phone_message{
+	font-size: 10px;
+}
+.phone_message > span{
+	display: block;
+}
+.content{
+	position: relative;
+	top: 110px;
+}
+.post_list > li{
+	position: relative;
+	height: 110px;
+	width: 100%;
+    border-bottom: 1px solid #333;
+}
+.main_title{
+	position: absolute;
+	font-size: 4rem;
+    color: #282727;
+    font-family: 'impact';
+    right: 10px;
+}
+.gray { 
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    filter: grayscale(1);
+    filter: gray;  /* IE 6-9 */  
+}
+.day{
+	position: absolute;
+	font-family: dayfont;
+	font-size: 4.5rem;
+	left: 16px;
+	color: #777777;
+}
+.year{
+	position: absolute;
+	font-size: 8px;
+	color: #777777;
+	top: 52px;
+	left: 16px;
+}
+.post_title{
+    position: absolute;
+    top: 65px;
+    font-size: 12px;
+    color: #777777;
+    left: 16px;	
+}
+.post_title > a{
+	color: #777777;
+}
+.more_icon{
+	position: absolute;
+    top: 77px;
+    left: 336px;
+    color: #777777;
+}
+.details{
+	position: absolute;
+	color: #777777;
+	left: 16px;
+	font-size: 8px;
+	top: 85px;
+}
+.contact_content{
+	padding: 20px;
+	color: #777777;
+}
+.email{
 
-
-
+}
+.explain {
+	margin-top: 20px;
+	font-size: 12px;
+}
+.post_message{
+	display: none;
+}
+.svg_font{
+	display: none;
+}
+.btnGroup{
+	display: none;
+}
 }

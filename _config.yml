@@ -1,4 +1,4 @@
-baseurl: http://tianxinokok.github.io
+#baseurl: http://tianxinokok.github.io
 url: http://tianxinokok.github.io
 #future: true
 #permalink: /:title/
@@ -9,11 +9,11 @@ author: tianxin
 email: tianxinokok@163.com
 #beian: 
 #cnzz:
-pygments: true
+#pygments: true
 safe: true
 auto: true
 github: tianxinokok
-paginate: 20
+#paginate: 20
 #### Markdown Processors
 markdown: kramdown
 
@@ -26,5 +26,3 @@ menu:
   分类:/
   About:/about
 ###### css/js
-source:/source
-
