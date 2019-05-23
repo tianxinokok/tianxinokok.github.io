@@ -697,8 +697,11 @@ body:before {
 	display: block;
 }
 .content{
-	position: relative;
 	top: 180px;
+  position: absolute;
+  overflow-y: scroll;
+  height: calc(100% - 180px);
+  overflow-x: hidden;
 }
 .post_list > li{
 	position: relative;
