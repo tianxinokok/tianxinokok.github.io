@@ -15,9 +15,12 @@ var config = {
 var isNavOpen = false;
 var navOpenTL = new TimelineMax();
 var navCloseTL = new TimelineMax();
+var logoTL = new TimelineMax();
 
 var $nav = $('.nav');
 var $navBtn = $('.nav-btn');
+var $navBtnPhone  = $('.nav_btn_phone');
+var $phonebtnclose = $('.phone_btn_close');
 var $bgMask = $('.nav__bg-mask-rect');
 var $link = $('.nav__link');
 var $linkNum = $('.nav__link-num');
@@ -25,6 +28,7 @@ var $linkTitle = $('.nav__link-title');
 var $linkDesc = $('.nav__link-desc');
 var $linkBase = $('.nav__link-base');
 var $itemLine = $('.nav__item-line');
+
 
 var animateGrad = true;
 function domToString (node) {  
@@ -158,6 +162,7 @@ function initNav() {
 
 function openNav(){
   isNavOpen = true;
+  showLogo();
   updateGradient();
   navBtnOpenOver();
   navOpenTL = new TimelineMax();
@@ -212,7 +217,7 @@ function closeNav() {
 
     isNavOpen = false;
 
-    // hideLogo();
+    hideLogo();
     stopGradient();
     navBtnClosedOver();
 
@@ -268,7 +273,24 @@ function closeNav() {
       });
     }
   }
+  function showLogo() {
+    TweenMax.set('.header_logo', { autoAlpha: 1 });
+    logoTL = new TimelineMax( { delay: 1 } );
+    logoTL.set('.logo__plus-horz', { opacity: 0 })
+          .fromTo('.logo__plus-vert',0.5, { scaleY: 0, transformOrigin: "center center" }, { scaleY: 1, ease: Power4.easeIn })
+          .set('.logo__plus-horz',{ opacity: 1, immediateRender: false  })
+          .fromTo('.logo_baidu_border', 1.0, { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', ease: Power4.easeOut}, 0.5)
+          .fromTo('.logo_xiansheng_border', 1.0, { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', ease: Power4.easeOut}, 0.5)
+          .fromTo('.logo__plus-horz', 0.5, { rotation: -90, transformOrigin: "center center" } ,{ rotation: 0, ease: Elastic.easeOut.config(1.0, 0.5) }, "-=0.35")
+          .staggerFromTo('.logo_baidu_letter', 0.4, { y: 150 }, { y: 0, ease: Power2.easeOut }, 0.07, "-=0.4")
+          .staggerFromTo('.logo_xiansheng_letter', 0.3, { y: -150 }, { y: 0, ease: Power2.easeOut }, 0.07, "-=0.59");
 
+
+  }
+  function hideLogo() {
+    destroyAnimation(logoTL);
+    TweenMax.to('.header_logo', 0.3, { autoAlpha: 0 });
+  }
   function stopGradient() {
     if(animateGrad) {
       $nav.off('mousemove');
@@ -300,7 +322,7 @@ $(document).ready(function(){
     });
     //work下一页伪翻页
     $('.next').on('click',function(e){
-
+      e.stopPropagation();
       var btn_type = $(this).attr('class');
       var n = 0 ;
       var pageIndex_type = '';
@@ -348,7 +370,7 @@ $(document).ready(function(){
     });
     //work_上一页伪翻页
     $('.prev').on('click',function(e){
-
+      e.stopPropagation();
       var btn_type = $(this).attr('class');
       var n = 0 ; 
       var pageIndex_type = '';
@@ -398,6 +420,7 @@ $(document).ready(function(){
     });
     //new nav
     $navBtn.on('click',function(e){
+      e.stopPropagation();
       $('.nav').addClass('nav_open');
       if(!isNavOpen) {
         openNav();
@@ -453,4 +476,16 @@ $(document).ready(function(){
     $link.on( "click", function(e) {
       //e.preventDefault();
     });
+    //phone_nav_btn open
+    $navBtnPhone.on('click',function(e){
+      e.stopPropagation();
+      $('.nav').addClass('_opacity1');
+      $('.nav__item').addClass('_opacity1');
+    });
+    //phone_nav_btn close
+    $phonebtnclose.on('click',function(e){
+      e.stopPropagation();
+      $('.nav').removeClass('_opacity1');
+      $('.nav__item').removeClass('_opacity1');
+    })
 })
