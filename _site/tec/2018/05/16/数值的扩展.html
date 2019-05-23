@@ -1,0 +1,606 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="/source/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/post_last.css" type="text/css">
+    <link rel="stylesheet" href="/source/css/obsidian.min.css">
+<!--     <link rel="stylesheet" type="text/css" href="/source/css/nav.css"> -->
+    <link rel="stylesheet" type="text/css" href="/source/css/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>摆渡先生</title>
+   <!-- <link rel="stylesheet" href="/css/highlight.css" type="text/css">-->
+</head>
+
+ <body>
+ <div class="nav_box" style="z-index: 10000">
+<nav class="nav">
+	<ul class="nav__list">
+		<li class="nav__item">
+			<a class="nav__link" href="/">
+				<div class="nav__link-content">
+					<span class="nav__link-num">01</span>
+					<div class="nav__link-title">Works</div>
+					<div class="nav__link-desc">What I'm made</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/new">
+				<div class="nav__link-content">
+					<span class="nav__link-num">02</span>
+					<div class="nav__link-title">News</div>
+					<div class="nav__link-desc">Latest ramblings</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/book">
+				<div class="nav__link-content">
+					<span class="nav__link-num">03</span>
+					<div class="nav__link-title">Books</div>
+					<div class="nav__link-desc">Many good books</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+		<li class="nav__item">
+			<a class="nav__link" href="/contact">
+				<div class="nav__link-content">
+					<span class="nav__link-num">04</span>
+					<div class="nav__link-title">Contact</div>
+					<div class="nav__link-desc">Don't be shy</div>
+				</div>
+				<div class="nav__link-base"></div>
+			</a>
+			<div class="nav__item-line"></div>
+		</li>
+        <li class="phone_btn_close nav__item">
+            x
+        </li>
+	</ul>
+  <div class="header_logo">
+    <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 825 299" style="enable-background:new 0 0 825 299;" xml:space="preserve">
+<g class="logo_baidu">
+  <path class="st0 logo_baidu_letter" fill="#fff" d="M132.94,183.58c-5.84,0.73-10.94,1.46-15.31,2.19c-2.19,0.73-4.02,0-5.47-2.19c0-5.1,1.82-8.02,5.47-8.75
+    c3.64,0.73,8.75,1.09,15.31,1.09c0-5.1-0.37-10.2-1.09-15.31c0-2.91,1.09-4.38,3.28-4.38c7.29,0.73,10.57,3.65,9.84,8.75
+    c-0.73,2.92-1.09,6.56-1.09,10.94h8.75c2.91,0.73,4.38,2.19,4.38,4.38c-2.19,1.46-6.56,2.19-13.13,2.19v9.84
+    c7.29-1.45,11.3-1.45,12.03,0c0.73,2.19-3.28,4.74-12.03,7.66c0,11.67,0.36,21.52,1.09,29.53c0.73,5.84-1.46,10.21-6.56,13.13
+    c-4.38,2.19-10.94,1.83-19.69-1.09c-7.3-3.64-11.3-7.29-12.03-10.94c17.5,4.38,26.25,3.65,26.25-2.19c0.73-9.48,0.73-17.86,0-25.16
+    c-8.75,2.92-14.95,4.74-18.59,5.47c-2.92,0-4.74-1.45-5.47-4.38c-0.73-3.64,0.73-5.83,4.38-6.56c5.1-0.73,11.66-1.82,19.69-3.28
+    V183.58z M217.16,162.8c3.64,0.73,5.47,3.28,5.47,7.66c-1.46,5.84-2.19,11.67-2.19,17.5c-0.73,3.65-2.92,5.11-6.56,4.38
+    c-6.56-1.45-12.77-2.19-18.59-2.19c-0.73,2.19-0.73,4.38,0,6.56h14.22c3.64,0,5.83,0.73,6.56,2.19c0.73,2.92-1.09,4.38-5.47,4.38
+    h-15.31c-0.73,2.19-0.73,4.38,0,6.56c15.31,0.73,28.8,0.73,40.47,0c-5.11,10.94-12.4,14.22-21.88,9.84
+    c-6.56-2.19-13.13-3.28-19.69-3.28l-5.47,6.56c-2.92,2.92-5.11,5.47-6.56,7.66c3.64,2.92,7.66,4.02,12.03,3.28
+    c5.1-1.45,8.38-3.28,9.84-5.47c-1.46-0.73-3.28-1.82-5.47-3.28c0.73-3.64,2.55-5.47,5.47-5.47c2.91-0.73,6.2,0.73,9.84,4.38
+    c5.1,4.38,8.75,8.39,10.94,12.03c2.19,4.38,0.73,5.84-4.38,4.38c-3.65-2.91-7.66-5.83-12.03-8.75c-5.11,7.3-11.3,10.58-18.59,9.84
+    c-8.02-3.64-13.13-5.1-15.31-4.38c-2.92,0.73-5.84,1.83-8.75,3.28c-2.92,0.73-5.11-0.36-6.56-3.28c-0.73-2.19,0-4.01,2.19-5.47
+    c2.91-2.19,5.83-4.01,8.75-5.47c6.56-3.64,10.57-6.92,12.03-9.84c-14.59,0.73-24.06,1.83-28.44,3.28
+    c-3.65,0.73-5.11-0.73-4.38-4.38c1.45-3.64,3.28-5.83,5.47-6.56c6.56,1.46,15.67,1.83,27.34,1.09c0.73-2.19,0.73-4.38,0-6.56
+    c-7.3,0-13.49,0.37-18.59,1.09c-3.65,0.73-4.74-1.09-3.28-5.47c1.45-1.45,3.64-2.55,6.56-3.28c5.1,0.73,10.2,1.09,15.31,1.09
+    c0.73-2.19,0.73-4.38,0-6.56c-6.56,0-11.67,0.73-15.31,2.19c-3.65,1.46-5.84,0.37-6.56-3.28c-0.73-8.75-1.46-15.67-2.19-20.78
+    c0-4.38,2.55-6.2,7.66-5.47C181.8,164.99,198.93,164.99,217.16,162.8z M167.94,170.46c-0.73,2.92-0.73,7.3,0,13.13
+    c3.64,1.46,6.56,1.46,8.75,0c0.73-4.38,0.73-8.75,0-13.13C174.51,169.73,171.58,169.73,167.94,170.46z M184.35,183.58
+    c3.64,0.73,6.56,0.73,8.75,0c0.73-5.1,0.73-9.48,0-13.13c-2.92-0.73-5.84-0.73-8.75,0C183.62,175.57,183.62,179.94,184.35,183.58z
+     M200.76,170.46c-0.73,3.65-0.73,8.02,0,13.13c4.38,1.46,7.66,1.46,9.84,0c2.19-3.64,2.55-8.02,1.09-13.13
+    C208.05,169.73,204.4,169.73,200.76,170.46z"/>
+  <path class="st0 logo_baidu_letter" fill="#fff" d="M255.44,189.05c8.75,2.92,17.5,5.11,26.25,6.56c1.45,0.73,1.45,1.83,0,3.28c-5.84,2.19-11.3,3.28-16.41,3.28
+    c-7.3,0.73-13.13,0-17.5-2.19c-2.92-2.19-2.92-5.1,0-8.75C249.98,189.05,252.52,188.33,255.44,189.05z M255.44,216.4
+    c8.75-1.45,17.5-4.01,26.25-7.66c1.45-0.73,2.55-0.73,3.28,0c-2.19,4.38-5.11,8.02-8.75,10.94c-4.38,3.65-10.94,6.93-19.69,9.84
+    c-2.92,0-5.11-1.82-6.56-5.47C249.24,219.68,251.07,217.13,255.44,216.4z M262.01,166.08c7.29,5.11,14.95,9.48,22.97,13.13
+    c-0.73,1.46-4.38,2.19-10.94,2.19s-12.77-1.45-18.59-4.38c-2.19-1.45-2.92-3.28-2.19-5.47
+    C254.71,167.18,257.63,165.36,262.01,166.08z M313.41,186.87c-4.38-0.73-8.39-0.36-12.03,1.09c0,5.84-0.73,13.13-2.19,21.88
+    c-0.73,4.38-2.19,8.39-4.38,12.03c-2.19,3.65-4.38,6.56-6.56,8.75c-5.11,4.38-9.48,6.93-13.13,7.66c-2.92,0-5.47-0.36-7.66-1.09
+    c-1.46-1.45-2.55-2.55-3.28-3.28c2.91-2.19,6.2-4.01,9.84-5.47c3.64-2.19,6.92-5.1,9.84-8.75c2.19-3.64,4.01-7.29,5.47-10.94
+    c1.45-5.83,2.19-11.3,2.19-16.41c0.73-8.75-0.37-16.04-3.28-21.88c0-4.38,2.19-6.56,6.56-6.56c4.38,1.46,12.39,2.19,24.06,2.19
+    v-6.56c1.45-2.91,4.38-4.01,8.75-3.28c2.19,0.73,4.01,1.83,5.47,3.28v6.56h20.78c6.56,0,9.84,1.46,9.84,4.38
+    c-1.46,1.46-7.66,2.19-18.59,2.19c-1.46,2.92-1.46,5.47,0,7.66h8.75c5.83,0,8.75,1.09,8.75,3.28s-1.09,3.28-3.28,3.28h-14.22
+    c-0.73,3.65-0.73,6.93,0,9.84c0.73,3.65-1.09,5.11-5.47,4.38c-2.92-1.45-5.84-2.55-8.75-3.28c-2.19,0-4.38,0-6.56,0
+    c-2.19,0.73-4.02,1.46-5.47,2.19c-3.65,0.73-5.47-0.36-5.47-3.28C314.14,192.33,314.14,189.05,313.41,186.87z M314.51,202.18
+    c2.19,0.73,4.38,1.09,6.56,1.09c7.29-0.73,14.95-0.36,22.97,1.09c5.1,1.46,6.92,4.02,5.47,7.66c-2.19,2.92-5.11,6.93-8.75,12.03
+    c16.04,5.11,28.07,7.66,36.09,7.66c-7.3,10.94-14.59,14.58-21.88,10.94c-6.56-4.38-13.49-8.75-20.78-13.13
+    c-9.48,5.11-17.87,8.75-25.16,10.94c-6.56,1.46-10.58-0.73-12.03-6.56c0.73-0.73,4.73-1.82,12.03-3.28
+    c8.02-1.45,14.22-3.64,18.59-6.56c-4.38-2.91-8.39-5.47-12.03-7.66c0-3.64,1.82-5.1,5.47-4.38c3.64,2.19,7.66,4.74,12.03,7.66
+    c2.91-2.19,4.73-4.73,5.47-7.66c0.73-2.19-0.73-3.28-4.38-3.28c-6.56,0-12.77,0.37-18.59,1.09c-3.65,2.19-5.84,2.19-6.56,0
+    C309.76,205.46,311.58,202.91,314.51,202.18z M313.41,172.65c-3.65-0.73-8.02-0.73-13.13,0c-0.73,2.92-0.73,5.47,0,7.66
+    c4.38,0.73,8.75,0.73,13.13,0C314.14,177.39,314.14,174.83,313.41,172.65z M322.16,172.65c-0.73,2.92-0.73,5.47,0,7.66
+    c5.1,0.73,9.48,0.73,13.13,0c0.73-2.91,0.73-5.47,0-7.66C330.91,171.92,326.54,171.92,322.16,172.65z M336.38,186.87
+    c-4.38-0.73-9.12-0.73-14.22,0c0,1.46,0,3.28,0,5.47c4.38,0.73,8.38,0.73,12.03,0C336.38,192.33,337.11,190.51,336.38,186.87z"/>
+</g>
+<polyline class="st1 logo_baidu_border" points="409.5,179.35 409.5,261 81.5,261 81.5,140 367.18,140 " fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="16"/>
+<g class="logo__plus" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="16">
+  <line class="st1 logo__plus-horz" x1="382.5" y1="140.5" x2="436.5" y2="140.5"/>
+  <!-- <path class="st1" d="M411.5,117.5"/> -->
+  <line class="st1 logo__plus-vert" x1="409.5" y1="167.5" x2="409.5" y2="113.5"/>
+</g>
+<g class="logo__xiansheng">
+  <path class="st2 logo_xiansheng_letter" fill="#fff" d="M484.78,60.65c-5.11,3.65-9.12,5.47-12.03,5.47c-4.38,0-5.47-1.09-3.28-3.28c5.1-2.91,8.75-8.02,10.94-15.31
+    c1.45-6.56,3.64-9.48,6.56-8.75c2.91,0,4.73,1.46,5.47,4.38c0,3.65-1.09,6.56-3.28,8.75h16.41V39.87c0-4.38,1.82-6.92,5.47-7.66
+    c6.56,0,9.84,2.92,9.84,8.75V51.9h25.16c4.38,0,6.2,1.83,5.47,5.47c-0.73,2.19-2.19,3.28-4.38,3.28h-26.25v8.75
+    c10.94,0,22.6,0.37,35,1.09c2.91,0,4.73,1.09,5.47,3.28c0.73,4.38-1.83,6.56-7.66,6.56c-10.21-0.73-19.69-1.09-28.44-1.09v10.94
+    c0,8.02,6.56,12.03,19.69,12.03c14.58,0.73,26.25-1.45,35-6.56c-2.92,10.94-6.2,17.5-9.84,19.69c-7.3,5.11-17.87,5.84-31.72,2.19
+    c-5.11-1.45-9.48-3.28-13.13-5.47c-7.3-4.38-11.3-10.57-12.03-18.59V79.24h-6.56c-0.73,4.38-2.55,9.48-5.47,15.31
+    c-6.56,9.48-14.22,16.05-22.97,19.69c-7.3,2.92-14.59,3.65-21.88,2.19c-6.56-2.91-8.75-5.83-6.56-8.75
+    c24.79-0.73,40.1-10.2,45.94-28.44c-5.84-0.73-13.49,0-22.97,2.19c-7.3,2.19-10.58,0.73-9.84-4.38c3.64-5.83,6.92-8.38,9.84-7.66
+    c8.02,1.46,18.95,1.46,32.81,0v-8.75H484.78z"/>
+
+  <path class="st3 logo_xiansheng_letter" fill="#fff" d="M645.29,63.43c-6.56-0.73-14.22-0.73-22.97,0c-2.92,3.65-7.3,6.93-13.13,9.84c-2.92,0.73-4.02,0-3.28-2.19
+    c5.83-6.56,9.84-13.48,12.03-20.78c2.19-8.75,6.2-12.03,12.03-9.84c4.38,2.92,3.64,8.02-2.19,15.31h17.5
+    c0.73-6.56,0.73-12.39,0-17.5c0-4.38,2.19-6.92,6.56-7.66c5.83,0,8.75,2.55,8.75,7.66c0,8.75,0.36,14.59,1.09,17.5h22.97
+    c8.02-0.73,12.03,0.73,12.03,4.38c2.19,3.65-9.48,4.74-35,3.28c-1.46,3.65-1.46,7.3,0,10.94l21.88,1.09c2.91,0,6.2,0.73,9.84,2.19
+    c1.45,2.92,1.09,4.74-1.09,5.47c-8.75-0.73-18.23-0.73-28.44,0c-2.19,0-3.28,3.65-3.28,10.94c0.73,6.56,16.04,8.02,45.94,4.38
+    c3.64,0,8.02-0.73,13.13-2.19c-3.65,16.77-12.03,22.97-25.16,18.59c-22.61-8.02-48.13-10.2-76.56-6.56
+    c-10.94,2.19-17.87,3.65-20.78,4.38c-5.84,1.46-8.02-0.36-6.56-5.47c2.91-5.83,6.92-9.48,12.03-10.94
+    c2.91-0.73,7.29-0.36,13.13,1.09c18.95,2.19,28.8,1.46,29.53-2.19c1.45-8.02,0-12.03-4.38-12.03c-7.3-0.73-14.22,0-20.78,2.19
+    c-4.38,1.46-5.84-0.36-4.38-5.47c0.73-2.19,2.91-4.38,6.56-6.56c2.91-1.45,5.83-1.09,8.75,1.09c5.83,0.73,10.2,0.73,13.13,0
+    C646.38,72.91,646.74,69.27,645.29,63.43z"/>
+</g>
+<polyline class="st1 logo_xiansheng_border" points="409.5,101.65 409.5,20 737.5,20 737.5,141 451.82,141 " fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="16"/>
+</svg>
+  </div>
+</nav>
+<svg class="nav__bg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient class="nav__grad" x1="92.6356902%" y1="7.36430977%" x2="0%" y2="100%" id="nav-grad">
+            <!-- <stop stop-color="#000000" offset="20%"></stop>
+            <stop stop-color="#223e36" offset="100%"></stop> -->
+            <!-- <stop stop-color="#43C6AC" offset="20%"></stop>
+            <stop stop-color="#191654" offset="100%"></stop> -->
+            <stop stop-color="#00dbde" offset="20%"></stop>
+            <stop stop-color="#fc00ff" offset="100%"></stop>
+        </linearGradient>
+		<mask id="nav__bg-mask" class="nav__bg-mask" maskUnits="userSpaceOnUse"x="0" y="0" width="100" height="100">
+		  	<rect class="nav__bg-mask-rect" x="0" y="0" width="25" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="24.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="49.9" y="0" width="25.1" height="100" fill="white"/>
+			<rect class="nav__bg-mask-rect" x="74.9" y="0" width="25.1" height="100" fill="white"/>
+		</mask>
+    </defs>
+    <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
+</svg>
+ <!--pc_menu_btn--> 
+<button class="nav-btn">
+  <svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+  <polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+  <g class="burger__plus">
+    <rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+    <rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+    <rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+    <rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
+  </g>
+  </svg>
+</button>
+</div>
+
+   <div class="content_container">
+      <div class="common_box">
+        <div class="slide_img" id="slide_img_1"><div class="slide_img_shade"></div></div>
+        <div class="title_box">
+          <h2 class="main_title"><span>WORKS</span></h2>
+        </div> 
+      </div>
+      <div class="content_box">
+          <div class="content_content" >
+            <div class="post_content">
+                <div class="content_title">
+                  <h1>ES6基础-数值的扩展</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime=""></time></span>
+                </div>
+                  <h3 id="一二进制和八进制表示法">一、二进制和八进制表示法</h3>
+<p>ES6提供了二进制和八进制数值的新的写法，分别用前缀0b(0B) 和 0o(0O) 表示。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let a = 0b111110111 ; //503
+let b = 0o767; //503
+console.log(a === b); //true
+</code></pre>
+</div>
+<p>从ES5开始，在严格模式之中，八进制就不再允许使用前缀0表示，ES6进一步明确，要使用前缀0o(0O)表示。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//非严格模式
+(function(){
+  console.log(0o11 === 011); //true
+})();
+//严格模式
+(function(){
+  'use strict';
+  console.log(0o11 === 011); //报错
+})();
+</code></pre>
+</div>
+<p>如果要将0b和0o前缀的字符串数值转为10进制，要用Number()方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number('0b111')  // 7
+Number('0o10')  // 8
+</code></pre>
+</div>
+<h3 id="二numberisfinitenumberisnan">二、Number.isFinite()，Number.isNaN()</h3>
+<p>ES6在Number对象上，提供了两个新的方法Number.isFinite()和Number.isNaN()。
+Number.isFinite()：返回一个布尔值，检查一个数值是否为有限的(finite)。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isFinite(123); // true
+Number.isFinite(0.1); // true
+</code></pre>
+</div>
+<p>如果所查询的参数类型不是数值，一律返回false。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isFinite('123') //false
+Number.isFinite(true) //false
+Number.isFinite(NaN) //false
+Number.isFinite(undefined) //false
+Number.isFinite({}) //false
+</code></pre>
+</div>
+<p>Number.isNaN():返回一个布尔值，检查一个值是否为NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isNaN(NaN) //true
+Number.isNaN(1/'adc'); //true
+Number.isNaN('abc'/'adc'); //true
+Number.isNaN(1/NaN); //true
+Number.isNaN('abc'); //false
+Number.isNaN(123); //false
+</code></pre>
+</div>
+<p>如果参数类型不是NaN,一律返回false。</p>
+
+<p>这两个方法与传统全局上同名的方法的区别在于：传统方法先调用Numer()将非数值的值转为数值，再进行判断，而ES6的这两个方法只对数值和NaN有效，Number.isFinite()对于非数值一律返回false,Numer.isNaN()只有对NaN返回true，其他类型都返回false。</p>
+
+<h3 id="三numberparseint-和-numberparsefloat">三、Number.parseInt() 和 Number.parseFloat()</h3>
+<p>ES6将全局方法parseInt()和Numer.parseFloat(),转移到Number对象上面，功能跟以前一样。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//es5写法
+let  a = parseInt('123');      //123
+let  a1 = parseFloat('123abc');//123
+//es6写法
+let b = Number.parseInt('123');       //123
+let b1 = Number.parseFloat('123abc'); //123
+</code></pre>
+</div>
+<p>这样做的目的，是局部减少全局性方法，使得语言逐步模块化。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.parseFloat === parseFloat; //true
+</code></pre>
+</div>
+<h3 id="四numberisinteger">四、Number.isInteger()</h3>
+<p>Number.isInteger()用来判断一个数值是否为整数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isInteger(123);//true
+Number.isInteger(12.5);//false
+</code></pre>
+</div>
+<p>js内部，整数和浮点数是同样的存储方法，所以1和1.0被认为是同一个值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isInteger(1.0) === Number.isInteger(1);//true
+</code></pre>
+</div>
+<p>同样如果参数不是数值，一律返回false。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isInteger('adc'); //false
+Number.isInteger(true); //false
+</code></pre>
+</div>
+<p>注意，由于js采用IEEE 754标准，数值存储为64位双精度格式，数值精度最多可以达到53个二进位(1个隐藏位和52个有效位)。如果数值的精度超过这个位数，第54位和后面的位就会被丢弃，这种情况下，Number.isInteger()可能会发生误判。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isInteger(3.0000000000000002) //true
+</code></pre>
+</div>
+<p>上面代码中，3.0000000000000002不是整数，但是会返回true，原因就是这个小数的精度达到了小数点后16个十进位制，转成二进制后超过了53位，导致最后的那个2被丢弃了。</p>
+
+<p>类似的情况还有，如果一个数值的绝对值小于js能够分辨的最小Number.MIN_VALUE(5e-324)，会被自动转为0，这时Number.isInteger()也会发生误判。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isInteger(5E-324) // false
+Number.isInteger(5E-325) // true
+</code></pre>
+</div>
+<p>能够分辨的最小值是5e-324，如果比它还小，将自动转为0，因此返回true。</p>
+
+<p>所以，如果对数据的精度要求过高，不建议使用Number.isInteger()判断一个数值是否为整数。</p>
+<h3 id="五numberepsilon">五、Number.EPSILON</h3>
+<p>ES6在Number对象上面新增了一个常量Number.EPSILON，根据规格，它表示 1 与大于 1 的最小浮点数之间的差。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.EPSILON // 2.220446049250313e-16
+</code></pre>
+</div>
+<p>Number.EPSILON实际上是js能够表示的最小精度。误差如果小于这个值，就可以认为已经没有意义了，即不存在误差了。</p>
+
+<p>引入一个这么小的常量的目的在于为浮点数计算，设置一个误差范围。因为js中浮点数计算是不精确的。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>0.1 + 0.2 === 0.3 //false
+
+0.1 + 0.2 - 0.3 //5.551115123125783e-17
+</code></pre>
+</div>
+<p>Number.EPSILON 可以用来设置一个最小误差范围，如果两个浮点数的差值小于这个值，我们就认为这两个浮点数相等。下面把误差范围值设为2的-50次方(Number.EPSILON * Math.pow(2, 2));</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>5.551115123125783e-17 &lt; Number.EPSILON * Math.pow(2, 2) //true
+</code></pre>
+</div>
+<p>因此，Number.EPSILON的实质是可以接受的最小误差范围。可以封装一个函数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function withinErrorMargin (left, right) {
+  return Math.abs(left - right) &lt; Number.EPSILON * Math.pow(2, 2);
+}
+0.1 + 0.2 === 0.3 // false
+withinErrorMargin(0.1 + 0.2, 0.3) // true
+
+1.1 + 1.3 === 2.4 // false
+withinErrorMargin(1.1 + 1.3, 2.4) // true
+</code></pre>
+</div>
+<p>【】上面Math.abs啥意思?</p>
+
+<p>上面封装的函数，意思就是误差如果小于设定的值，就认为两个数相等。</p>
+<h3 id="六安全整数和numberissafeinteger">六、安全整数和Number.isSafeInteger()</h3>
+<p>js能够准确表示的整数范围是-2^53到2^53之间（不含两个端点），超过这个范围，无法精确表示这个值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.pow(2, 53) // 9007199254740992
+9007199254740992  // 9007199254740992
+9007199254740993  // 9007199254740992
+Math.pow(2, 53) === Math.pow(2, 53) + 1 //true
+</code></pre>
+</div>
+<p>上面代码中，最大值+ 1 之后就不精确了。</p>
+
+<p>ES6引入了Number.MAX_SAFE_INTEGER和Number.MIN_SAFE_INTEGER这两个常量，表示安全范围的上下限。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.MAX_SAFE_INTEGER === Math.pow(2, 53) - 1 //true
+Number.MAX_SAFE_INTEGER === 9007199254740991 //true
+
+Number.MIN_SAFE_INTEGER === -Number.MAX_SAFE_INTEGER //true
+Number.MIN_SAFE_INTEGER === -9007199254740991 //true
+</code></pre>
+</div>
+<p>上面代码中，可以看到js能够精确表示的极限。</p>
+
+<p>Number.isSafeInteger()用来判断一个整数是否在找个安全范围之内。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Number.isSafeInteger(1); //true
+Number.isSafeInteger(1.0); //true
+Number.isSafeInteger(9007199254740990);//true
+
+Number.isSafeInteger(1.2); //false
+Number.isSafeInteger('adc');//false
+Number.isSafeInteger('1'); //false
+Number.isSafeInteger(9007199254740992); //false
+</code></pre>
+</div>
+<p>【】同时验证运算数和运算结果。没写。</p>
+<h3 id="七math对象的扩展">七、Math对象的扩展</h3>
+<h4 id="mathtrunc">Math.trunc()</h4>
+<p>Math.trunc()方法用于去除一个数的小数部分，返回整数部分。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.trunc(1.2) //1
+Math.trunc(-1.2) //-1
+Math.trunc(-0.01) // -0
+</code></pre>
+</div>
+<p>对于非数值，Math.trunc()内部会使用Number方法将其转化为数值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.trunc('123.1') //123
+Math.trunc(true) //1
+Math.trunc(false) //0
+Math.trunc(null) //0
+</code></pre>
+</div>
+<p>对于空值和无法截取整数的值，返回NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//都返回NaN
+Math.trunc(NaN)
+Math.trunc(undefined)
+Math.trunc('adc')
+Math.trunc()
+</code></pre>
+</div>
+<p>【】这里有个替代函数</p>
+
+<h4 id="mathsign">Math.sign()</h4>
+<p>Math.sign()：判断一个数是整数，负数，零。如果是非数值，会先将其转化为数值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.sign(5) //1
+Math.sign(-5) //-1
+Math.sign(0) //0
+Math.sign(-0) //-0
+Math.sign('123') //123
+Math.sign('abc') /NaN
+</code></pre>
+</div>
+<p>如果参数是非数值，会自动转为数值。对于那些无法转为数值的值，会返回NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.sign(NaN); //NaN
+Math.sign('abc'); //NaN
+Math.sign(); //NaN
+Math.sign(true); //1
+Math.sign(false); //0
+Math.sign(null); //0
+Math.sign(undefined); //NaN
+Math.sign('');0
+</code></pre>
+</div>
+<p>【】替代函数</p>
+
+<h4 id="mathcbrt">Math.cbrt()</h4>
+<p>Math.cbrt()：方法用于计算一个数的立方根。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.cbrt(-1) // -1
+Math.cbrt(0)  // 0
+Math.cbrt(1)  // 1
+Math.cbrt(2)  // 1.2599210498948734
+</code></pre>
+</div>
+<p>对于非数值，Math.cbrt()内部也是先转化为数值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.cbrt(8) // 2
+Math.cbrt('8') // 2
+Math.cbrt('abc') // NaN
+</code></pre>
+</div>
+<p>【】替代函数</p>
+
+<h4 id="mathclz32">Math.clz32()</h4>
+<p>Math.clz32()：将参数转为32位无符号整数的形式，返回这32位里面有多少个前导0。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.clz32(0) // 32
+Math.clz32(1) // 31
+Math.clz32(1000) // 22
+Math.clz32(0b01000000000000000000000000000000) // 1
+Math.clz32(0b00100000000000000000000000000000) // 2
+</code></pre>
+</div>
+<p>如果是小数，Math.clz32()方法会只考虑整数部分。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.clz32(1.2) //31
+</code></pre>
+</div>
+<p>如果是空值或者其他类型的值，也是会将他们先转为数值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.clz32(NaN) //32
+Math.clz32(true) //31
+Math.clz32(false) //32
+Math.clz32(undefined) //32
+Math.clz32() //32
+Math.clz32('') //32
+</code></pre>
+</div>
+<h4 id="mathimul">Math.imul()</h4>
+<h4 id="mathfround">Math.fround()</h4>
+<p>Math.fround()：返回一个数的32位单精度浮点形式。</p>
+
+<p>对于32位单精度格式来说，数值精度是24个二进制位 (1位隐藏位与 23 位有效位）,所以对于负2的24次方和2的24次方之间的数，返回结果与参数本身一致。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.fround(1) //1
+Math.fround(0) //0
+Math.fround(2**24) //16777216
+</code></pre>
+</div>
+<p>如果参数的的绝对值大于2的24次方，返回的结果就丢失精度。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> Math.fround(2**24) === Math.fround(2**24 + 1)
+</code></pre>
+</div>
+<p>Math.fround()的主要作用，是将64位双精度浮点数转为32位单精度浮点数，如果小数的精度超过24个二进位制，返回值就会不同于原值，否则返回值不变（即与64位双精度一致）</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> //未丢失精度
+ Math.fround(1.25) //1.25
+ Math.fround(1.125) //1.125
+ //丢失精度
+ Math.fround(1.1) // 1.100000023841858
+ Math.fround(0.3) //0.30000001192092896
+</code></pre>
+</div>
+<p>如果参数是NaN和Infinity，此方法返回原值。对于其他类型的非数值，会先转化为数值，再返回单精度浮点数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.fround(NaN) //NaN
+Math.fround(Infinity) //Infinity
+
+Math.fround(true) //1
+Math.fround(false) //0
+Math.fround('') //0
+Math.fround({}) //NaN
+Math.fround(null) //0
+Math.fround('adc') //NaN
+Math.fround('123') //123
+</code></pre>
+</div>
+<p>【】替代函数</p>
+
+<h4 id="mathhypot">Math.hypot()</h4>
+<p>Math.hypot()：返回所有参数的平方和的平方根。如果参数中有不是数值的参数，就会先转为数值，只要有一个不能转为数值，返回的结果就是NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.hypot(3,4) //5
+Math.hypot(4) //4
+Math.hypot(-4) //4
+Math.hypot(3,'4') //5
+Math.hypot(3,'adc') //NaN
+</code></pre>
+</div>
+
+<h3 id="八对数方法的扩展">八、对数方法的扩展</h3>
+
+<h4 id="mathexpm1">Math.expm1()</h4>
+
+<p>Math.expm1(x)：返回 ex - 1，即Math.exp(x) - 1。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> Math.expm1(1) 1.718281828459045
+</code></pre>
+</div>
+<h4 id="mathlog1p">Math.log1p()</h4>
+<p>Math.log1p(x)：返回1 + x的自然对数，即Math.log(1 + x)，如果x小于1，返回NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.log1p(1)  // 0.6931471805599453
+Math.log1p(0)  // 0
+Math.log1p(-1) // -Infinity
+Math.log1p(-2) // NaN
+</code></pre>
+</div>
+<h4 id="mathlog10">Math.log10()</h4>
+<p>Math.log10(x)：返回以10为底的x的对数，如果x小于0，返回NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.log10(1) //0
+Math.log10(2) //0.3010299956639812
+Math.log10(-1) //NaN
+Math.log10(0) //-Infinity
+</code></pre>
+</div>
+<h4 id="mathlog2">Math.log2()</h4>
+<p>Math.log2()：返回以2为底的对数，如果参数小于0，返回NaN。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.log2(2) //1
+Math.log2(1) //0
+Math.log2(-1) // NaN
+Math.log2(0) //-Infinity 
+</code></pre>
+</div>
+<h3 id="双曲函数方法">双曲函数方法</h3>
+<p>Math.sinh(x) 返回x的双曲正弦（hyperbolic sine）</p>
+
+<p>Math.cosh(x) 返回x的双曲余弦（hyperbolic cosine）</p>
+
+<p>Math.tanh(x) 返回x的双曲正切（hyperbolic tangent）</p>
+
+<p>Math.asinh(x) 返回x的反双曲正弦（inverse hyperbolic sine）</p>
+
+<p>Math.acosh(x) 返回x的反双曲余弦（inverse hyperbolic cosine）</p>
+
+<p>Math.atanh(x) 返回x的反双曲正切（inverse hyperbolic tangent）
+【】不懂</p>
+<h3 id="九指数运算符">九、指数运算符</h3>
+<p>ES6新增了一个指数运算符 (* *) 。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>2**2 //4
+2**3 //8
+</code></pre>
+</div>
+<p>这个运算符的一个特点是右结合，多个指数符连用时，是从右边开始计算的。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//相当于2**(2**4)
+2**2**4 //65536
+2**16 //65536
+</code></pre>
+</div>
+<p>指数运算符可以与等号结合，形成一个新的赋值运算符(**=) 。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let a = 1;
+a **= 2; //1
+// 等同于 a = a * a;
+
+let a = 2;
+a **=3 //8
+//等同于 a = a * a *a;
+</code></pre>
+</div>
+<p>注意：V8引擎的指数运算跟Math.pow的方式实现不同，对于特别大的结果，两者会有细微差异。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Math.pow(99, 99) //3.697296376497263e+197
+99 ** 99 //3.697296376497268e+197
+</code></pre>
+</div>
+
+
+   
+            </div>
+            
+          </div>
+          
+                <div class="next_page_box">
+                  <div class="read_next">阅读下一篇文章</div>
+                  <div class="next_page">
+                    <a class="" href="http://localhost:4000/tec/2018/05/07/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="http://localhost:4000/tec/2018/05/07/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html">
+                      <h4>ES6基础-字符串的扩展</h4>
+                      <div></div>
+                    </a>
+                  </div>
+                </div>
+          
+          <div class="phone_bottom">
+              <a class="" href="http://localhost:4000/tec/2018/06/08/%E6%AD%A3%E5%88%99%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="http://localhost:4000/tec/2018/06/08/%E6%AD%A3%E5%88%99%E7%9A%84%E6%89%A9%E5%B1%95.html">
+              PREV
+              </a>
+              <a class="" href="http://localhost:4000/tec/2018/05/07/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="http://localhost:4000/tec/2018/05/07/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%89%A9%E5%B1%95.html">
+                NEXT
+              </a>
+          </div>
+       </div>
+    </div>
+  </body>
+<script src="/source/js/highlight.min.js"></script>
+<script type="text/javascript" src="/source/js/jquery.js"></script>
+<script type="text/javascript" src="/source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="/source/js/tween.js"></script>
+<script type="text/javascript" src="/source/js/animation.js"></script>
+  <script type="text/javascript" src="/source/js/index.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
+    })
+  </script>
+</html>

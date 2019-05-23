@@ -512,6 +512,29 @@ body{
 }  
 /*<479px*/
 @media only screen and (max-width: 479px){
+@font-face{
+font-family: dayfont;
+src: url('../img/zt/impact.ttf'),
+     url('../img/zt/impact.eot'); /* IE9+ */
+}
+body{
+  background-image:url(../img/h_bg.jpg);
+  background-size: 50%;
+  background-attachment: fixed;
+  width: 100%;
+  overflow-x: hidden;
+}
+body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(../img/h_bg.jpg);
+  background-size: 50%;
+}
 /*导航*/
 .nav {
   position: fixed;
@@ -520,7 +543,7 @@ body{
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: #000;
+  background-color: #212121;
   opacity: 0;
   transition: opacity 0.3s;
   -moz-transition: opacity 0.3s;  
@@ -548,7 +571,7 @@ body{
   padding: 15px;
   position: relative;
   left: 10%;
-  font-family: impact;
+  font-family: dayfont;
 }
 .nav__link{
   color: #7de87d;
@@ -565,6 +588,7 @@ body{
 .nav__bg{
   display: none;
 }
+/*导航结束*/
 /*btn*/
 .nav-btn {
   position: fixed;
@@ -619,40 +643,18 @@ body{
   will-change: transition;
   visibility: hidden;
 }
-@font-face{
-font-family: dayfont;
-src: url('../img/zt/impact.ttf'),
-     url('../img/zt/impact.eot'); /* IE9+ */
-}
-body{
-	background-image:url(../img/h_bg.jpg);
-	background-size: 50%;
-	background-attachment: fixed;
-	width: 100%;
-	overflow-x: hidden;
-}
-body:before {
-  content: ' ';
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url(../img/h_bg.jpg);
-  background-size: 50%;
-}
+
 .phone_title{
 	width: 100%;
     height: 70px;
     position: fixed;
-    background: url(../img/h_bg.jpg);
+    background: #212121;
     z-index: 2;
 }
 .svg_phone_logo{
 	position: relative;
-    top: 16px;
-    width: 105px;
+  top: 16px;
+  width: 105px;
 }
 .slide_img{
 	position: absolute;
@@ -697,10 +699,9 @@ body:before {
 	display: block;
 }
 .content{
+	position: relative;
 	top: 180px;
-  position: absolute;
-  overflow-y: scroll;
-  height: calc(100% - 180px);
+  width: 100% !important;
   overflow-x: hidden;
 }
 .post_list > li{
@@ -712,9 +713,9 @@ body:before {
 .main_title{
 	position: absolute;
 	font-size: 4rem;
-    color: #282727;
-    font-family: 'impact';
-    right: 10px;
+  color: #282727;
+  font-family: dayfont;
+  right: 10px;
 }
 .gray { 
     -webkit-filter: grayscale(1);
@@ -750,9 +751,9 @@ body:before {
 }
 .more_icon{
 	position: absolute;
-    top: 77px;
-    left: 368px;
-    color: #777777;
+  top: 77px;
+  right: 16px;
+  color: #777777;
 }
 .details{
 	position: absolute;

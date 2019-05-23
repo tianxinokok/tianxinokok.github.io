@@ -14,9 +14,7 @@
 </head>
 
  <body>
-   <div class="container">
-       <header>
-          <div class="nav_box" style="z-index: 10000">
+ <div class="nav_box" style="z-index: 10000">
 <nav class="nav">
 	<ul class="nav__list">
 		<li class="nav__item">
@@ -167,56 +165,36 @@
     </defs>
     <rect x="0" y="0" width="100" height="100" fill="url(#nav-grad)" mask="url(#nav__bg-mask)"></rect>
 </svg>
+ <!--pc_menu_btn--> 
 <button class="nav-btn">
-	<svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
-	<rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
-	<polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
-	<g class="burger__plus">
-		<rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
-		<rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
-		<rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
-		<rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
-	</g>
-	</svg>
-</button>
-   <!--phone_menu-->  
-<button class="nav_btn_phone">
-  <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-     viewBox="0 0 213 200" style="enable-background:new 0 0 213 200;" xml:space="preserve">
-  <g>
-    <line class="svg_menu_phone" x1="33" y1="58" x2="177" y2="58"/>
-    <line class="svg_menu_phone" x1="33" y1="100" x2="177" y2="100"/>
-    <line class="svg_menu_phone" x1="33" y1="142" x2="177" y2="142"/>
+  <svg class="burger <?php echo $darkBurgerClass; ?>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <rect class="burger__stroke"  x="2" y="2" width="32" height="32" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+  <polyline class="burger__stroke-over"points="18 2 34 2 34 34 2 34 2 2 18 2" fill="none" stroke="" stroke-miterlimit="10" stroke-width="4"/>
+  <g class="burger__plus">
+    <rect class="burger__plus-left" x="8" y="16" width="10" height="4"/>
+    <rect class="burger__plus-btm" x="16" y="18" width="4" height="10"/>
+    <rect class="burger__plus-right" x="18" y="16" width="10" height="4"/>
+    <rect class="burger__plus-top" x="16" y="8" width="4" height="10"/>
   </g>
   </svg>
 </button>
 </div>
 
-      </header> 
-       <div class="content_box">
-          <div class="content" >
+   <div class="content_container">
+      <div class="common_box">
+        <div class="slide_img" id="slide_img_1"><div class="slide_img_shade"></div></div>
+        <div class="title_box">
+          <h2 class="main_title"><span>WORKS</span></h2>
+        </div> 
+      </div>
+      <div class="content_box">
+          <div class="content_content" >
             <div class="post_content">
-                <div class="doubleMenuList">
-                    <ul>
-                      
-                      <li>
-                        <div>
-                          <div class="post_title">
-                          <a class="post-link" href="/es6/2018/12/23/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95.html" data-post-href="/es6/2018/12/23/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95.html">对象的扩展</a>
-                          </div>
-                        </div>
-                      </li> 
-                      
-                    </ul>
+                <div class="content_title">
+                  <h1>对象的扩展</h1><span id="busuanzi_container_page_pv">
+                  <span><time datetime=""></time></span>
                 </div>
-                <div class="doubleMenuContent">
-                  <div class="content_title">
-                    <h2>对象的扩展</h2>
-                    <span id="busuanzi_container_page_pv">
-                    <time datetime=""></time>
-                    </span>
-                  </div>
-                   <h3 id="一属性的简洁表示法">一、属性的简洁表示法</h3>
+                  <h3 id="一属性的简洁表示法">一、属性的简洁表示法</h3>
 <p>ES6允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let name = 'tx';
 //es6
@@ -332,16 +310,47 @@ obj['na' + 'me'] = 'jl';
 <p>第一种方法是直接用标识符作为属性名，方法二是用表达式作为属性名，这时要将表达式放在括号之内。</p>
 
 
-                </div>
+   
             </div>
+            
+          </div>
+          
+                <div class="next_page_box">
+                  <div class="read_next">阅读下一篇文章</div>
+                  <div class="next_page">
+                    <a class="" href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html" data-post-href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html">
+                      <h4>路边流浪汉</h4>
+                      <div></div>
+                    </a>
+                  </div>
+                </div>
+          
+          <div class="phone_bottom">
+              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
+              PREV
+              </a>
+              <a class="" href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html" data-post-href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html">
+                NEXT
+              </a>
           </div>
        </div>
     </div>
   </body>
-  <script src="/source/js/highlight.min.js"></script>
-  <script type="text/javascript" src="/source/js/jquery.js"></script>
+<script src="/source/js/highlight.min.js"></script>
+<script type="text/javascript" src="/source/js/jquery.js"></script>
+<script type="text/javascript" src="/source/js/TweenMax.min.js"></script>
+<script type="text/javascript" src="/source/js/DrawSVGPlugin.min.js"></script>
+<script type="text/javascript" src="/source/js/tween.js"></script>
+<script type="text/javascript" src="/source/js/animation.js"></script>
   <script type="text/javascript" src="/source/js/index.js"></script>
   <script>
     hljs.initHighlightingOnLoad();
+    $(document).ready(function(){
+      //评论
+        $('.comments').on('click',function(e){
+          e.preventDefault();
+          $('#lv-container').show();
+        });
+    })
   </script>
 </html>
