@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fireCheck</title>
+</head>
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+body{font-family:Arial, Helvetica, sans-serif,"宋体";font-size:12px;text-align:center;}
+h1{margin:0;padding:20px 0;font-size:16px;}
+ol{padding-left:20px;line-height:130%;}
+#box{width:600px;text-align:left;margin:0 auto;padding-top:80px;}
+#suggest,#suggest2{width:200px;}
+.gray{color:gray;}
+.ac_results {background:#fff;border:1px solid #7f9db9;position:absolute;z-index:10000;display:none;}
+.ac_results ul{margin:0;padding:0;list-style:none;}
+.ac_results li a{white-space:nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+.ac_results li{border:1px solid #fff;}
+.ac_over,.ac_results li a:hover {background:#c8e3fc;}
+.ac_results li a span{float:right;}
+.ac_result_tip{border-bottom:1px dashed #666;padding:3px;}
+
+</style>
+<body>
+	<div id="box">
+        <h1>机票预定智能输入提示DEMO</h1>
+        <input type="hidden" name="arrcity_3word" id="arrcity_3word" value="" />
+        <label for="arrcity">出发城市：</label><input type="text" name="arrcity" id="arrcity" />
+        <div id='suggest' class="ac_results"></div>
+        <label for="city2">目的城市：</label><input type="text" name="city2" id="city2" />
+        <div id='suggest2' class="ac_results"></div>
+        <p>具体的功能如下：</p>
+        <ol>
+            <li>点击输入框，自动列出热门出行城市；</li>
+            <li>支持中文/拼音/3字码 输入的智能提示；</li>
+            <li>支持键盘方向键选择、回车键确定；</li>
+            <li>支持选择后自定义callback函数；</li>
+            <li>支持IE6、IE7、IE8、Firefox</li>
+        </ol>
+        
+    </div>
+
+</body>
+</html>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+
+    $("#arrcity").suggest(citys,{hot_list:commoncitys,dataContainer:'#arrcity_3word',onSelect:function(){$("#city2").click();},attachObject:'#suggest'});
+    
+    $("#city2").suggest(citys,{hot_list:commoncitys,attachObject:"#suggest2"});
+    
+});
+
+
+(function($) {
+
+        $.suggest = function(input, options) {
+    
+            var $input = $(input).attr("autocomplete", "off");
+            var $results;
+
+            var timeout = false;        // hold timeout ID for suggestion results to appear 
+            var prevLength = 0;         // last recorded length of $input.val()
+            var cache = [];             // cache MRU list
+            var cacheSize = 0;          // size of cache in chars (bytes?)
+            
+            if($.trim($input.val())=='' || $.trim($input.val())=='涓枃/鎷奸煶') $input.val('涓枃/鎷奸煶').css('color','#aaa');
+            if( ! options.attachObject )
+                options.attachObject = $(document.createElement("ul")).appendTo('body');
+
+            $results = $(options.attachObject);
+            $results.addClass(options.resultsClass);
+            
+            resetPosition();
+            $(window)
+                .load(resetPosition)        // just in case user is changing size of page while loading
+                .resize(resetPosition);
+
+            $input.blur(function() {
+                setTimeout(function() { $results.hide() }, 200);
+            });
+            
+            $input.focus(function(){
+                if($.trim($(this).val())=='涓枃/鎷奸煶'){
+                    $(this).val('').css('color','#000');
+                }
+                if($.trim($(this).val())==''){
+                    displayItems('');//鏄剧ず鐑棬鍩庡競鍒楄〃
+                }
+            });
+            $input.click(function(){
+                var q=$.trim($(this).val());
+                displayItems(q);
+                $(this).select();
+            });
+                        
+            // help IE users if possible
+            try {
+                $results.bgiframe();
+            } catch(e) { }
+
+            $input.keyup(processKey);//
+            
+            function resetPosition() {
+                // requires jquery.dimension plugin
+                var offset = $input.offset();
+                $results.css({
+                    top: (offset.top + input.offsetHeight) + 'px',
+                    left: offset.left + 'px'
+                });
+            }
+            
+            
+            function processKey(e) {
+                
+                // handling up/down/escape requires results to be visible
+                // handling enter/tab requires that AND a result to be selected
+                if ((/27$|38$|40$/.test(e.keyCode) && $results.is(':visible')) ||
+                    (/^13$|^9$/.test(e.keyCode) && getCurrentResult())) {
+                    
+                    if (e.preventDefault)
+                        e.preventDefault();
+                    if (e.stopPropagation)
+                        e.stopPropagation();
+
+                    e.cancelBubble = true;
+                    e.returnValue = false;
+                
+                    switch(e.keyCode) {
+    
+                        case 38: // up
+                            prevResult();
+                            break;
+                
+                        case 40: // down
+                            nextResult();
+                            break;
+                        case 13: // return
+                            selectCurrentResult();
+                            break;
+                            
+                        case 27: // escape
+                            $results.hide();
+                            break;
+    
+                    }
+                    
+                } else if ($input.val().length != prevLength) {
+
+                    if (timeout) 
+                        clearTimeout(timeout);
+                    timeout = setTimeout(suggest, options.delay);
+                    prevLength = $input.val().length;
+                    
+                }           
+                    
+                
+            }
+            
+            function suggest() {
+            
+                var q = $.trim($input.val());
+                displayItems(q);
+            }       
+            function displayItems(items) {
+                var html = '';
+                if (items=='') {//鐑棬鍩庡競閬嶅巻
+                    for(h in options.hot_list){
+                        html+='<li rel="'+options.hot_list[h][0]+'"><a href="#'+h+'"><span>'+options.hot_list[h][2]+'</span>'+options.hot_list[h][1]+'</a></li>';
+                    }
+                    html='<div class="gray ac_result_tip">璇疯緭鍏ヤ腑鏂�/鎷奸煶鎴栬€呪啈鈫撻€夋嫨</div><ul>'+html+'</ul>';
+                }
+                else {
+                    /*if (!items)
+                    return;
+                    if (!items.length) {
+                        $results.hide();
+                        return;
+                    }*/
+                    for (var i = 0; i < options.source.length; i++) {//鍥藉唴鍩庡競鍖归厤
+                        var reg = new RegExp('^' + items + '.*$', 'im');
+                        if (reg.test(options.source[i][0]) || reg.test(options.source[i][1]) || reg.test(options.source[i][2]) || reg.test(options.source[i][3])) {
+                            html += '<li rel="' + options.source[i][0] + '"><a href="#' + i + '"><span>' + options.source[i][2] + '</span>' + options.source[i][1] + '</a></li>';
+                        }
+                    }
+                    if (html == '') {
+                        suggest_tip = '<div class="gray ac_result_tip">瀵逛笉璧凤紝鎵句笉鍒帮細' + items + '</div>';
+                    }
+                    else {
+                        suggest_tip = '<div class="gray ac_result_tip">' + items + '锛屾寜鎷奸煶鎺掑簭</div>';
+                    }
+                    html = suggest_tip + '<ul>' + html + '</ul>';
+                }
+
+                $results.html(html).show();
+                $results.children('ul').children('li:first-child').addClass(options.selectClass);
+                
+                $results.children('ul')
+                    .children('li')
+                    .mouseover(function() {
+                        $results.children('ul').children('li').removeClass(options.selectClass);
+                        $(this).addClass(options.selectClass);
+                    })
+                    .click(function(e) {
+                        e.preventDefault(); 
+                        e.stopPropagation();
+                        selectCurrentResult();
+                    });
+            }
+                        
+            function getCurrentResult() {
+            
+                if (!$results.is(':visible'))
+                    return false;
+            
+                var $currentResult = $results.children('ul').children('li.' + options.selectClass);
+                if (!$currentResult.length)
+                    $currentResult = false;
+                    
+                return $currentResult;
+
+            }
+            
+            function selectCurrentResult() {
+            
+                $currentResult = getCurrentResult();
+            
+                if ($currentResult) {
+                    $input.val($currentResult.children('a').html().replace(/<span>.+?<\/span>/i,''));
+                    $results.hide();
+
+                    if( $(options.dataContainer) ) {
+                        $(options.dataContainer).val($currentResult.attr('rel'));
+                    }
+    
+                    if (options.onSelect) {
+                        options.onSelect.apply($input[0]);
+                    }
+                }
+            
+            }
+            
+            function nextResult() {
+            
+                $currentResult = getCurrentResult();
+            
+                if ($currentResult)
+                    $currentResult
+                        .removeClass(options.selectClass)
+                        .next()
+                            .addClass(options.selectClass);
+                else
+                    $results.children('ul').children('li:first-child').addClass(options.selectClass);
+            
+            }
+            
+            function prevResult() {
+            
+                $currentResult = getCurrentResult();
+            
+                if ($currentResult)
+                    $currentResult
+                        .removeClass(options.selectClass)
+                        .prev()
+                            .addClass(options.selectClass);
+                else
+                    $results.children('ul').children('li:last-child').addClass(options.selectClass);
+            
+            }
+    
+        }
+        
+        $.fn.suggest = function(source, options) {
+        
+            if (!source)
+                return;
+        
+            options = options || {};
+            options.source = source;
+            options.hot_list=options.hot_list || [];
+            options.delay = options.delay || 0;
+            options.resultsClass = options.resultsClass || 'ac_results';
+            options.selectClass = options.selectClass || 'ac_over';
+            options.matchClass = options.matchClass || 'ac_match';
+            options.minchars = options.minchars || 1;
+            options.delimiter = options.delimiter || '\n';
+            options.onSelect = options.onSelect || false;
+            options.dataDelimiter = options.dataDelimiter || '\t';
+            options.dataContainer = options.dataContainer || '#SuggestResult';
+            options.attachObject = options.attachObject || null;
+    
+            this.each(function() {
+                new $.suggest(this, options);
+            });
+    
+            return this;
+            
+        };
+        
+    })(jQuery);
+    //download by http://www.codefans.net
+//鍒濆鍖栧父鐢ㄦ満鍦哄煄甯�
+var commoncitys=new Array();
+
+commoncitys[0]=new Array('SZX','娣卞湷','SHENZHEN','SZ');
+ 
+commoncitys[1]=new Array('PEK','鍖椾含','BEIJING','BJ');
+ 
+commoncitys[2]=new Array('SHA','涓婃捣','SHANGHAI','SH');
+ 
+commoncitys[3]=new Array('CAN','骞垮窞','GUANGZHOU','GZ');
+ 
+commoncitys[4]=new Array('CTU','鎴愰兘','CHENGDU','CD');
+ 
+commoncitys[5]=new Array('HGH','鏉窞','HANGZHOU','HZ');
+ 
+commoncitys[6]=new Array('CSX','闀挎矙','CHANGSHA','CS');
+ 
+commoncitys[7]=new Array('CKG','閲嶅簡','CHONGQING','CQ');
+ 
+commoncitys[8]=new Array('KMG','鏄嗘槑','KUNMING','KM');
+ 
+commoncitys[9]=new Array('XIY','瑗垮畨','XIAN','XA');
+ 
+commoncitys[10]=new Array('WUH','姝︽眽','WUHAN','WH');
+ 
+commoncitys[11]=new Array('NKG','鍗椾含','NANJING','NJ');
+ 
+commoncitys[12]=new Array('TAO','闈掑矝','QINGDAO','QD');
+ 
+commoncitys[13]=new Array('SYX','涓変簹','SANYA','SY');
+ 
+commoncitys[14]=new Array('XMN','鍘﹂棬','XIAMEN','XM');
+ 
+
+//鍒濆鍖栨墍鏈夊浗鍐呮満鍦哄煄甯�
+var citys=new Array();
+// A
+ 
+citys[0]=new Array('SHA','涓婃捣','SHANGHAI','SH');
+ 
+citys[1]=new Array('HYN','榛勫博','HUANGYAN','HY');
+ 
+citys[2]=new Array('HGH','鏉窞','HANGZHOU','HZ');
+ 
+citys[3]=new Array('YIW','涔変箤','YIWU','YW');
+ 
+citys[4]=new Array('JUZ','琛㈠窞','JUZHOU','QZ');
+ 
+citys[5]=new Array('HSN','鑸熷北(鏅檧灞�)','ZHOUSHAN','ZS');
+ 
+citys[6]=new Array('WNZ','娓╁窞','WENZHOU','WZ');
+ 
+citys[7]=new Array('NGB','瀹佹尝','NINGBO','NB');
+ 
+citys[8]=new Array('LNJ','涓存钵','LINCANG','LC');
+ 
+citys[9]=new Array('ZAT','鏄€�','ZHAOTONG','ZT');
+ 
+citys[10]=new Array('SYM','鎬濊寘','SIMAO','SM');
+ 
+citys[11]=new Array('LUM','鑺掑競','MANSHI','MS');
+ 
+citys[12]=new Array('BSD','淇濆北','BAOSHAN','BS');
+ 
+citys[13]=new Array('KMG','鏄嗘槑','KUNMING','KM');
+ 
+citys[14]=new Array('JHG','瑗垮弻鐗堢撼','XISHUANGBANNA','XSBN');
+ 
+citys[15]=new Array('DLU','澶х悊','DALI','DL');
+ 
+citys[16]=new Array('DIG','杩簡','DIQING','DQ');
+ 
+citys[17]=new Array('LJG','涓芥睙','LIJIANG','LJ');
+ 
+citys[18]=new Array('LXA','鎷夎惃','LASA','LS');
+ 
+citys[19]=new Array('TCG','濉斿煄','TACHENG','TC');
+ 
+citys[20]=new Array('IQM','涓旀湯','QIEMO','QM');
+ 
+citys[21]=new Array('KCA','搴撹溅','KUCHE','KC');
+ 
+citys[22]=new Array('HTN','鍜岀敯','HETAN','HT');
+ 
+citys[23]=new Array('HMI','鍝堝瘑','HAMI','HM');
+ 
+citys[24]=new Array('FYN','瀵岃暣','FUYUN','FY');
+ 
+citys[25]=new Array('AKU','闃垮厠鑻�','AGESU','AKS');
+ 
+citys[26]=new Array('URC','涔岄瞾鏈ㄩ綈','WULUMUQI','WLMQ');
+ 
+citys[27]=new Array('KHG','鍠€浠€','KASHI','KS');
+ 
+citys[28]=new Array('KRL','搴撳皵鍕�','KUERLE','KEL');
+ 
+citys[29]=new Array('KRY','鍏嬫媺鐜涗緷','KELAMAYI','KLMY');
+ 
+citys[30]=new Array('AAT','闃垮嫆娉�','ALETAI','ALT');
+ 
+citys[31]=new Array('YIN','浼婂畞','YINING','YN');
+ 
+citys[32]=new Array('TSN','澶╂触','TIANJIN','TJ');
+ 
+citys[33]=new Array('AKA','瀹夊悍','ANKANG','AK');
+ 
+citys[34]=new Array('ENY','寤跺畨','YANAN','YA');
+ 
+citys[35]=new Array('HZG','姹変腑','HANZHONG','HZ');
+ 
+citys[36]=new Array('XIY','瑗垮畨','XIAN','XA');
+ 
+citys[37]=new Array('UYN','姒嗘灄','YULIN','YL');
+ 
+citys[38]=new Array('CIH','闀挎不','CHANGZHI','CZ');
+ 
+citys[39]=new Array('TYN','澶師','TAIYUAN','TY');
+ 
+citys[40]=new Array('DAT','澶у悓','DATONG','DT');
+ 
+citys[41]=new Array('YCU','杩愬煄','YUNCHENG','YC');
+ 
+citys[42]=new Array('TNA','娴庡崡','JINAN','JN');
+ 
+citys[43]=new Array('YNT','鐑熷彴','YANTAI','YT');
+ 
+citys[44]=new Array('JNG','娴庡畞','JINING','JL');
+ 
+citys[45]=new Array('DOY','涓滆惀','DONGYING','DY');
+ 
+citys[46]=new Array('LYI','涓存矀','LINYI','LY');
+ 
+citys[47]=new Array('WEF','娼嶅潑','WEIFANG','WF');
+ 
+citys[48]=new Array('TAO','闈掑矝','QINGDAO','QD');
+ 
+citys[49]=new Array('WEH','濞佹捣','WEIHAI','WH');
+ 
+citys[50]=new Array('GHN','骞挎眽','GUANGHAN','GH');
+ 
+citys[51]=new Array('DAX','杈惧幙','DAXIAN','DX');
+ 
+citys[52]=new Array('CTU','鎴愰兘','CHENGDU','CD');
+ 
+citys[53]=new Array('MIG','缁甸槼','MIANYANG','MY');
+ 
+citys[54]=new Array('YBP','瀹滃','YIBIN','YB');
+ 
+citys[55]=new Array('LZO','娉稿窞','LUZHOU','LZ');
+ 
+citys[56]=new Array('XIC','瑗挎槍','XICHANG','XC');
+ 
+citys[57]=new Array('NAO','鍗楀厖','NANCHONG','NC');
+ 
+citys[58]=new Array('PZI','鏀€鏋濊姳','PANZHIHUA','PZH');
+ 
+citys[59]=new Array('GOQ','鏍煎皵鏈�','GELANMU','GEM');
+ 
+citys[60]=new Array('XNN','瑗垮畞','XINING','XN');
+ 
+citys[61]=new Array('ZHY','涓崼','ZHONGWEI','null');
+ 
+citys[62]=new Array('INC','閾跺窛','YINCHUAN','YC');
+ 
+citys[63]=new Array('XIL','閿℃灄娴╃壒','XILINHAOTE','XLHT');
+ 
+citys[64]=new Array('HLH','涔屽叞娴╃壒','WULANHAOTE','WLHT');
+ 
+citys[65]=new Array('WUA','涔屾捣','WUHAI','WH');
+ 
+citys[66]=new Array('TGO','閫氳窘','TONGLIAO','TL');
+ 
+citys[67]=new Array('HET','鍛煎拰娴╃壒','HUHEHAOTE','HHHT');
+ 
+citys[68]=new Array('DSN','閯傚皵澶氭柉','EERDUOSI','EEDS');
+ 
+citys[69]=new Array('NZH','婊℃床閲�','MANZHOULI','MZL');
+ 
+citys[70]=new Array('HLD','娴锋媺灏�','HAILAER','HLE');
+ 
+citys[71]=new Array('CIF','璧ゅ嘲','CHIFENG','CF');
+ 
+citys[72]=new Array('BAV','鍖呭ご','BAOTOU','BT');
+ 
+citys[73]=new Array('CHG','鏈濋槼','CHAOYANG','CY');
+ 
+citys[74]=new Array('SHE','娌堥槼','SHENYANG','SY');
+ 
+citys[75]=new Array('DLC','澶ц繛','DALIAN','DL');
+ 
+citys[76]=new Array('DDG','涓逛笢','DANDONG','DD');
+ 
+citys[77]=new Array('JNZ','閿﹀窞','JINZHOU','JZ');
+ 
+citys[78]=new Array('AOG','闉嶅北','ANSHAN','AS');
+ 
+citys[79]=new Array('KHN','鍗楁槍','NANCHANG','NC');
+ 
+citys[80]=new Array('JDZ','鏅痉闀�','JINDEZHEN','JDZ');
+ 
+citys[81]=new Array('JIU','涔濇睙','JIUJIANG','JJ');
+ 
+citys[82]=new Array('KOW','璧ｅ窞','GANZHOU','GZ');
+ 
+citys[83]=new Array('JGS','浜曞唸灞�','JINGGANGSHAN','JGS');
+ 
+citys[84]=new Array('KNC','鍚夊畨','JIAN','JA');
+ 
+citys[85]=new Array('LYG','杩炰簯娓�','LIANYUNGANG','LYG');
+ 
+citys[86]=new Array('SZV','鑻忓窞','SUZHOU','SZ');
+ 
+citys[87]=new Array('YNZ','鐩愬煄','YANCHENG','YC');
+ 
+citys[88]=new Array('XUZ','寰愬窞','XUZHOU','XZ');
+ 
+citys[89]=new Array('NKG','鍗椾含','NANJING','NJ');
+ 
+citys[90]=new Array('NTG','鍗楅€�','NANTONG','NT');
+ 
+citys[91]=new Array('CZX','甯稿窞','CHANGZHOU','CZ');
+ 
+citys[92]=new Array('WUX','鏃犻敗','WUXI','WX');
+ 
+citys[93]=new Array('TNH','閫氬寲','TONGHUA','TH');
+ 
+citys[94]=new Array('JIL','鍚夋灄','JILIN','JL');
+ 
+citys[95]=new Array('CGQ','闀挎槬','CHANGCHUN','CC');
+ 
+citys[96]=new Array('YNJ','寤跺悏','YANJI','YJ');
+ 
+citys[97]=new Array('HJJ','鑺锋睙','ZHIJIANG','ZJ');
+ 
+citys[98]=new Array('DYG','寮犲鐣�','ZHANGJIAJIE','ZJJ');
+ 
+citys[99]=new Array('CGD','甯稿痉','CHANGDE','CD');
+ 
+citys[100]=new Array('CSX','闀挎矙','CHANGSHA','CS');
+ 
+citys[101]=new Array('HNY','琛￠槼','HENGYANG','HY');
+ 
+citys[102]=new Array('OHE','婕犳渤','MOHE','MH');
+ 
+citys[103]=new Array('HRB','鍝堝皵婊�','HAERBIN','HRB');
+ 
+citys[104]=new Array('HEK','榛戞渤','HEIHE','HH');
+ 
+citys[105]=new Array('NDG','榻愰綈鍝堝皵','QIQIHAER','QQHE');
+ 
+citys[106]=new Array('JMU','浣虫湪鏂�','JIAMUSI','JMS');
+ 
+citys[107]=new Array('MDG','鐗′腹姹�','MUDANJIANG','MDJ');
+ 
+citys[108]=new Array('LYA','娲涢槼','LUOYANG','LY');
+ 
+citys[109]=new Array('NNY','鍗楅槼','NANYANG','NY');
+ 
+citys[110]=new Array('CGO','閮戝窞','ZHENGZHOU','ZZ');
+ 
+citys[111]=new Array('SJW','鐭冲搴�','SHIJIAZHUANG','SJZ');
+ 
+citys[112]=new Array('SHP','绉︾殗宀�','QINHUANGDAO','QHD');
+ 
+citys[113]=new Array('HDN','閭兏','HANDAN','HD');
+ 
+citys[114]=new Array('SHS','娌欏競','SHASHI','SS');
+ 
+citys[115]=new Array('WUH','姝︽眽','WUHAN','WH');
+ 
+citys[116]=new Array('XFN','瑗勬▕','XIANGFAN','XF');
+ 
+citys[117]=new Array('ENH','鎭╂柦','ENSHI','ES');
+ 
+citys[118]=new Array('YIH','瀹滄槍','YICHANG','YC');
+ 
+citys[119]=new Array('HAK','娴峰彛','HAIKOU','HK');
+ 
+citys[120]=new Array('SYX','涓変簹','SANYA','SY');
+ 
+citys[121]=new Array('XYI','鍏翠箟','XINGYI','XY');
+ 
+citys[122]=new Array('KWE','璐甸槼','GUIYANG','GY');
+ 
+citys[123]=new Array('TEN','閾滀粊','TONGREN','TR');
+ 
+citys[124]=new Array('ZYI','閬典箟','ZUNYI','ZY');
+ 
+citys[125]=new Array('BHY','鍖楁捣','BEIHAI','BH');
+ 
+citys[126]=new Array('KWL','妗傛灄','GUILIN','GL');
+ 
+citys[127]=new Array('LZH','鏌冲窞','LIUZHOU','LZ');
+ 
+citys[128]=new Array('NNG','鍗楀畞','NANNING','NN');
+ 
+citys[129]=new Array('BAS','鐧捐壊','BAISE','BS');
+ 
+citys[130]=new Array('WUZ','姊у窞','WUZHOU','WZ');
+ 
+citys[131]=new Array('THQ','澶╂按','TIANSHUI','null');
+ 
+citys[132]=new Array('IQN','搴嗛槼','QINGYANG','QY');
+ 
+citys[133]=new Array('CHW','閰掓硥','JIUQUAN','JQ');
+ 
+citys[134]=new Array('JGN','鍢夊唱鍏�','JIAYUGUAN','JYG');
+ 
+citys[135]=new Array('DNH','鏁︾厡','DUNHUANG','DH');
+ 
+citys[136]=new Array('LHW','鍏板窞','LANZHOU','LZ');
+ 
+citys[137]=new Array('ZHA','婀涙睙','ZHANJIANG','ZJ');
+ 
+citys[138]=new Array('MXZ','姊呭窞','MEIZHOU','MZ');
+ 
+citys[139]=new Array('ZUH','鐝犳捣','ZHUHAI','ZH');
+ 
+citys[140]=new Array('SWA','姹曞ご','SHANTOU','ST');
+ 
+citys[141]=new Array('SZX','娣卞湷','SHENZHEN','SZ');
+ 
+citys[142]=new Array('CAN','骞垮窞','GUANGZHOU','GZ');
+ 
+citys[143]=new Array('XMN','鍘﹂棬','XIAMEN','XM');
+ 
+citys[144]=new Array('WUS','姝﹀し灞�','WUYISHAN','WYS');
+ 
+citys[145]=new Array('QHU','娉夊窞','QUANZHOU','QZ');
+ 
+citys[146]=new Array('LIC','杩炲煄','LIANCHENG','LC');
+ 
+citys[147]=new Array('JJN','鏅嬫睙','JINJIANG','JJ');
+ 
+citys[148]=new Array('FOC','绂忓窞','FUZHOU','FZ');
+ 
+citys[149]=new Array('WXN','涓囧幙','WANXIAN','WX');
+ 
+citys[150]=new Array('CKG','閲嶅簡','CHONGQING','CQ');
+ 
+citys[151]=new Array('TXN','榛勫北','HUANGSHAN','HS');
+ 
+citys[152]=new Array('BFU','铓屽煚','BENGBU','BB');
+ 
+citys[153]=new Array('FUG','闃滈槼','FUYANG','FY');
+ 
+citys[154]=new Array('HFE','鍚堣偉','HEFEI','HF');
+ 
+citys[155]=new Array('AQG','瀹夊簡','ANQING','AQ');
+ 
+citys[156]=new Array('PEK','鍖椾含','BEIJING','BJ');
+</script>

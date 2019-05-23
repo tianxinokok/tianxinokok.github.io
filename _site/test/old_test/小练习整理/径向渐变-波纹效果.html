@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>径向渐变-波纹效果</title>
+<style type="text/css">
+.radial-gradient{
+	width: 400px;
+	height: 200px;
+	background-color: red;
+	position: relative;
+}
+.radial-gradient:after {
+	content: '';
+	position: absolute;
+	height: 10px;
+	left: 0;
+	right: 0;
+	bottom: -10px;
+	background: radial-gradient(20px 15px ellipse at top , red 10px,transparent 11px);
+	background-size: 20px 10px;
+}
+</style>
+</head>
+<body>
+	<div class="radial-gradient"></div>
+</body>
+</html>

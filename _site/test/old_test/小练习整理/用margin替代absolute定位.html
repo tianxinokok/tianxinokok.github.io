@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用margin替代absolute定位使页面更具扩张性和弹性</title>
+</head>
+<style type="text/css">
+.container{
+    margin: 0 auto;
+    width: 980px;
+    height: 250px;
+    position: relative;
+}
+.container dl{
+    float: left;
+    width:235px;
+    padding: 0 10px;
+    text-align: center;
+}
+.container dt{
+    height: 130px;
+    position: relative;
+}
+.p-price {
+    background: none repeat scroll 0 0 #FF3333;
+    bottom: 10px;
+    color: #FFFFFF;
+    font-family: arial;
+    font-weight: bold;
+    height: 14px;
+    line-height: 14px;
+    padding: 2px 5px;
+    position: absolute;
+    right: 50px;
+}
+.p-img{
+    height: 100px;
+}
+.new-prise{
+    display: inline-block;
+    background: none repeat scroll 0 0 #FF3333;
+    color: #FFFFFF;
+    font-family: arial;
+    font-weight: bold;
+    height: 14px;
+    line-height: 14px;
+    padding: 2px 5px;
+}
+.new-price-x {
+    margin: -36px 0 0 74px;
+}
+</style>
+<body>
+	<div class="container">
+        <dl >
+            <dt class="p-img">
+                <a href="##"><img width="130" height="130" src="margin.jpg" /></a>
+                <div class="p-price">￥999.00</div>
+            </dt>
+            <dd class="p-name">
+                <a href="##">LG  GD580  3G手机 300万像素 999返100元券！</a>
+            </dd>
+        </dl>
+    </div>
+    <div class="container">
+        <dl >
+            <dt class="p-img">
+                <a href="##"><img width="130" height="130" src="margin.jpg" /></a>
+                <div class="new-price-x"><span class="new-prise">￥999.00</span></div>
+            </dt>
+            <dd class="p-name">
+                <a href="##">LG  GD580  3G手机 300万像素 999返100元券！</a>
+            </dd>
+        </dl>
+    </div>
+</body>
+<script type="text/javascript">
+
+</script>
+</html>
