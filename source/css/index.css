@@ -768,6 +768,7 @@ body:before {
 	color: #777777;
 }
 .explain {
+  width: 90%;
 	margin-top: 20px;
 	font-size: 12px;
 }
