@@ -634,14 +634,15 @@ body:before {
   will-change: transform;
 }
 .header_logo {
-  position: absolute;
+  display: none;
+/*  position: absolute;
   bottom: 50px;
   left: calc(50% - 72px);
   display: block;
   width: 144px;
   height: auto;
   will-change: transition;
-  visibility: hidden;
+  visibility: hidden;*/
 }
 
 .phone_title{
@@ -769,6 +770,9 @@ body:before {
 .explain {
 	margin-top: 20px;
 	font-size: 12px;
+}
+._overflow_hidden{
+  overflow: hidden;
 }
 .nav_btn_phone{
   position: fixed;

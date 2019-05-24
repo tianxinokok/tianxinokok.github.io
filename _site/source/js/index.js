@@ -476,16 +476,23 @@ $(document).ready(function(){
     $link.on( "click", function(e) {
       //e.preventDefault();
     });
+    var stopDefault = function(){
+        event.preventDefault();
+    };
     //phone_nav_btn open
     $navBtnPhone.on('click',function(e){
       e.stopPropagation();
       $('.nav').addClass('_opacity1');
       $('.nav__item').addClass('_opacity1');
+      $(document.body).addClass('_overflow_hidden');
+      document.addEventListener('touchmove', stopDefault ,{passive:false});
     });
     //phone_nav_btn close
     $phonebtnclose.on('click',function(e){
       e.stopPropagation();
       $('.nav').removeClass('_opacity1');
       $('.nav__item').removeClass('_opacity1');
-    })
+      $(document.body).removeClass('_overflow_hidden');
+      document.removeEventListener('touchmove', stopDefault ,{passive:false});
+    });
 })
