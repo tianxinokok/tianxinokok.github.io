@@ -52,7 +52,7 @@
       </div>
 <div>
 <!-- svg_font开始 -->
-<svg width="700" height="100" id="demo" class="svg_font" viewBox="0 0 700 200">
+<svg width="700" height="100" id="demo" class="svg_font_work" viewBox="0 0 700 200">
 <rect id="bgBase" width="700" height="100" fill="none" />
 <path id="a1" d="M47,89c0,0,1-4,2-12s-2-9-2-9s7,8,9,8s4-2,8-5s5-1,5-1s-1,16-2,19s-1,3-1,3" fill="none"/>
 <path id="a2" d="M74,73c0,0-2,4,2,7s3,3,3,3s1-1,3-3s2-7,2-7s1,13,0,19s-4,8-5,8" fill="none"/>
@@ -123,8 +123,7 @@
 <script type="text/javascript" src="../source/js/tween.js"></script>
 <script type="text/javascript" src="../source/js/animation.js"></script>
 <script type="text/javascript">
-function abc(){
-console.log('动画开始');
+function workWriteAnimation(){
 var demo = document.getElementById("demo");
 var tl = new TimelineMax();
 var ease = Linear.easeNone;
@@ -184,5 +183,5 @@ tl.to("#a49", 0.25, {drawSVG:true, ease:ease});
 tl.to("#a50", 0.25, {drawSVG:true, ease:ease});
 tl.to("#a51", 0.25, {drawSVG:true, ease:ease});
 }
-abc();
+workWriteAnimation();
 </script>

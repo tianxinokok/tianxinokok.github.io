@@ -309,6 +309,46 @@ obj['na' + 'me'] = 'jl';
 </div>
 <p>第一种方法是直接用标识符作为属性名，方法二是用表达式作为属性名，这时要将表达式放在括号之内。</p>
 
+<p>但是如果使用字面量方式定义对象（使用大括号），在ES5中只能使用标识符定义属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	foo: true,
+	abc:123
+};
+</code></pre>
+</div>
+<p>ES6允许字面量定义对象时，用表达式作为对象的属性名，即把表达式放在放括号内。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let key = 'foo';
+
+let obj = {
+	[key] : true,
+	['a' + 'bc'] : 123
+};
+console.log(obj.foo);  //true
+console.log(obj.abc);  //123
+console.log(obj.key);  //undefined
+</code></pre>
+</div>
+<p>下面是另外一个例子</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let lastword = 'last word';
+let obj = {
+	'first word' : 'hello',
+	[lastword]   : 'world'
+};
+console.log(obj['first word']);  //hello
+console.log(obj['last word']);   //world
+console.log(obj[lastword]);  	 //world
+</code></pre>
+</div>
+<p>表达式还可以用于定于方法名。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	['get'+'Hi'](){
+		return 'hi';
+	}
+};
+obj.getHi(); //hi
+</code></pre>
+</div>
+
 
    
             </div>
