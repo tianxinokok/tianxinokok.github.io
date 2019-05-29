@@ -54,9 +54,9 @@ layout: default
         </div>
       </div>
 <!---->
-<svg version="1.1" id="demo3" width="3178" height="100" class="svg_font_book" viewBox="0 0 8000 100">
+<svg version="1.1" id="demo3" width="3178" height="100" class="svg_font_book" viewBox="0 0 11000 100">
 <g>
-  <rect x="-20" y="-6" class="st4" width="3178" height="212" fill="none"/>
+  <rect x="-20" y="-6" class="st4" width="1178" height="212" fill="none"/>
   <path class="st5" id="b1" d="M55,94c0,0,5,0,8,0s16-2,16-2h3" fill="none"/>
   <path class="st5" id="b2" d="M66,92c0,0,2-1,2,8s0,13-1,17s-1,4-1,4" fill="none"/>
   <path class="st5" id="b3" d="M87,87c0,0,2,29,3,31" fill="none" />
@@ -222,8 +222,8 @@ var demo3 = document.getElementById("demo3");
 var tl = new TimelineMax();
 var ease = Linear.easeNone;
 TweenMax.set(demo3, {autoAlpha:1});
-TweenMax.set("path", {drawSVG:0, stroke:"#EAEAEA"});
-TweenMax.set("line", {drawSVG:0, stroke:"#EAEAEA"});
+TweenMax.set("path", {drawSVG:0, stroke:"#F1F1F1"});
+TweenMax.set("line", {drawSVG:0, stroke:"#F1F1F1"});
 
 tl.to("#b1", 0.25, {drawSVG:true, ease:ease});
 tl.to("#b2", 0.25, {drawSVG:true, ease:ease});

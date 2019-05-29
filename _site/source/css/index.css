@@ -329,6 +329,12 @@ body{
 }
 .svg_font_book{
   position: fixed;
+  left: 10%;
+  top: 81vh;
+}
+.svg_font_new{
+  position: fixed;
+  left: 20%;
   top: 81vh;
 }
 .btnGroup{
