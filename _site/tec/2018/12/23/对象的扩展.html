@@ -372,7 +372,16 @@ console.log(obj); //{[object Object]: "B"}
 <p>上面代码中，【keyA】和【keyB】得到的都是【object ，Object】，所以【keyB】会把【keyA】覆盖掉，所以obj最后只有一个【object ， Object】属性，【object ， Object】的值为B。</p>
 
 <h3 id="三方法的name属性">三、方法的name属性</h3>
-<p>window</p>
+<p>函数的name属性，返回函数名。对象的方法也是函数，因此也有name属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	getName (){
+		return this.name;
+	}
+};
+console.log(obj.getName.name); //getName
+</code></pre>
+</div>
+<p>上面代码中，方法的name属性返回方法名。</p>
 
 
    

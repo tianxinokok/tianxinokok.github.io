@@ -8,8 +8,11 @@
 
 </body>
 <script type="text/javascript">
-const foo = 'bar';
-const bar = 'abc';
-const baz = { ['fooo'] };
+let obj = {
+	getName (){
+		return this.name;
+	}
+};
+console.log(obj.getName.name);
 </script>
 </html>
