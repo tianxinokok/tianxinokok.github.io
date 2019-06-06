@@ -8,11 +8,8 @@
 
 </body>
 <script type="text/javascript">
-let obj = {
-	getName (){
-		return this.name;
-	}
-};
-console.log(obj.getName.name);
+console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable);
+console.log(Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
+);
 </script>
 </html>
