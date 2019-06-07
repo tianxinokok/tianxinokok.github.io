@@ -8,8 +8,14 @@
 
 </body>
 <script type="text/javascript">
-console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable);
-console.log(Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
-);
+let obj = {
+	name : 'tx',
+	age  : 24,
+	1:'1',
+	2:'2',
+	[Symbol()]:0
+};
+console.log(Reflect.ownKeys(obj));
+//["1", "2", "name", "age", Symbol()]
 </script>
 </html>
