@@ -8,14 +8,6 @@
 
 </body>
 <script type="text/javascript">
-let obj = {
-	name : 'tx',
-	age  : 24,
-	1:'1',
-	2:'2',
-	[Symbol()]:0
-};
-console.log(Reflect.ownKeys(obj));
-//["1", "2", "name", "age", Symbol()]
+let { a , ...{b,c}} = obj;
 </script>
 </html>
