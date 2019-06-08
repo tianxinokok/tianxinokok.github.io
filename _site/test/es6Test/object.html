@@ -8,13 +8,12 @@
 
 </body>
 <script type="text/javascript">
-function baseFunciton({a,b}){
+let x = 2;
+let obj = {
+	...( x > 1 ? {a:1} : {}),
+	b:2
+};
+console.log(obj.a);
 
-}
-function wrapperFunction({x,y,...restConfig }}){
-  // 使用 x 和 y 参数进行操作
-  // 其余参数传给原始函数
-  return baseFunciton(restConfig);
-}
 </script>
 </html>
