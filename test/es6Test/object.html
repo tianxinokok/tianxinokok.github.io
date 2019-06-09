@@ -8,12 +8,18 @@
 
 </body>
 <script type="text/javascript">
-let x = 2;
-let obj = {
-	...( x > 1 ? {a:1} : {}),
-	b:2
+const  defaultconfig = {
+	url : {
+		host : 'tianxinokok.com',
+		port : '8080'
+	}
 };
-console.log(obj.a);
-
+function processContent(options){
+options = Object.assign({},defaultconfig,options);
+console.log(options);
+}
+processContent( { url: {port:'123'} } );
+console.log(defaultconfig);
+//
 </script>
 </html>
