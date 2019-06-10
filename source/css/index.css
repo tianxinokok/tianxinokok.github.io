@@ -213,8 +213,8 @@ body{
 	font-family: Giorgios, "Arial", sans-serif;
 	position: absolute;
 	width: 100%;
-  height: 100vh;
-  overflow: hidden;
+    height: 100vh;
+    overflow: hidden;
 }
 .slide_img{
 	position: absolute;
@@ -720,11 +720,6 @@ body:before {
   width: 100% !important;
   overflow-x: hidden;
 }
-.post_list{
-    width: 100%;
-    overflow: hidden;
-}
-}
 .post_list > li{
 	position: relative;
 	height: 110px;
@@ -832,5 +827,14 @@ body:before {
 }
 .nav-btn{
 	display: none;
+}
+.svg_font_work{
+  display: none;
+}
+.svg_font_book{
+  display: none;
+}
+.svg_font_new{
+  display: none;
 }
 }
