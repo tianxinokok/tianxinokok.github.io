@@ -213,8 +213,8 @@ body{
 	font-family: Giorgios, "Arial", sans-serif;
 	position: absolute;
 	width: 100%;
-    height: 100vh;
-    overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 .slide_img{
 	position: absolute;
@@ -545,6 +545,10 @@ body:before {
   left: 0;
   background: url(../img/h_bg.jpg);
   background-size: 50%;
+}
+.container{
+  width: 100%;
+  overflow-x: hidden;
 }
 /*导航*/
 .nav {
