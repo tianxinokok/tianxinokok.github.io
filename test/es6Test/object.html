@@ -8,18 +8,7 @@
 
 </body>
 <script type="text/javascript">
-const  defaultconfig = {
-	url : {
-		host : 'tianxinokok.com',
-		port : '8080'
-	}
-};
-function processContent(options){
-options = Object.assign({},defaultconfig,options);
-console.log(options);
-}
-processContent( { url: {port:'123'} } );
-console.log(defaultconfig);
-//
+console.log(Object.fromEntries(new URLSearchParams('foo=bar&baz=qux')));
+// { foo: "bar", baz: "qux" }
 </script>
-</html>
+</html>	

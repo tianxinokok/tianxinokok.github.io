@@ -194,7 +194,7 @@
                   <h1>对象的新增方法</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="objectis">一、Object.is()</h3>
+                  <h3 id="一objectis">一、Object.is()</h3>
 <p>es5比较两个值是否相等，只有两个运算符。相等运算符（==）和全等运算符（===）。他们都有缺点，前者会自动转换数据类型，后者的nNaN不等于自身，以及+0等于-0。javascript缺乏一种运算，在所有环境中，只要两个值是一样的，他们就应该像等。</p>
 
 <p>es6提出同值相等算法，用来解决这个问题。Object.is就是部署这个算法的新方法。他用来比较两个值是否严格相等。与全等运算符（===）的作用基本一致。</p>
@@ -228,9 +228,9 @@ writable: true
 
 </code></pre>
 </div>
-<h3 id="objectassign">二、Object.assign()</h3>
+<h3 id="二objectassign">二、Object.assign()</h3>
 
-<h4 id="section">基本用法</h4>
+<h4 id="基本用法">基本用法</h4>
 <p>Object.assign方法用于对象的合并，将源对象的所有可枚举属性，复制到目标对象。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let target = {name:'tx'};
 let source1 = {age:24};
@@ -289,9 +289,9 @@ console.log(target); //{0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
 //{Symbol(c): "d"}
 </code></pre>
 </div>
-<h4 id="section-1">注意点</h4>
+<h4 id="注意点">注意点</h4>
 
-<h5 id="section-2">（1）浅拷贝</h5>
+<h5 id="1浅拷贝">（1）浅拷贝</h5>
 <p>Object.assign方法实行的是浅拷贝，如果源对象的某个属性值是对象，那么目标对象拷贝得到的是对这个对象的引用。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let obj = {a:{b:'tx'}};
 let newobj = Object.assign({},obj);
@@ -301,7 +301,7 @@ console.log(newobj.a.b); //new
 </div>
 <p>上面代码中，源对象a属性的值是一个对象，Object.assign拷贝得到的是这个对象的引用。这个对象的任何变化，都会反应到目标对象上。</p>
 
-<h5 id="section-3">（2）同名属性的替换</h5>
+<h5 id="2同名属性的替换">（2）同名属性的替换</h5>
 <p>对于嵌套的对象，一旦遇到同名属性，Object.assign的处理方式是替换，而不是添加。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let obj = {config:{name:'tx',age:24,sex:'男'}};
 let obj2 = {config:{age:'28'}};
@@ -311,7 +311,7 @@ console.log(obj); //{config: {age:'28'}}
 </div>
 <p>上面代码中，obj中的config属性被obj2的config属性这个替换掉了，而不是得到   {config:{name:’tx’,age:28,sex:’男’}}的结果，这通常不是开发者想要的，要特别小心。</p>
 
-<h5 id="section-4">（3）数组的处理</h5>
+<h5 id="3数组的处理">（3）数组的处理</h5>
 <p>Object.assign可以用来处理数组，但是会把数组视为对象。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let target = [1,2,3];
 let source = [4,5];
@@ -321,7 +321,7 @@ console.log(target); //[4, 5, 3]
 </div>
 <p>上面代码中，Object.assign把数组视为属性名为0，1，2的对象，因此源数组的0好属性4和1号属性分别覆盖了目标数组的0号和1号。</p>
 
-<h5 id="section-5">（4）取值函数的处理</h5>
+<h5 id="4取值函数的处理">（4）取值函数的处理</h5>
 <p>Object.assign只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let target = {};
 let source = {
@@ -335,10 +335,10 @@ console.log(target); //{getnum: 1}
 </div>
 <p>上面代码中，源对象的getname属性是一个取值函数，Object不会复制这个取值函数，只会拿到值以后，将这个值复制过去。</p>
 
-<h4 id="section-6">常见用途</h4>
+<h4 id="常见用途">常见用途</h4>
 <p>Object.assign方法有很多用处</p>
 
-<h5 id="section-7">（1）为对象添加属性</h5>
+<h5 id="1为对象添加属性">（1）为对象添加属性</h5>
 <div class="highlighter-rouge"><pre class="highlight"><code>class point {
 construntor(x,y){
 Object.assign(this,{x,y});
@@ -348,7 +348,7 @@ Object.assign(this,{x,y});
 </div>
 <p>上面方法通过Object.assign方法，将x属性和y属性添加到point类的实例对象。【】不太明白。</p>
 
-<h5 id="section-8">（2）为对象添加方法</h5>
+<h5 id="2为对象添加方法">（2）为对象添加方法</h5>
 <div class="highlighter-rouge"><pre class="highlight"><code>Object.assign(someClass.prototype,{
 someMethod(arg1,arg2){
 
@@ -368,7 +368,7 @@ someClass.prototype.anotherMethod = function(){
 </div>
 <p>上面代码使用了对象属性的简洁表示法，直接将两个函数放在大括号中，再使用assign方法添加到someClass.prototype之中。</p>
 
-<h5 id="section-9">（3）克隆对象</h5>
+<h5 id="3克隆对象">（3）克隆对象</h5>
 <div class="highlighter-rouge"><pre class="highlight"><code>function clone(origin){
 Object.assign({},origin);
 }
@@ -383,7 +383,7 @@ return Object.assign(Object.create(originProto),origin);
 }
 </code></pre>
 </div>
-<h5 id="section-10">(4)   合并多个对象</h5>
+<h5 id="4---合并多个对象">(4)   合并多个对象</h5>
 <p>将多个对象合并到某个对象</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>const mergeobj = (target,...sources) =&gt; Object.assign(target,...sources);
 </code></pre>
@@ -392,7 +392,7 @@ return Object.assign(Object.create(originProto),origin);
 <div class="highlighter-rouge"><pre class="highlight"><code>const mergeobj = (...sources) =&gt;Object.assign({},...sources); 
 </code></pre>
 </div>
-<h5 id="section-11">(5) 为属性指定默认值(可用作默认配置参数)</h5>
+<h5 id="5-为属性指定默认值可用作默认配置参数">(5) 为属性指定默认值(可用作默认配置参数)</h5>
 <div class="highlighter-rouge"><pre class="highlight"><code>const defaultconfig = {
 name:'tx',
 age :24
@@ -422,7 +422,307 @@ processContent( { url: {port:'123'} } ); //url: {port:'123'}}
 </div>
 <p>上面代码的原意是将url.port改成123，url.host不变。实际结果确是options.url覆盖掉defaultconfig.url,导致url.host就不存在了。</p>
 
-<h3 id="objectgetownpropertydescriptors">三、Object.getOwnPropertyDescriptors()</h3>
+<h3 id="三objectgetownpropertydescriptors">三、Object.getOwnPropertyDescriptors()</h3>
+<p>es5的Object.getOwnPropertyDescripto()方法会返回某个对象属性的描述对象，es6引入了Object.getOwnPropertyDescriptors()方法，返回指定对象所有自身属性（非继承属性）的描述对象。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj  = {
+	name:'tx',
+	getName(){
+
+	}
+};
+console.log(Object.getOwnPropertyDescriptors(obj));
+// getName: {value: ƒ, writable: true, enumerable: true, configurable: true}
+// name: {value: "tx", writable: true, enumerable: true, configurable: true}
+</code></pre>
+</div>
+<p>上面代码中，Object.getOwnPropertyDescriptors()方法返回一个对象，所有原对象的属性名都是该对象的属性名，对应的属性值就是该属性的描述对象。</p>
+
+<p>引入该方法的目的是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let source = {
+	set foo(value){
+		console.log(value);
+	}
+};
+let target = {};
+Object.assign(target,source);
+console.log(Object.getOwnPropertyDescriptor(target,'foo'));
+// {
+// 		configurable: true
+// 		enumerable: true
+// 		value: undefined
+// 		writable: true
+// }
+</code></pre>
+</div>
+<p>上面代码中，source对象的foo属性的值是一个赋值函数，Object.assign将这个属性复制给target对象，结果该属性的值变为了undefined。这是因为Object.assign()方法总是拷贝一个属性的值，而不会拷贝他背后的赋值方法或者取值方法。</p>
+
+<p>这时，Object.getOwnPropertyDescriptors()方法配合Object.defineProperties()方法，就可以实现正确拷贝。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let source = {
+	set foo(value){
+		console.log(value);
+	}
+};
+let target = {};
+Object.defineProperties(target,Object.getOwnPropertyDescriptors(source));
+console.log(Object.getOwnPropertyDescriptor(target,'foo'));
+// {
+// 	configurable: true
+// 	enumerable: true
+// 	get: undefined
+// 	set: ƒ foo(value)
+// }
+</code></pre>
+</div>
+<p>上面代码中，两个对象合并的逻辑可以写成一个函数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let shallowMerge = (target,source) =&gt; Object.defineProperties(target,Object.getOwnPropertyDescriptors(source));
+</code></pre>
+</div>
+<p>Object.getOwnPropertyDescriptors()方法的另一个作用，是配合Object.create()方法，将对象属性拷贝到一个新对象，这属于浅拷贝。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+//或者
+let shallowclone = (obj) =&gt;  Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+</code></pre>
+</div>
+<p>上面代码会拷贝对象obj。</p>
+
+<p>Object.getOwnPropertyDescriptors()可以实现一个对象继承另一个对象。以前，继承另一个对象，通常写成下面这样。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	__proto__:source,
+	name:'tx'
+};
+</code></pre>
+</div>
+<p>es6规定__protot__只有浏览器要部署，其他环境不用部署。如果没有__protot__，上面代码就要写成这样。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = Object.create(source);
+obj.name = 'tx';
+//或者 
+let obj = Object.assign(Object.create(source),{name:'tx'});
+</code></pre>
+</div>
+<p>有了Object.getOwnPropertyDescriptors()方法我们就有了另一种写法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>const obj = Object.create(
+  prot,
+  Object.getOwnPropertyDescriptors({
+    foo: 123,
+  })
+);
+</code></pre>
+</div>
+<h3 id="四__proto__属性objectsetprototypeofobjectgetprototypeof">四、__proto__属性，Object.setPrototypeOf(),Object.getPrototypeOf()</h3>
+<p>js的对象继承性是通过原型链实现的。es6提供了更多原型对象的操作方法。</p>
+
+<h4 id="__proto__属性">__proto__属性</h4>
+<p>__proto__属性：用来读取或者设置当前对象的prototype对象。目前，所有浏览都部署了这个属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> //es5 
+let obj = {
+	getName:function(){
+
+	}
+};
+obj.__proto__ = otherObj;
+//es6
+let obj = Object.create(otherObj);
+obj.getName = funciton(){
+	
+}
+</code></pre>
+</div>
+<p>该属性没有写入es6的正文，而是写入了附录，原因是__proto__写法的前后两个双下划线，说明他本质上是一个内部属性，而不是一个正式的对外API，只是由于浏览器广泛支持，才被加入了es6。标准明确规定，只有浏览器必须部署这个属性，其他环境不一定需要部署，而且新的代码最好认为这个属性是不存在的。因此，无论从语义的角度，还是从兼容性的角度，都不要使用这个属性，而是使用下面的Objcet.setPrototypeOf()(写操作)和Object.getPrototypeOf()(读操作),Object.create()（生成操作）代替。</p>
+
+<p>如果一个对象本身部署了__proto__属性，该属性的值就是对象的原型。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> Object.getPrototypeOf({ __proto__: null }); //null
+</code></pre>
+</div>
+<p>#### Object.setPrototypeOf()
+ Object.setPrototypeOf()方法的作用与__proto__一样，用来设置一个对象的prototype对象，返回参数对象本身。它是es6正式推荐的设置原型对象的方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> //格式 
+Object.setPrototypeOf(object,prototype);
+//用法
+let obj = Object.setPrototypeOf({},null);  //{}
+</code></pre>
+</div>
+<p>该方法等同于下面的函数。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> function setPrototypeOf(obj,proto){
+	obj.__proto__ = proto;
+	return obj;
+}
+</code></pre>
+</div>
+<p>下面是一个例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code> let proto = {};
+let obj = {
+	name:'tx'
+};
+Object.setPrototypeOf(obj,proto);
+proto.age = 24;
+console.log(obj.age); //24
+</code></pre>
+</div>
+<p>上面把obj的原型对象设为proto，所以obj可以读取proto原型对象上的属性。</p>
+
+<p>如果第一个参数不是对象，会自动转为对象。但是由于返回还是第一个参数，所以这个操作不会产生任何效果。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.setPrototypeOf(123,{});      //123
+Object.setPrototypeOf('hello',{});  //hello
+Object.setPrototypeOf(true,{});     //true
+</code></pre>
+</div>
+<p>由于undefined和null无法转为对象，所以如果第一个参数是undefined或者null，就会报错。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.setPrototypeOf(undefined,{});  //报错
+Object.setPrototypeOf(null,{});       //报错
+</code></pre>
+</div>
+<p>#### Object.getPrototypeOf()
+ 该方法与Object.setPrototypeOf()方法配套，用于获取一个对象的原型对象。</p>
+
+<p>下面是一个例子。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function gzfunction(){}
+let rec = new gzfunction();
+Object.getPrototypeOf(rec) === gzfunction.prototype;              //true
+Object.setPrototypeOf(rec,Object.prototype);
+console.log(Object.getPrototypeOf(rec) === gzfunction.prototype); //false
+</code></pre>
+</div>
+<p>跟setPrototypeOf()一样，如果第一个参数不是对象，会自动转为对象，如果是undefined或者null，会报错。</p>
+
+<h3 id="五objectkeysobjectvaluesobjectentries">五、Object.keys(),Object.values(),Object.entries()</h3>
+
+<h4 id="objectkeys">Object.keys()</h4>
+<p>es5引入了Object.keys()方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	name:'tx',
+	age : 24
+};
+Object.keys(obj); //["name", "age"]
+</code></pre>
+</div>
+<p>es6引入了跟Object.keys()配套的Object.values()和Object.entries()，作为遍历一个对象的补充手段，供for…in循环使用。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let {keys, values, entries} = Object;
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key of keys(obj)) {
+  console.log(key); // 'a', 'b', 'c'
+}
+
+for (let value of values(obj)) {
+  console.log(value); // 1, 2, 3
+}
+
+for (let [key, value] of entries(obj)) {
+  console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
+}
+</code></pre>
+</div>
+<h4 id="objectvalues">Object.values()</h4>
+<p>Object.values()方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumable）属性的键值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	name:'tx',
+	age :24
+};
+Object.values(obj); //["tx", 24]
+</code></pre>
+</div>
+<p>返回的数组成员顺序，与上面介绍的规则一致。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	10  :'a',
+	1   :'b',
+	name:'tx'
+};
+Object.values(obj); //["b", "a", "tx"]
+</code></pre>
+</div>
+<p>上面代码中，属性名为数值的属性是按照数值大小，从小到大遍历的，然后是属性名为字符串的属性。</p>
+
+<p>Object.values()只返回对象自身的可遍历属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = Object.create({}, {name:{vlaue:'tx'}});
+console.log(Object.values(obj)); //[]
+</code></pre>
+</div>
+<p>上面代码中，Object.create()方法的第二个参数添加的对象属性（属性name），如果不显示声明，默认是不可遍历的，因为name属性的描述对象的enumerable默认为false，
+Object.values()不会返回这个属性。只要把name属性的enumerable改为true，Object.values()方法就会返回属性name的值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = Object.create({}, {name:
+	{
+	  value:'tx',
+	  enumerable:true
+    }
+});
+Object.values(obj); //["tx"]
+</code></pre>
+</div>
+<p>注意：【】Object.create()总是忘记。不理解。</p>
+
+<p>Object.values()方法会过滤属性名为Symbol值的属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.values({[Symbol()]:123 , name: 'tx'}); //["tx"]
+</code></pre>
+</div>
+<p>如果Object.values(）方法的参数是一个字符出，会返回各个字符组成的数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.values('hello'); //["h", "e", "l", "l", "o"]
+</code></pre>
+</div>
+<p>上面代码中，字符串会先转成一个类似数组的对象，字符串的每一个字符，就是该对象的一个属性。</p>
+
+<p>如果参数不是对象，Object.values()会先将其转为对象。由于数组和布尔的包装对象，都不会为实例添加非继承的属性。所以，Object.values()会返回空数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.values(123) // []
+Object.values(true) // []
+</code></pre>
+</div>
+<h4 id="objectentries">Object.entries()</h4>
+<p>Object.entries()方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	name:'tx',
+	age :24
+};
+Object.entries(obj); //[["name", "tx"],["age", 24]]
+</code></pre>
+</div>
+<p>除了返回值不一样，该方法的行为与Object.values()基本一样。</p>
+
+<p>如果原对象的属性名是一个 Symbol 值，该属性会被忽略。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.entries({ [Symbol()]: 123, foo: 'abc' }); // [ [ 'foo', 'abc' ] ]
+</code></pre>
+</div>
+<p>Object.entries的基本用途是遍历对象的属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = { one: 1, two: 2 };
+for (let [k, v] of Object.entries(obj)) {
+  console.log(
+    `${JSON.stringify(k)}: ${JSON.stringify(v)}`
+  );
+}
+// "one": 1
+// "two": 2
+</code></pre>
+</div>
+<p>【】上面console里面的写法很喜欢。</p>
+
+<p>Object.entries方法的另一个用处是，将对象转为真正的Map结构。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+	name:'tx',
+	age :24
+};
+let map = new Map(Object.entries(obj))
+console.log(map); //{"name" =&gt; "tx", "age" =&gt; 24}
+</code></pre>
+</div>
+<p>【】Map不懂</p>
+<h3 id="六objectfromentries">六、Object.fromEntries()</h3>
+<p>Object.fromEntries()方法是Object.entries()的逆操作，用于将一个键值对数组转为对象。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.fromEntries([['name','tx'],['age',24]]); //{name: "tx", age: 24}
+</code></pre>
+</div>
+<p>注意:chrome版本要73以上</p>
+
+<p>该方法的主要目的，是将键值对的数据解构还原为对象，因此特别适合将Map结构转为对象。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let entries = new Map([
+	 ['name','tx'],
+	 ['age',24]
+]);
+Object.fromEntries(entries); //{name: "tx", age: 24}
+</code></pre>
+</div>
+<p>该方法的一个用处是配合URLSearchParams对象，将查询字符串转为对象。【】神奇</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Object.fromEntries(new URLSearchParams('foo=bar&amp;baz=qux'));
+// { foo: "bar", baz: "qux" }
+</code></pre>
+</div>
 
 
    

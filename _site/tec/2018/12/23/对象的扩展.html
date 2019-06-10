@@ -194,7 +194,7 @@
                   <h1>对象的扩展</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="section">一、属性的简洁表示法</h3>
+                  <h3 id="一属性的简洁表示法">一、属性的简洁表示法</h3>
 <p>ES6允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let name = 'tx';
 //es6
@@ -299,7 +299,7 @@ let obj = {
 </div>
 <p>【】Generator 函数</p>
 
-<h3 id="section-1">二、属性名表达式</h3>
+<h3 id="二属性名表达式">二、属性名表达式</h3>
 <p>js定义对象的属性，有两种方法。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>//第一种
 obj.name = 'tx';
@@ -371,7 +371,7 @@ console.log(obj); //{[object Object]: "B"}
 </div>
 <p>上面代码中，【keyA】和【keyB】得到的都是【object ，Object】，所以【keyB】会把【keyA】覆盖掉，所以obj最后只有一个【object ， Object】属性，【object ， Object】的值为B。</p>
 
-<h3 id="name">三、方法的name属性</h3>
+<h3 id="三方法的name属性">三、方法的name属性</h3>
 <p>函数的name属性，返回函数名。对象的方法也是函数，因此也有name属性。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
 	getName (){
@@ -406,9 +406,9 @@ console.log(obj[key2].name); //[]
 </div>
 <p>上面代码中，key1对应Symbol值有描述，key2没有。 【】 Symbol还没有学到。</p>
 
-<h3 id="section-2">四、属性的可枚举性和遍历</h3>
+<h3 id="四属性的可枚举性和遍历">四、属性的可枚举性和遍历</h3>
 
-<h4 id="section-3">可枚举性</h4>
+<h4 id="可枚举性">可枚举性</h4>
 <p>对象的每一个属性都有一个描述对象（Descriptor），用来控制该属性的行为。Object.getOwnPropertyDescriptor方法可以获取该属性的描述对象。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
 	name:'tianxin'
@@ -425,10 +425,10 @@ console.log(Object.getOwnPropertyDescriptor(obj,'name'));
 <p>上面描述对象中的enumerable字段，称为”可枚举性”，如果该属性为false，就表示某些操作会忽略当前属性。</p>
 
 <p>目前，有四个操作会忽略enumerable为false的属性。</p>
-<h5 id="forin">- for…in循环：只遍历对象自身的和继承的可枚举的属性。</h5>
-<h5 id="objectkey-">- Object.key(): 返回对象自身的所有可枚举的属性的键名。</h5>
-<h5 id="jsonstringify--">- JSON.stringify() : 只将对象的自身可枚举属性转化为字符串。</h5>
-<h5 id="objectassign--enumerablefalse">- Object.assign() : 忽略enumerable为false的属性，只拷贝对象自身的可枚举属性。</h5>
+<h5 id="--forin循环只遍历对象自身的和继承的可枚举的属性">- for…in循环：只遍历对象自身的和继承的可枚举的属性。</h5>
+<h5 id="--objectkey-返回对象自身的所有可枚举的属性的键名">- Object.key(): 返回对象自身的所有可枚举的属性的键名。</h5>
+<h5 id="--jsonstringify--只将对象的自身可枚举属性转化为字符串">- JSON.stringify() : 只将对象的自身可枚举属性转化为字符串。</h5>
+<h5 id="--objectassign--忽略enumerable为false的属性只拷贝对象自身的可枚举属性">- Object.assign() : 忽略enumerable为false的属性，只拷贝对象自身的可枚举属性。</h5>
 
 <p>这四个操作中，前三个是es5就有的，最后一个Object.assign是es6新增的。其中，只有for…in会返回继承的的属性，其他三个方法都会忽略继承的属性，只处理对象自身的属性。实际上引入”可枚举”(enumerable)这个概念的最初目的，就是让某些属性可以规避掉for…in操作，不然所有内部属性和方法都会都遍历到。 例如  ， 对象原型的toString方法，以及数组的length属性，就通过”可枚举性”，从而避免被for…in循环到。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
@@ -446,17 +446,17 @@ Object.getOwnPropertyDescriptor([], 'length').enumerable
 </code></pre>
 </div>
 <p>总的来说，操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性，所有尽量不用for…in循环，而用Object.keys()代替。</p>
-<h4 id="section-4">属性的遍历</h4>
+<h4 id="属性的遍历">属性的遍历</h4>
 
-<h5 id="forin-1">（1）for…in</h5>
+<h5 id="1forin">（1）for…in</h5>
 <p>for…in循环遍历对象自身和继承的可枚举属性（不含Symbol属性）。</p>
-<h5 id="objectkeysobj">（2）Object.keys(obj)</h5>
+<h5 id="2objectkeysobj">（2）Object.keys(obj)</h5>
 <p>Object.keys(obj)返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含Symbol属性）的键名。</p>
-<h5 id="objectgetownpropertynamesobj">（3）Object.getOwnPropertyNames(obj)</h5>
+<h5 id="3objectgetownpropertynamesobj">（3）Object.getOwnPropertyNames(obj)</h5>
 <p>Object.getOwnPropertyNames(obj)也是返回一个数组，包含对象自身的所有属性。（*不含Symbol属性，但是包含不可枚举属性，注：可用defineProperty为对象定义不可枚举属性）的键名。</p>
-<h5 id="objectgetownpropertysymbolsobj">（4）Object.getOwnPropertySymbols(obj)</h5>
+<h5 id="4objectgetownpropertysymbolsobj">（4）Object.getOwnPropertySymbols(obj)</h5>
 <p>Object.getOwnPropertySymbols(obj) 返回一个数组，包含对象自身的所有Symbol属性的键名。</p>
-<h5 id="reflectownkeysobj">（5）Reflect.ownKeys(obj)</h5>
+<h5 id="5reflectownkeysobj">（5）Reflect.ownKeys(obj)</h5>
 <p>Reflect.ownKeys(obj) 返回一个数组，包含对象自身的所有键名，不管键名是Symbol或者是字符串，也不管是否可枚举。</p>
 
 <p>以上的5种方法遍历对象的键名，都遵守同样的属性遍历的次序规则。</p>
@@ -476,7 +476,7 @@ console.log(Reflect.ownKeys(obj));
 </code></pre>
 </div>
 <p>上面代码中，Reflect.ownKeys方法返回一个数组，包含了对象的所有属性。这个数组的属性次序是这样的，首先是数值属性1和2，然后是字符串属性name和age，最后是Symbol属性。</p>
-<h3 id="super">五、super关键字</h3>
+<h3 id="五super关键字">五、super关键字</h3>
 <p>this关键字总是指向函数所在的当前对象，es6又增加了一个类似的关键字super，指向当前对象的原型对象。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
 name : 'tx',
@@ -529,10 +529,10 @@ obj.getName(); // tx
 </div>
 <p>上面代码中，super.foo指向原型对象proto的getName方法，但是绑定的this却还是当前对象obj，因此输出的就是tx。</p>
 
-<h3 id="section-5">六、对象的扩展运算符</h3>
+<h3 id="六对象的扩展运算符">六、对象的扩展运算符</h3>
 <p>《数组的扩展》一章中，已经介绍过扩展运算（…）。ES2018 将这个运算符引入了对象。</p>
 
-<h4 id="section-6">解构赋值</h4>
+<h4 id="解构赋值">解构赋值</h4>
 <p>对象的解构赋值用于从一个对象取值，相当于将目标对象自身的所有可遍历的（enumerable）、但尚未被读取的属性，分配到指定的对象上面。所有的键和他们的值，都会拷贝到新对象上面。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let { x , y , ...z} = {x:1,y:2,c:3,d:4};
 console.log(x);  //1
@@ -604,7 +604,7 @@ return baseFunciton(restConfig);
 </div>
 <p>上面代码中，原始函数baseFunction接受a和b作为参数，函数wrapperFunction在baseFunction的基础上进行了扩展，能够接受多余的参数，并且保留原始函数的行为。</p>
 
-<h4 id="section-7">扩展运算符</h4>
+<h4 id="扩展运算符">扩展运算符</h4>
 <p>对象的扩展运算符（…）用于取出参数对象所有可遍历的属性，拷贝到当前对象之中。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let obj = { x:1 , y:2 };
 let newobj = {...obj};
@@ -755,7 +755,7 @@ throw new Error('throw now');
                 </div>
           
           <div class="phone_bottom">
-              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
+              <a class="" href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html" data-post-href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html">
               PREV
               </a>
               <a class="" href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html" data-post-href="http://localhost:4000/prose/2018/10/01/%E8%B7%AF%E8%BE%B9%E6%B5%81%E6%B5%AA%E6%B1%89.html">
