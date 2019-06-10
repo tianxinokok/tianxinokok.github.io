@@ -713,7 +713,7 @@ body:before {
 .content{
 	position: relative;
 	top: 180px;
-  width: 100% !important;
+  width: 100vw !important;
   overflow-x: hidden;
 }
 .post_list{
