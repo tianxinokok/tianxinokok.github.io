@@ -715,9 +715,9 @@ body:before {
 	display: block;
 }
 .content{
-	position: relative;
+	position: absolute;
 	top: 180px;
-  width: 100vw !important;
+  width: 100% !important;
   overflow-x: hidden;
 }
 .post_list{
