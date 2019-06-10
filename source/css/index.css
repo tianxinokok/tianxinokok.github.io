@@ -716,11 +716,16 @@ body:before {
   width: 100% !important;
   overflow-x: hidden;
 }
+.post_list{
+    width: 100%;
+    overflow: hidden;
+}
+}
 .post_list > li{
 	position: relative;
 	height: 110px;
 	width: 100%;
-    border-bottom: 1px solid #333;
+  border-bottom: 1px solid #333;
 }
 .main_title{
 	position: absolute;
