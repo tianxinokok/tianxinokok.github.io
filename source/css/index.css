@@ -662,22 +662,22 @@ body:before {
 
 .phone_title{
 	width: 100%;
-    height: 70px;
-    position: fixed;
-    background: #212121;
-    z-index: 2;
+  height: 104px;
+  position: fixed;
+  background: #212121;
+  z-index: 2;
 }
 .svg_phone_logo{
 	position: relative;
-  top: 16px;
+  top: 32px;
   width: 105px;
 }
 .slide_img{
 	position: absolute;
 	width: 50%;
 	left: 50%;
-	top: 70px;
-	height: 110px;
+	top: 104px;
+	height: 104px;
 }
 .post_list_false{
 	width: 0;
@@ -703,26 +703,27 @@ body:before {
 .title_box{
 	position: absolute;
 	width: 50%;
-	top: 70px;
-	height: 110px;
-    background: #7de87d;
-    text-align: right;
+	top: 104px;
+	height: 104px;
+  background: #7de87d;
+  text-align: left;
 }
 .phone_message{
 	font-size: 10px;
 }
 .phone_message > span{
 	display: block;
+  margin : 4px 0;
 }
 .content{
 	position: absolute;
-	top: 180px;
+	top: 208px;
   width: 100% !important;
   overflow-x: hidden;
 }
 .post_list > li{
 	position: relative;
-	height: 110px;
+	height: 104px;
 	width: 100%;
   border-bottom: 1px solid #333;
 }
@@ -731,7 +732,7 @@ body:before {
 	font-size: 4rem;
   color: #282727;
   font-family: dayfont;
-  right: 10px;
+  left: 16px;
 }
 .gray { 
     -webkit-filter: grayscale(1);
@@ -744,21 +745,22 @@ body:before {
 .day{
 	position: absolute;
 	font-family: dayfont;
-	font-size: 4.5rem;
+	font-size: 4rem;
 	left: 16px;
+  margin-top: 4px;
 	color: #777777;
 }
 .year{
 	position: absolute;
 	font-size: 8px;
 	color: #777777;
-	top: 52px;
+	top: 49px;
 	left: 16px;
 }
 .post_title{
     position: absolute;
-    top: 65px;
-    font-size: 12px;
+    top: 62px;
+    font-size: 11px;
     color: #777777;
     left: 16px;	
 }
@@ -767,7 +769,7 @@ body:before {
 }
 .more_icon{
 	position: absolute;
-  top: 77px;
+  top: 68px;
   right: 16px;
   color: #777777;
 }
@@ -776,7 +778,7 @@ body:before {
 	color: #777777;
 	left: 16px;
 	font-size: 8px;
-	top: 85px;
+	top: 81px;
 }
 .contact_content{
 	padding: 20px;
@@ -793,7 +795,7 @@ body:before {
 .nav_btn_phone{
   position: fixed;
   z-index: 101;
-  top: 10px;
+  top: 24px;
   right: 10px;
   width: 60px;
   background: transparent;

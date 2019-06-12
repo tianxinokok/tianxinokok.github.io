@@ -495,4 +495,10 @@ $(document).ready(function(){
       $(document.body).removeClass('_overflow_hidden');
       document.removeEventListener('touchmove', stopDefault ,{passive:false});
     });
+    //post click
+    $('.post_list li').on('click',function(e){
+      e.preventDefault();
+      var lala  = $(this).find('a').attr('data-post-href');
+      window.location.href = lala;
+    });
 })
