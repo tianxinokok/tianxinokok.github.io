@@ -8,7 +8,19 @@
 
 </body>
 <script type="text/javascript">
-let s1 = Symbol('123');
-console.log(s1.description);
+let color_red = Symbol('red');
+let color_green = Symbol('green');
+
+function getComplement(color){
+	switch (color){
+		case  color_red :
+		return color_green;
+		case color_green:
+		return color_red;
+		default:
+		throw new Error('undefined color');
+	}
+}
+getComplement(color_green); //Symbol(red)
 </script>
 </html>	
