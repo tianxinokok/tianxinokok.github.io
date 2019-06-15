@@ -8,19 +8,13 @@
 
 </body>
 <script type="text/javascript">
-let color_red = Symbol('red');
-let color_green = Symbol('green');
+let obj = {
+	[Symbol('name')] : 'tx',
+	age:24
+};
 
-function getComplement(color){
-	switch (color){
-		case  color_red :
-		return color_green;
-		case color_green:
-		return color_red;
-		default:
-		throw new Error('undefined color');
-	}
-}
-getComplement(color_green); //Symbol(red)
+console.log(Reflect.ownKeys(obj));
+
+
 </script>
 </html>	
