@@ -8,12 +8,8 @@
 
 </body>
 <script type="text/javascript">
-let obj = {
-	[Symbol('name')] : 'tx',
-	age:24
-};
-
-console.log(Reflect.ownKeys(obj));
+Symbol.for('name') === Symbol.for('name');  //true
+Symbol('name') === Symbol('name'); 			//false
 
 
 </script>
