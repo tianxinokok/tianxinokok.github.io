@@ -32,7 +32,7 @@
                  </time>
                 </span>
               </div>
-             <!--  <div style="color: #000"> {{forloop.index}}</div> -->
+
               <span class="post_title"><a class="post-link" href="{{ post.url }}" data-post-href="{{ post.url }}">{{ post.title}}</a></span>
               <span class="details">Details&nbsp;<i class="fa fa-briefcase" aria-hidden="true"></i></span>
               </div>
@@ -40,11 +40,7 @@
               <div>
                 <i class="more_icon fa fa-plus" aria-hidden="true"></i>
               </div>
-              <div class="post-excerpt" itemprop="description">
-                <!-- <p class="yl">{{ post.description }}</p> -->
-                <!--<p class="yl">{{ post.content | strip_html | truncatewords: 0 }}</p>-->
-                <!--<p class="ydqw"><a href="{{ post.url }}">阅读全文...</a></p>-->
-              </div>
+              <div class="post-excerpt" itemprop="description"></div>
             </div>
           </li>
           {% endfor %}
