@@ -191,281 +191,193 @@
           <div class="content_content" >
             <div class="post_content">
                 <div class="content_title">
-                  <h1>Symbol</h1><span id="busuanzi_container_page_pv">
+                  <h1>Set和Map数据结构</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一概述">一、概述</h3>
-<p>es5中对象的属性名都是字符串，这容易造成属性名的冲突。如果你使用了一个他人提供的对象，需要在这个对象上添加属性，新属性的名字就有可能与旧属性的名字产生冲突。如果有一种机制，可以保证每个属性的名字都是独一无二的就好了，这样就能彻底解决属性名冲突的问题。这就是es6新增Symbol的原因。</p>
+                  <h3 id="一set">一、set</h3>
 
-<p>es6引入了一种新的原始数据类型Symbol，表示独一无二的值。他是js语言的第七种数据类型，之前的数据类型有：数值（Number）、字符串（String）、对象（Object）、布尔值（Boolean）、undefined、null。</p>
+<h4 id="基本用法">基本用法</h4>
+<p>es6提供了新的数据结构Set。她类似于数组，但是成员的值都是唯一的，没有重复值。</p>
 
-<p>Symbol值通过Symbol函数生成。这就是说，对象的属性名现在可以用两种类型，一种是原来的字符串类型，另一种就是新增的Symbol类型。凡是属性名属于Symbol类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = Symbol();
-console.log(typeof s); //symbol
+<p>Set本身是一个构造函数，用来生成Set数据结构。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = new Set();
+[1,2,3,3,4,4].forEach((x) =&gt; s.add(x));
+
+for(let i of s){
+    console.log(i);  //1,2,3,4
+}
 </code></pre>
 </div>
-<p>上面代码中，s的数据类型是symbol，并且是一个第一无二的值。</p>
+<p>上面代码通过add方法向Set结构添加成员，结果表明Set结构不会添加重复的值。</p>
 
-<p>注意：Symbol函数前不能使用new命令，否则会报错。这是因为生成的Symbol值是一个原始类型的值，不是对象。也就是说，由于Symbol值不是对象，所以不能添加属性。基本上，他是一种类似于字符出的数据类型。</p>
-
-<p>Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述，主要是为了在控制台显示，或者转为字符串，比较容易区分。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('s1');
-let s2 = Symbol('s2');
-console.log(s1);             //Symbol(s1)
-console.log(s2); 			 //Symbol(s2)
-
-console.log(s1.toString());  //"Symbol(s1)"
-console.log(s2.toString());  //"Symbol(s2)"
+<p>Set函数可以接受一个数组（或者具有iterable接口的其他数据结构）作为参数，用来初始化。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let s = new Set([1,2,3,4]);
+//例子1
+console.log(s);            //Set(4) {1, 2, 3, 4}
+console.log([...s]);       //[1, 2, 3, 4]
+//例子2
+let items = new Set([1,3,4]);
+console.log(items.size);   //3
+//例子3
+let  sDiv = new Set(document.querySelectorAll('div'));
+console.log(sDiv.size);   //1
+//类似于
+let sDiv2 = new Set();
+document.querySelectorAll('div').forEach(div =&gt; sDiv2.add(div));
 </code></pre>
 </div>
-<p>上面代码中，s1和s2是两个Symbol值。如果不加参数，他们在控制台的输出都是Symbol()，不利于区分。加上字符串参数之后，相当于为他们加了描述，输出的时候就更容易区分。</p>
+<p>上面代码中，例子1和例子2都是接收数组作为参数，例子3是接收类似数组的对象作为参数。</p>
 
-<p>如果Symbol的参数是一个对象，就会先调用对象的toString(）方法，将其转为字符串，然后才生成一个Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
-	toString(){
-		return '123';
-	}
-};
-let s1 = Symbol(obj);
-console.log(s1); //Symbol(123)
+<p>上面代码展示了去除数组中重复成员的方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//去除数组中重复项
+[...new Set([1,4,4,5,6])]; //[1, 4, 5, 6]
+</code></pre>
+</div>
+<p>上面的方法也可用于，去除字符串里面的重复字符。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//去除字符串中重复字符
+[...new Set('hello')].join(''); //"helo"
+</code></pre>
+</div>
+<p>向Set加入值的时候，不会发生类型转换，所以加入5和”5”是两个不同的值，Set内部判断两个值是否相等，使用的算法叫做“Same-value-zero equality”，它类似于全等运算符(===),只要的区别是NaN等于自身，而全等运算符比较NaN不等于自身。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set();
+let a = NaN;
+let b = NaN;
+set.add(a);
+set.add(b);
+console.log(set); //Set(1) {NaN}
+</code></pre>
+</div>
+<p>上面代码向Set实例添加了两个NaN,但是只能加入一个，这表明，在Set内部，两个NaN是相等的。</p>
 
+<p>另外，两个对象总是不相等的。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set();
+set.add({});
+set.add({});
+set.size;  //2
+</code></pre>
+</div>
+<p>上面代码表示：由于两个空对象不相等，所以set中被加进了两项。</p>
+
+<h4 id="set实例的属性和方法">Set实例的属性和方法</h4>
+<p>Set结构的实例有以下属性。</p>
+
+<p>–Set.prototype.constructor:构造函数，默认就是Set函数。
+–Set.prototype.size:返回Set实例的成员数量。</p>
+
+<p>Set实例的方法分为两大类：操作方法（用于操作数据）和遍历方法（用于遍历成员）。</p>
+
+<p>–add(value)：添加某个值，返回Set结构本身。
+–delete(value)：删除某个值，返回一个布尔值，表示是否删除成功。
+–has(value)：返回一个布尔值，表示该值是否为Set的成员。
+–clear()：清除所有成员，没有返回值。</p>
+
+<p>上面这些方法的例子如下:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set();
+set.add(1).add(2).add(2);
+
+set.size;       //2
+set.has(2);     //true
+set.delete(2);  //true
+set.has(2);     //false
+</code></pre>
+</div>
+<p>下面是一个对比，比较在判断是否包含某一个键上面，Object结构和Set结构有什么不同。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>//Object
 let obj = {
-	name:'tx'
+    name : 'tianxin',
+    age :24
 };
-let s1 = Symbol(obj);
-console.log(s1); //Symbol([object Object])
-</code></pre>
-</div>
-<p>注意：Symbol的参数只是表示对当前Symbol值的描述，因此相同参数的Symbol函数的返回值是不相等的，也就是上文所说的，每一个Symbol值都是独一无二的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let  s1 = Symbol();
-let  s2 = Symbol();
-console.log(s1===s2);   //false
 
-let s3 = Symbol('abc');
-let s4 = Symbol('abc');
-console.log(s3 === s4); //false
-</code></pre>
-</div>
-<p>Symbol的值不能与其他类型的值进行运算，会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-console.log('hello' + s1); //Cannot convert a Symbol value to a string
-</code></pre>
-</div>
-<p>Symbol值可以显式转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-String(s1);    //"Symbol(world)"
-s1.toString(); //"Symbol(world)"
-</code></pre>
-</div>
-<p>另外，Symbol值也可以转为布尔值，但是不能转为数值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-Boolean(s1);      //true
-!s1; 			  //false
-
-let s1 = Symbol('123');
-Number(s1); //Cannot convert a Symbol value to a number
-</code></pre>
-</div>
-<h3 id="二symbolprototypedescription">二、Symbol.prototype.description</h3>
-<p>创建Symbol值的时候，虽然可以添加一个字符串参数作为描述。但是，想要读取这个描述需要将Symbol转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
-s1.toString(); //Symbol(123)
-</code></pre>
-</div>
-<p>上面代码中，s1的描述就是字符串123，但是读取这个描述就得将Symbol值转为字符串。</p>
-
-<p>很明显，这种方式很不方便。因此提供了一个description属性，直接返回Symbol的描述。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
-s1.description; //"123"
-</code></pre>
-</div>
-<h3 id="三作为属性名的symbol">三、作为属性名的Symbol</h3>
-<p>由于每一个Symbol值都是独一无二的，这意味着Symbol值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于对象非常有用，可以防止某一个键被不小心改写或者覆盖。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
-//第一种写法
-let obj = {};
-obj[s1] = 'hello';
-
-//第二种写法
-let obj = {
-	[s1]:'hello'
-};
-第三种写法
-let obj = {};
-Object.defineProperty(obj,s1 , {value:'hello'});
-
-console.log(obj[s1]); //'hello'
-console.log(obj.s1);  //undefined 用.取值 取到的是undefined 
-</code></pre>
-</div>
-<p>上面代码通过方括号和Object.defineProperty，将对象的属性名指定为一个Symbol值。</p>
-
-<p>注意：Symbol值作为对象的属性名时，不能用点运算符。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
-let obj = {};
-obj.s1 = 'hello';
-
-console.log(obj[s1]);   //undefined
-console.log(obj['s1']); //undefined
-</code></pre>
-</div>
-<p>因为点运算符(.)后面总是字符串，所以不会读取到Symbol作为标识名所指代的那个值，导致obj的s1属性名实际上是一个字符串，而不是一个Symbol值。</p>
-
-<p>同理，在对象的内部，使用Symbol值定义属性时，Symbol值必须放在方括号之中。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let f1 = Symbol();
-let obj = {
-	[f1](num){
-		console.log(num);
-	}
-};
-obj[f1]('123'); //123
-</code></pre>
-</div>
-<p>如果f1不放在放方括号里，该属性的key就是字符串f1，而不是f1所代表的那个Sumbol值。</p>
-
-<p>Symbol类型还可以用于定义一组常量，保证这组常量的值都是不相等的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
-obj.levels = {
-	DEBUG : Symbol('debug'),
-	INFO  : Symbol('info'),
-	WARN  : Symbol('warn')
-};
-console.log(obj.levels.DEBUG, 'debug message'); //Symbol(debug) "debug message"
-console.log(obj.levels.INFO, 'info message');   //Symbol(info) "info message"
-</code></pre>
-</div>
-<p>下面是另外一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let color_red = Symbol('red');
-let color_green = Symbol('green');
-
-function getComplement(color){
-	switch (color){
-		case  color_red :
-		return color_green;
-		case color_green:
-		return color_red;
-		default:
-		throw new Error('undefined color');
-	}
+if(obj['name']){
+    console.log('obj对象中包含name键'); 
 }
-getComplement(color_green); //Symbol(red)
-</code></pre>
-</div>
-<p>常量使用Symbol值的最大好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的switch语句会按照设计的方式工作。  【】想了一会，没理解这种写法的好处。</p>
+//Set
+let set = new Set();
+set.add('name');
+set.add('age');
 
-<p>还有一点需要注意，Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。</p>
-
-<h3 id="四实例消除魔术字符串">四、实例：消除魔术字符串</h3>
-<p>魔术字符串指的是，在代码之中多次出现，与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，该由含义清晰的变量代替。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function getArea(shape,options){
-let area = 0;
-switch(shape){
-case : 'Triangle':  //魔术字符串
-area =  options.width * options.height ; 
-break;
+if(set.has('name')){
+    console.log('set结构中包含name键');
 }
-return area;
+</code></pre>
+</div>
+<p>Array.from()方法可以将Set结构转为数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set([1,2,3]);
+let arr = Array.from(set);
+console.log(arr);  //[1, 2, 3]
+</code></pre>
+</div>
+<p>这就提供了去除数组重复成员的另一种方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function dedupe(array) {
+  return Array.from(new Set(array));
 }
-getArea('Triangle',{width:100,height:200}); //魔术字符串
+dedupe([1, 1, 2, 3]) // [1, 2, 3]
 </code></pre>
 </div>
-<p>上面代码中，字符串Triangle就是一个魔术字符串。他在一段代码中多次出现，与代码形成强耦合，不利于将来的修改和维护。</p>
+<h4 id="遍历操作">遍历操作</h4>
 
-<p>常用的消除魔术字符串的方法，就是把它写成一个变量。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
-triangle : 'Triangle'
-};
-function getArea(shape,options){
-let area = 0;
-switch(shape){
-case : shapeType.triangle :  //魔术字符串
-area =  options.width * options.height ; 
-break;
+<p>Set结构的实例有四个遍历方法，可以用于遍历成员。</p>
+
+<p>–key()：返回键名的遍历器。
+–values：返回键值的遍历器。
+–entries：返回键值对的遍历器。
+–forEach：使用回调函数遍历每个成员。</p>
+
+<p>需要特别说明的是：Set的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用Set保存一个回调函数的列表，调用时就能保证按照添加顺序调用。</p>
+
+<h5 id="1keysvaluesentries">（1）keys()，values()，entries()</h5>
+<p>keys()，values()，entries()这三个方法返回的都是遍历器对象。由于Set结构没有键名，只有键值(或者说键名和键值是同一个值)，所以keys()方法和values()方法的行为完全一致。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set(['red','blue','yellow']);
+
+for(let items of set.keys()){
+    console.log(items);
 }
-return area;
+//red
+//blue
+//yellow
+for(let items of set.values()){
+    console.log(items);
 }
-getArea(shapeType.triangle,{width:100,height:200}); //魔术字符串
-
-</code></pre>
-</div>
-<p>上面代码中，我们把Triangle写成shapeType对象的triangle属性，这样就消除了强耦合。</p>
-
-<p>如果仔细发现，可以发现shapeType.triangle等于哪个值不重要，只要确保不会跟其他shapeType属性的值冲突即可。因此，这里就很适合改用Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
-triangle : Symbol()
-};
-</code></pre>
-</div>
-<p>上面代码中，除了将shapeType.triangle的值设为一个Symbol值，其他地方都不用修改。</p>
-
-<h3 id="五属性名的遍历">五、属性名的遍历</h3>
-<p>Symbol作为属性名，该属性不会出现在for…in 、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，他也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象所有Symbol属性名。</p>
-
-<p>Object.getOwnPropertySymbols方法返回一个数组，成员是当前对象的所有用作属性名的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = Symbol('a');
-let b = Symbol('b');
-
-obj[a] = 'hello';
-obj[b] = 'world';
-
-let  = objectSymbols = Object.getOwnPropertySymbols(obj);
-
-console.log(objectSymbols); //[Symbol(a), Symbol(b)]
-</code></pre>
-</div>
-<p>下面是Object.getOwnPropertySymbols方法与for…in循环、Object.getOwnPropertyNames方法进行对比的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let name = Symbol('name');
-Object.defineProperty(obj , name, {
-value : 'foobar',
-});
-
-for(let i in obj){
-console.log(i);  //无打印
+//red
+//blue
+//yellow
+for(let items of set.entries()){
+    console.log(items);
 }
-console.log(Object.getOwnPropertyNames(obj));   //[]
-
-console.log(Object.getOwnPropertySymbols(obj)); //[Symbol(name)]
+//["red", "red"]
+//["blue", "blue"]
+//["yellow", "yellow"]
 </code></pre>
 </div>
-<p>上面代码中，使用Object.getOwnPropertyNames方法得不到Symbol属性名，需要使用Object.getOwnPropertySymbols方法。</p>
 
-<p>另一个新增的方法:Reflect.ownkeys()可以返回所有类型的键名，包括常规键名和Symbol键名。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
-[Symbol('name')] : 'tx',
-age:24
-};
-
-Reflect.ownKeys(obj); //["age", Symbol(name)]
+<p>Set结构的实例默认可遍历，他的默认遍历器生成函数就是他的values方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Set.prototype[Symbol.iterator] === Set.prototype.values
+// true
 </code></pre>
 </div>
-<p>由于以Symbol值作为名称的属性，不会被常规方法遍历得到。我们可以利用这个特性，为对象一些非私有的，但又希望只用于内部的方法。【】下面这段代码看不懂 ，没有复制。</p>
+<p>这意味着，可以省略values方法，直接用for…of循环Set。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set(['red','blue','yellow']);
 
-<h3 id="六symbolfor--symbolkeyfor">六、Symbol.for() , Symbol.keyFor()</h3>
-<p>如果我们需要使用同一个Symbol值，symbol.for()方法可以做到这一点。他接收一个字符出作为参数，然后搜索有没有以该参数为名称的Symbol值。如果有，就返回这个Symbol值，如果没有，就新建并返回以该字符串为参数的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol.for('name') ; 
-let s2 = Symbol.for('name');
-console.log(s1 === s2); //true
+for(let items of set){
+    console.log(items);
+}
 </code></pre>
 </div>
-<p>上面代码中，s1和s2都是Symbol值，但是他们都是同样参数的Symbol.for方法生成的，所有他们相等是同一个值。</p>
+<h5 id="2-foreach">(2) forEach()</h5>
+<p>Set结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set([1,2,3]);
 
-<p>Symbol.for()和Symbol()这两种写法都会生成新的Symbol。他们的区别是Symbol.for()会在全局环境中供搜索，Symbol()不会。Symbol.for()不会每次调用就返回一个新的Symbol类型的值，而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。比如，如果你调用Symbol.for(“name”)n次，每次都会返回同一个Symbol值，但是调用Symbol()n次，会返回n个不同的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Symbol.for('name') === Symbol.for('name');  //true
-Symbol('name') === Symbol('name'); 			//false
+set.forEach((key,value) =&gt; console.log(key + ':' + value));
+//1:1
+//2:2
+//3:3
 </code></pre>
 </div>
-<p>上面代码中，由于Symbol()写法没有登记机制，所以每次调用都会返回一个不同的值。</p>
+<p>上面代码说明，forEach方法的参数就是一个处理函数。该数组的参数与数组的forEach一致，依次为键值、键名、集合本身（上面没写）。这里需要注意的是：Set结构的键值跟键名相等，因此第一个参数和第二个参数永远是一样的。</p>
 
-<p>Symbol.keyFor方法返回一个已登记的Symbol类型值的key。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-let s1 = Symbol.for('name');
-Symbol.keyFor(s1); //"name"
+<p>另外，forEach方法还可以有第二个参数，表示绑定处理函数内部的this对象。</p>
 
-let  s2 = Symbol('name');
-Symbol.keyFor(s2); //undefined
-</code></pre>
-</div>
-<p>上面代码中s2属于未登记的Symbol值，所以Symbol.keyFor()返回undefined。</p>
+<h5 id="3遍历的应用">（3）遍历的应用</h5>
 
 
    
@@ -476,18 +388,18 @@ Symbol.keyFor(s2); //undefined
                 <div class="next_page_box">
                   <div class="read_next">阅读下一篇文章</div>
                   <div class="next_page">
-                    <a class="" href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html" data-post-href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html">
-                      <h4>对象的新增方法</h4>
+                    <a class="" href="http://localhost:4000/tec/2019/01/26/Symbol.html" data-post-href="http://localhost:4000/tec/2019/01/26/Symbol.html">
+                      <h4>Symbol</h4>
                       <div></div>
                     </a>
                   </div>
                 </div>
           
           <div class="phone_bottom">
-              <a class="" href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.html" data-post-href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.html">
+              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
               PREV
               </a>
-              <a class="" href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html" data-post-href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html">
+              <a class="" href="http://localhost:4000/tec/2019/01/26/Symbol.html" data-post-href="http://localhost:4000/tec/2019/01/26/Symbol.html">
                 NEXT
               </a>
           </div>
