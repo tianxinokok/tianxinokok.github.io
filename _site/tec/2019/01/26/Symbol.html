@@ -454,6 +454,18 @@ console.log(s1 === s2); //true
 Symbol('name') === Symbol('name'); 			//false
 </code></pre>
 </div>
+<p>上面代码中，由于Symbol()写法没有登记机制，所以每次调用都会返回一个不同的值。</p>
+
+<p>Symbol.keyFor方法返回一个已登记的Symbol类型值的key。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+let s1 = Symbol.for('name');
+Symbol.keyFor(s1); //"name"
+
+let  s2 = Symbol('name');
+Symbol.keyFor(s2); //undefined
+</code></pre>
+</div>
+<p>上面代码中s2属于未登记的Symbol值，所以Symbol.keyFor()返回undefined。</p>
 
 
    
