@@ -405,18 +405,18 @@ body{
     width: 265px;
     padding: 25px;
     height: calc(60vh - 64px);
-	border-right:1px solid #000;
+	border-right:1px solid #eee;
 }
 .prose_list > li{
 	width: 265px;
     padding: 25px;
     height: calc(60vh - 64px);
-    border-right:1px solid #000;
+    border-right:1px solid #eee;
 }
 .book_list > li{
 	width: 265px;
     height: calc(60vh - 64px);
-    border-right:1px solid #000;
+    border-right:1px solid #eee;
 }
 .post_img_box{
 	position: absolute;
