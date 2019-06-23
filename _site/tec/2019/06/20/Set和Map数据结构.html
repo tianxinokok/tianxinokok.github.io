@@ -194,9 +194,9 @@
                   <h1>Set和Map数据结构</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一set">一、set</h3>
+                  <h3 id="set">一、set</h3>
 
-<h4 id="基本用法">基本用法</h4>
+<h4 id="section">基本用法</h4>
 <p>es6提供了新的数据结构Set。她类似于数组，但是成员的值都是唯一的，没有重复值。</p>
 
 <p>Set本身是一个构造函数，用来生成Set数据结构。</p>
@@ -258,7 +258,7 @@ set.size;  //2
 </div>
 <p>上面代码表示：由于两个空对象不相等，所以set中被加进了两项。</p>
 
-<h4 id="set实例的属性和方法">Set实例的属性和方法</h4>
+<h4 id="set-1">Set实例的属性和方法</h4>
 <p>Set结构的实例有以下属性。</p>
 
 <p>–Set.prototype.constructor:构造函数，默认就是Set函数。
@@ -314,7 +314,7 @@ console.log(arr);  //[1, 2, 3]
 dedupe([1, 1, 2, 3]) // [1, 2, 3]
 </code></pre>
 </div>
-<h4 id="遍历操作">遍历操作</h4>
+<h4 id="section-1">遍历操作</h4>
 
 <p>Set结构的实例有四个遍历方法，可以用于遍历成员。</p>
 
@@ -325,7 +325,7 @@ dedupe([1, 1, 2, 3]) // [1, 2, 3]
 
 <p>需要特别说明的是：Set的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用Set保存一个回调函数的列表，调用时就能保证按照添加顺序调用。</p>
 
-<h5 id="1keysvaluesentries">（1）keys()，values()，entries()</h5>
+<h5 id="keysvaluesentries">（1）keys()，values()，entries()</h5>
 <p>keys()，values()，entries()这三个方法返回的都是遍历器对象。由于Set结构没有键名，只有键值(或者说键名和键值是同一个值)，所以keys()方法和values()方法的行为完全一致。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set(['red','blue','yellow']);
 
@@ -363,7 +363,7 @@ for(let items of set){
 }
 </code></pre>
 </div>
-<h5 id="2-foreach">(2) forEach()</h5>
+<h5 id="foreach">(2) forEach()</h5>
 <p>Set结构的实例与数组一样，也拥有forEach方法，用于对每个成员执行某种操作，没有返回值。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set([1,2,3]);
 
@@ -377,7 +377,62 @@ set.forEach((key,value) =&gt; console.log(key + ':' + value));
 
 <p>另外，forEach方法还可以有第二个参数，表示绑定处理函数内部的this对象。</p>
 
-<h5 id="3遍历的应用">（3）遍历的应用</h5>
+<h5 id="section-2">（3）遍历的应用</h5>
+<p>扩展运算符（…）内部使用for…of循环，所以也可以用于Set结构。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set  = new Set([1,2,3]);
+let arr   = [...set];
+console.log(arr); //[1, 2, 3]
+</code></pre>
+</div>
+<p>扩展运算符和Set结构相结合，就可以去除数组的重复成员。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = [1,2,2,3,4];
+let unique = [... new Set(arr)];
+console.log(unique); //[1,2,3,4]
+</code></pre>
+</div>
+<p>数组的map和filter方法也可以间接用于Set了。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set([1,2,3]);
+set = new Set([...set].map(x =&gt; x*2));
+console.log(set); //Set(3) {2, 4, 6}
+
+let set = new Set([1,2,3]);
+set = new Set([...set].filter(x=&gt; (x % 2) ==0 ));
+console.log(set); //Set(1) {2}
+</code></pre>
+</div>
+<p>因此使用Set可以很容易实现并集，交集和差集。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let a = new Set([1,2,3]);
+let b = new Set([2,3,4]);
+
+//并集 
+let union = new Set([...a,...b]);
+console.log(union);     //Set(4) {1, 2, 3, 4}
+
+//交集
+let intersect = new Set([...a].filter(x =&gt; b.has(x)));
+console.log(intersect); //{2, 3}
+
+
+//差集
+let difference = new Set([...a].filter(x =&gt; !b.has(x)));
+console.log(difference); //Set(1) {1}
+</code></pre>
+</div>
+<p>如果想在遍历操作中，同步改变原来的Set结构，目前没有直接的方法，但有两种变通方法。一种是利用原来的Set结构映射出一个新结构，然后赋值给原来的dSet结构，另一个方法是利用Array.from方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set([1,2,3]);
+set = new Set([...set].map(val =&gt; val * 2));
+console.log(set); //Set(3) {2, 4, 6}
+
+let set = new Set([1,2,3]);
+set = new Set(Array.from(set,val =&gt; val *2));
+console.log(set); //Set(3) {2, 4, 6}
+</code></pre>
+</div>
+<p>上面这两种方法可以在遍历的过程中改变原来的Set结构。</p>
+
+<h3 id="set-2">二、Set</h3>
+
+<p>备注：WeakSet和WeakMap没写。</p>
 
 
    

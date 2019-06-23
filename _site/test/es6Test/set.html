@@ -9,11 +9,13 @@
 <body>
 </body>
 <script>
-let set = new Set([1,2,3]);
 
-set.forEach((key,value) => console.log(key + ':' + value));
-//1:1
-//2:2
-//3:3
+let set = new Set([1,2,3]);
+	set = new Set(Array.from(set,val => val *2));
+	console.log(set);
+
+
+
+
 </script>
 </html>
