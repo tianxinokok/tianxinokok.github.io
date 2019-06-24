@@ -7,15 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="test"></div>
 </body>
 <script>
-
-let set = new Set([1,2,3]);
-	set = new Set(Array.from(set,val => val *2));
-	console.log(set);
-
-
-
-
+let obj = {};
+let Div = document.getElementById('test');
+obj[Div] = 'hello';
+console.log(obj); //{[object HTMLDivElement]: "hello"}
+console.log(obj['[object HTMLDivElement]']);
 </script>
 </html>
