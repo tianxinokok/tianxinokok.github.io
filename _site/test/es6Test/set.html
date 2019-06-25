@@ -10,10 +10,9 @@
     <div id="test"></div>
 </body>
 <script>
-let obj = {};
-let Div = document.getElementById('test');
-obj[Div] = 'hello';
-console.log(obj); //{[object HTMLDivElement]: "hello"}
-console.log(obj['[object HTMLDivElement]']);
+let m = new Map();
+m.set(['a'],123);
+m.get(['a']);  //undefined
+
 </script>
 </html>
