@@ -10,9 +10,10 @@
     <div id="test"></div>
 </body>
 <script>
-let m = new Map();
-m.set(['a'],123);
-m.get(['a']);  //undefined
-
+let m = new Map([
+    ['name','tx'],
+    ['age',24]
+]);
+console.log(m);
 </script>
 </html>
