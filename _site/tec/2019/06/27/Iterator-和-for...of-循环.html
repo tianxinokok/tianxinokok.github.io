@@ -191,281 +191,120 @@
           <div class="content_content" >
             <div class="post_content">
                 <div class="content_title">
-                  <h1>Symbol</h1><span id="busuanzi_container_page_pv">
+                  <h1>Iterator 和 for...of 循环</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一概述">一、概述</h3>
-<p>es5中对象的属性名都是字符串，这容易造成属性名的冲突。如果你使用了一个他人提供的对象，需要在这个对象上添加属性，新属性的名字就有可能与旧属性的名字产生冲突。如果有一种机制，可以保证每个属性的名字都是独一无二的就好了，这样就能彻底解决属性名冲突的问题。这就是es6新增Symbol的原因。</p>
+                  <h3 id="一iterator遍历器的概念">一、Iterator(遍历器)的概念</h3>
+<p>js原有的表示集合的数据结构，主要是数组(Array)和对象(Object)，ES6又添加了Map和Set。这样就有了四种数据集合，用户还可以组合使用他们，定义自己的数据结构，比如数组的成员是Map，Map的成员是对象。这样就需要一种统一的接口机制，来处理所有不同的数据结构。</p>
 
-<p>es6引入了一种新的原始数据类型Symbol，表示独一无二的值。他是js语言的第七种数据类型，之前的数据类型有：数值（Number）、字符串（String）、对象（Object）、布尔值（Boolean）、undefined、null。</p>
+<p>遍历器（Iterator）就是这样一种机制。他是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署Iterator 接口，就可以完成遍历操作。</p>
 
-<p>Symbol值通过Symbol函数生成。这就是说，对象的属性名现在可以用两种类型，一种是原来的字符串类型，另一种就是新增的Symbol类型。凡是属性名属于Symbol类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = Symbol();
-console.log(typeof s); //symbol
+<p>Iterator的作用有三个：</p>
+
+<p>1.为各种数据结构，提供一个统一的、简便的访问接口。</p>
+
+<p>2.使数据结构的成员能够按某种次序排列。</p>
+
+<p>3.es6创造了一种新的遍历命令for…of循环，Iterator接口主要供for…of消费。</p>
+
+<p>Iterator的遍历过程是这样的。</p>
+
+<p>（1）创建一个指针对象，指向当前数据结构的起始位置。也就是说，遍历器对象本质上，就是一个指针对象。</p>
+
+<p>（2）第一次调用指针对象的next方法，可以将指针指向数据结构的第一个成员。</p>
+
+<p>（3）第二次调用指针对象的next方法，指针就指向数据结构的第二个成员。</p>
+
+<p>（4）不断调用指针的next方法，直到它指向数据结构的结束位置。</p>
+
+<p>每一次调用next方法，都会返回数据结构的当前成员的信息。具体来说，就是返回一个包含value和done两个属性的对象。value是当前成员的值，done是一个布尔值，表示遍历是否结束。</p>
+
+<h3 id="二默认iterator接口">二、默认Iterator接口</h3>
+<p>Iterator接口的目的，就是为所有数据结构，提供了一种统一的访问机制，即for…of循环。当使用for…of循环遍历某种数据结构时，该循环会自动寻找Iterator接口。</p>
+
+<p>一种数据解构只要部署了Iterator接口，就称这种数据结构是可遍历的。</p>
+
+<p>es6规定，默认的Iterator接口部署在数据结构的Symbol.iterator属性，或者说，一个数据结构只要具有Symbol.iterator属性，就可以认为是可遍历的。</p>
+
+<p>Symbol.iterator属性本身是一个函数，就是当前数据结构默认的遍历器生成函数。执行这个函数，就会返回一个遍历器。属性名Symbol.iterator是一个表达式，返回Symbol对象的iterator属性，这是一个预定义好的、类型为Symbol的特殊值，所以要放在方括号内。</p>
+
+<p>ES6的有些数据结构原生具备Iterator接口（数组），即不用任何处理，就可以被for…of循环遍历。原因就是，这些数据解构原生部署了Symbol.iterator属性，另外一些数据结构没有（比如对象）。</p>
+
+<p>原生具备Iterator接口的数据结构如下：</p>
+
+<p>–Array</p>
+
+<p>–Map</p>
+
+<p>–Set</p>
+
+<p>–String</p>
+
+<p>–TypedArray</p>
+
+<p>–函数的arguments对象</p>
+
+<p>–NodeList对象</p>
+
+<p>下面的例子是数组的Symbol.iterator属性。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = ['a','b','c'];
+let iter = arr[Symbol.iterator]();
+iter.next() // { value: "a", done: false}
+iter.next() // { value: 'b', done: false }
+iter.next() // { value: 'c', done: false }
+iter.next() // { value: undefined, done: true }
 </code></pre>
 </div>
-<p>上面代码中，s的数据类型是symbol，并且是一个第一无二的值。</p>
+<p>上面代码中，变量arr是一个数组，原生就具有遍历器接口，部署在arr的Symbol.iterator属性上面。所以，调用这个属性，就可以得到遍历器对象。</p>
 
-<p>注意：Symbol函数前不能使用new命令，否则会报错。这是因为生成的Symbol值是一个原始类型的值，不是对象。也就是说，由于Symbol值不是对象，所以不能添加属性。基本上，他是一种类似于字符出的数据类型。</p>
+<p>其他数据结构（主要是对象）的iterator接口，都需要自己在Symbol.iterator属性上部署，这样才会被for…of循环遍历。</p>
 
-<p>Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述，主要是为了在控制台显示，或者转为字符串，比较容易区分。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('s1');
-let s2 = Symbol('s2');
-console.log(s1);             //Symbol(s1)
-console.log(s2); 			 //Symbol(s2)
+<p>对象（Object）之所以没有部署Iterator接口，是因为对象属性的遍历顺序是不确定的，需要开发者手动指定，本质上，遍历器是一种线性处理，对于任何非线性的数据解构，部署遍历器接口，就等于部署一种线性转换。不过，对象部署遍历器接口并不是很必要，因为这时对象实际上被当作Map结构使用。</p>
 
-console.log(s1.toString());  //"Symbol(s1)"
-console.log(s2.toString());  //"Symbol(s2)"
+<p>一个对象如果要具备可被for…of循环调用的 Iterator 接口，就必须在Symbol.iterator的属性上部署遍历器生成方法（原型链上的对象具有该方法也可）。</p>
+
+<h3 id="三调用iterator接口的场合">三、调用Iterator接口的场合</h3>
+<p>有一些场合会默认调用Iterator接口，除了for…of循环，还有几个别的场合。</p>
+
+<h4 id="1解构赋值">（1）解构赋值</h4>
+<p>对数组和Set结构进行解构赋值时，会默认调用Symbol.iterator方法。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let set = new Set().add('a').add('b').add('c');
+let [x,y] = set;
+console.log(x,y);   //"a","b"
+let [first,...rest] = set;
+console.log(first); //"a"
+console.log(rest);  //["b", "c"]
 </code></pre>
 </div>
-<p>上面代码中，s1和s2是两个Symbol值。如果不加参数，他们在控制台的输出都是Symbol()，不利于区分。加上字符串参数之后，相当于为他们加了描述，输出的时候就更容易区分。</p>
-
-<p>如果Symbol的参数是一个对象，就会先调用对象的toString(）方法，将其转为字符串，然后才生成一个Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
-	toString(){
-		return '123';
-	}
-};
-let s1 = Symbol(obj);
-console.log(s1); //Symbol(123)
-
-let obj = {
-	name:'tx'
-};
-let s1 = Symbol(obj);
-console.log(s1); //Symbol([object Object])
+<h4 id="2扩展运算符">（2）扩展运算符</h4>
+<p>扩展运算符(…)也会调用默认的Iterator接口。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let str = 'hello';
+[...str];                   // ["h", "e", "l", "l", "o"]
+let arr = ['a','b'];
+console.log([...arr,'c']); //["a", "b", "c"]
 </code></pre>
 </div>
-<p>注意：Symbol的参数只是表示对当前Symbol值的描述，因此相同参数的Symbol函数的返回值是不相等的，也就是上文所说的，每一个Symbol值都是独一无二的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let  s1 = Symbol();
-let  s2 = Symbol();
-console.log(s1===s2);   //false
+<p>上面代码的扩展运算符内部就调用了Iterator接口。</p>
 
-let s3 = Symbol('abc');
-let s4 = Symbol('abc');
-console.log(s3 === s4); //false
+<p>这提供了一种简便机制，可以将任何部署了Iterator接口的数据结构转为数组。也就是说，只要某个数据结构部署了Iterator接口，就可以对他使用扩展运算符，将其转为数组。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>let arr = [...iterable];
 </code></pre>
 </div>
-<p>Symbol的值不能与其他类型的值进行运算，会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-console.log('hello' + s1); //Cannot convert a Symbol value to a string
-</code></pre>
-</div>
-<p>Symbol值可以显式转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-String(s1);    //"Symbol(world)"
-s1.toString(); //"Symbol(world)"
-</code></pre>
-</div>
-<p>另外，Symbol值也可以转为布尔值，但是不能转为数值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
-Boolean(s1);      //true
-!s1; 			  //false
+<h4 id="3yield">（3）yield*</h4>
+<p>yield<em>后面跟的是一个可遍历的结构，它会调用该结构的遍历器接口。【】yield</em>不懂</p>
 
-let s1 = Symbol('123');
-Number(s1); //Cannot convert a Symbol value to a number
-</code></pre>
-</div>
-<h3 id="二symbolprototypedescription">二、Symbol.prototype.description</h3>
-<p>创建Symbol值的时候，虽然可以添加一个字符串参数作为描述。但是，想要读取这个描述需要将Symbol转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
-s1.toString(); //Symbol(123)
-</code></pre>
-</div>
-<p>上面代码中，s1的描述就是字符串123，但是读取这个描述就得将Symbol值转为字符串。</p>
+<h4 id="4其他场合">（4）其他场合</h4>
+<p>由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用了遍历器接口。如下面例子。</p>
 
-<p>很明显，这种方式很不方便。因此提供了一个description属性，直接返回Symbol的描述。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
-s1.description; //"123"
-</code></pre>
-</div>
-<h3 id="三作为属性名的symbol">三、作为属性名的Symbol</h3>
-<p>由于每一个Symbol值都是独一无二的，这意味着Symbol值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于对象非常有用，可以防止某一个键被不小心改写或者覆盖。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
-//第一种写法
-let obj = {};
-obj[s1] = 'hello';
+<p>–for…of</p>
 
-//第二种写法
-let obj = {
-	[s1]:'hello'
-};
-第三种写法
-let obj = {};
-Object.defineProperty(obj,s1 , {value:'hello'});
+<p>–Array.from()</p>
 
-console.log(obj[s1]); //'hello'
-console.log(obj.s1);  //undefined 用.取值 取到的是undefined 
-</code></pre>
-</div>
-<p>上面代码通过方括号和Object.defineProperty，将对象的属性名指定为一个Symbol值。</p>
+<p>–Map(), Set(), WeakMap(), WeakSet()（比如new Map([[‘a’,1],[‘b’,2]])）</p>
 
-<p>注意：Symbol值作为对象的属性名时，不能用点运算符。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
-let obj = {};
-obj.s1 = 'hello';
+<p>–Promise.all()</p>
 
-console.log(obj[s1]);   //undefined
-console.log(obj['s1']); //undefined
-</code></pre>
-</div>
-<p>因为点运算符(.)后面总是字符串，所以不会读取到Symbol作为标识名所指代的那个值，导致obj的s1属性名实际上是一个字符串，而不是一个Symbol值。</p>
-
-<p>同理，在对象的内部，使用Symbol值定义属性时，Symbol值必须放在方括号之中。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let f1 = Symbol();
-let obj = {
-	[f1](num){
-		console.log(num);
-	}
-};
-obj[f1]('123'); //123
-</code></pre>
-</div>
-<p>如果f1不放在放方括号里，该属性的key就是字符串f1，而不是f1所代表的那个Sumbol值。</p>
-
-<p>Symbol类型还可以用于定义一组常量，保证这组常量的值都是不相等的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
-obj.levels = {
-	DEBUG : Symbol('debug'),
-	INFO  : Symbol('info'),
-	WARN  : Symbol('warn')
-};
-console.log(obj.levels.DEBUG, 'debug message'); //Symbol(debug) "debug message"
-console.log(obj.levels.INFO, 'info message');   //Symbol(info) "info message"
-</code></pre>
-</div>
-<p>下面是另外一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let color_red = Symbol('red');
-let color_green = Symbol('green');
-
-function getComplement(color){
-	switch (color){
-		case  color_red :
-		return color_green;
-		case color_green:
-		return color_red;
-		default:
-		throw new Error('undefined color');
-	}
-}
-getComplement(color_green); //Symbol(red)
-</code></pre>
-</div>
-<p>常量使用Symbol值的最大好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的switch语句会按照设计的方式工作。  【】想了一会，没理解这种写法的好处。</p>
-
-<p>还有一点需要注意，Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。</p>
-
-<h3 id="四实例消除魔术字符串">四、实例：消除魔术字符串</h3>
-<p>魔术字符串指的是，在代码之中多次出现，与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，该由含义清晰的变量代替。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function getArea(shape,options){
-let area = 0;
-switch(shape){
-case : 'Triangle':  //魔术字符串
-area =  options.width * options.height ; 
-break;
-}
-return area;
-}
-getArea('Triangle',{width:100,height:200}); //魔术字符串
-</code></pre>
-</div>
-<p>上面代码中，字符串Triangle就是一个魔术字符串。他在一段代码中多次出现，与代码形成强耦合，不利于将来的修改和维护。</p>
-
-<p>常用的消除魔术字符串的方法，就是把它写成一个变量。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
-triangle : 'Triangle'
-};
-function getArea(shape,options){
-let area = 0;
-switch(shape){
-case : shapeType.triangle :  //魔术字符串
-area =  options.width * options.height ; 
-break;
-}
-return area;
-}
-getArea(shapeType.triangle,{width:100,height:200}); //魔术字符串
-
-</code></pre>
-</div>
-<p>上面代码中，我们把Triangle写成shapeType对象的triangle属性，这样就消除了强耦合。</p>
-
-<p>如果仔细发现，可以发现shapeType.triangle等于哪个值不重要，只要确保不会跟其他shapeType属性的值冲突即可。因此，这里就很适合改用Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
-triangle : Symbol()
-};
-</code></pre>
-</div>
-<p>上面代码中，除了将shapeType.triangle的值设为一个Symbol值，其他地方都不用修改。</p>
-
-<h3 id="五属性名的遍历">五、属性名的遍历</h3>
-<p>Symbol作为属性名，该属性不会出现在for…in 、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，他也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象所有Symbol属性名。</p>
-
-<p>Object.getOwnPropertySymbols方法返回一个数组，成员是当前对象的所有用作属性名的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = Symbol('a');
-let b = Symbol('b');
-
-obj[a] = 'hello';
-obj[b] = 'world';
-
-let  = objectSymbols = Object.getOwnPropertySymbols(obj);
-
-console.log(objectSymbols); //[Symbol(a), Symbol(b)]
-</code></pre>
-</div>
-<p>下面是Object.getOwnPropertySymbols方法与for…in循环、Object.getOwnPropertyNames方法进行对比的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let name = Symbol('name');
-Object.defineProperty(obj , name, {
-value : 'foobar',
-});
-
-for(let i in obj){
-console.log(i);  //无打印
-}
-console.log(Object.getOwnPropertyNames(obj));   //[]
-
-console.log(Object.getOwnPropertySymbols(obj)); //[Symbol(name)]
-</code></pre>
-</div>
-<p>上面代码中，使用Object.getOwnPropertyNames方法得不到Symbol属性名，需要使用Object.getOwnPropertySymbols方法。</p>
-
-<p>另一个新增的方法:Reflect.ownkeys()可以返回所有类型的键名，包括常规键名和Symbol键名。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
-[Symbol('name')] : 'tx',
-age:24
-};
-
-Reflect.ownKeys(obj); //["age", Symbol(name)]
-</code></pre>
-</div>
-<p>由于以Symbol值作为名称的属性，不会被常规方法遍历得到。我们可以利用这个特性，为对象一些非私有的，但又希望只用于内部的方法。【】下面这段代码看不懂 ，没有复制。</p>
-
-<h3 id="六symbolfor--symbolkeyfor">六、Symbol.for() , Symbol.keyFor()</h3>
-<p>如果我们需要使用同一个Symbol值，symbol.for()方法可以做到这一点。他接收一个字符出作为参数，然后搜索有没有以该参数为名称的Symbol值。如果有，就返回这个Symbol值，如果没有，就新建并返回以该字符串为参数的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol.for('name') ; 
-let s2 = Symbol.for('name');
-console.log(s1 === s2); //true
-</code></pre>
-</div>
-<p>上面代码中，s1和s2都是Symbol值，但是他们都是同样参数的Symbol.for方法生成的，所有他们相等是同一个值。</p>
-
-<p>Symbol.for()和Symbol()这两种写法都会生成新的Symbol。他们的区别是Symbol.for()会在全局环境中供搜索，Symbol()不会。Symbol.for()不会每次调用就返回一个新的Symbol类型的值，而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。比如，如果你调用Symbol.for(“name”)n次，每次都会返回同一个Symbol值，但是调用Symbol()n次，会返回n个不同的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Symbol.for('name') === Symbol.for('name');  //true
-Symbol('name') === Symbol('name'); 			//false
-</code></pre>
-</div>
-<p>上面代码中，由于Symbol()写法没有登记机制，所以每次调用都会返回一个不同的值。</p>
-
-<p>Symbol.keyFor方法返回一个已登记的Symbol类型值的key。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-let s1 = Symbol.for('name');
-Symbol.keyFor(s1); //"name"
-
-let  s2 = Symbol('name');
-Symbol.keyFor(s2); //undefined
-</code></pre>
-</div>
-<p>上面代码中s2属于未登记的Symbol值，所以Symbol.keyFor()返回undefined。</p>
+<h3 id="四字符串的iterator接口">四、字符串的Iterator接口</h3>
 
 
    
@@ -476,18 +315,18 @@ Symbol.keyFor(s2); //undefined
                 <div class="next_page_box">
                   <div class="read_next">阅读下一篇文章</div>
                   <div class="next_page">
-                    <a class="" href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html" data-post-href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html">
-                      <h4>对象的新增方法</h4>
+                    <a class="" href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html" data-post-href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html">
+                      <h4>Set和Map数据结构</h4>
                       <div></div>
                     </a>
                   </div>
                 </div>
           
           <div class="phone_bottom">
-              <a class="" href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html" data-post-href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html">
+              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
               PREV
               </a>
-              <a class="" href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html" data-post-href="http://localhost:4000/tec/2019/01/09/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95.html">
+              <a class="" href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html" data-post-href="http://localhost:4000/tec/2019/06/20/Set%E5%92%8CMap%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%89%AF%E6%9C%AC.html">
                 NEXT
               </a>
           </div>
