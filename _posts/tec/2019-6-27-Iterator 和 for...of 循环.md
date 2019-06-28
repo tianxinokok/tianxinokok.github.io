@@ -118,7 +118,7 @@ yield*后面跟的是一个可遍历的结构，它会调用该结构的遍历�
 --Promise.all()
 
 ### 四、字符串的Iterator接口
-
+test
 
 
 
