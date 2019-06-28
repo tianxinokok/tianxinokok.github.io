@@ -650,14 +650,6 @@ body:before {
 }
 .header_logo {
   display: none;
-/*  position: absolute;
-  bottom: 50px;
-  left: calc(50% - 72px);
-  display: block;
-  width: 144px;
-  height: auto;
-  will-change: transition;
-  visibility: hidden;*/
 }
 
 .phone_title{
