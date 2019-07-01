@@ -9,9 +9,16 @@
 <body>
 </body>
 <script>
-let str = 'hello';
-[...str];                   // ["h", "e", "l", "l", "o"]
-let arr = ['a','b'];
-console.log([...arr,'c']); //["a", "b", "c"]
+let arr = [1,2,3];
+arr.foo = 'abc';
+console.log(arr);
+for(let i in arr){
+    console.log(i);  
+}
+
+for(let i of arr){
+    console.log(i);
+}
+
 </script>
 </html>

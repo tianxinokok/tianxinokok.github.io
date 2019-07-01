@@ -118,16 +118,81 @@ yield*后面跟的是一个可遍历的结构，它会调用该结构的遍历�
 --Promise.all()
 
 ### 四、字符串的Iterator接口
+字符串是一个类似数组的对象，也原生具有Iterator接口。
+```
+let someString = 'hi';
+typeof someString[Symbol.iterator];  //"function"
 
+var iterator  = someString[Symbol.iterator]();
+console.log(iterator.next()); //{value: "h", done: false}
+console.log(iterator.next()); //{value: "i", done: false}
+console.log(iterator.next()); //{value: undefined, done: true}
+```
+上面代码中，调用Symbol.iterator方法返回一个遍历器对象，在这个遍历器上可以调用next方法，实现对于字符串的遍历。
 
+### 五、for...of循环
+for...of作为遍历所有数据结构的统一方法。
 
+一个数据结构只要部署了Symbol.Iterator属性，就被视为具有Iterator接口，就可以用for...of遍历他的成员。也就是说，for...of循环内部调用的是Symbol.iterator方法。
 
+for...of循环可以使用的范围包括数组，Set和Map结构、某些类似数组的对象（比如arguments对象、DOM NodeList对象），后文的Generator 对象，还有字符串。
 
+#### 数组
+数组原生具备Iterator接口（即默认部署了Symbol.iterator属性），for...of循环本质上是调用这个接口产生的遍历器。可用下面代码证明。
+```
+let arr = ['a','b','c'];
+for(let v of arr){
+    console.log(v);  //a b c
+}
+let obj = {};
+obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr);
+for(let v of obj){
+    console.log(v); //a b c
+}
+```
+上面代码中，空对象obj部署了数组arr的Symbol.iterator属性，结果obj的for...of循环，产生了与arr完全一样的结果。
 
+for...of循环可以代替数组实例的forEach方法。
+```
+let arr = ['a','b','c'];
+arr.forEach(function(element,index){
+    console.log(element);  //'a' 'b' 'c'
+    console.log(index);    //0 1 2
+})
+```
+js原有的for...in循环，只能获得对象的键名，不能直接获取键值。ES6提供for...of循环，允许遍历获得键值。
+```
+let arr = ['a','b','c'];
 
+for(let v in arr){
+    console.log(v);  //0 1 2 
+}
 
+for(let v of arr){
+    console.log(v); //'a' 'b' 'c'
+}
 
- 
+```
+上面代码表明，for...in循环读取键名，for...of循环读取键值。如果要通过for...of获取数组的索引，可以借助数组的entries方法和keys方法。
+
+for...of循环调用遍历器接口，数组的遍历器接口只返回具有数字索引的属性。这一点跟for...in循环也不一样。
+```
+let arr = [1,2,3];
+arr.foo = 'abc';
+console.log(arr);     //[1, 2, 3, foo: "abc"]
+for(let i in arr){
+    console.log(i);   //"0" "1" "2" "foo"
+}
+
+for(let i of arr){
+    console.log(i);   //1 2 3
+}
+```
+上面代码中，for...of循环没有循环数组arr的foo属性。
+
+#### Set和Map结构
+Set和Map结构也原生具有Iterator接口，可以直接使用for...of循环。
+
  
  
 
