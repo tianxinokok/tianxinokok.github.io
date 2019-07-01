@@ -192,7 +192,39 @@ for(let i of arr){
 
 #### Set和Map结构
 Set和Map结构也原生具有Iterator接口，可以直接使用for...of循环。
+```
+let set = new Set(['a','b','c']);
+for(var v of set){
+    console.log(v);     //"a","b","c"
+}
 
+
+var map = new Map();
+map.set('name','tx');
+map.set('age',24);
+
+for(let [name,value] of map){
+    console.log(name + ':' + value); // "name:tx" "age:24"
+} 
+```
+上面代码有两个需要注意的地方，第一：遍历的顺序是按照各个成员被添加进数据结构的顺序。第二，遍历Set结构时，返回的是一个值，而遍历Map结构时，返回的是一个数组，该数组的两个成员分别为当前Map成员的键名和键值。
+```
+var map = new Map();
+map.set('name','tx');
+map.set('age',24);
+
+for(let item of map){
+    console.log(item);
+}
+//["name", "tx"]
+//["age", 24]
+for(let [name,value] of map){
+    console.log(name + ':' + value); // "name:tx" "age:24"
+}
+//name:tx
+//age:24
+```
+#### 计算生成的数据结构
  
  
 

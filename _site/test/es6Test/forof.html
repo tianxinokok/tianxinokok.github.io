@@ -9,16 +9,20 @@
 <body>
 </body>
 <script>
-let arr = [1,2,3];
-arr.foo = 'abc';
-console.log(arr);
-for(let i in arr){
-    console.log(i);  
-}
 
-for(let i of arr){
-    console.log(i);
-}
+var map = new Map();
+map.set('name','tx');
+map.set('age',24);
 
+for(let item of map){
+    console.log(item);
+}
+//["name", "tx"]
+//["age", 24]
+for(let [name,value] of map){
+    console.log(name + ':' + value); // "name:tx" "age:24"
+}
+//name:tx
+//age:24
 </script>
 </html>
