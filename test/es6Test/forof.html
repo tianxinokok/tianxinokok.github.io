@@ -7,22 +7,14 @@
     <title>Document</title>
 </head>
 <body>
+    <div></div>
+    <div></div>
 </body>
 <script>
-
-var map = new Map();
-map.set('name','tx');
-map.set('age',24);
-
-for(let item of map){
-    console.log(item);
+for(let i of arr){
+    if(i > 100){
+        break;
+    }
 }
-//["name", "tx"]
-//["age", 24]
-for(let [name,value] of map){
-    console.log(name + ':' + value); // "name:tx" "age:24"
-}
-//name:tx
-//age:24
 </script>
 </html>

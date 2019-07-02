@@ -225,6 +225,166 @@ for(let [name,value] of map){
 //age:24
 ```
 #### 计算生成的数据结构
+有些数据结构是在现有数据结构的基础上，计算生成的。比如，es6的数组，Set、Map都部署了以下三个方法，调用后都返回遍历器对象。
+
+-enrites()：返回一个遍历器对象，用来遍历["键名","键值"]组成的数组。对于数组，键名就是索引值；对于Set，键名与键值相同。Map结构的Iterator接口，默认就是调用entires()方法。
+
+-keys()：返回一个遍历器对象，用来遍历所有的键名。
+
+-values()：返回一个遍历器对象，用来遍历所有的键值。
+
+这三个方法调用后生成的的遍历器对象，所遍历的都是计算生成的数据结构。
+```
+let arr = ['a','b','c'];
+for(let item of arr.entries()){
+    console.log(item);
+}
+//[0, "a"]
+//[1, "b"]
+//[2, "c"]
+```
+#### 类似数组的对象
+类似数组的对象包括字符串、NodeList对象、arguments对象。
+```
+//字符串
+let str = 'hello';
+for(let v of str){
+    console.log(v);
+}
+//"h" "e" "l" "l" "o"
+
+//DOM NodeList对象
+let sDiv = document.querySelectorAll('div');
+for(let v of sDiv){
+    console.log(v);
+}
+//<div></div>
+//<div></div>
+
+
+//arguments对象
+function setName(){
+    for(let v of arguments){
+        console.log(v);
+    }
+}
+setName('name','tx');
+//"name"
+//"tx"
+```
+并不是所有类似数组的对象都具有Iterator 接口，一个简单的解决办法，就是使用Array.from方法将其转为数组。
+```
+let obj = {
+    length:2,
+    name:'tx',
+    age:24
+};
+for(let v of obj){
+    console.log(v); //报错 obj is not iterable
+}
+
+//正确
+for(let v of Array.from(obj)){
+    console.log(v);
+}
+//"tx"
+//24
+```
+#### 对象
+对于普通的对象，for...of结构不能直接使用，会报错，必须部署了Iterator接口后才能使用。但是，这样情况下，for...in循环依然可以用来遍历键名。
+```
+let obj = {
+    name:'tx',
+    age:24
+};
+for(let v in obj){
+    console.log(v);
+}
+//"name"
+//"age"
+
+for(let v of obj){  //报错 obj is not iterable
+    
+}
+```
+上面代码表示，对于普通的对象，for...in循环可以遍历键名,for...of循环会报错。
+
+一种解决办法是，使用Object.keys()方法将对象的键名生成一个数组，然后遍历这个数组。
+```
+let obj = {
+    name:'tx',
+    age:24
+};
+for(let v of Object.keys(obj)){
+    console.log(v);
+    //"name"
+    //"age"
+    console.log(obj[v]);
+    //"tx"
+    //24
+}
+```
+另一个方法是使用 Generator 函数将对象重新包装一下。
+
+.......
+
+#### 与其他遍历语法的比较
+js提供了多种遍历数组的方法。最原始的写法就是for循环。
+```
+let arr  = ['a','b','c'];
+
+for(let i  = 0 ; i < arr.length ; i++){
+    console.log(arr[i]);
+}
+```
+上面这种写法比较麻烦，因此数组提供内置的forEach方法。
+```
+let arr  = ['a','b','c'];
+
+arr.forEach(function(value){
+    console.log(value);
+})
+```
+这种写法的问题是，无法中途跳出forEach循环，break命令或return命令都不能奏效。
+
+for...in循环可以遍历数组的键名。
+```
+let arr  = ['a','b','c'];
+
+for(let i in arr){
+    console.log(arr[i]);
+}
+```
+for...in循环有以下几个缺点。
+
+--数组的键名是数字，但是for...in循环是以字符串作为键名"0","1","2"。
+
+--for...in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。
+
+--某些情况下，for...in循环会以任意顺序遍历键名。
+
+总之，for...in循环主要是为遍历对象而设计的，不适用于遍历数组。
+
+for...of循环有一些显著的优点。
+
+--跟for...in一样的简单写法，但是没有for...in所具有的缺点。
+
+--不同于forEach方法，他可以配合break、continue、return配合使用。
+
+--提供了遍历所有数据结构的统一操作接口。
+
+下面是一个使用break语句，跳出for...of循环的例子。
+```
+for(let i of arr){
+    if(i > 100){
+        break;
+    }
+}
+```
+如果当前项大于100，就会跳出循环。
+
+
+
  
  
 
