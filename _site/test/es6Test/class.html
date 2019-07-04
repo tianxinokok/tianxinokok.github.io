@@ -11,12 +11,13 @@
     <div></div>
 </body>
 <script>
-
-class Point{
-
+class Obj {
+    #name = 'tx';
 }
-var x1 = new Point();
-var x2 = new Point();
-console.log(x1.__proto__ === x2.__proto__); //true
+console.log(Obj.#name);
+let myobj = new Obj();
+console.log(myobj.#name);
+
+
 </script>
 </html>
