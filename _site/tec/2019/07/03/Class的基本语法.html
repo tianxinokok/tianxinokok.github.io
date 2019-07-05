@@ -620,6 +620,86 @@ Obj.name = 'tx';
 <p>这个新写法大大方便了静态属性的表达。（貌似提案已经通过了，上面那种写法测试也是可以的）。</p>
 <h3 id="五私有方法和私有属性">五、私有方法和私有属性</h3>
 
+<h4 id="现有的解决方法">现有的解决方法</h4>
+
+<h5 id="1命名前加_">（1）命名前加_</h5>
+<h5 id="2利用symbol值的唯一性将私有方法的名字命名为一个symbol值">（2）利用Symbol值的唯一性，将私有方法的名字命名为一个Symbol值。</h5>
+
+<p>现有的提案是：为class加了私有属性。方法是在属性名之前，使用#表示。</p>
+
+<h3 id="六newtarget属性">六、new.target属性</h3>
+<p>new是从构造函数生成实例对象的命令。es6为new命令引入了一个new.target属性，该属性一般用在构造函数中，返回new命令作用于的那个构造函数。如果构造函数不是通过new命令或Reflect.construct()调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>function Person(name){
+    if(new.target != undefined){
+        this.name = name;
+    }else{
+        throw new Error('必须使用new命令生成实例');
+    }
+}
+//另一种写法
+function Person(name){
+    if(new.target === Person){
+        this.name = name;
+    }else{
+        throw new Error('必须使用new命令生成实例');
+    }
+}
+var person = new Person('tx');
+var notAPerson = Person.call(person, 'tx');  // 报错
+</code></pre>
+</div>
+<p>上面代码确保构造函数只能通过new命令调用。</p>
+
+<p>Class内部调用new.target，返回当前Class。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+    constructor(name,age){
+        console.log(new.target === Obj)
+        this.name = name;
+        this.age = age;
+    }
+}
+var obj = new Obj('tx',24); //true
+</code></pre>
+</div>
+<p>需要注意的是，子类继承父类时，new.taget会返回子类。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass {
+    constructor(name,age){
+        console.log(new.target === Parentclass);
+    }
+}
+class childrenclass extends Parentclass{
+    constructor(name){
+        super(name);
+    }
+}
+var obj = new childrenclass('tx');  //false
+</code></pre>
+</div>
+<p>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>lass Shape {
+  constructor() {
+    if (new.target === Shape) {
+      throw new Error('本类不能实例化');
+    }
+  }
+}
+
+class Rectangle extends Shape {
+  constructor(length, width) {
+    super();
+    // ...
+  }
+}
+
+var x = new Shape();  // 报错
+var y = new Rectangle(3, 4);  // 正确
+</code></pre>
+</div>
+<p>上面代码中，Shape类不能被实例化，只能用于继承。</p>
+
+<p>注意：在函数外部，使用new.target会报错。</p>
+
+
    
             </div>
             
@@ -636,7 +716,7 @@ Obj.name = 'tx';
                 </div>
           
           <div class="phone_bottom">
-              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
+              <a class="" href="http://localhost:4000/tec/2019/07/05/Class%E7%9A%84%E7%BB%A7%E6%89%BF.html" data-post-href="http://localhost:4000/tec/2019/07/05/Class%E7%9A%84%E7%BB%A7%E6%89%BF.html">
               PREV
               </a>
               <a class="" href="http://localhost:4000/tec/2019/06/27/Iterator-%E5%92%8C-for...of-%E5%BE%AA%E7%8E%AF-%E5%89%AF%E6%9C%AC.html" data-post-href="http://localhost:4000/tec/2019/06/27/Iterator-%E5%92%8C-for...of-%E5%BE%AA%E7%8E%AF-%E5%89%AF%E6%9C%AC.html">

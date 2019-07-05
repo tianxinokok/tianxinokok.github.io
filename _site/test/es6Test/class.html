@@ -11,13 +11,12 @@
     <div></div>
 </body>
 <script>
-class Obj {
-    #name = 'tx';
-}
-console.log(Obj.#name);
-let myobj = new Obj();
-console.log(myobj.#name);
-
+let obj = {
+    toString(){
+       console.log(super.toString()); // [object Object]
+    }
+};
+obj.toString();  
 
 </script>
 </html>
