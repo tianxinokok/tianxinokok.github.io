@@ -11,12 +11,12 @@
     <div></div>
 </body>
 <script>
-let obj = {
-    toString(){
-       console.log(super.toString()); // [object Object]
-    }
-};
-obj.toString();  
-
+class myObject extends Object{
+	constructor(){
+		super(...arguments);
+	}
+}
+var o = new myObject({namestr:'tx'});
+console.log(o.namestr === 'tx'); //false
 </script>
 </html>

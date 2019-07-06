@@ -7,14 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="test"></div>
 </body>
 <script>
-let m = new Map([
-    ['name','tx'],
-    ['age',24]
-]);
-console.log(m);
-//map结构 {"name" => "tx", "age" => 24}
+
+let set = new Set([1,2,3]);
+	set = new Set(Array.from(set,val => val *2));
+	console.log(set); //Set(3) {2, 4, 6}
+
+
+
+
 </script>
 </html>
