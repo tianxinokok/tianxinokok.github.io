@@ -11,12 +11,13 @@
     <div></div>
 </body>
 <script>
-class myObject extends Object{
-	constructor(){
-		super(...arguments);
-	}
-}
-var o = new myObject({namestr:'tx'});
-console.log(o.namestr === 'tx'); //false
+const obj1 = {
+	name:'tx'
+};
+const obj2 = {
+	age:24
+};
+const mergeobj = {...obj1,...obj2};
+console.log(mergeobj);
 </script>
 </html>
