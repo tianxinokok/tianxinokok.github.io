@@ -11,12 +11,13 @@
     <div></div>
 </body>
 <script>
-let obj = {
-    toString(){
-       console.log(super.toString()); // [object Object]
-    }
+const obj1 = {
+	name:'tx'
 };
-obj.toString();  
-
+const obj2 = {
+	age:24
+};
+const mergeobj = {...obj1,...obj2};
+console.log(mergeobj);
 </script>
 </html>
