@@ -194,47 +194,140 @@
                 </div>
                   <h3 id="代码总结">代码总结</h3>
 <div class="highlighter-rouge"><pre class="highlight"><code>//es5写法
-function Point(x, y) {
-  this.x = x;
-  this.y = y;
+function func(a,b){
+    this.a = a;
+    this.b = b;
 }
-
-Point.prototype.toString = function () {
-  return '(' + this.x + ', ' + this.y + ')';
-};
-
-var p = new Point(1, 2);
+func.prototype.toString = function(){
+    return '(' + this.a + ',' + this.b + ')'; 
+}
+var p =  new func(1,2);
+p.toString(); //(1,2)
 
 //es6写法
+class func {
+    constructor(a,b){
+        this.a = a ;
+        this.b = b;
+    }
+
+    toString(){
+        return '(' + this.a + , this.b + ')' ;
+    }
+}
+--------------------------------------------------------------------------------------------------------------------
+class func {
+    constructor(){
+
+    }
+    getName(){
+
+    }
+    toString(){
+
+    }
+}
+//等同于
+func.prototype = {
+    constructor(){
+
+    },
+    getName(){
+
+    },
+    toString(){
+        
+    }
+};
+--------------------------------------------------------------------------------------------------------------------
+//Object.assign向类的prototype添加方法
+class func {
+    constructor(){
+
+    }
+}
+Object.assign(func.prototype,{
+    getName(){},
+    toString(){}
+});
+--------------------------------------------------------------------------------------------------------------------
+//类的内部方法不可枚举
+class func {
+    constructor(){
+
+    }
+    toString(){
+
+    }
+}
+Object.keys(func.prototype);                //[]
+Object.getOwnPropertyNames(func.prototype); //["constructor", "toString"]
+
+//es5的写法就是可枚举的
+var func = function(a,b){
+
+};
+func.prototype.toString = function(){
+
+};
+Object.keys(func.prototype);                //["toString"]
+Object.getOwnPropertyNames(func.prototype); //["constructor","toString"]
+--------------------------------------------------------------------------------------------------------------------
+//与 ES5 一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）。
 class Point {
+
   constructor(x, y) {
     this.x = x;
     this.y = y;
   }
+
   toString() {
     return '(' + this.x + ', ' + this.y + ')';
   }
-}
---------------------------------------------------------------------------------
-class Point {
-  constructor() {
 
-  }
-  toString() {
-
-  }
-  toValue() {
-
-  }
 }
 
-// 等同于
-Point.prototype = {
-  constructor() {},
-  toString() {},
-  toValue() {},
-};
---------------------------------------------------------------------------------
+var point = new Point(2, 3);
+
+point.toString() // (2, 3)
+
+point.hasOwnProperty('x') // true
+point.hasOwnProperty('y') // true
+point.hasOwnProperty('toString') // false
+point.__proto__.hasOwnProperty('toString') // true
+--------------------------------------------------------------------------------------------------------------------
+//类不存在变量提升
+new func(); //Cannot access 'func' before initialization
+class func{}
+--------------------------------------------------------------------------------------------------------------------
+//类的内部含有this，默认指向类的实例。小心使用，单独使用该方法，可能报错。
+class Logger{
+    printName(name = "there"){
+        this.print(`hello ${name}`);
+    }
+    print(text){
+        console.log(text);
+    }
+}
+const logger = new Logger();
+const {printName} = logger;
+printName();  //Cannot read property 'print' of undefined
+
+//解决办法1：在构造函数中绑定this
+class Logger{
+    constructor(){
+        this.printName = this.printName.bind(this);
+    }
+
+}
+//解决办法2：使用箭头函数
+class Obj {
+    constructor(){
+        this.getThis = () =&gt; this;
+    }
+}
+const myobj = new Obj();
+myobj.getThis() === myobj ;  //true
 </code></pre>
 </div>
 
