@@ -192,7 +192,36 @@
                   <h1>Class的继承</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一简介">一、简介</h3>
+                  <h3 id="代码总结">代码总结</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>//super表示父类的构造函数
+class Childclass extends Parentclass{
+    constructor(x,t,color){
+        super(x,y);            // 调用父类的constructor(x, y)
+        this.color = color;
+    }
+    toString(){
+        return this.color + ' '  + super.toString(); // 调用父类的toString()
+    }
+}
+--------------------------------------------------------------------------------------------------------------------
+//子类必须在constructor方法中调用super方法，否则新建实例时会报错
+class Parentclass{
+
+}
+class Childclass extends Parentclass{
+    constructor(){
+     
+    }
+}
+var obj = new Childclass(); //报错
+--------------------------------------------------------------------------------------------------------------------
+//Object.getPrototypeOf()方法可以用来从子类上获取父类。
+Object.getPrototypeOf(B) === A ; //true
+--------------------------------------------------------------------------------------------------------------------
+
+</code></pre>
+</div>
+<h3 id="一简介">一、简介</h3>
 <p>class可以通过extends关键字实现继承，这比es5的通过修改原型链实现继承，要清晰和方便很多。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass{
 
