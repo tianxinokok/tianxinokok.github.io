@@ -6,6 +6,135 @@ category: tec
 imgs: '../source/img/post/basic.jpg'
 
 ---
+### 代码总结
+```
+//调用Iterator的场合
+//（1）解构赋值
+let set = new Set().add('a').add('b').add('c');
+let [x,y] = set;
+console.log(x,y);   //"a","b"
+let [first,...rest] = set;
+console.log(first); //"a"
+console.log(rest);  //["b", "c"]
+
+//（2）扩展运算符
+let str = 'hello';
+[...str];                   // ["h", "e", "l", "l", "o"]
+let arr = ['a','b'];
+console.log([...arr,'c']); //["a", "b", "c"]
+
+// （3）其他场合
+for…of
+
+Array.from()
+
+Map(), Set(), WeakMap(), WeakSet()（比如new Map([[‘a’,1],[‘b’,2]])）
+
+Promise.all()
+--------------------------------------------------------------------------------------------------------------------
+//for…of循环可以使用的范围包括数组，Set和Map结构、某些类似数组的对象（比如arguments对象、DOM NodeList对象），Generator 对象，还有字符串。
+
+//（1）数组
+//for…of循环可以代替数组实例的forEach方法。
+let arr = ['a','b','c'];
+arr.forEach(function(element,index){
+    console.log(element);  //'a' 'b' 'c'
+    console.log(index);    //0 1 2
+})
+
+//js原有的for…in循环，只能获得对象的键名，不能直接获取键值。ES6提供for…of循环，允许遍历获得键值。如果要通过for…of获取数组的索引，可以借助数组的entries方法和keys方法。
+let arr = ['a','b','c'];
+
+for(let v in arr){
+    console.log(v);  //0 1 2 
+}
+
+for(let v of arr){
+    console.log(v); //'a' 'b' 'c'
+}
+
+//（2）Set和Map结构
+let set = new Set(['a','b','c']);
+for(var v of set){
+    console.log(v);     //"a","b","c"
+}
+
+
+var map = new Map();
+map.set('name','tx');
+map.set('age',24);
+
+for(let [name,value] of map){
+    console.log(name + ':' + value); // "name:tx" "age:24"
+} 
+
+//（3）类似数组的对象（包括字符串、NodeList对象、arguments对象）
+
+//字符串
+let str = 'hello';
+for(let v of str){
+    console.log(v);
+}
+//"h" "e" "l" "l" "o"
+
+//DOM NodeList对象
+let sDiv = document.querySelectorAll('div');
+for(let v of sDiv){
+    console.log(v);
+}
+//<div></div>
+//<div></div>
+
+
+//arguments对象
+function setName(){
+    for(let v of arguments){
+        console.log(v);
+    }
+}
+setName('name','tx');
+//"name"
+//"tx"
+
+//（4）对象
+//并不是所有类似数组的对象都具有Iterator 接口，一个简单的解决办法，就是使用Array.from方法将其转为数组。
+let obj = {
+    length:2,
+    name:'tx',
+    age:24
+};
+for(let v of obj){
+    console.log(v); //报错 obj is not iterable
+}
+
+//正确
+for(let v of Array.from(obj)){
+    console.log(v);
+}
+//"tx"
+//24
+
+//对于普通的对象，for…of结构不能直接使用，解决办法是，使用Object.keys()方法将对象的键名生成一个数组，然后遍历这个数组。
+let obj = {
+    name:'tx',
+    age:24
+};
+for(let v of Object.keys(obj)){
+    console.log(v);
+    //"name"
+    //"age"
+    console.log(obj[v]);
+    //"tx"
+    //24
+}
+--------------------------------------------------------------------------------------------------------------------
+//for..of比起forEach可以跳出中途跳出循环
+for(let i of arr){
+    if(i > 100){
+        break;
+    }
+}
+```
 
 ### 一、Iterator(遍历器)的概念
 js原有的表示集合的数据结构，主要是数组(Array)和对象(Object)，ES6又添加了Map和Set。这样就有了四种数据集合，用户还可以组合使用他们，定义自己的数据结构，比如数组的成员是Map，Map的成员是对象。这样就需要一种统一的接口机制，来处理所有不同的数据结构。
