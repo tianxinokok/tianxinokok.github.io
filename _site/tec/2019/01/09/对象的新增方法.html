@@ -192,7 +192,111 @@
                   <h1>对象的新增方法</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一objectis">一、Object.is()</h3>
+                  <h3 id="代码总结">代码总结</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {a:1};
+console.log(Object.is(obj,obj)); //true
+console.log(Object.is({},{}));   //true
+--------------------------------------------------------------------------------------------------------------------
+console.log(+0 === -0);   //true
+console.log(NaN === NaN); //false
+
+console.log(Object.is(+0,-0));   //false
+console.log(Object.is(NaN,NaN)); //true
+--------------------------------------------------------------------------------------------------------------------
+//Object.assign()
+let target = {name:'tx'};
+let source1 = {age:24};
+let source2 = {sex:'男'};
+Object.assign(target,source1,source2);
+console.log(target); //{name: "tx", age: 24, sex: "男"}
+--------------------------------------------------------------------------------------------------------------------
+//Object.assign用途
+class point {
+construntor(x,y){
+Object.assign(this,{x,y});
+}
+}
+--------------------------------------------------------------------------------------------------------------------
+////Object.assign用途
+bject.assign(someClass.prototype,{
+someMethod(arg1,arg2){
+
+},
+anotherMethod(){
+
+}
+});
+//等同于下面的写法
+someClass.prototype.someMethod = function(arg1,arg2){
+
+};
+someClass.prototype.anotherMethod = function(){
+
+};
+--------------------------------------------------------------------------------------------------------------------
+//合并多个对象
+const mergeobj = (target,...sources) =&gt; Object.assign(target,...sources);
+--------------------------------------------------------------------------------------------------------------------
+//为属性指定默认值(可用作默认配置参数)
+const defaultconfig = {
+name:'tx',
+age :24
+};
+
+function processContent(options){
+options = Object.assign({},defaultconfig,options);
+console.log(options);
+}
+--------------------------------------------------------------------------------------------------------------------
+//Object.keys()
+let obj = {
+	name:'tx',
+	age : 24
+};
+Object.keys(obj); //["name", "age"]
+--------------------------------------------------------------------------------------------------------------------
+let {keys, values, entries} = Object;
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key of keys(obj)) {
+  console.log(key); // 'a', 'b', 'c'
+}
+
+for (let value of values(obj)) {
+  console.log(value); // 1, 2, 3
+}
+
+for (let [key, value] of entries(obj)) {
+  console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
+}
+--------------------------------------------------------------------------------------------------------------------
+//Object.values()
+let obj = {
+	name:'tx',
+	age :24
+};
+Object.values(obj); //["tx", 24]
+--------------------------------------------------------------------------------------------------------------------
+//Object.entries()
+let obj = {
+	name:'tx',
+	age :24
+};
+Object.entries(obj); //[["name", "tx"],["age", 24]]
+--------------------------------------------------------------------------------------------------------------------
+//Object.entries的基本用途是遍历对象的属性。
+let obj = { one: 1, two: 2 };
+for (let [k, v] of Object.entries(obj)) {
+  console.log(
+    `${JSON.stringify(k)}: ${JSON.stringify(v)}`
+  );
+}
+// "one": 1
+// "two": 2
+
+</code></pre>
+</div>
+<h3 id="一objectis">一、Object.is()</h3>
 <p>es5比较两个值是否相等，只有两个运算符。相等运算符（==）和全等运算符（===）。他们都有缺点，前者会自动转换数据类型，后者的nNaN不等于自身，以及+0等于-0。javascript缺乏一种运算，在所有环境中，只要两个值是一样的，他们就应该像等。</p>
 
 <p>es6提出同值相等算法，用来解决这个问题。Object.is就是部署这个算法的新方法。他用来比较两个值是否严格相等。与全等运算符（===）的作用基本一致。</p>
