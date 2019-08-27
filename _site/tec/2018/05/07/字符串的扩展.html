@@ -192,7 +192,90 @@
                   <h1>ES6基础-字符串的扩展</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一">一、</h3>
+                  <h3 id="代码总结">代码总结</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>for(let i of 'hello'){
+	console.log(i);
+}
+--------------------------------------------------------------------------------------------------------------------
+//ES5中，只有indexOf()方法，可以确定某个字符出是否包含在另一个字符串中，ES6又提供了三种方法。
+//1.includes()：返回布尔值，表示是否找到了参数字符串。
+//2.startsWith()：返回布尔值，表示要查找的字符串是否在原字符串的头部。
+//3.endsWith()：返回布尔值，表示要查找的字符出是否在原字符串的尾部
+
+let str = 'hello';
+str.includes('h');//true
+
+let str = 'hello';
+str.startsWith('h');//true
+
+let str = 'hello';
+console.log(str.endsWith('h'));//false
+console.log(str.endsWith('o'));//true
+
+//第二个参数表示搜索位置
+let str = 'hello';
+console.log(str.includes('h',2));//false
+console.log(str.startsWith('hell',4));//false
+console.log(str.endsWith('hell',4));//true
+--------------------------------------------------------------------------------------------------------------------
+//模板字符串
+//平时我们使用模板字符串是这样的
+//es5
+let str = '&lt;ul&gt;' + '&lt;li&gt;' + data.name' + '&lt;/li&gt;' + '&lt;li&gt;' + data.age' + '&lt;/li&gt;' + '&lt;span&gt;'+data.job' + '&lt;/span&gt;'+'&lt;/ul&gt;';
+
+//es6
+let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/li&gt;&lt;span&gt;${data.job}&lt;/span&gt;&lt;/ul&gt;`;
+
+--------------------------------------------------------------------------------------------------------------------
+//普通字符串
+let str = `hello`; 
+//多行字符串
+let str = `my name 
+is tx`;
+let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/li&gt;&lt;span&gt;${data.job}&lt;/span&gt;&lt;/ul&gt;`;
+
+//上面代码中的模板字符串，都是用反引号表示，如果模板字符串中需要反引号，前面要用反斜杠转译
+let str = `\`这是通过反斜杠转译的反引号`;
+--------------------------------------------------------------------------------------------------------------------
+let len = `
+		&lt;ul&gt;
+		&lt;li&gt;123&lt;/li&gt;
+		&lt;/ul&gt;
+	`.length;
+console.log(len);//32
+
+let len = `
+		&lt;ul&gt;
+		&lt;li&gt;123&lt;/li&gt;
+		&lt;/ul&gt;
+	`trim().length;
+console.log(len);//27
+--------------------------------------------------------------------------------------------------------------------
+let x = 1;
+let y = 2;
+let z = `${x + y}`; //3
+
+let obj = {
+	x:1,
+	y:2
+};
+let z = `${obj.x + obj.y}`;
+console.log(z);//'12'
+let z = `${obj.x + obj.y}`;
+console.log(z);//3
+--------------------------------------------------------------------------------------------------------------------
+function func(){
+	return 1;
+}
+let z = `${func() + 1}`;
+console.log(z);//2
+--------------------------------------------------------------------------------------------------------------------
+let z = `${1+1}`;
+console.log(typeof z);//string
+
+</code></pre>
+</div>
+<h3 id="一">一、</h3>
 <h3 id="二">二、</h3>
 <h3 id="三">三、</h3>
 <h3 id="四字符串的遍历接口">四、字符串的遍历接口</h3>

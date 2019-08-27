@@ -192,7 +192,32 @@
                   <h1>ES6基础-数值的扩展</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一二进制和八进制表示法">一、二进制和八进制表示法</h3>
+                  <h3 id="代码总结">代码总结</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>//ES6将全局方法parseInt()和Numer.parseFloat(),转移到Number对象上面，功能跟以前一样。
+//es5写法
+let  a = parseInt('123');      //123
+let  a1 = parseFloat('123abc');//123
+//es6写法
+let b = Number.parseInt('123');       //123
+let b1 = Number.parseFloat('123abc'); //123
+--------------------------------------------------------------------------------------------------------------------
+Number.isInteger(123);//true
+Number.isInteger(12.5);//false
+
+Number.isInteger(1.0) === Number.isInteger(1);//true
+--------------------------------------------------------------------------------------------------------------------
+//Math.trunc()方法用于去除一个数的小数部分，返回整数部分。
+Math.trunc(1.2) //1
+Math.trunc(-1.2) //-1
+Math.trunc(-0.01) // -0
+--------------------------------------------------------------------------------------------------------------------
+//ES6新增了一个指数运算符 (* *) 。
+2**2 //4
+2**3 //8
+
+</code></pre>
+</div>
+<h3 id="一二进制和八进制表示法">一、二进制和八进制表示法</h3>
 <p>ES6提供了二进制和八进制数值的新的写法，分别用前缀0b(0B) 和 0o(0O) 表示。</p>
 <div class="highlighter-rouge"><pre class="highlight"><code>let a = 0b111110111 ; //503
 let b = 0o767; //503
