@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>//super表示父类的构造函数
+<pre><code>//super表示父类的构造函数
 class Childclass extends Parentclass{
     constructor(x,t,color){
         super(x,y);            // 调用父类的constructor(x, y)
@@ -220,19 +220,17 @@ Object.getPrototypeOf(B) === A ; //true
 --------------------------------------------------------------------------------------------------------------------
 
 </code></pre>
-</div>
 <h3 id="一简介">一、简介</h3>
 <p>class可以通过extends关键字实现继承，这比es5的通过修改原型链实现继承，要清晰和方便很多。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass{
+<pre><code>class Parentclass{
 
 }
 class Childclass extends Parentclass{
     
 }
 </code></pre>
-</div>
 <p>上面代码定义了一个类Childclass类，该类通过extends关键字，继承了Parentclass类的所有属性和方法。如果没有写自己的属性和方法，这两个类就完全一样，等于复制了一个Parentclass类。下面，我们在Childclass内部加上代码。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Childclass extends Parentclass{
+<pre><code>class Childclass extends Parentclass{
     constructor(x,t,color){
         super(x,y);            // 调用父类的constructor(x, y)
         this.color = color;
@@ -242,11 +240,10 @@ class Childclass extends Parentclass{
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，constructor方法和toString中，都出现了super关键字，它在这里表示父类的构造函数，用来新建父类的this对象。</p>
 
 <p>子类必须在constructor方法中调用super方法，否则新建实例时会报错。这是因为子类自己的this对象，必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其进行加工，加上子类自己的实例属性和方法。如果不调用super方法，子类就得不到this对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass{
+<pre><code>class Parentclass{
 
 }
 class Childclass extends Parentclass{
@@ -256,13 +253,12 @@ class Childclass extends Parentclass{
 }
 var obj = new Childclass(); //报错
 </code></pre>
-</div>
 <p>上面代码中，Childclass继承了父类Parentclass，但是它的构造函数没有调用super方法，导致新建实例报错。</p>
 
 <p>es5的继承，实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面（Parent.apply(this)）。es6的继承机制完全不同，实质是先将父类实例对象的属性和方法，加到this上面（所以必须先调用super方法），然后再用子类的构造函数修改this。</p>
 
 <p>如果子类没有定义constructor方法，这个方法会被默认添加，代码如下。也就是说，不管有没有显式定义，任何一个子类都有constructor方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Childclass extends Parentclass{
+<pre><code>class Childclass extends Parentclass{
 
 }
 //等同于
@@ -272,9 +268,8 @@ class Childclass extends Parentclass{
     }
 }
 </code></pre>
-</div>
 <p>另一个需要注意的地方是，在子类的构造函数中，只有调用super之后，才可以使用this关键字，否则会报错。这是因为子类实例的构建，基于父类实例，只有super方法才能调用父类实例。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass{
+<pre><code>class Parentclass{
     constructor(x,y){
         this.x = x;
         this.y = y;
@@ -288,19 +283,17 @@ class Childclass extends Parentclass{
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，子类的constructor方法中，没有调用super方法之前就使用了this，结果报错。放在super方法之后就是正确的。</p>
 
 <p>下面是生成子类实例的代码。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = new Childclass(1,2,'red');
+<pre><code>let obj = new Childclass(1,2,'red');
 console.log(obj instanceof Childclass);  //true
 console.log(obj instanceof Parentclass); //true
 </code></pre>
-</div>
 <p>上面代码中，实例对象obj同时是Childclass和Parentclass两个类的实例，这与es5的行为完全一致。</p>
 
 <p>最后，父类的静态方法，也会被子类继承。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     static getName(){
         console.log('tx');
     }
@@ -310,20 +303,18 @@ class B extends A{
 }
 B.getName();  //"tx"
 </code></pre>
-</div>
 <p>上面代码中，getName是A类的静态方法，B继承了A，也继承了A的静态方法。</p>
 <h3 id="二objectgetprototypeof">二、Object.getPrototypeOf()</h3>
 <p>Object.getPrototypeOf()方法可以用来从子类上获取父类。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Object.getPrototypeOf(B) === A ; //true
+<pre><code>Object.getPrototypeOf(B) === A ; //true
 </code></pre>
-</div>
 <p>因此可以使用这个方法，一个类是否继承了另一个类。</p>
 
 <h3 id="三super关键字">三、super关键字</h3>
 <p>super这个关键字，既可以当作函数使用，也可以当作对象使用。在这两种情况下，它的用法完全相同。</p>
 
 <p>第一种情况，super作为函数调用时，代表父类的构造函数。es6要求，子类的构造函数必须执行一次super函数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
 
 }
 class B extends A{
@@ -332,11 +323,10 @@ class B extends A{
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，子类B的构造函数之中的super()，代表调用父类的构造函数。这是必须的，否则js会报错。</p>
 
 <p>注意，虽然super代表了父类的构造函数，但是返回的是子类B的实例，即super内部的this指的是B的实例，因此super()在这里相当于A.prototype.constructor.call(this)。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     constructor(){
         console.log(new.target.name);
     }
@@ -349,11 +339,10 @@ class B extends A{
 new A(); //A
 new B(); //B
 </code></pre>
-</div>
 <p>上面代码中，new.target指向当前正在执行的函数。可以看到，在super执行时，它指向的是子类B的构造函数，而不是父类A的构造函数。也就是说，super内部的this指向的是B。</p>
 
 <p>作为函数时，super()只能用在子类的构造函数中，用在其他地方就会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
 }
 class B extends A{
     getName(){
@@ -361,11 +350,10 @@ class B extends A{
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，super用在B类的getName方法之中，就会报错。</p>
 
 <p>第二种情况，super作为对象时，在普通方法中，指向父类的的原型对象。在静态方法中，指向父类。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     getName(){
         console.log('tx');
     }
@@ -378,11 +366,10 @@ class B extends A{
 }
 let obj = new B(); //"tx"
 </code></pre>
-</div>
 <p>上面代码中，子类B当中的super.getName(),就是将super当作一个对象使用。这是，super在普通方法之中，指向A.prototype，所以super.p()就相当于A.prototype.getName()。</p>
 
 <p>这里需要注意，由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     constructor(){
         this.x = 1;
     }
@@ -395,11 +382,10 @@ class B extends A{
 let obj = new B();
 obj.getX();   //undefined
 </code></pre>
-</div>
 <p>上面代码中，x是父类A实例的属性，子类super.x就取不到它。</p>
 
 <p>如果属性定义在父类的原型对象上，super就可以取到。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
 
 }
 A.prototype.x = 1;
@@ -411,11 +397,10 @@ class B extends A{
 let obj = new B();
 obj.getX();   //1
 </code></pre>
-</div>
 <p>上面代码中，属性x是定义在A.prototype上面的，所以super.x就可以取到x的值。</p>
 
 <p>es6规定，在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     constructor(){
         this.x = 1;
     }
@@ -435,11 +420,10 @@ class B extends A{
 let obj = new B();
 obj.getX();
 </code></pre>
-</div>
 <p>上面代码中，虽然super.print()调用的是A.prototype.print()，但是，A.prototype.print()内部的this指向子类B的实例，导致输出的是2，而不是1。也就是说，实际上执行的是super.print.call(this)。</p>
 
 <p>由于this指向子类实例，所以如果通过super对某个属性赋值，这时super就是this，赋值的属性会变成子类实例的属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     constructor(){
         this.x = 1;
     }
@@ -455,11 +439,10 @@ class B extends A{
 }
 let b = new B();
 </code></pre>
-</div>
 <p>上面代码中，super.x赋值为3，这时等同于this.x赋值为3。而当读取super.x的时候，读的是A.prototype.x ， 所以返回undefined。</p>
 
 <p>如果super作为对象，用在静态方法之中，这时super将指向父类，而不是父类的原型对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     static getName(msg){
         console.log('static', msg);
     }
@@ -479,11 +462,10 @@ B.getName(1);       //static 1
 let obj = new B();
 obj.getName(2);    //instance 2
 </code></pre>
-</div>
 <p>上面代码中，super在静态方法中指向父类，在普通方法中指向父类的原型对象。</p>
 
 <p>另外，在子类的静态方法中通过super调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
     constructor(){
         this.x = 1 ;
     }
@@ -503,11 +485,10 @@ class B extends A{
 B.x = 3;
 B.getX();   //3
 </code></pre>
-</div>
 <p>上面代码中，静态方法B.getX里面，super.print指向父类的静态方法。这个方法里面的this指向的是B，而不是B的实例。</p>
 
 <p>注意，使用super的时候，必须显式指定是作为函数、还是作为对象使用，否则会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
 
 }
 class B extends A{
@@ -517,9 +498,8 @@ class B extends A{
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，console.log(super)当中的super，无法看出是作为函数使用，还是作为对象使用，所以js报错。如果能清晰的表明super的数据类型，就不会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A {}
+<pre><code>class A {}
 
 class B extends A {
   constructor() {
@@ -528,25 +508,23 @@ class B extends A {
   }
 }
 </code></pre>
-</div>
 <p>上面代码中，super.valueOf()表明super是一个对象，因此就不会报错。同时，由于super使得this指向B的实例，所以super.valueOf()返回的是一个B的实例。</p>
 
 <p>由于对象总是继承其他对象的，所以可以在任意一个对象中，使用super关键字。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
     toString(){
        console.log(super.toString()); // [object Object]
     }
 };
 obj.toString();  
 </code></pre>
-</div>
 <h3 id="四类的prototype属性和__proto__属性">四、类的prototype属性和__proto__属性</h3>
 <p>大多数浏览器的es5实现之中，每一个对象都有__proto__属性，指向对应的构造函数的prototype属性。Class作为构造函数的语法糖，同时有prototype属性和__proto__属性，因此同时存在两条继承链。</p>
 
 <p>（1）子类的__proto__属性，表示构造函数的继承，总是指向父类。</p>
 
 <p>（2）子类prototype属性的__proto__属性，表示方法的继承，总是指向</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class A{
+<pre><code>class A{
 
 }
 class B extends A{
@@ -555,29 +533,26 @@ class B extends A{
 B.__proto__ === A;                      //true
 B.prototype.__proto__ === A.prototype;  //true
 </code></pre>
-</div>
 <p>上面代码中，子类B的__proto__属性指向父类A,子类B的prototype属性的__proto__属性指向父类A的prototype属性。</p>
 
 <h4 id="实例的__proto__属性">实例的__proto__属性</h4>
 <p>子类实例的__proto__属性的__proto__属性，指向父类实例的__proto__属性，也就是说，子类的原型的原型，是父类的原型。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var p1 = new Point(2, 3);
+<pre><code>var p1 = new Point(2, 3);
 var p2 = new ColorPoint(2, 3, 'red');
 
 p2.__proto__ === p1.__proto__ // false
 p2.__proto__.__proto__ === p1.__proto__ // true
 
 </code></pre>
-</div>
 <p>上面代码中，ColorPoint继承了Point，导致前者原型的原型是后者的原型。</p>
 
 <p>因此，通过子类实例的__proto__.__proto__属性,可以修改父类实例的行为。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>p2.__proto__.__proto__.printName = function () {
+<pre><code>p2.__proto__.__proto__.printName = function () {
 console.log('Ha');
 };
 
 p1.printName() // "Ha"
 </code></pre>
-</div>
 <h3 id="五原生构造函数的继承">五、原生构造函数的继承</h3>
 <p>原生构造函数是指语言内置的构造函数，通常用来生成数据结构。ECMAScript原生构造函数大致有下面这些。</p>
 
@@ -600,7 +575,7 @@ p1.printName() // "Ha"
 <p>–Object()</p>
 
 <p>以前，这些原生构造函数是无法继承的，不能自己定义一个Array的子类。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function myArray(){
+<pre><code>function myArray(){
 Array.apply(this,arguments);
 }
 myArray.prototype = Object.create(Array.prototype,{
@@ -612,18 +587,16 @@ enumerable:true
 }
 })
 </code></pre>
-</div>
 <p>上面代码定义了一个继承Array的myArray类，但是，这个类的行为与Array完全不一致。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var arr = new myArray();
+<pre><code>var arr = new myArray();
 arr[0] = 'red';
 console.log(arr.length); //0
 console.log(arr[0]);     //"red"
 </code></pre>
-</div>
 <p>之所以会发生这种情况，是因为子类无法获得原生构造函数的内部属性，通过Array.apply()或者分配给原型对象都不行。原生构造函数会忽略apply方法传入的this，也就是说，原生构造函数的this无法绑定，导致拿不到内部属性。</p>
 
 <p>es5是先新建子类的实例对象this，再将父类的属性添加到子类上，由于父类的内部属性无法获取，导致无法继承原生的构造函数，比如，Array构造函数有一个内部属性[[DefineOwnProperty]]。用来定义新属性时，更新length属性，这个内部属性无法在子类获取，导致子类的length属性行为不正常，下面的例子中，我们想让一个普通对象继承Error对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var e = {};
+<pre><code>var e = {};
 
 Object.getOwnPropertyNames(Error.call(e))
 // [ 'stack' ]
@@ -631,11 +604,10 @@ Object.getOwnPropertyNames(Error.call(e))
 Object.getOwnPropertyNames(e)
 // []
 </code></pre>
-</div>
 <p>上面代码中，我们想通过Error.call(e)这种写法，让普通对象e具有Error对象的实例属性。但是，Error.call()完全忽略传入的第一个参数，而是返回一个新对象，e本身没有任何变化。这证明了Error.call(e)这种写法，无法继承原生构造函数。</p>
 
 <p>es6允许继承原生构造函数定义子类，因为es6是先新建父类的实例对象this，然后再用子类的构造函数修饰this，使得父类的所以行为都可以继承，下面是一个继承Array的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class myArray extends Array{
+<pre><code>class myArray extends Array{
 constructor(...args){
 super(...args);
 }
@@ -646,13 +618,12 @@ console.log(arr.length); //1
 arr.length = 0;
 console.log(arr[0]);     //undefined 
 </code></pre>
-</div>
 <p>上面代码定义了一个myArray类，继承了Array构造函数，因此就可以从myArray生成数组的实例。这意味着，es6可以自定义原生数据结构（比如Array、String等）的子类，这是es5无法做到的。</p>
 
 <p>上面这个例子也说明，extends关键字不仅可以用来继承类，还可以用来继承原生的构造函数。因此可以在原生数据结构的基础上，定义自己的数据结构。</p>
 
 <p>注意，继承Object的子类，有一个行为差异。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class myObject extends Object{
+<pre><code>class myObject extends Object{
 constructor(){
 super(...arguments);
 }
@@ -660,12 +631,11 @@ super(...arguments);
 var o = new myObject({namestr:'tx'});
 console.log(o.namestr === 'tx'); //false
 </code></pre>
-</div>
 <p>上面代码中，myObject继承了Object，但是无法通过super方法向父类Object传参。这是因为es6改变了Object构造函数的行为，一旦发现Object不是通过new Object()这种方式调用，ES6 规定Object构造函数会忽略参数。</p>
 
 <h3 id="六mimin模式的实现">六、Mimin模式的实现</h3>
 <p>Mixin指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj1 = {
+<pre><code>const obj1 = {
 name:'tx'
 };
 const obj2 = {
@@ -674,7 +644,6 @@ age:24
 const mergeobj = {...obj1,...obj2};
 console.log(mergeobj);   //{name: "tx", age: 24}
 </code></pre>
-</div>
 <p>上面代码中，mergeobj是obj1对象和obj2对象的合并。</p>
 
    

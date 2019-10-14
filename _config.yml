@@ -1,4 +1,3 @@
-#baseurl: http://tianxinokok.github.io
 url: http://tianxinokok.github.io
 #future: true
 #permalink: /:title/
@@ -11,7 +10,8 @@ email: tianxinokok@163.com
 #cnzz:
 #pygments: true
 safe: true
-auto: true
+#auto: true
+highlighter: pygments
 github: tianxinokok
 #paginate: 20
 #### Markdown Processors

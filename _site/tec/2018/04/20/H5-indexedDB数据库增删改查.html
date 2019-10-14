@@ -203,28 +203,26 @@
 <p>3.大小不同，某些浏览器对indexDB有大小限制（不低于250MB）。谷歌对单条数据的大小限制在130MB以下 （备注：没有验证）。</p>
 
 <h2 id="二打开数据库">二.打开数据库</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>//兼容处理
+<pre><code>//兼容处理
  var indexedDB =indexedDB = window.indexedDB || window.msIndexedDB ||      window.mozIndexedDB || window.webkitIndexedDB;
 //打开方式
  var dbOpenRequest = indexedDB.open(dbName,version);
 </code></pre>
-</div>
 <p>indexedDB.open接收两个参数，第一个参数dbName是数据库的名称，第二个参数是数据库的版本，如果第二个参数不填，默认打开当前数据库版本。</p>
 
 <h2 id="三新建数据库">三.新建数据库</h2>
 <p>把新建写在打开后面就是因为新建数据库跟打开数据库用的方法一模一样。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code> var indexedDB =indexedDB = window.indexedDB || window.msIndexedDB ||      window.mozIndexedDB || window.webkitIndexedDB;
+<pre><code> var indexedDB =indexedDB = window.indexedDB || window.msIndexedDB ||      window.mozIndexedDB || window.webkitIndexedDB;
  var dbOpenRequest = indexedDB.open(dbName,version);
 </code></pre>
-</div>
 <p>当打开的数据库不存在或者版本不一样的时候就会新建数据库。跟打开的区别在于，创建会触发upgradeneeded事件。</p>
 
 <h2 id="四upgradeneeded事件">四.upgradeneeded事件</h2>
 <p>数据库首次创建版本，或者indexedDB.open传递的新版本（版本数值要比现在的高）就会触发upgradeneeded事件。</p>
 
 <p>触发upgradeneeded事件之后第一件事要新建对象仓库(也就是传统的新建表)</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>    dbOpenRequest.onupgradeneeded = function(event){
+<pre><code>    dbOpenRequest.onupgradeneeded = function(event){
     	var db = event.target.result;
         var objectStore ;
         if(!db.objectStoreNames.contains(dbName)){  
@@ -235,9 +233,8 @@
         }
     };
 </code></pre>
-</div>
 <p>对象仓库建好之后（表建好），就应该定义存储数据了（索引）需要调用createIndex()方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>   dbOpenRequest.onupgradeneeded = function(event){
+<pre><code>   dbOpenRequest.onupgradeneeded = function(event){
     	var db = event.target.result;
         var objectStore ;
         if(!db.objectStoreNames.contains(dbName)){
@@ -256,10 +253,9 @@
     	objectStore.createIndex('introduction','introduction');
     };
 </code></pre>
-</div>
 <h2 id="五新增编辑删除">五.新增、编辑、删除</h2>
 <p>这三个操作都是同一个模式，新建一个事务（transaction() →通过事务拿到存储对象→拿到存储对象后进行相应操作</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//新建事务
+<pre><code>//新建事务
 var transaction = db.transaction([dbName],'readwrite'); 
 //拿到存储对象
 var objectStore = transaction.objectStore(dbName);
@@ -282,18 +278,16 @@ objectStoreRequest.onsuccess = function(event){
 //删除delete()
 var objectStoreRequest = objectStore.delete(id);
 </code></pre>
-</div>
 <h2 id="五查看">五.查看</h2>
 <p>查看分两种情况：</p>
 
 <p>1.查询单个对象→get(键)。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var transaction = db.transaction([dbName],'readwrite'); 
+<pre><code>var transaction = db.transaction([dbName],'readwrite'); 
 var objectStore = transaction.objectStore(dbName);
 var objectStoreRequest = objectStore.get(parseInt(id)); 
 </code></pre>
-</div>
 <p>2.检索多个对象要使用创建游标的方式，也就是一个结果集的指针→openCursor()</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var transaction = db.transaction([dbName],'readwrite'); 
+<pre><code>var transaction = db.transaction([dbName],'readwrite'); 
 var objectStore = transaction.objectStore(dbName);
 objectStore.openCursor().onsuccess = function(event){
 	var cursor = event.target.result;
@@ -306,7 +300,6 @@ objectStore.openCursor().onsuccess = function(event){
 	}
 };
 </code></pre>
-</div>
 <p>openCursor()请求对象成功后，event.target.result会拿到存储空间的下一个对象，在结果集有下一项时，event.target.result中会保存一个IDBCursor的实例，cursor.continue()会执行继续遍历，在没有下一项时，这个结果会保存一个null，会进入else，相当于遍历结束。所以例子中的if(cursor){}条件一定要有。</p>
 
 <h2 id="六总结">六.总结</h2>

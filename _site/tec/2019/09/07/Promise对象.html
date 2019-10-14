@@ -213,7 +213,7 @@
 <h3 id="二基本用法">二、基本用法</h3>
 
 <p>Promise对象是一个构造函数，用来生成Promise实例。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const promise = new Promise(function(resolve,reject){
+<pre><code>const promise = new Promise(function(resolve,reject){
     if(/*异步操作成功*/){
         resolve(value);
     }else{
@@ -221,23 +221,21 @@
     }
 });
 </code></pre>
-</div>
 <p>Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。他们是两个函数，由JavaScript引擎提供，不用自己部署。</p>
 
 <p>resolve函数的作用是，将Promise对象的状态从”未完成”变为”成功”（pending变为resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从”未完成”变为”失败”（pending变为rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。</p>
 
 <p>Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>promise.then(function(value){
+<pre><code>promise.then(function(value){
 
 },function(error){
 
 })
 </code></pre>
-</div>
 <p>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接收Promise对象传出的值作为参数。</p>
 
 <p>下面是一个简单的Promise例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function timeout(ms){
+<pre><code>function timeout(ms){
     return new Promise((resolve,reject) =&gt; {
         setTimeout(resolve,ms,"完成");
     });
@@ -246,11 +244,10 @@ timeout(100).then((value) =&gt; {
     console.log(value);  //"完成"
 })
 </code></pre>
-</div>
 <p>上面代码中，timeout方法返回一个Promise实例，表示一段时间以后才会发生的结果。过了指定的时间（ms参数）以后，Promise实例的状态变为resolved后，就会触发then方法绑定的回调函数。</p>
 
 <p>Promise新建后会立即执行。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const promise = new Promise((resolve,reject) =&gt;{
+<pre><code>const promise = new Promise((resolve,reject) =&gt;{
     console.log('Promise内部');
     resolve()
 })
@@ -263,8 +260,31 @@ console.log('123');
 //123
 //resolved
 </code></pre>
-</div>
 <p>上面代码中，Promise新建后立即执行，首先输出”Promise内部”。then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以”resolved”最后输出。</p>
+
+<p>如果调用resolve函数和reject函数时带有参数，那么他们的参数会被传递给回调函数。reject函数的参数通常是Error对象的实例，表示抛出的错误；resolve函数的参数除了正常的值以外，还可能是另一个Promise实例。</p>
+<pre><code>const promise1 = new Promise((resolve,reject) =&gt; {
+
+})
+const promise2 = new Promise((resolve,reject) =&gt; {
+    resolve(promise1);
+})
+</code></pre>
+<p>上面代码中，p1和p2都是Promise的实例，但是promise2的resolve方法将promise1作为参数，即一个异步操作的结果是返回另一个异步操作。</p>
+
+<p>注意，这时promise1的状态就会传递给promise2，也就是说，promise1的状态决定了promise2的状态。如果promise1的状态是pending，那么promise2的回调函数就会等待promise1的状态改变；如果promise1的状态已经是resolved和rejected，那么promise2的回调函数将会立刻执行。</p>
+
+<p>注意：调用resolve或者reject并不会终结Promise的参数函数的执行。</p>
+<pre><code>new Promise((resolve, reject) =&gt; {
+  resolve(1);
+  console.log(2);
+}).then(r =&gt; {
+  console.log(r);
+});
+// 2
+// 1
+</code></pre>
+<p>上面代码中，调用resolve之后，后面的console.log（2）还是会执行，并且会先打印出来。这是因为立即resolved的Promise是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。</p>
 
 
    

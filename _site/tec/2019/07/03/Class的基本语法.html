@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>//es5写法
+<pre><code>//es5写法
 function func(a,b){
     this.a = a;
     this.b = b;
@@ -329,13 +329,12 @@ class Obj {
 const myobj = new Obj();
 myobj.getThis() === myobj ;  //true
 </code></pre>
-</div>
 
 <h3 id="一简介">一、简介</h3>
 
 <h4 id="类的由来">类的由来</h4>
 <p>js语言中，生成实例对象的传统方法是通过构造函数。下面是一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(a,b){
+<pre><code>function func(a,b){
     this.a = a;
     this.b = b;
 }
@@ -345,13 +344,12 @@ func.prototype.toString = function(){
 var p =  new func(1,2);
 p.toString(); //(1,2)
 </code></pre>
-</div>
 <p>上面这种写法跟传统的面向对象语言相差很大，很容易让新学习这门语言的程序员感到困惑。</p>
 
 <p>es6提供了更接近传统语言的写法，引入了Class（类）这个概念，作为对象的模板。通过Class关键字，可以定义类。</p>
 
 <p>基本上，es6的class可以看作只是一个语法糖，它的绝大部分功能，es5都可以做大，新的class写法只是让对象原型的写法更加清晰，更像面向对象编程的语法而已。上面的代码用es6的class改写，就是下面这样。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     constructor(a,b){
         this.a = a ;
         this.b = b;
@@ -362,23 +360,21 @@ p.toString(); //(1,2)
     }
 }
 </code></pre>
-</div>
 <p>上面代码定义了一个类 ， 可以看到里面有一个constructor方法，这就是构造方法，而this关键字代表实例对象。也就是说，es5的构造函数func，对应es6的func类的构造方法。</p>
 
 <p>func类除了构造方法，还定义了toString方法。注意，定义类的方法的时候，前面不需要加上function这个关键字，直接把函数定义放进去就可以了。而且，方法跟方法之间不需要逗号分隔，加了会报错。</p>
 
 <p>es6的类，完全可以看作构造函数的另一种写法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
 
 }
 console.log(typeof func);                          //"function"
 console.log(func === func.prototype.constructor);  //true
 </code></pre>
-</div>
 <p>上面代码说明，类的数据类型就是函数，类本身就指向构造函数。</p>
 
 <p>使用的时候，也是直接对类使用new命令，跟构造函数的用法完全一致。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     getName(){
         console.log('hello')
     }
@@ -386,9 +382,8 @@ console.log(func === func.prototype.constructor);  //true
 var b = new func();
 b.getName(); //"hello"
 </code></pre>
-</div>
 <p>构造函数的prototype属性，在es6的”类”上面继续存在，事实上，类的所有方法都定义在类的prototype属性上面。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     constructor(){
 
     }
@@ -412,17 +407,15 @@ func.prototype = {
     }
 };
 </code></pre>
-</div>
 <p>在类的实例上调用方法，其实就是调用原型上的方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class B {}
+<pre><code>class B {}
 let b = new B();
 console.log(b.constructor === B.prototype.constructor); //true
 </code></pre>
-</div>
 <p>上面代码中，b是B类的实例，它的constructor方法就是B类原型上的constructor方法。</p>
 
 <p>由于类的方法都定义在prototype上面，所以类的新方法可以添加在prototype对象上面。Object.assign方法可以很方便的一次向类添加多个方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     constructor(){
 
     }
@@ -432,18 +425,16 @@ Object.assign(func.prototype,{
     toString(){}
 });
 </code></pre>
-</div>
 <p>prototype对象的constructor属性，直接指向类的本身，这与es5的行为是一致的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     constructor(){
 
     }
 }
 func.prototype.constructor === func; //true
 </code></pre>
-</div>
 <p>另外，类的内部所有定义的方法，都是不可枚举的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func {
+<pre><code>class func {
     constructor(){
 
     }
@@ -454,9 +445,8 @@ func.prototype.constructor === func; //true
 Object.keys(func.prototype);                //[]
 Object.getOwnPropertyNames(func.prototype); //["constructor", "toString"]
 </code></pre>
-</div>
 <p>上面代码中，toString方法是func类内部定义的方法，它是不可枚举的。这一点与es5的行为不一致。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var func = function(a,b){
+<pre><code>var func = function(a,b){
 
 };
 func.prototype.toString = function(){
@@ -465,12 +455,11 @@ func.prototype.toString = function(){
 Object.keys(func.prototype);                //["toString"]
 Object.getOwnPropertyNames(func.prototype); //["constructor","toString"]
 </code></pre>
-</div>
 <p>上面代码采用es5的写法，toString方法就是可枚举的。</p>
 
 <h4 id="constructor方法">constructor方法</h4>
 <p>constructor方法是类的默认方法，通过new命令生成类的实例时，自动调用该方法。一个类一定会有constructor方法，如果没有显示定义，一个空的construction方法会被默认添加。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Point {
+<pre><code>class Point {
 }
 //等同于
 class Point {
@@ -479,31 +468,28 @@ class Point {
     }
 }
 </code></pre>
-</div>
 <p>如果定义一个空的类Point，js引擎会自动为他添加一个空的constructor方法。</p>
 
 <p>constructor方法默认会返回实例对象（即this），完全可以指定返回另外一个对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Point {
+<pre><code>class Point {
     constructor(){
         return Object.create(null);
     }
 }
 new Point() instanceof Point ; //false
 </code></pre>
-</div>
 <p>上面代码中，constructor函数返回一个全新的对象，结果导致实例对象不是Point类的实例。</p>
 
 <p>类必须使用new调用，否则会报错。这是他跟普通构造函数的一个主要区别，后者不用new也可以执行。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Point {
+<pre><code>class Point {
 }
 Point(); // Class constructor Point cannot be invoked without 'new'
 </code></pre>
-</div>
 <h4 id="类的实例">类的实例</h4>
 <p>生成类的实例的写法，与es5一样，也是使用new命令，前面已经说过，类的实例如果忘记加new，会报错。</p>
 
 <p>与es5一样，实例的属性除非显式定义在其本身（即定义在this对象上），否则都是定义在原型上（即定义在class上）。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Point {
+<pre><code>class Point {
     constructor(x,y){
         this.x = x;
         this.y = y;
@@ -518,54 +504,48 @@ console.log(point.hasOwnProperty('y'));                   //true
 console.log(point.hasOwnProperty('toString'));            //false
 console.log(point.__proto__.hasOwnProperty('toString'));  //true
 </code></pre>
-</div>
 <p>上面代码中，x和y都是实例对象point自身的属性（因为定义在this变量上），所以hasOwnProperty方法返回true，而toString方法是原型对象的属性（因为定义在Point类上），所以hasOwnPrototype方法返回false。这些都与es5的行为保持一致。</p>
 
 <p>与es5一样，类的所有实例共享一个原型对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Point{
+<pre><code>class Point{
 
 }
 var x1 = new Point();
 var x2 = new Point();
 console.log(x1.__proto__ === x2.__proto__); //true
 </code></pre>
-</div>
 <h4 id="属性表达式">属性表达式</h4>
 <p>类的属性名，可以采用表达式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let methodName = 'getName';
+<pre><code>let methodName = 'getName';
 class func {
     [methodName](){
         
     }
 }
 </code></pre>
-</div>
 <p>上面代码中，func类的方法名getName，是从表达式得到的。</p>
 <h4 id="class表达式">Class表达式</h4>
 <p>与函数一样，类也可以使用表达式的形式定义。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let myclass = class func{
+<pre><code>let myclass = class func{
     getName(){
         return func.name;
     }
 };
 </code></pre>
-</div>
 <p>上面代码使用了表达式定义一个类。需要注意的是，这个类的名字是func，但是func只在Class的内部可用，指代当前类。在class的外部，这个类只能用myclass引用。看下面。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let inst = new myclass();
+<pre><code>let inst = new myclass();
 inst.getName(); //"func"
 func.Name;      //func is not defined
 </code></pre>
-</div>
 <p>上面代码表示，func只在Class内部有定义。</p>
 
 <p>如果类的内部没有用到的话，可以省略内部的名字func，也就是下面的形式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let myclass = class{
+<pre><code>let myclass = class{
 
 };
 </code></pre>
-</div>
 <p>采用Class表达式，可以写出立即执行的Class。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let myclass  = new class {
+<pre><code>let myclass  = new class {
     constructor(name){
         this.name = name;
     }
@@ -575,7 +555,6 @@ func.Name;      //func is not defined
     }('tx');
 myclass.getName();  //"tx"
 </code></pre>
-</div>
 <p>上面代码中，myclass是一个立即执行的类的实例。</p>
 
 <h4 id="注意点">注意点</h4>
@@ -585,30 +564,27 @@ myclass.getName();  //"tx"
 
 <h5 id="2不存在提升">（2）不存在提升</h5>
 <p>类不存在变量提升，这一点与es5不同。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>new func(); //Cannot access 'func' before initialization
+<pre><code>new func(); //Cannot access 'func' before initialization
 class func{}
 </code></pre>
-</div>
 <p>上面代码中，func类使用在前，声明在后，这样会报错，因为es6不会把类的声明提升到代码开头。这种规定的原因与下文要提到的继承有关，必须保证子类在父类之后定义。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="err">let</span><span class="w"> </span><span class="err">Foo</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">class</span><span class="w"> </span><span class="err">{</span><span class="p">}</span><span class="err">;</span><span class="w">
-  </span><span class="err">class</span><span class="w"> </span><span class="err">Bar</span><span class="w"> </span><span class="err">extends</span><span class="w"> </span><span class="err">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-</div>
+<pre><code>{
+  let Foo = class {};
+  class Bar extends Foo {
+  }
+}
+</code></pre>
 <p>上面代码不会报错，因为Bar继承Foo的时候，Foo已经有定义了。但是，如果存在class的提升，上面的代码就会报错，因为Class会被提升到代码头部，而let命令是不提升的。所以导致Bar继承Foo的时候，Foo还没有被定义。</p>
 
 <h5 id="3name属性">（3）name属性</h5>
 <p>本质上，class只是es5构造函数的一层包装，所以函数的许多特性都被Class继承，包括name属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func{}
+<pre><code>class func{}
 console.log(func.name); //"func"
 </code></pre>
-</div>
 <p>name属性总是返回紧跟在class关键字后面的类名。</p>
 <h5 id="4generator-方法">（4）Generator 方法</h5>
 <p>如果某个方法之前加上星号（* ) ，就表示该方法是一个Generator函数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class func{
+<pre><code>class func{
     constructor(...args){
         this.args = args;
     }
@@ -624,12 +600,11 @@ for(let v of new func('hello','world')){
 //"hello"
 //"world"
 </code></pre>
-</div>
 
 <p>上面代码中，func类的Symbol.iterator方法前有一个星号，表示该方法是一个Generator函数。Symbol.iterator方法返回一个func类的默认遍历器，for…of循环会自动调用这个遍历器。</p>
 <h5 id="5this的指向">（5）this的指向</h5>
 <p>类的方法内部如果含有this，他们默认指向类的实例。但是必须非常小心，一旦单独使用该方法，很可能报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Logger{
+<pre><code>class Logger{
     printName(name = "there"){
         this.print(`hello ${name}`);
     }
@@ -641,20 +616,18 @@ const logger = new Logger();
 const {printName} = logger;
 printName();  //Cannot read property 'print' of undefined
 </code></pre>
-</div>
 <p>上面代码中，prientName方法中的this，默认指向Logger类的实例。但是，如果将这个方法提取出来单独使用，this会指向该方法运行时所在的环境（由于class内部是严格模式，所以实际上this指向的是undefined），从而导致找不到print方法而报错。</p>
 
 <p>一个比较简单的解决办法是，在构造函数中绑定this，这样就不会找不到print方法了。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Logger{
+<pre><code>class Logger{
     constructor(){
         this.printName = this.printName.bind(this);
     }
 
 }
 </code></pre>
-</div>
 <p>另一种解决方法是使用箭头函数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     constructor(){
         this.getThis = () =&gt; this;
     }
@@ -662,14 +635,13 @@ printName();  //Cannot read property 'print' of undefined
 const myobj = new Obj();
 myobj.getThis() === myobj ;  //true
 </code></pre>
-</div>
 <p>箭头函数内部的this总是指向定义时所在的对象。上面代码中，箭头函数位于构造函数内部，他的定义生效的时候，是在构造函数执行的时候。这时，箭头函数所在的运行环境，肯定是实例对象，所以this总是指向实例对象。</p>
 
 <p>还有一种解决方法是使用Proxy，获取方法的时候，自动绑定this。【】没写代码 不懂</p>
 
 <h3 id="二静态方法">二、静态方法</h3>
 <p>类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为”静态方法”。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     static classMethod(){
         console.log('hello')
     }
@@ -678,11 +650,10 @@ Obj.classMethod();           //"hello"
 let newobj  =  new Obj();
 newobj.classMethod();       //newobj.classMethod is not a function
 </code></pre>
-</div>
 <p>上面代码中，Obj类的classMethod方法前有static关键字，表明该方法是一个静态方法，可以直接在Obj类上使用，而不能在Obj的实例上调用。</p>
 
 <p>注意：如果静态方法包含this关键字，这个this指的是类，而不是实例。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     static getName(){
         this.getAge();
     }
@@ -696,11 +667,10 @@ newobj.classMethod();       //newobj.classMethod is not a function
 }
 Obj.getName();  //我是静态方法getAge
 </code></pre>
-</div>
 <p>上面代码中，静态方法getName调用了this.getAge(),这里的this指的是Obj类，而不是Obj的实例，等同于调用Obj.getName()。从这个例子也可以看出，静态方法可以与非静态方法重名。</p>
 
 <p>父类的静态方法，可以被子类继承。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     static classMethod(){
         console.log('我是父类的静态方法');
     }
@@ -710,11 +680,10 @@ class Bar extends Obj{
 }
 Bar.classMethod(); //我是父类的静态方法
 </code></pre>
-</div>
 <p>上面代码中，父类Obj有一个静态的classMethod方法，子类Bar可以调用这个方法。</p>
 
 <p>静态方法也是可以从super对象上调用的。【】下面这个不懂</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Foo {
+<pre><code>class Foo {
   static classMethod() {
     return 'hello';
   }
@@ -728,34 +697,30 @@ class Bar extends Foo {
 
 Bar.classMethod() // "hello, too"
 </code></pre>
-</div>
 <h3 id="三实例属性的新写法">三、实例属性的新写法</h3>
 <p>实例属性除了定义在constructor()方法里面this上，也可以定义在类的最顶层。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
    _name = 'tx';
    getName(){
        console.log(this._name);
    }
 }
 </code></pre>
-</div>
 <p>上面代码中,_name属性与函数getName ()方法处在同一个层级。这时，不需要在实例属性前面加上this。</p>
 
 <p>这种写法的好处是，所有实例对象自身的属性都定义在类的头部，看上去很整齐，一眼就能看出这个类有哪些实例属性。</p>
 <h3 id="四静态属性">四、静态属性</h3>
 <p>静态属性指的是Class本身的属性，即Class.propName,而不是定义在实例对象（this）上的属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {}
+<pre><code>class Obj {}
 Obj.name = 'tx';
 </code></pre>
-</div>
 <p>上面写法为Obj类定义了一个静态属性name。</p>
 
 <p>目前，只有这种写法可行，因为es6明确规定，Class内部只有静态方法，没有静态属性 ，现在有一个提案提供了类的静态属性，写法是在实例属性法的前面，加上static关键字。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     static name = 'tx';
 }
 </code></pre>
-</div>
 <p>这个新写法大大方便了静态属性的表达。（貌似提案已经通过了，上面那种写法测试也是可以的）。</p>
 <h3 id="五私有方法和私有属性">五、私有方法和私有属性</h3>
 
@@ -768,7 +733,7 @@ Obj.name = 'tx';
 
 <h3 id="六newtarget属性">六、new.target属性</h3>
 <p>new是从构造函数生成实例对象的命令。es6为new命令引入了一个new.target属性，该属性一般用在构造函数中，返回new命令作用于的那个构造函数。如果构造函数不是通过new命令或Reflect.construct()调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function Person(name){
+<pre><code>function Person(name){
     if(new.target != undefined){
         this.name = name;
     }else{
@@ -786,11 +751,10 @@ function Person(name){
 var person = new Person('tx');
 var notAPerson = Person.call(person, 'tx');  // 报错
 </code></pre>
-</div>
 <p>上面代码确保构造函数只能通过new命令调用。</p>
 
 <p>Class内部调用new.target，返回当前Class。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Obj {
+<pre><code>class Obj {
     constructor(name,age){
         console.log(new.target === Obj)
         this.name = name;
@@ -799,9 +763,8 @@ var notAPerson = Person.call(person, 'tx');  // 报错
 }
 var obj = new Obj('tx',24); //true
 </code></pre>
-</div>
 <p>需要注意的是，子类继承父类时，new.taget会返回子类。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>class Parentclass {
+<pre><code>class Parentclass {
     constructor(name,age){
         console.log(new.target === Parentclass);
     }
@@ -813,9 +776,8 @@ class childrenclass extends Parentclass{
 }
 var obj = new childrenclass('tx');  //false
 </code></pre>
-</div>
 <p>利用这个特点，可以写出不能独立使用、必须继承后才能使用的类。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>lass Shape {
+<pre><code>lass Shape {
   constructor() {
     if (new.target === Shape) {
       throw new Error('本类不能实例化');
@@ -833,7 +795,6 @@ class Rectangle extends Shape {
 var x = new Shape();  // 报错
 var y = new Rectangle(3, 4);  // 正确
 </code></pre>
-</div>
 <p>上面代码中，Shape类不能被实例化，只能用于继承。</p>
 
 <p>注意：在函数外部，使用new.target会报错。</p>

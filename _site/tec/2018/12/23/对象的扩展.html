@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>let name = 'tx';
+<pre><code>let name = 'tx';
 //es6
 let obj = {name};
 console.log(obj); //{name: "tx"}
@@ -322,10 +322,9 @@ let obj = {...null};      //{}
 let obj = { ...'hello'};
 console.log(obj) //{0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
 </code></pre>
-</div>
 <h3 id="一属性的简洁表示法">一、属性的简洁表示法</h3>
 <p>ES6允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let name = 'tx';
+<pre><code>let name = 'tx';
 //es6
 let obj = {name};
 console.log(obj); //{name: "tx"}
@@ -333,9 +332,8 @@ console.log(obj); //{name: "tx"}
 let obj = {name:name};
 console.log(obj); //{name: "tx"}
 </code></pre>
-</div>
 <p>上面的代码说明，ES6允许在对象之中，直接写变量。这时，属性名为变量名，属性值为变量的值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(x,y){
+<pre><code>function func(x,y){
 	return {x,y}
 }
 func('tx',28);  //{x: "tx", y: 28}
@@ -347,9 +345,8 @@ function func2(x,y){
 	};
 }
 </code></pre>
-</div>
 <p>除了属性简写，方法也可以简写。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+<pre><code>const obj = {
 	name:'tx',
 	getName() {
 		console.log(this.name);
@@ -364,9 +361,8 @@ const obj = {
 	}
 };
 </code></pre>
-</div>
 <p>下面是一个实际的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let age = 25;
+<pre><code>let age = 25;
 const obj = {
 	name:'tx',
 	age,
@@ -374,18 +370,16 @@ const obj = {
 };
 obj.getName(); //我的年龄是：25
 </code></pre>
-</div>
 <p>这种写法用于函数的返回值，将会非常方便。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+<pre><code>function func(){
 	let x = 1;
 	let y = 2;
 	return {x,y};
 }
 func(); //{x: 1, y: 2}
 </code></pre>
-</div>
 <p>CommonJS模块输出一组变量，就非常合适使用简洁写法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
+<pre><code>let obj = {};
 function getItem(key){
 	return key in obj ? obj[key] : null;
 }
@@ -405,9 +399,8 @@ module.exports = {
 	clear   : clear
 };
 </code></pre>
-</div>
 <p>注意：简洁写法的属性名总是字符串，这会导致一些看上去比较奇怪的结果。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	class (){}
 };
 //相当于
@@ -415,38 +408,34 @@ let obj = {
 	'class':function(){}
 }
 </code></pre>
-</div>
 <p>上面代码中，class是字符串，所以不会因为他是关键字，而导致语法解析报错。</p>
 
 <p>如果某个方法的值是一个Generator 函数，前面需要加上*号。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+<pre><code>const obj = {
   * m() {
     yield 'hello world';
   }
 };
 </code></pre>
-</div>
 <p>【】Generator 函数</p>
 
 <h3 id="二属性名表达式">二、属性名表达式</h3>
 <p>js定义对象的属性，有两种方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//第一种
+<pre><code>//第一种
 obj.name = 'tx';
 //第二种
 obj['na' + 'me'] = 'jl';
 </code></pre>
-</div>
 <p>第一种方法是直接用标识符作为属性名，方法二是用表达式作为属性名，这时要将表达式放在括号之内。</p>
 
 <p>但是如果使用字面量方式定义对象（使用大括号），在ES5中只能使用标识符定义属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	foo: true,
 	abc:123
 };
 </code></pre>
-</div>
 <p>ES6允许字面量定义对象时，用表达式作为对象的属性名，即把表达式放在放括号内。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let key = 'foo';
+<pre><code>let key = 'foo';
 
 let obj = {
 	[key] : true,
@@ -456,9 +445,8 @@ console.log(obj.foo);  //true
 console.log(obj.abc);  //123
 console.log(obj.key);  //undefined
 </code></pre>
-</div>
 <p>下面是另外一个例子</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let lastword = 'last word';
+<pre><code>let lastword = 'last word';
 let obj = {
 	'first word' : 'hello',
 	[lastword]   : 'world'
@@ -467,18 +455,16 @@ console.log(obj['first word']);  //hello
 console.log(obj['last word']);   //world
 console.log(obj[lastword]);  	 //world
 </code></pre>
-</div>
 <p>表达式还可以用于定于方法名。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	['get'+'Hi'](){
 		return 'hi';
 	}
 };
 obj.getHi(); //hi
 </code></pre>
-</div>
 <p>注意：属性名表达式与简洁表示法不能同时使用，会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//报错
+<pre><code>//报错
 const foo = 'bar';
 const baz = { [foo] };
 
@@ -486,9 +472,8 @@ const baz = { [foo] };
 const foo = 'bar';
 const baz = { [foo] : 'abc' };
 </code></pre>
-</div>
 <p>注意：属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串【object ， Object】,这一点要特别小心。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let keyA = {a:1};
+<pre><code>let keyA = {a:1};
 let keyB = {b:2};
 
 let obj = {
@@ -497,23 +482,21 @@ let obj = {
 };
 console.log(obj); //{[object Object]: "B"}
 </code></pre>
-</div>
 <p>上面代码中，【keyA】和【keyB】得到的都是【object ，Object】，所以【keyB】会把【keyA】覆盖掉，所以obj最后只有一个【object ， Object】属性，【object ， Object】的值为B。</p>
 
 <h3 id="三方法的name属性">三、方法的name属性</h3>
 <p>函数的name属性，返回函数名。对象的方法也是函数，因此也有name属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	getName (){
 		return this.name;
 	}
 };
 console.log(obj.getName.name); //getName
 </code></pre>
-</div>
 <p>上面代码中，方法的name属性返回方法名。</p>
 
 <p>有两种特殊情况：bind方法创造的函数，name属性返回bound加原函数的名字，Funciton构造函数创造的函数，name属性返回anonymous。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>var fun = function(){
+<pre><code>var fun = function(){
 	
 };
 console.log(fun.bind().name); //bound fun
@@ -521,9 +504,8 @@ console.log(fun.bind().name); //bound fun
 var func = new Function();
 console.log(func.name); //anonymous
 </code></pre>
-</div>
 <p>如果对象的方法是一个Symbol值，那么name属性返回的是这个Symbol值的描述。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const key1 = Symbol("this is a Symblo");
+<pre><code>const key1 = Symbol("this is a Symblo");
 const key2 = Symbol("");
 let obj = {
 	[key1](){},
@@ -532,14 +514,13 @@ let obj = {
 console.log(obj[key1].name); //[this is a Symblo]
 console.log(obj[key2].name); //[]
 </code></pre>
-</div>
 <p>上面代码中，key1对应Symbol值有描述，key2没有。 【】 Symbol还没有学到。</p>
 
 <h3 id="四属性的可枚举性和遍历">四、属性的可枚举性和遍历</h3>
 
 <h4 id="可枚举性">可枚举性</h4>
 <p>对象的每一个属性都有一个描述对象（Descriptor），用来控制该属性的行为。Object.getOwnPropertyDescriptor方法可以获取该属性的描述对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	name:'tianxin'
 };
 console.log(Object.getOwnPropertyDescriptor(obj,'name'));
@@ -550,7 +531,6 @@ console.log(Object.getOwnPropertyDescriptor(obj,'name'));
  // 	configurable: true
  // }
 </code></pre>
-</div>
 <p>上面描述对象中的enumerable字段，称为”可枚举性”，如果该属性为false，就表示某些操作会忽略当前属性。</p>
 
 <p>目前，有四个操作会忽略enumerable为false的属性。</p>
@@ -560,20 +540,18 @@ console.log(Object.getOwnPropertyDescriptor(obj,'name'));
 <h5 id="--objectassign--忽略enumerable为false的属性只拷贝对象自身的可枚举属性">- Object.assign() : 忽略enumerable为false的属性，只拷贝对象自身的可枚举属性。</h5>
 
 <p>这四个操作中，前三个是es5就有的，最后一个Object.assign是es6新增的。其中，只有for…in会返回继承的的属性，其他三个方法都会忽略继承的属性，只处理对象自身的属性。实际上引入”可枚举”(enumerable)这个概念的最初目的，就是让某些属性可以规避掉for…in操作，不然所有内部属性和方法都会都遍历到。 例如  ， 对象原型的toString方法，以及数组的length属性，就通过”可枚举性”，从而避免被for…in循环到。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
+<pre><code>Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable
 // false
 
 Object.getOwnPropertyDescriptor([], 'length').enumerable
 // false
 </code></pre>
-</div>
 <p>上面代码中，toString()方法和length属性的enumerable都是false，因此for…in不会遍历到这两个继承自原型的方法和属性。</p>
 
 <p>另外，es6规定，所有Class的原型的方法都是不可枚举的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
+<pre><code>Object.getOwnPropertyDescriptor(class {foo() {}}.prototype, 'foo').enumerable
 // false
 </code></pre>
-</div>
 <p>总的来说，操作中引入继承的属性会让问题复杂化，大多数时候，我们只关心对象自身的属性，所有尽量不用for…in循环，而用Object.keys()代替。</p>
 <h4 id="属性的遍历">属性的遍历</h4>
 
@@ -593,7 +571,7 @@ Object.getOwnPropertyDescriptor([], 'length').enumerable
 <p>–首先遍历所有数值键，按照数值升序排列。
 –其次遍历所有字符串键，按照加入时间升序排列。
 –最后遍历所有Symbol键，按照加入时间升序排列。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 name : 'tx',
 age  : 24,
 1:'1',
@@ -603,11 +581,10 @@ age  : 24,
 console.log(Reflect.ownKeys(obj));
 //["1", "2", "name", "age", Symbol()]
 </code></pre>
-</div>
 <p>上面代码中，Reflect.ownKeys方法返回一个数组，包含了对象的所有属性。这个数组的属性次序是这样的，首先是数值属性1和2，然后是字符串属性name和age，最后是Symbol属性。</p>
 <h3 id="五super关键字">五、super关键字</h3>
 <p>this关键字总是指向函数所在的当前对象，es6又增加了一个类似的关键字super，指向当前对象的原型对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+<pre><code>const obj = {
 name : 'tx',
 find (){
 return super.name;
@@ -619,12 +596,11 @@ name : 'proto_name'
 Object.setPrototypeOf(obj,proto);
 console.log(obj.find()); //proto_name
 </code></pre>
-</div>
 <p>上面代码中，通过super关键字找到了obj对象的原型对象proto上面的name属性。
 备注：Object.setPrototypeOf()：讲一个指定的对象的原型设置为另一个对象或者null。</p>
 
 <p>注意：super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 foo : super.name      //'super' keyword unexpected here
 };
 let obj = {
@@ -636,11 +612,10 @@ return super.name;//'super' keyword unexpected here
 }
 };
 </code></pre>
-</div>
 <p>上面三种super的用法都会报错，因为对于js引擎来说，这里的super都没有用在对象的方法之中。第一种写法super用在了对象的属性当中。第二种和第三种方法看似是用在了对象的方法之中，其实不是，它们先是用在了函数里面，然后赋值给foo属性。目前只有对象的简写方法可以让js引擎确认，定义的是对象的方法。</p>
 
 <p>js引擎内部，super.foo等同于Object.getPrototypeOf(this).foo（属性）或Object.getPrototypeOf(this).foo.call(this)（方法）。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+<pre><code>const obj = {
 name :'tx',
 getName(){
 super.getName();
@@ -655,7 +630,6 @@ console.log(this.name);
 Object.setPrototypeOf(obj,proto);
 obj.getName(); // tx
 </code></pre>
-</div>
 <p>上面代码中，super.foo指向原型对象proto的getName方法，但是绑定的this却还是当前对象obj，因此输出的就是tx。</p>
 
 <h3 id="六对象的扩展运算符">六、对象的扩展运算符</h3>
@@ -663,47 +637,42 @@ obj.getName(); // tx
 
 <h4 id="解构赋值">解构赋值</h4>
 <p>对象的解构赋值用于从一个对象取值，相当于将目标对象自身的所有可遍历的（enumerable）、但尚未被读取的属性，分配到指定的对象上面。所有的键和他们的值，都会拷贝到新对象上面。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let { x , y , ...z} = {x:1,y:2,c:3,d:4};
+<pre><code>let { x , y , ...z} = {x:1,y:2,c:3,d:4};
 console.log(x);  //1
 console.log(y);  //2
 console.log(z);  //{c: 3, d: 4}
 </code></pre>
-</div>
 <p>上面代码中，变量z是解构赋值所在的对象。他获取等号右边的所有尚未读取的键（a和b），将它们连同值一起拷贝归来。</p>
 
 <p>由于解构赋值要求等号右边是一个对象，所以如果等号右边是undefined或者null就会报错，因为它们无法转为对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let { ...z } = null;      // 报错
+<pre><code>let { ...z } = null;      // 报错
 let { ...z } = undefined; // 报错
 </code></pre>
-</div>
 <p>解构赋值必须是最后一个参数，否则会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x,...z,y} = {x:1,z:3,y:2};//Rest element must be last element
+<pre><code>let {x,...z,y} = {x:1,z:3,y:2};//Rest element must be last element
 </code></pre>
-</div>
 <p>上面代码中，解构赋值不是最后一个参数，所以会报错。</p>
 
 <p>注意：解构赋值的拷贝是浅拷贝，即如果一个键的值是复合类型的值（数组，对象，函数），那么解构赋值拷贝的是这个值的引用，而不是这个值的副本。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = { a : {b:1} };
+<pre><code>let obj = { a : {b:1} };
 let {...z} = obj ; 
 obj.a.b = 2;
 console.log(z.a.b); // 2
 </code></pre>
-</div>
 <p>上面代码中，z是解构赋值所在的对象，拷贝了对象obj，obj对象中是复合类型，所以修改这个复合类型的值，会影响到解构赋值对他的引用。所以输出的值为2。</p>
 
 <p>另外，扩展运算符的解构赋值，不能复制继承自原型对象的属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = {x:1};
+<pre><code>let a = {x:1};
 let b = {y:2};
 Object.setPrototypeOf(b,a);
 let {...c} = b; 
 console.log(c);   //{y: 2}
 console.log(c.x); //undefined
 </code></pre>
-</div>
 <p>上面代码中，对象c复制了对象b，但是只复制了b自身的属性，没有复制他的原型对象a的属性。</p>
 
 <p>下面是另一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = Object.create({a:1,b:2});
+<pre><code>let obj = Object.create({a:1,b:2});
 obj.c = 3;
 let {a , ...newobj } = obj;
 let { b,c } =  newobj;
@@ -712,16 +681,14 @@ console.log(b);      //undefined
 console.log(c);      //3
 console.log(newobj); //{c: 3}
 </code></pre>
-</div>
 <p>上面代码中，变量x是单纯的解构赋值，所以可以读取对象obj继承的属性；变量b和c是扩展运算符的解构赋值，只能读取对象obj自身的属性，所以变量c可以赋值成功，变量b取不到值。</p>
 
 <p>es6规定，变量声明语句之中，如果使用解构赋值，扩展运算符后面必须是一个变量名，而不能是一个解构赋值表达式，所以上面代码中引入了中间变量newobj，如果写成下面这样会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let { a , ...{b,c}} = obj;
+<pre><code>let { a , ...{b,c}} = obj;
 //`...` must be followed by an identifier in declaration contexts
 </code></pre>
-</div>
 <p>解构赋值的一个用处，是扩展某个函数的参数，引入其他操作。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function baseFunciton({a,b}){
+<pre><code>function baseFunciton({a,b}){
 
 }
 function wrapperFunction({x,y,...restConfig }){
@@ -730,56 +697,48 @@ function wrapperFunction({x,y,...restConfig }){
 return baseFunciton(restConfig);
 }
 </code></pre>
-</div>
 <p>上面代码中，原始函数baseFunction接受a和b作为参数，函数wrapperFunction在baseFunction的基础上进行了扩展，能够接受多余的参数，并且保留原始函数的行为。</p>
 
 <h4 id="扩展运算符">扩展运算符</h4>
 <p>对象的扩展运算符（…）用于取出参数对象所有可遍历的属性，拷贝到当前对象之中。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = { x:1 , y:2 };
+<pre><code>let obj = { x:1 , y:2 };
 let newobj = {...obj};
 console.log(newobj);  //{x: 1, y: 2}
 </code></pre>
-</div>
 <p>由于数组是特殊的对象，所以对象的扩展运算符也可以用于数组。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {...['x','y','z']};
+<pre><code>let obj = {...['x','y','z']};
 console.log(obj); //{0: "x", 1: "y", 2: "z"}
 </code></pre>
-</div>
 <p>如果扩展运算符后面是一个空对象，则没有任何效果。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {...{},a:1};
+<pre><code>let obj = {...{},a:1};
 console.log(obj); //{a: 1}
 </code></pre>
-</div>
 <p>如果扩展运算符后面不是对象，就会自动转为对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {...1};
+<pre><code>let obj = {...1};
 //等同于
 let obj = {...Object(1)};
 console.log(obj); //{}
 </code></pre>
-</div>
 <p>上面代码扩展运算符后面是整数1，会自动转为数值的包装对象Number{1}。由于该对象没有自身属性，所以返回一个空对象。</p>
 
 <p>下面的例子都是一眼的道理。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {...undefined}; //{}
+<pre><code>let obj = {...undefined}; //{}
 let obj = {...true};      //{}
 let obj = {...null};      //{}
 </code></pre>
-</div>
 <p>但是如果扩展运算符后面是一个字符串，他会自动转为一个类似数组的对象，因此返回的不是空对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = { ...'hello'};
+<pre><code>let obj = { ...'hello'};
 console.log(obj) //{0: "h", 1: "e", 2: "l", 3: "l", 4: "o"}
 </code></pre>
-</div>
 <p>对象的扩展运算符等同于使用Object.assign()方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = {x:1,y:2};
+<pre><code>let a = {x:1,y:2};
 let obj = { ...a };               //{x: 1, y: 2}
 let newobj = Object.assign({},a); //{x: 1, y: 2}
 </code></pre>
-</div>
 <p>注：Object.assign（target, source）：用于将所有可枚举属性的值从一个或多个原对象复制到目标对象。他将返回目标对象。</p>
 
 <p>上面的例子只是拷贝了对象实例的属性，如果想完整克隆一个对象，还拷贝对象原型的属性，可以用下面的方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 写法一
+<pre><code>// 写法一
 const clone1 = {
 __proto__: Object.getPrototypeOf(obj),
 ...obj
@@ -797,19 +756,17 @@ Object.getPrototypeOf(obj),
 Object.getOwnPropertyDescriptors(obj)
 )
 </code></pre>
-</div>
 <p>上面代码中，写法一的__proto__属性在非浏览器环境下不一定部署，因此推荐后两种方法。</p>
 
 <p>扩展运算符可以用于合并两个对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x = {name:'tx'};
+<pre><code>let x = {name:'tx'};
 let y = {age:24};
 let obj = {...x,...y};            //{name: "tx", age: 24}
 //等于
 let obj = Object.assign({},x,y);  //{name: "tx", age: 24}
 </code></pre>
-</div>
 <p>如果用户自定义的属性，放在扩展运算符后面，则扩展运算符内部的同名属性会被覆盖掉。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {...a,x:1,y:2};
+<pre><code>let obj = {...a,x:1,y:2};
 //等同于
 let obj = { ...a, ...{a:1,y:2}};
 //等同于
@@ -817,37 +774,33 @@ let x = 1 , y = 2 , obj = {...a,x,y};
 //等同于
 let obj = Object.assign({},a,{x:1,y:2});
 </code></pre>
-</div>
 <p>上面的写法中，a对象的x和y属性，拷贝到新对象后会被覆盖掉。</p>
 
 <p>这样的写法可以用于修改对象的部分属性很方便。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let newVersion = {
+<pre><code>let newVersion = {
 ...previousVersion,
 name:'new name' //新的name值，用来覆盖前一版本的name值。
 }；
 </code></pre>
-</div>
 <p>上面代码中，新版本的对象自定义了name属性，覆盖掉老版本的name属性，其他属性还是复制老版本的。</p>
 
 <p>如果把自定义属性放在扩展运算符前面，就变成了设置新对象的默认属性值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {x:1,y:2,...a};
+<pre><code>let obj = {x:1,y:2,...a};
 //等同于
 let obj = Object.assign({x:1,y:2},a);
 //等同于
 let obj = Object.assign({},{x:1,y:2},a);
 </code></pre>
-</div>
 <p>与数组的扩展运算符一样，对象的扩展运算符可以后面可以跟表达式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x = 2;
+<pre><code>let x = 2;
 let obj = {
 ...( x &gt; 1 ? {a:1} : {}),
 b:2
 };
 console.log(obj.a); //1
 </code></pre>
-</div>
 <p>扩展运算符的参数对象之中，如果有取值参数get，这个函数是会执行的。【】取值参数get不懂，平时也不会这么写吧，直接复制的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 并不会抛出错误，因为 x 属性只是被定义，但没执行
+<pre><code>// 并不会抛出错误，因为 x 属性只是被定义，但没执行
 let aWithXGetter = {
 ...a,
 get x() {
@@ -865,7 +818,6 @@ throw new Error('throw now');
 }
 };
 </code></pre>
-</div>
 
 
    

@@ -10,14 +10,11 @@
     
 </body>
 <script>
-const promise = new Promise((resolve,reject) =>{
-    console.log('Promise内部');
-    resolve()
-})
-promise.then(() =>{
-    console.log('resolved');
-})
-console.log('123');
+const promise1 = new Promise((resolve,reject) => {
 
+})
+const promise2 = new Promise((resolve,reject) => {
+    resolve(promise1);
+})
 </script>
 </html>

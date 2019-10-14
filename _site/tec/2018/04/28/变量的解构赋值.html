@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>//ES6允许按照一定模式，从数组和对象中获取值，对变量进行赋值，这被称为解构。
+<pre><code>//ES6允许按照一定模式，从数组和对象中获取值，对变量进行赋值，这被称为解构。
 //es5
 let a = 1 ;
 let b = 'adc';
@@ -415,25 +415,22 @@ for (let [,value] of map) {
   // ...
 }
 </code></pre>
-</div>
 <h3 id="一数组的解构赋值">一、数组的解构赋值</h3>
 <h4 id="基本用法">基本用法</h4>
 <p>ES6允许按照一定模式，从数组和对象中获取值，对变量进行赋值，这被称为解构。</p>
 
 <p>以前，为变量赋值，只能直接指定值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = 1 ;
+<pre><code>let a = 1 ;
 let b = 'adc';
 </code></pre>
-</div>
 <p>ES6可以写成下面这样</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a,b] = [1,'abc'];
+<pre><code>let [a,b] = [1,'abc'];
 console.log(a);
 console.log(b);
 </code></pre>
-</div>
 <p>上面代码表示：等号左边声明了两个变量a和b，按照对应位置赋值等号右边数组里的1和adc。只要等号两边的模式相同，等号左边的变量就会对应位置赋予右边的值，
 下面是使用数组嵌套进行解构的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a,[b]] = [1,['abc']];
+<pre><code>let [a,[b]] = [1,['abc']];
 console.log(a);//1
 console.log(b);//adc
 
@@ -454,18 +451,16 @@ console.log(n2);//undefined
 console.log(n3);//[]
 
 </code></pre>
-</div>
 <p>如果解构不成功，解构这词真难受，叫赋值不成功吧，如果等号右边的值数量小于等号左边的变量数量，多处的变量的值就等于undifined。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [x1] = [];
+<pre><code>let [x1] = [];
 console.log(x1);//undefined
 let [x2,x3] = [1];
 console.log(x3);//undefined
 </code></pre>
-</div>
 <p>以上两种都属于赋值不成功。</p>
 
 <p>另一种情况是不完全赋值，即等号右边的值的数量大于等号左边变量的数量，这样就只匹配等号右边部分的值，也就是说多余的就用不上了。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a,b] = [1,2,3];
+<pre><code>let [a,b] = [1,2,3];
 console.log(a);//1
 console.log(b);//2
 
@@ -474,29 +469,26 @@ console.log(a1);//1
 console.log(b1);//2
 console.log(c1);//4
 </code></pre>
-</div>
 <p>上面两个例子，都属于不完全赋值，都是可以赋值成功的。</p>
 
 <p>如果等号的右边不是数组(或者严格的说，不是可遍历的解构），那么将会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [x1] = {};         //报错
+<pre><code>let [x1] = {};         //报错
 let [x1] = 1;          //报错
 let [x1] = true;       //报错
 let [x1] = undefined;  //报错
 let [x1] = 'undefined';//x1 = u,这个可以，字符出可遍历
 </code></pre>
-</div>
 <p>对于Set数据结构，也可以使用数组的解构赋值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a,b,c] = new Set([1,2,3]);
+<pre><code>let [a,b,c] = new Set([1,2,3]);
 console.log(a); 
 </code></pre>
-</div>
 <p>事实上，只要某种数据解构具有Iterator接口，都可以采用数组形式的解构赋值。</p>
 
 <p>【】这里有个Generator函数,还没学到，看不懂，后面补。</p>
 
 <h4 id="默认值">默认值</h4>
 <p>解构赋值允许指定默认值</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a = 1] = [];
+<pre><code>let [a = 1] = [];
 console.log(a);//1
 
 let [b,c='adc'] = [1];
@@ -507,9 +499,8 @@ let [d,f='abc'] = [1,undefined];
 console.log(d);//1
 console.log(f);//abc
 </code></pre>
-</div>
 <p>注意：ES6内部使用严格相等运算符(===)判断一个位置是否有值。所以当一个数组内的变量成员对应的位置严格等于undefined，默认值才会生效。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [d,f='abc'] = [1,undefined];
+<pre><code>let [d,f='abc'] = [1,undefined];
 console.log(f);//abc 默认值生效
 
 let [j,h='adc'] = [1,2];
@@ -518,17 +509,15 @@ console.log(h); //2 默认值未生效，虽然h有默认值，但是等号右�
 let [i=1] = [null];
 console.log(i);//null，默认值同样未生效，原因也是对应位置null不严格等于undefined
 </code></pre>
-</div>
 <p>如果默认值是一个表达式，那么这个表达式是惰性求值的，只有在用到的时候才会求值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+<pre><code>function func(){
 	return 1;
 }
 let [a = func()] = [2];
 console.log(a);//2 func并不会执行
 </code></pre>
-</div>
 <p>上面的代码中函数func不会执行，因为a可以取到等号右边的值。上面的代码实际等于下面的代码</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+<pre><code>function func(){
 	return 1;
 }
 let a ;
@@ -539,9 +528,8 @@ if([2][0] === undefined){
 }
 console.log(a);//2
 </code></pre>
-</div>
 <p>默认值可以引用解构赋值的其他变量，但该变量必须已经声明.。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a = 1, b = a] = [];
+<pre><code>let [a = 1, b = a] = [];
 console.log(b);//1
 
 let [a = 1, b = a] = [2];
@@ -558,16 +546,14 @@ console.log(b);//undefined
 
 let [a=b,b] = [];//报错 b is not defined
 </code></pre>
-</div>
 <h3 id="二对象的解构赋值">二、对象的解构赋值</h3>
 <p>解构不仅可以用于数组，还可以用于对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {obj1,obj2} = {obj1:1,obj2:2};
+<pre><code>let {obj1,obj2} = {obj1:1,obj2:2};
 console.log(obj1);//1
 console.log(obj2);//1
 </code></pre>
-</div>
 <p>对象的解构与数组的解构有一个不同，数组中变量和值的对应是按位置对应的，而对象的变量赋值是没有位置概念的，是靠属性名对应赋值的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x,y} = {x:1,y:2};
+<pre><code>let {x,y} = {x:1,y:2};
 console.log(x);//1
 console.log(y);//1
 
@@ -575,11 +561,10 @@ let { z, x } = {x:1, y:2};
 console.log(z); //undefined
 console.log(x); //1
 </code></pre>
-</div>
 <p>上面的代码第一个例子把顺序调换了一下，但是等号右边的属性名只要有对应上，就可以解构成功，第二个例子obj3在等号右边没有对应的属性名，所以值为undefined。</p>
 
 <p>如果变量名与属性名不一致，必须写成下面这样。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x:z} = {x:1};
+<pre><code>let {x:z} = {x:1};
 console.log(z);//1
 
 let obj = {x:1,y:'abc'};
@@ -587,23 +572,20 @@ let {x:x1,y:y1} = obj;
 console.log(x1);//1
 console.log(y1);//abc
 </code></pre>
-</div>
 <p>这实际上说明：对象的解构赋值是下面形式的简写。参见《对象的扩展》。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x:x, y:y} = {x:1,y:'abc'};
+<pre><code>let {x:x, y:y} = {x:1,y:'abc'};
 console.log(x);//1
 console.log(y);//abc
 </code></pre>
-</div>
 <p>也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋值给对应的变量。真正被赋值的是后者，而不是前者。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x:y} = {x:1};
+<pre><code>let {x:y} = {x:1};
 console.log(y);//1
 console.log(x);// 报错 x is not defined
 </code></pre>
-</div>
 <p>上面代码中,x是匹配的模式，y才是被赋值的变量，而不是模式被赋值。</p>
 
 <p>与数组一样，解构也可以用于嵌套解构的对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj  = {
+<pre><code>let obj  = {
 	name:'tx',
 	p:[
 		1,
@@ -615,9 +597,8 @@ console.log(name);//tx
 console.log(y);//1
 console.log(age);//28 
 </code></pre>
-</div>
 <p>下面是另一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const obj = {
+<pre><code>const obj = {
 	loc : {
 		start:{
 			line:1,
@@ -631,19 +612,17 @@ console.log(start);
 console.log(line);
 console.log(column);
 </code></pre>
-</div>
 <p>上面代码有四次解构赋值，分别对loc，start，line，column四个属性的解构赋值，注意，对line和column赋值的时候，外层的start和loc都是匹配模式，不是变量。</p>
 
 <p>下面是嵌套赋值</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
+<pre><code>let obj = {};
 let arr = [];
 ({ x:obj.name , y:arr[0] } = {x:'tx',y:[1,2]}); //这个括号是干嘛滴 ？
 console.log(obj);//{name: "tx"}
 console.log(arr);//[1,2]
 </code></pre>
-</div>
 <p>对象的解构也可以指定默认值</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x = 1} = {};
+<pre><code>let {x = 1} = {};
 console.log(x);//1
 
 let { x , y = 1} = {x:1};
@@ -658,28 +637,24 @@ let {x:y=1} = {x:2};
 console.log(y);//2 不等于默认值
 console.log(x);//报错x is not defined
 </code></pre>
-</div>
 <p>默认值生效的条件是:对象的属性值严格等于undefined。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x:y=1} = {x:undefined};
+<pre><code>let {x:y=1} = {x:undefined};
 console.log(y);//1
 
 let {x:y=1} = {x:null};
 console.log(y);//null 属性的值null不严格等于undefined
 </code></pre>
-</div>
 <p>如果等号右边没有属性名与变量对应，那么变量将被赋值undefined</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x} = {y:1};
+<pre><code>let {x} = {y:1};
 console.log(x);//undefined
 </code></pre>
-</div>
 <p>如果解构模式是嵌套的对象，而且子对象所在的父属性不存在，将报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {obj:{x}} = {x:1}; //报错
+<pre><code>let {obj:{x}} = {x:1}; //报错
 </code></pre>
-</div>
 <p>上面代码中，等号左边的obj对象在等号右边找不到匹配的，所以obj被赋值undefined，再取子属性就会报错。</p>
 
 <p>猜一下下面会打印什么结果？</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {obj:{x}} = {obj:{'abc'}}; //？
+<pre><code>let {obj:{x}} = {obj:{'abc'}}; //？
 
 let {obj:{x}} = {obj:{x:'abc'}}; //？
 
@@ -688,46 +663,40 @@ console.log(obj); //?
 console.log(obj.x);//?
 console.log(obj.y);//?
 </code></pre>
-</div>
 <p>如果将一个已经声明的变量进行解构赋值，必须非常小心。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x ;
+<pre><code>let x ;
 {x} = {x:1};
 console.log(x);//报错 Unexpected token =
 </code></pre>
-</div>
 <p>上面的写法会报错，因为js引擎会把{x}理解成一个代码块，从而发生语法错误。只有不将大括号写在开头，才能避免这个错误。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x ;
+<pre><code>let x ;
 ({x} = {x:1});
 console.log(x);//1
 </code></pre>
-</div>
 <p>上面的代码把整个解构语句放在一个()里面，就可以解构成功。（圆括号是啥意思 ?）</p>
 
 <p>解构赋值允许等号左边的模式，不放置任何变量名，因此，可以写出非常古怪的赋值表达式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>({} = [1,2]);
+<pre><code>({} = [1,2]);
 ({} = 'abc');
 ({} = []);
 </code></pre>
-</div>
 <p>上面代码没有意义，但是能运行。</p>
 
 <p>对象的解构赋值，可以很方便的将现有对象的方法，赋值到某个变量。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {log , sin , cos} = Math;
+<pre><code>let {log , sin , cos} = Math;
 </code></pre>
-</div>
 <p>上面代码将Math函数的对数，正弦，余弦三个方法，赋值到对应的变量上，使用起来很方便。</p>
 
 <p>由于数组本质是对象，因此可以对数组进行对象属性的解构。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let arr = [1,2,3,4];
+<pre><code>let arr = [1,2,3,4];
 let {0:x , [arr.length -1 ] : y} = arr;
 console.log(x); //1
 console.log(y); //4
 </code></pre>
-</div>
 <p>上面代码对数组进行对象解构。数组arr的0键对应的值是1，[arr.length - 1]对应的就是数组的最后一项，所以对应的值是4，圆括号还没明白，又出来个方括号。参见《对象的扩展》。</p>
 <h3 id="三字符出的解构赋值">三、字符出的解构赋值</h3>
 <p>字符出也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let [a,b,c,d,e] = 'hello';
+<pre><code>let [a,b,c,d,e] = 'hello';
 console.log(a);//a
 
 let [a,b] = 'abc';
@@ -736,18 +705,16 @@ console.log(a);//a
 let [a,b,c,d] = 'abc';
 console.log(d);//undefined
 </code></pre>
-</div>
 <p>类似数组的对象都有一个length属性，因此可以对这个length属性进行解构赋值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {length:len} = 'abc';
+<pre><code>let {length:len} = 'abc';
 console.log(len);//3
 
 let {len:len} = 'abc';
 console.log(len);//undefined
 </code></pre>
-</div>
 <h3 id="四数值和布尔值的解构赋值">四、数值和布尔值的解构赋值</h3>
 <p>解构赋值语句，如果等号右边是数字或者布尔值，则会先转为对象。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {toString:x} = 123;
+<pre><code>let {toString:x} = 123;
 console.log(x);//tostring function
 console.log(x === Number.prototype.toString);//true
 let {x:x} = 123;
@@ -759,32 +726,28 @@ console.log(x === Boolean.prototype.toString);//true
 let {x:x} = true;
 console.log(x);//undefined
 </code></pre>
-</div>
 <p>上面代码中，数字和布尔值的包装对象都有toString属性，因此变量可以取到值。</p>
 
 <p>解构赋值的规则是：只要等号右边的值不是数组或者对象，就先将其转化为对象，由于undefined和null都不能转化为对象，因此对他们进行解构赋值，都会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let {x} = undefined; //报错
+<pre><code>let {x} = undefined; //报错
 let {y} = null; //报错
 </code></pre>
-</div>
 <h3 id="五函数参数的解构赋值">五、函数参数的解构赋值</h3>
 <p>函数的参数也可以使用解构赋值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func([x,y]){
+<pre><code>function func([x,y]){
 	return x + y;
 }
 func([1,2]); //3
 </code></pre>
-</div>
 <p>上面代码中，函数func的参数是一个数组，但在函数内部，数组参数就被解构为变量x和y了。</p>
 
 <p>下面是另一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[[1, 2], [3, 4]].map(([a, b]) =&gt; a + b); //[ 3, 7 ]
+<pre><code>[[1, 2], [3, 4]].map(([a, b]) =&gt; a + b); //[ 3, 7 ]
 </code></pre>
-</div>
 <p>【】上面不懂</p>
 
 <p>函数参数的解构也可以使用默认值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func({x = 0 , y = 0} = {}){
+<pre><code>function func({x = 0 , y = 0} = {}){
 	return [x,y];
 }
 func({x:1});       //[1,0]
@@ -792,11 +755,10 @@ func({x:1,y:2});   //[1,2]
 func({});          //[0,0]
 func();            //[0,0]
 </code></pre>
-</div>
 <p>上面的函数参数是一个对象，通过对这个对象解构，得到变量x和y的值，如果解构失败，x和y等于默认值。</p>
 
 <p>注意下面的写法会得到不一样的结果。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func({x,y} = {x:0,y:0}){
+<pre><code>function func({x,y} = {x:0,y:0}){
 	return [x,y];
 }
 func({x:1});       //[1, undefined]
@@ -804,14 +766,12 @@ func({x:1,y:2});   //[1, 2]
 func({});          //[undefined, undefined]
 func();            //[0, 0]
 </code></pre>
-</div>
 <p>上面的代码是为函数func的参数指定默认值，而不是为变量x和y指定默认值，所以会得到跟之前的写法不同的结果。</p>
 
 <p>undefined就会触发函数参数的默认值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[1, undefined, 3].map((x = 'yes') =&gt; x);
+<pre><code>[1, undefined, 3].map((x = 'yes') =&gt; x);
 // [ 1, 'yes', 3 ]
 </code></pre>
-</div>
 <p>【】上面不懂</p>
 <h3 id="六圆括号的问题">六、圆括号的问题</h3>
 <p>解构赋值虽然很方便，但是解析起来并不容易。对于编译器来说，一条语句到底是解构赋值还是表达式，没有办法从一开始就知道，必须解析到（或者解析不到）等号才知道。</p>
@@ -824,7 +784,7 @@ func();            //[0, 0]
 <p>以下三种情况解构赋值不能使用圆括号。</p>
 
 <p>1.变量声明语句：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//全部报错
+<pre><code>//全部报错
 let [(x)] = [1];
 let [(x)] = [(1)];
 
@@ -833,11 +793,10 @@ let ({x:y}) = {};
 let {(x):y} = {};
 let {(x:Y)} = {};
 </code></pre>
-</div>
 <p>上面都会报错，因为他们都是变量声明语句，模式不能使用圆括号，总之，带let 和const都不行。</p>
 
 <p>2.函数参数：函数参数也属于变量声明，所以也不行。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//都报错
+<pre><code>//都报错
 function func([(x)]){
 	return x;
 }
@@ -846,22 +805,19 @@ function func({(x)}){
 	return x;
 }
 </code></pre>
-</div>
 <p>3.赋值语句的模式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//都报错
+<pre><code>//都报错
 ([x]) = [1];
 ({ x : y }) = {x:1};
 </code></pre>
-</div>
 <p>等号左边整个被圆括号包裹，导致报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[({x:y}),{n:m}] = [{x:1},{n:2}];
+<pre><code>[({x:y}),{n:m}] = [{x:1},{n:2}];
 </code></pre>
-</div>
 <p>等号左边模式部分使用圆括号，也报错。</p>
 
 <h4 id="可以使用圆括号的情况">可以使用圆括号的情况</h4>
 <p>可以使用圆括号只有一种情况：解构赋值语句的非模式部分。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[(x)] = [1];
+<pre><code>[(x)] = [1];
 console.log(x);//1
 
 ([{x:y},{n:m}] = [{x:1},{n:2}]);
@@ -871,7 +827,6 @@ console.log(y);//1
 console.log(y);//1
 console.log(m);//2
 </code></pre>
-</div>
 <p>上面的代码都可以解构赋值成功，原因：</p>
 
 <p>1.都是赋值语句，不是变量声明。</p>
@@ -879,17 +834,16 @@ console.log(m);//2
 <p>2.圆括号都不在匹配模式的部分。第一个例子里面虽然用在了模式部分，但是因为是数组，模式按照位置匹配，所以可以成功。</p>
 <h3 id="七用途">七、用途</h3>
 <p>1.交换变量的值：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x = 1;
+<pre><code>let x = 1;
 let y = 2;
 [x,y] = [y,x];
 console.log(x);//2
 console.log(y);//1
 </code></pre>
-</div>
 <p>2.取出从函数返回的多个值：</p>
 
 <p>函数如果返回多个值，只能将他们放在数组或者对象里返回，有了解构赋值，取出这些返回值就很方便了。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//返回数组
+<pre><code>//返回数组
 function func(){
 	return [1,2,3];
 }
@@ -906,11 +860,10 @@ function func(){
 let {name,old} = func();
 console.log(name);//tx
 </code></pre>
-</div>
 <p>3.函数参数的传参：</p>
 
 <p>解构赋值可以让传参变得容易</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//有序的参数
+<pre><code>//有序的参数
 function func([x,y,z]){
 	return [x,y,z]
 }
@@ -922,11 +875,10 @@ function func({x,z,y}){
 }
 func({z:1,y:2,x:3});//[1,2,3]
 </code></pre>
-</div>
 <p>4.提取json数据</p>
 
 <p>解构赋值对提取json数据特别有用</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let jsonData = {
+<pre><code>let jsonData = {
 	name:'tianxin',
 	old : 24,
 	listdata:[1,3,5,7]
@@ -934,9 +886,8 @@ func({z:1,y:2,x:3});//[1,2,3]
 let {name,old,listdata} = jsonData;
 console.log(listdata); //[1,3,5,7]
 </code></pre>
-</div>
 <p>5.函数参数的默认值</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>jQuery.ajax = function (url, {
+<pre><code>jQuery.ajax = function (url, {
   async = true,
   beforeSend = function () {},
   cache = true,
@@ -948,7 +899,6 @@ console.log(listdata); //[1,3,5,7]
   // ... do stuff
 };
 </code></pre>
-</div>
 <p>指定参数的默认值，就避免了在函数体内部再写var foo = config.foo || ‘default foo’;这样的语句。</p>
 
 <p>【】上面的例子直接复制过来了，不是很理解比原先方便在哪 。</p>
@@ -956,7 +906,7 @@ console.log(listdata); //[1,3,5,7]
 <p>6.遍历map结构</p>
 
 <p>任何具有Iterator接口的对象，都可以用for…o循环遍历。Map结构原生支持Iterator接口，配合变量的解构赋值，获取键值和键名就很方便。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const map = new Map();
+<pre><code>const map = new Map();
 map.set('first', 'hello');
 map.set('second', 'world');
 
@@ -966,11 +916,10 @@ for (let [key, value] of map) {
 // first is hello
 // second is world
 </code></pre>
-</div>
 <p>【】同上 看完map回来补。</p>
 
 <p>如果只想获取键名，或者只想获取键值，可以写成下面这样。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 获取键名
+<pre><code>// 获取键名
 for (let [key] of map) {
   // ...
 }
@@ -980,13 +929,11 @@ for (let [,value] of map) {
   // ...
 }
 </code></pre>
-</div>
 <p>【】同上 看完map回来补。</p>
 
 <p>7.输入模块的指定方法</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const { source-map中具有的方法名1, source-map中具有的方法名2 } = require("source-map");
+<pre><code>const { source-map中具有的方法名1, source-map中具有的方法名2 } = require("source-map");
 </code></pre>
-</div>
 
 
    

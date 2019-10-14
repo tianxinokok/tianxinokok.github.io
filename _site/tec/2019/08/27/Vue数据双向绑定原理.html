@@ -204,7 +204,7 @@
 
 <h3 id="让数据变得可观测">让数据变得可观测</h3>
 <p>要将数据变得可观测，需要用到Object.defineproperty（）方法。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
+<pre><code>/**
 * 使一个对象转化成可观测对象
 * @param { Object } obj 对象
 * @param { String } key 对象的key
@@ -238,13 +238,12 @@ function observable(obj){
     return obj;
 }
 </code></pre>
-</div>
 <h3 id="依赖收集容器">依赖收集容器</h3>
 <p>上面我们已经把数据变得可观测了，接下来就是更新相应的视图。问题是，依赖此数据的视图未必只有一个，所以我们需要一个依赖收集容器，把所有依赖收集起来。等监听到数据变化之后，统一更新所有相关视图。这就是典型的发布订阅模式，数据变化为发布者，依赖视图为订阅者。</p>
 
 <p>创建依赖收集容器</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//创建消息订阅器
+<pre><code>//创建消息订阅器
 class Dep {
     constructor(){
         this.subs = []
@@ -265,9 +264,8 @@ class Dep {
 }
 Dep.target = null;
 </code></pre>
-</div>
 <p>有了依赖收集容器，需要将defineReactive函数改造一下，向其植入依赖收集容器。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function defineReactive(obj,key,value){
+<pre><code>function defineReactive(obj,key,value){
     let dep = new Dep();
     Object.defineProperty(obj,key,{
         get(){
@@ -283,9 +281,8 @@ Dep.target = null;
     })
 }
 </code></pre>
-</div>
 <h3 id="订阅者watcher">订阅者Watcher</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>//创建订阅者
+<pre><code>//创建订阅者
 class Watcher{
     constructor(vm,exp,cb){
         this.vm = vm;
@@ -310,7 +307,6 @@ class Watcher{
     }
 }
 </code></pre>
-</div>
 <h3 id="总结">总结</h3>
 <p>要实现数据的双向绑定，首先要设置一个监听器Observer，用来监听数据的变化。如果数据发生变化了，就需要告诉订阅者Watcher看是否需要更新。因为订阅者可能有多个，所以需要有一个消息订阅器Dep来专门收集这些订阅者，然后在监听器Observer和订阅者Watcher之间进行统一管理。</p>
 

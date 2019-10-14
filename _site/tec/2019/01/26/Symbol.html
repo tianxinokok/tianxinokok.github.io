@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = Symbol();
+<pre><code>let s = Symbol();
 console.log(typeof s); //symbol
 --------------------------------------------------------------------------------------------------------------------
 let s1 = Symbol('s1');
@@ -271,7 +271,6 @@ console.log(Object.getOwnPropertyNames(obj));   //[]
 console.log(Object.getOwnPropertySymbols(obj)); //[Symbol(name)]
 
 </code></pre>
-</div>
 
 <h3 id="一概述">一、概述</h3>
 <p>es5中对象的属性名都是字符串，这容易造成属性名的冲突。如果你使用了一个他人提供的对象，需要在这个对象上添加属性，新属性的名字就有可能与旧属性的名字产生冲突。如果有一种机制，可以保证每个属性的名字都是独一无二的就好了，这样就能彻底解决属性名冲突的问题。这就是es6新增Symbol的原因。</p>
@@ -279,16 +278,15 @@ console.log(Object.getOwnPropertySymbols(obj)); //[Symbol(name)]
 <p>es6引入了一种新的原始数据类型Symbol，表示独一无二的值。他是js语言的第七种数据类型，之前的数据类型有：数值（Number）、字符串（String）、对象（Object）、布尔值（Boolean）、undefined、null。</p>
 
 <p>Symbol值通过Symbol函数生成。这就是说，对象的属性名现在可以用两种类型，一种是原来的字符串类型，另一种就是新增的Symbol类型。凡是属性名属于Symbol类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = Symbol();
+<pre><code>let s = Symbol();
 console.log(typeof s); //symbol
 </code></pre>
-</div>
 <p>上面代码中，s的数据类型是symbol，并且是一个第一无二的值。</p>
 
 <p>注意：Symbol函数前不能使用new命令，否则会报错。这是因为生成的Symbol值是一个原始类型的值，不是对象。也就是说，由于Symbol值不是对象，所以不能添加属性。基本上，他是一种类似于字符出的数据类型。</p>
 
 <p>Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述，主要是为了在控制台显示，或者转为字符串，比较容易区分。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('s1');
+<pre><code>let s1 = Symbol('s1');
 let s2 = Symbol('s2');
 console.log(s1);    //Symbol(s1)
 console.log(s2);    //Symbol(s2)
@@ -296,11 +294,10 @@ console.log(s2);    //Symbol(s2)
 console.log(s1.toString()); //"Symbol(s1)"
 console.log(s2.toString()); //"Symbol(s2)"
 </code></pre>
-</div>
 <p>上面代码中，s1和s2是两个Symbol值。如果不加参数，他们在控制台的输出都是Symbol()，不利于区分。加上字符串参数之后，相当于为他们加了描述，输出的时候就更容易区分。</p>
 
 <p>如果Symbol的参数是一个对象，就会先调用对象的toString(）方法，将其转为字符串，然后才生成一个Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 	toString(){
 		return '123';
 	}
@@ -314,9 +311,8 @@ let obj = {
 let s1 = Symbol(obj);
 console.log(s1); //Symbol([object Object])
 </code></pre>
-</div>
 <p>注意：Symbol的参数只是表示对当前Symbol值的描述，因此相同参数的Symbol函数的返回值是不相等的，也就是上文所说的，每一个Symbol值都是独一无二的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let  s1 = Symbol();
+<pre><code>let  s1 = Symbol();
 let  s2 = Symbol();
 console.log(s1===s2);   //false
 
@@ -324,43 +320,37 @@ let s3 = Symbol('abc');
 let s4 = Symbol('abc');
 console.log(s3 === s4); //false
 </code></pre>
-</div>
 <p>Symbol的值不能与其他类型的值进行运算，会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
+<pre><code>let s1 = Symbol('world');
 console.log('hello' + s1); //Cannot convert a Symbol value to a string
 </code></pre>
-</div>
 <p>Symbol值可以显式转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
+<pre><code>let s1 = Symbol('world');
 String(s1);    //"Symbol(world)"
 s1.toString(); //"Symbol(world)"
 </code></pre>
-</div>
 <p>另外，Symbol值也可以转为布尔值，但是不能转为数值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('world');
+<pre><code>let s1 = Symbol('world');
 Boolean(s1);      //true
 !s1; 			  //false
 
 let s1 = Symbol('123');
 Number(s1); //Cannot convert a Symbol value to a number
 </code></pre>
-</div>
 <h3 id="二symbolprototypedescription">二、Symbol.prototype.description</h3>
 <p>创建Symbol值的时候，虽然可以添加一个字符串参数作为描述。但是，想要读取这个描述需要将Symbol转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
+<pre><code>let s1 = Symbol('123');
 s1.toString(); //Symbol(123)
 </code></pre>
-</div>
 <p>上面代码中，s1的描述就是字符串123，但是读取这个描述就得将Symbol值转为字符串。</p>
 
 <p>很明显，这种方式很不方便。因此提供了一个description属性，直接返回Symbol的描述。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol('123');
+<pre><code>let s1 = Symbol('123');
 s1.description; //"123"
 </code></pre>
-</div>
 <h3 id="三作为属性名的symbol">三、作为属性名的Symbol</h3>
 <p>由于每一个Symbol值都是独一无二的，这意味着Symbol值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于对象非常有用，可以防止某一个键被不小心改写或者覆盖。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
+<pre><code>let s1 = Symbol();
 //第一种写法
 let obj = {};
 obj[s1] = 'hello';
@@ -376,22 +366,20 @@ Object.defineProperty(obj,s1 , {value:'hello'});
 console.log(obj[s1]); //'hello'
 console.log(obj.s1);  //undefined 用.取值 取到的是undefined 
 </code></pre>
-</div>
 <p>上面代码通过方括号和Object.defineProperty，将对象的属性名指定为一个Symbol值。</p>
 
 <p>注意：Symbol值作为对象的属性名时，不能用点运算符。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol();
+<pre><code>let s1 = Symbol();
 let obj = {};
 obj.s1 = 'hello';
 
 console.log(obj[s1]);   //undefined
 console.log(obj['s1']); //undefined
 </code></pre>
-</div>
 <p>因为点运算符(.)后面总是字符串，所以不会读取到Symbol作为标识名所指代的那个值，导致obj的s1属性名实际上是一个字符串，而不是一个Symbol值。</p>
 
 <p>同理，在对象的内部，使用Symbol值定义属性时，Symbol值必须放在方括号之中。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let f1 = Symbol();
+<pre><code>let f1 = Symbol();
 let obj = {
 	[f1](num){
 		console.log(num);
@@ -399,11 +387,10 @@ let obj = {
 };
 obj[f1]('123'); //123
 </code></pre>
-</div>
 <p>如果f1不放在放方括号里，该属性的key就是字符串f1，而不是f1所代表的那个Sumbol值。</p>
 
 <p>Symbol类型还可以用于定义一组常量，保证这组常量的值都是不相等的。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {};
+<pre><code>let obj = {};
 obj.levels = {
 	DEBUG : Symbol('debug'),
 	INFO  : Symbol('info'),
@@ -412,9 +399,8 @@ obj.levels = {
 console.log(obj.levels.DEBUG, 'debug message'); //Symbol(debug) "debug message"
 console.log(obj.levels.INFO, 'info message');   //Symbol(info) "info message"
 </code></pre>
-</div>
 <p>下面是另外一个例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let color_red = Symbol('red');
+<pre><code>let color_red = Symbol('red');
 let color_green = Symbol('green');
 
 function getComplement(color){
@@ -429,14 +415,13 @@ function getComplement(color){
 }
 getComplement(color_green); //Symbol(red)
 </code></pre>
-</div>
 <p>常量使用Symbol值的最大好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的switch语句会按照设计的方式工作。  【】想了一会，没理解这种写法的好处。</p>
 
 <p>还有一点需要注意，Symbol 值作为属性名时，该属性还是公开属性，不是私有属性。</p>
 
 <h3 id="四实例消除魔术字符串">四、实例：消除魔术字符串</h3>
 <p>魔术字符串指的是，在代码之中多次出现，与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，该由含义清晰的变量代替。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function getArea(shape,options){
+<pre><code>function getArea(shape,options){
 let area = 0;
 switch(shape){
 case : 'Triangle':  //魔术字符串
@@ -447,11 +432,10 @@ return area;
 }
 getArea('Triangle',{width:100,height:200}); //魔术字符串
 </code></pre>
-</div>
 <p>上面代码中，字符串Triangle就是一个魔术字符串。他在一段代码中多次出现，与代码形成强耦合，不利于将来的修改和维护。</p>
 
 <p>常用的消除魔术字符串的方法，就是把它写成一个变量。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
+<pre><code>let shapeType = {
 triangle : 'Triangle'
 };
 function getArea(shape,options){
@@ -466,22 +450,20 @@ return area;
 getArea(shapeType.triangle,{width:100,height:200}); //魔术字符串
 
 </code></pre>
-</div>
 <p>上面代码中，我们把Triangle写成shapeType对象的triangle属性，这样就消除了强耦合。</p>
 
 <p>如果仔细发现，可以发现shapeType.triangle等于哪个值不重要，只要确保不会跟其他shapeType属性的值冲突即可。因此，这里就很适合改用Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let shapeType = {
+<pre><code>let shapeType = {
 triangle : Symbol()
 };
 </code></pre>
-</div>
 <p>上面代码中，除了将shapeType.triangle的值设为一个Symbol值，其他地方都不用修改。</p>
 
 <h3 id="五属性名的遍历">五、属性名的遍历</h3>
 <p>Symbol作为属性名，该属性不会出现在for…in 、for…of循环中，也不会被Object.keys()、Object.getOwnPropertyNames()、JSON.stringify()返回。但是，他也不是私有属性，有一个Object.getOwnPropertySymbols方法，可以获取指定对象所有Symbol属性名。</p>
 
 <p>Object.getOwnPropertySymbols方法返回一个数组，成员是当前对象的所有用作属性名的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let a = Symbol('a');
+<pre><code>let a = Symbol('a');
 let b = Symbol('b');
 
 obj[a] = 'hello';
@@ -491,9 +473,8 @@ let  = objectSymbols = Object.getOwnPropertySymbols(obj);
 
 console.log(objectSymbols); //[Symbol(a), Symbol(b)]
 </code></pre>
-</div>
 <p>下面是Object.getOwnPropertySymbols方法与for…in循环、Object.getOwnPropertyNames方法进行对比的例子。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let name = Symbol('name');
+<pre><code>let name = Symbol('name');
 Object.defineProperty(obj , name, {
 value : 'foobar',
 });
@@ -505,45 +486,40 @@ console.log(Object.getOwnPropertyNames(obj));   //[]
 
 console.log(Object.getOwnPropertySymbols(obj)); //[Symbol(name)]
 </code></pre>
-</div>
 <p>上面代码中，使用Object.getOwnPropertyNames方法得不到Symbol属性名，需要使用Object.getOwnPropertySymbols方法。</p>
 
 <p>另一个新增的方法:Reflect.ownkeys()可以返回所有类型的键名，包括常规键名和Symbol键名。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let obj = {
+<pre><code>let obj = {
 [Symbol('name')] : 'tx',
 age:24
 };
 
 Reflect.ownKeys(obj); //["age", Symbol(name)]
 </code></pre>
-</div>
 <p>由于以Symbol值作为名称的属性，不会被常规方法遍历得到。我们可以利用这个特性，为对象一些非私有的，但又希望只用于内部的方法。【】下面这段代码看不懂 ，没有复制。</p>
 
 <h3 id="六symbolfor--symbolkeyfor">六、Symbol.for() , Symbol.keyFor()</h3>
 <p>如果我们需要使用同一个Symbol值，symbol.for()方法可以做到这一点。他接收一个字符出作为参数，然后搜索有没有以该参数为名称的Symbol值。如果有，就返回这个Symbol值，如果没有，就新建并返回以该字符串为参数的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s1 = Symbol.for('name') ; 
+<pre><code>let s1 = Symbol.for('name') ; 
 let s2 = Symbol.for('name');
 console.log(s1 === s2); //true
 </code></pre>
-</div>
 <p>上面代码中，s1和s2都是Symbol值，但是他们都是同样参数的Symbol.for方法生成的，所有他们相等是同一个值。</p>
 
 <p>Symbol.for()和Symbol()这两种写法都会生成新的Symbol。他们的区别是Symbol.for()会在全局环境中供搜索，Symbol()不会。Symbol.for()不会每次调用就返回一个新的Symbol类型的值，而是会先检查给定的key是否已经存在，如果不存在才会新建一个值。比如，如果你调用Symbol.for(“name”)n次，每次都会返回同一个Symbol值，但是调用Symbol()n次，会返回n个不同的Symbol值。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>Symbol.for('name') === Symbol.for('name');  //true
+<pre><code>Symbol.for('name') === Symbol.for('name');  //true
 Symbol('name') === Symbol('name'); 			//false
 </code></pre>
-</div>
 <p>上面代码中，由于Symbol()写法没有登记机制，所以每次调用都会返回一个不同的值。</p>
 
 <p>Symbol.keyFor方法返回一个已登记的Symbol类型值的key。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<pre><code>
 let s1 = Symbol.for('name');
 Symbol.keyFor(s1); //"name"
 
 let  s2 = Symbol('name');
 Symbol.keyFor(s2); //undefined
 </code></pre>
-</div>
 <p>上面代码中s2属于未登记的Symbol值，所以Symbol.keyFor()返回undefined。</p>
 
 

@@ -80,4 +80,32 @@ console.log('123');
 ```
 上面代码中，Promise新建后立即执行，首先输出"Promise内部"。then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以"resolved"最后输出。
 
+如果调用resolve函数和reject函数时带有参数，那么他们的参数会被传递给回调函数。reject函数的参数通常是Error对象的实例，表示抛出的错误；resolve函数的参数除了正常的值以外，还可能是另一个Promise实例。
+```
+const promise1 = new Promise((resolve,reject) => {
+
+})
+const promise2 = new Promise((resolve,reject) => {
+    resolve(promise1);
+})
+```
+上面代码中，p1和p2都是Promise的实例，但是promise2的resolve方法将promise1作为参数，即一个异步操作的结果是返回另一个异步操作。
+
+注意，这时promise1的状态就会传递给promise2，也就是说，promise1的状态决定了promise2的状态。如果promise1的状态是pending，那么promise2的回调函数就会等待promise1的状态改变；如果promise1的状态已经是resolved和rejected，那么promise2的回调函数将会立刻执行。
+
+注意：调用resolve或者reject并不会终结Promise的参数函数的执行。
+```
+new Promise((resolve, reject) => {
+  resolve(1);
+  console.log(2);
+}).then(r => {
+  console.log(r);
+});
+// 2
+// 1
+```
+上面代码中，调用resolve之后，后面的console.log（2）还是会执行，并且会先打印出来。这是因为立即resolved的Promise是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。
+
+
+
 

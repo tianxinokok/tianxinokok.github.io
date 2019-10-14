@@ -193,7 +193,7 @@
                   <span><time datetime=""></time></span>
                 </div>
                   <h3 id="代码总结">代码总结</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>for(let i of 'hello'){
+<pre><code>for(let i of 'hello'){
 	console.log(i);
 }
 --------------------------------------------------------------------------------------------------------------------
@@ -274,19 +274,17 @@ let z = `${1+1}`;
 console.log(typeof z);//string
 
 </code></pre>
-</div>
 <h3 id="一">一、</h3>
 <h3 id="二">二、</h3>
 <h3 id="三">三、</h3>
 <h3 id="四字符串的遍历接口">四、字符串的遍历接口</h3>
 <p>ES6为字符串添加了遍历器接口，详见《Iterator》一章，使得可以被for…of遍历。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>for(let i of 'hello'){
+<pre><code>for(let i of 'hello'){
 	console.log(i);
 }
 </code></pre>
-</div>
 <p>除了遍历字符串，这个遍历器最大的优点是可以识别大于0xFFFF的码点，传统的for循环无法识别这样的码点。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let text = String.fromCodePoint(0x20BB7);
+<pre><code>let text = String.fromCodePoint(0x20BB7);
 for (let i = 0; i &lt; text.length; i++) {
   console.log(text[i]);
 }
@@ -298,7 +296,6 @@ for (let i of text) {
 }
 // "𠮷"
 </code></pre>
-</div>
 <p>上面代码中，字符串text只是一个字符，但是以往的for循环认为他包含两个字符，并且不可打印，而for…of可以正确识别这一字符。</p>
 <h3 id="五includes-startswith-endswith">五、includes(), startsWith(), endsWith()</h3>
 <p>ES5中，只有indexOf()方法，可以确定某个字符出是否包含在另一个字符串中，ES6又提供了三种方法。</p>
@@ -309,7 +306,7 @@ for (let i of text) {
 
 <p>3.endsWith()：返回布尔值，表示要查找的字符出是否在原字符串的尾部。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>let str = 'hello';
+<pre><code>let str = 'hello';
 str.includes('h');//true
 
 let str = 'hello';
@@ -319,18 +316,16 @@ let str = 'hello';
 console.log(str.endsWith('h'));//false
 console.log(str.endsWith('o'));//true
 </code></pre>
-</div>
 <p>这三个方法都支持第二个参数，表示开始搜索的位置。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let str = 'hello';
+<pre><code>let str = 'hello';
 console.log(str.includes('h',2));//false
 console.log(str.startsWith('hell',4));//false
 console.log(str.endsWith('hell',4));//true
 </code></pre>
-</div>
 <p>从上面代码可以看出，includes()和startsWith()第二个参数是从第n个位置到结束位置，而endsWith()方法的第二个参数的意思是代表前n个位置。</p>
 <h3 id="七repeat">七、repeat()</h3>
 <p>repeat()方法返回一个新字符串，表示将原字符串重复n次。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(2);
+<pre><code>let s = 'hello'.repeat(2);
 console.log(s);//hellohello
 
 let s = 'hello'.repeat(1);
@@ -339,99 +334,83 @@ console.log(s);//hello
 let s = 'hello'.repeat(0);
 console.log(s);//空字符串
 </code></pre>
-</div>
 <p>如果参数是小数，会被向下自动取整。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(2.1);
+<pre><code>let s = 'hello'.repeat(2.1);
 console.log(s);//hellohello
 
 let s = 'hello'.repeat(2.9);
 console.log(s);//hellohello
 </code></pre>
-</div>
 <p>如果参数是复数或者Infinity，会报错。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat(-2);//报错
+<pre><code>let s = 'hello'.repeat(-2);//报错
 let s = 'hello'.repeat(Infinity);//报错
 </code></pre>
-</div>
 <p>如果参数是0到-1之间的小数，则等于0，这是因为会先进行取整运算，0到-1之间的小数，取整之后是-0；repeat视它为0。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>'hello'.repeat(0) === 'hello'.repeat(-0.8); //true
+<pre><code>'hello'.repeat(0) === 'hello'.repeat(-0.8); //true
 </code></pre>
-</div>
 <p>如果参数是NaN，也是等同于0。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>'hello'.repeat(0) === 'hello'.repeat(NaN);//true
+<pre><code>'hello'.repeat(0) === 'hello'.repeat(NaN);//true
 </code></pre>
-</div>
 <p>如果参数是字符串，会先转化为数字。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.repeat('2');
+<pre><code>let s = 'hello'.repeat('2');
 console.log(s);//hellohello
 
 let s = 'hello'.repeat('tx');
 console.log(s);//空字符串
 </code></pre>
-</div>
 <h3 id="八padstartpadend">八、padStart()，padEnd()</h3>
 <p>这两个方法用于补全字符串长度，padStart()用于在字符串头部补全，padEnd()用于在字符串尾部补全。返回补全后的字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7,'h'); //hehello
+<pre><code>let s = 'hello'.padStart(7,'h'); //hehello
 let s = 'hello'.padStart(7,'hello');//hehello
 
 let s = 'hello'.padEnd(7,'h');//hellohh
 let s = 'hello'.padEnd(7,'hello');//hellohe
 </code></pre>
-</div>
 <p>上面代码中，padStart()，padEnd(）接收两个参数，第一个参数是字符串补全后的最大长度，第二个参数是用来补全的字符串。</p>
 
 <p>如果原字符串的长度，等于或者大于最大长度，则字符串补全不生效，返回原字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(5,'h'); //hello
+<pre><code>let s = 'hello'.padStart(5,'h'); //hello
 let s = 'hello'.padEnd(5,'h'); //hello
 </code></pre>
-</div>
 <p>如果用来补全的字符串与原字符串的长度相加大于最大长度，则会截掉超出位数的补全字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7,'hello'); //hehello
+<pre><code>let s = 'hello'.padStart(7,'hello'); //hehello
 </code></pre>
-</div>
 <p>如果省略第二个参数，默认使用空格补全剩余长度。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = 'hello'.padStart(7); 
+<pre><code>let s = 'hello'.padStart(7); 
 console.log(s);//hhollo;// '  hello'
 console.log(s.length);7
 </code></pre>
-</div>
 <p>padStart()的常见用途是为数值补全指定位数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = '1'.padStart(10,'0');//0000000001
+<pre><code>let s = '1'.padStart(10,'0');//0000000001
 </code></pre>
-</div>
 <p>另一个用途是提示字符出格式。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let s = '12'.padStart(10,'YYYY-MM-DD');//YYYY-MM-12
+<pre><code>let s = '12'.padStart(10,'YYYY-MM-DD');//YYYY-MM-12
 let s = '07-12'.padStart(10,'YYYY-MM-DD');//YYYY-07-12
 </code></pre>
-</div>
 <h3 id="九matchall">九、matchAll()</h3>
 <p>matchAll()方法返回一个正则表达式在当前字符串的所有匹配，详见《正则的扩展》一张。</p>
 <h3 id="十模板字符串">十、模板字符串</h3>
 <p>平时我们使用模板字符串是这样的</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let str = '&lt;ul&gt;' + '&lt;li&gt;' + data.name' + '&lt;/li&gt;' + '&lt;li&gt;' + data.age' + '&lt;/li&gt;' + '&lt;span&gt;'+data.job' + '&lt;/span&gt;'+'&lt;/ul&gt;';
+<pre><code>let str = '&lt;ul&gt;' + '&lt;li&gt;' + data.name' + '&lt;/li&gt;' + '&lt;li&gt;' + data.age' + '&lt;/li&gt;' + '&lt;span&gt;'+data.job' + '&lt;/span&gt;'+'&lt;/ul&gt;';
 </code></pre>
-</div>
 <p>上面这种字符串拼接的方法特别不方便，ES6引入了模板字符串解决这个问题。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/li&gt;&lt;span&gt;${data.job}&lt;/span&gt;&lt;/ul&gt;`;
+<pre><code>let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/li&gt;&lt;span&gt;${data.job}&lt;/span&gt;&lt;/ul&gt;`;
 </code></pre>
-</div>
 <p>上面这种写法就方便很多，避免了很多单引号和双引号的混乱。</p>
 
 <p>模板字符出是增强版的字符串，用反引号标识，他可以当作普通字符串使用，也可以用来定义多行字符串，最重要的是在模板中嵌入变量。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>//普通字符串
+<pre><code>//普通字符串
 let str = `hello`; 
 //多行字符串
 let str = `my name 
 is tx`;
 let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/li&gt;&lt;span&gt;${data.job}&lt;/span&gt;&lt;/ul&gt;`;
 </code></pre>
-</div>
 <p>上面代码中的模板字符串，都是用反引号表示，如果模板字符串中需要反引号，前面要用反斜杠转译。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let str = `\`这是通过反斜杠转译的反引号`;
+<pre><code>let str = `\`这是通过反斜杠转译的反引号`;
 </code></pre>
-</div>
 <p>如果使用模板字符串表示多行字符串，所有的空格和缩进都会保留在代码中。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>document.getElementById('test').innerHTML = `
+<pre><code>document.getElementById('test').innerHTML = `
 		&lt;ul&gt;
 		&lt;li&gt;123&lt;/li&gt;
 		&lt;li&gt;123&lt;/li&gt;
@@ -439,9 +418,8 @@ let str = `&lt;ul&gt;&lt;li&gt;${data.name}&lt;/li&gt;&lt;li&gt;${data.age}&lt;/
 		&lt;/ul&gt;
 	`;
 </code></pre>
-</div>
 <p>上面代码中，所有模板字符串的空格和换行，都是被保留的。如果你不想要这个换行和空格，可以用trim()方法消除。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let len = `
+<pre><code>let len = `
 		&lt;ul&gt;
 		&lt;li&gt;123&lt;/li&gt;
 		&lt;/ul&gt;
@@ -455,11 +433,10 @@ let len = `
 	`trim().length;
 console.log(len);//27
 </code></pre>
-</div>
 <p>模板字符串要嵌入变量，需要将变量名写在${}中，上面已有例子。</p>
 
 <p>${}大括号内可以放入任意的js表达式，可以进行运算，以及引用对象属性。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let x = 1;
+<pre><code>let x = 1;
 let y = 2;
 let z = `${x + y}`; //3
 
@@ -472,28 +449,24 @@ console.log(z);//'12'
 let z = `${obj.x + obj.y}`;
 console.log(z);//3
 </code></pre>
-</div>
 <p>${}大括号中还能调用函数。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>function func(){
+<pre><code>function func(){
 	return 1;
 }
 let z = `${func() + 1}`;
 console.log(z);//2
 </code></pre>
-</div>
 <p>如果大括号中的值不是字符串，将调用toString()方法转为字符串。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let z = `${1+1}`;
+<pre><code>let z = `${1+1}`;
 console.log(typeof z);//string
 </code></pre>
-</div>
 <p>如果模板字符串中的变量没有声明，将报错。</p>
 
 <p>如果大括号内部是一个字符串，将会原样输出。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>let z = `hello ${'world'}`; //hello world
+<pre><code>let z = `hello ${'world'}`; //hello world
 </code></pre>
-</div>
 <p>模板字符出还能嵌套。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const tmpl = addrs =&gt; `
+<pre><code>const tmpl = addrs =&gt; `
   &lt;table&gt;
   ${addrs.map(addr =&gt; `
     &lt;tr&gt;&lt;td&gt;${addr.first}&lt;/td&gt;&lt;/tr&gt;
@@ -502,17 +475,15 @@ console.log(typeof z);//string
   &lt;/table&gt;
 `;
 </code></pre>
-</div>
 <p>【】这个函数意思理解，具体不懂，直接复制过来的。</p>
 
 <p>上面代码中，模板字符串的变量之中，又嵌入了另一个模板字符串，使用方法如下。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>const data = [
+<pre><code>const data = [
     { first: '&lt;Jane&gt;', last: 'Bond' },
     { first: 'Lars', last: '&lt;Croft&gt;' },
 ];
 tmpl(data);
 </code></pre>
-</div>
 <p>这里有一个引用模板字符串本身，在需要时执行的例子，感觉好麻烦，会遇到这种情况 ?</p>
 
 <h3 id="十一实例模板编译">十一、实例：模板编译</h3>
