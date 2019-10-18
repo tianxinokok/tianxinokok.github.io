@@ -189,102 +189,52 @@
           <div class="content_content" >
             <div class="post_content">
                 <div class="content_title">
-                  <h1>Promise对象</h1><span id="busuanzi_container_page_pv">
+                  <h1>vue一些需要注意的点</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一promise含义">一、Promise含义</h3>
-<p>Promise是异步编程的一种解决方案，比传统的解决方案(回调函数和事件)，更合理和更强大。</p>
+                  <h3 id="一vue一些需要注意的点">一、vue一些需要注意的点</h3>
+<pre><code>由于 JavaScript 的限制，Vue 不能检测以下数组的变动：
 
-<p>Promise是一个容器，里面保存这未来才会结束的事件（通常是一个异步操作）的结果。从语法上来说，Promise是一个对象，从他可以获取异步操作的消息。Promise提供统一的API，各种异步操作都可以用同样的方法进行处理。</p>
+1.当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
 
-<p>Promise对象有以下两个特点：</p>
+2.当你修改数组的长度时，例如：vm.items.length = newLength
 
-<p>1.对象的状态不受外界影响。一个Promise代表一个异步操作，其中有三种状态：pending（进行中），fulfilled（已成功），rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都不能影响整个状态。</p>
+var vm = new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+vm.items[1] = 'x' // 不是响应性的
+vm.items.length = 2 // 不是响应性的
 
-<p>2.状态一旦改变，就不会再变。Promise状态的改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种状态发生，状态就凝固了，不会再变了，这时就成为resolved（已定型）。如果改变已经发生了，再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）不同，事件的特点是：如果错过了，再去监听，是得不到结果的。</p>
+两种解决方案：
 
-<p>Promise对象还有一些特性：
-1.无法取消Promise，一旦新建就会立即执行，无法中途取消。</p>
+1.Vue.set(vm.items, indexOfItem, newValue)（vm.$set(vm.items, indexOfItem, newValue)）
 
-<p>2.如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。</p>
-
-<p>3.当处于pending状态时，无法得知目前进行到哪一个阶段。</p>
-
-<h3 id="二基本用法">二、基本用法</h3>
-
-<p>Promise对象是一个构造函数，用来生成Promise实例。</p>
-<pre><code>const promise = new Promise(function(resolve,reject){
-    if(/*异步操作成功*/){
-        resolve(value);
-    }else{
-        reject(error);
-    }
-});
+2.vm.items.splice(indexOfItem, 1, newValue)
 </code></pre>
-<p>Promise构造函数接受一个函数作为参数，该函数的两个参数分别是resolve和reject。他们是两个函数，由JavaScript引擎提供，不用自己部署。</p>
 
-<p>resolve函数的作用是，将Promise对象的状态从”未完成”变为”成功”（pending变为resolved），在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；reject函数的作用是，将Promise对象的状态从”未完成”变为”失败”（pending变为rejected），在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去。</p>
+<pre><code>有时你可能需要为已有对象赋值多个新属性，比如使用 Object.assign() 或 _.extend()。在这种情况下，你应该用两个对象的属性创建一个新的对象。所以，如果你想添加新的响应式属性，不要像这样：
 
-<p>Promise实例生成以后，可以用then方法分别指定resolved状态和rejected状态的回调函数。</p>
-<pre><code>promise.then(function(value){
+Object.assign(vm.userProfile, {
+  age: 27,
+  favoriteColor: 'Vue Green'
+})
 
-},function(error){
+应该这样做：
 
+vm.userProfile = Object.assign({}, vm.userProfile, {
+  age: 27,
+  favoriteColor: 'Vue Green'
 })
 </code></pre>
-<p>then方法可以接受两个回调函数作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接收Promise对象传出的值作为参数。</p>
 
-<p>下面是一个简单的Promise例子。</p>
-<pre><code>function timeout(ms){
-    return new Promise((resolve,reject) =&gt; {
-        setTimeout(resolve,ms,"完成");
-    });
-}
-timeout(100).then((value) =&gt; {
-    console.log(value);  //"完成"
-})
+<pre><code>在自定义组件上，你可以像在任何普通元素上一样使用 v-for 。
+
+&lt;my-component v-for="item in items" :key="item.id"&gt;&lt;/my-component&gt;
+
+2.2.0+ 的版本里，当在组件上使用 v-for 时，key 是必须的。
 </code></pre>
-<p>上面代码中，timeout方法返回一个Promise实例，表示一段时间以后才会发生的结果。过了指定的时间（ms参数）以后，Promise实例的状态变为resolved后，就会触发then方法绑定的回调函数。</p>
-
-<p>Promise新建后会立即执行。</p>
-<pre><code>const promise = new Promise((resolve,reject) =&gt;{
-    console.log('Promise内部');
-    resolve()
-})
-promise.then(() =&gt;{
-    console.log('resolved');
-})
-console.log('123');
-
-//Promise内部
-//123
-//resolved
-</code></pre>
-<p>上面代码中，Promise新建后立即执行，首先输出”Promise内部”。then方法指定的回调函数，将在当前脚本所有同步任务执行完才会执行，所以”resolved”最后输出。</p>
-
-<p>如果调用resolve函数和reject函数时带有参数，那么他们的参数会被传递给回调函数。reject函数的参数通常是Error对象的实例，表示抛出的错误；resolve函数的参数除了正常的值以外，还可能是另一个Promise实例。</p>
-<pre><code>const promise1 = new Promise((resolve,reject) =&gt; {
-
-})
-const promise2 = new Promise((resolve,reject) =&gt; {
-    resolve(promise1);
-})
-</code></pre>
-<p>上面代码中，p1和p2都是Promise的实例，但是promise2的resolve方法将promise1作为参数，即一个异步操作的结果是返回另一个异步操作。</p>
-
-<p>注意，这时promise1的状态就会传递给promise2，也就是说，promise1的状态决定了promise2的状态。如果promise1的状态是pending，那么promise2的回调函数就会等待promise1的状态改变；如果promise1的状态已经是resolved和rejected，那么promise2的回调函数将会立刻执行。</p>
-
-<p>注意：调用resolve或者reject并不会终结Promise的参数函数的执行。</p>
-<pre><code>new Promise((resolve, reject) =&gt; {
-  resolve(1);
-  console.log(2);
-}).then(r =&gt; {
-  console.log(r);
-});
-// 2
-// 1
-</code></pre>
-<p>上面代码中，调用resolve之后，后面的console.log（2）还是会执行，并且会先打印出来。这是因为立即resolved的Promise是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务。</p>
 
 
    
@@ -295,18 +245,18 @@ const promise2 = new Promise((resolve,reject) =&gt; {
                 <div class="next_page_box">
                   <div class="read_next">阅读下一篇文章</div>
                   <div class="next_page">
-                    <a class="" href="http://localhost:4000/tec/2019/08/27/Vue%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86.html" data-post-href="http://localhost:4000/tec/2019/08/27/Vue%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86.html">
-                      <h4>Vue数据双向绑定原理</h4>
+                    <a class="" href="http://localhost:4000/tec/2019/09/07/Promise%E5%AF%B9%E8%B1%A1.html" data-post-href="http://localhost:4000/tec/2019/09/07/Promise%E5%AF%B9%E8%B1%A1.html">
+                      <h4>Promise对象</h4>
                       <div></div>
                     </a>
                   </div>
                 </div>
           
           <div class="phone_bottom">
-              <a class="" href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html" data-post-href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html">
+              <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
               PREV
               </a>
-              <a class="" href="http://localhost:4000/tec/2019/08/27/Vue%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86.html" data-post-href="http://localhost:4000/tec/2019/08/27/Vue%E6%95%B0%E6%8D%AE%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86.html">
+              <a class="" href="http://localhost:4000/tec/2019/09/07/Promise%E5%AF%B9%E8%B1%A1.html" data-post-href="http://localhost:4000/tec/2019/09/07/Promise%E5%AF%B9%E8%B1%A1.html">
                 NEXT
               </a>
           </div>
