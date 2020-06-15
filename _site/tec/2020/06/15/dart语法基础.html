@@ -189,80 +189,128 @@
           <div class="content_content" >
             <div class="post_content">
                 <div class="content_title">
-                  <h1>vue一些需要注意的点</h1><span id="busuanzi_container_page_pv">
+                  <h1>Dart基础语法</h1><span id="busuanzi_container_page_pv">
                   <span><time datetime=""></time></span>
                 </div>
-                  <h3 id="一vue一些需要注意的点">一、vue一些需要注意的点</h3>
-<pre><code>由于 JavaScript 的限制，Vue 不能检测以下数组的变动：
-
-1.当你利用索引直接设置一个数组项时，例如：vm.items[indexOfItem] = newValue
-
-2.当你修改数组的长度时，例如：vm.items.length = newLength
-
-var vm = new Vue({
-  data: {
-    items: ['a', 'b', 'c']
-  }
-})
-vm.items[1] = 'x' // 不是响应性的
-vm.items.length = 2 // 不是响应性的
-
-两种解决方案：
-
-1.Vue.set(vm.items, indexOfItem, newValue)（vm.$set(vm.items, indexOfItem, newValue)）
-
-2.vm.items.splice(indexOfItem, 1, newValue)
+                  <h3 id="一变量">一、变量</h3>
+<pre><code>var name = 'Bob'
+dynamic name = 'Bob'; //不限于单一的类型
+String name = 'Bob';  //指定类型
+final name  = 'Bob';  //用final修饰变量让他变为常量
+const name = 'Bob';   //const变量是一个编译时常量（const变量同时也是final的）
+final bar = const [];  //const创建的常量值可以赋予给任何变量
 </code></pre>
+<h3 id="二内置类型">二、内置类型</h3>
+<ul>
+  <li>numbers</li>
+  <li>strings</li>
+  <li>booleans</li>
+  <li>
+    <p>lists (也被称为 arrays)</p>
+  </li>
+  <li>sets</li>
+  <li>maps</li>
+  <li>
+    <p>runes (用于在字符串中表示 Unicode 字符)</p>
+  </li>
+  <li>symbols</li>
+</ul>
 
-<pre><code>有时你可能需要为已有对象赋值多个新属性，比如使用 Object.assign() 或 _.extend()。在这种情况下，你应该用两个对象的属性创建一个新的对象。所以，如果你想添加新的响应式属性，不要像这样：
+<h4 id="1lists">1、Lists</h4>
 
-Object.assign(vm.userProfile, {
-  age: 27,
-  favoriteColor: 'Vue Green'
-})
+<pre><code>var list = [1,2,3];
+var list2 = [0,...list]; //扩展操作符...
 
-应该这样做：
+var list ;
+var list2 = [0,...?list] //如果扩展操作符右边可能为null,使用...?
 
-vm.userProfile = Object.assign({}, vm.userProfile, {
-  age: 27,
-  favoriteColor: 'Vue Green'
-})
+var nav = [
+  'Home',
+  'Furniture',
+  'Plants',
+  if (promoActive) 'Outlet'  //构建集合时，可以用if条件判断
+];
+
+var listOfInts = [1,2,3];
+var listOfStrings = [
+    '#0',
+    for(var i in listOfInts) '#$i'  //构建集合时，可以用for循环操作其他lists为新lists赋值
+];
 </code></pre>
+<h4 id="2sets">2、Sets</h4>
+<pre><code>var fruits = {"apple","banana"}   //dart推断fruits变量是一个Set&lt;String&gt;集合,如果往该Set中添加类型不正确的对象会报错
 
-<pre><code>在自定义组件上，你可以像在任何普通元素上一样使用 v-for 。
+var name = &lt;String&gt;{}  //类型+{}的形式创建Set
+Set&lt;String&gt; names = {} // 声明类型变量的形式创建Set
+var names = {}         //这样的形式创建的是Map 而不是Set  Set还是Map? 因为先有的Map字面量语法,如果没有注释类型或赋值到一个未声明类型的变量上 默认是Map类型
 
-&lt;my-component v-for="item in items" :key="item.id"&gt;&lt;/my-component&gt;
+var elements = &lt;String&gt;{};
+elements.add('fluorine');
+elements.addAll(halogens);  //向一个已存在的 Set 中添加项目可以使用 add() 方法或 addAll() 方法
+print(elements.length);     //.length可以获取Set中元素的数量
 
-2.2.0+ 的版本里，当在组件上使用 v-for 时，key 是必须的。
+final constantSet = const {  //可以在 Set 字面量前添加 const 关键字创建一个 Set 编译时常量 
+  'fluorine',
+  'chlorine',
+  'bromine',
+  'iodine',
+  'astatine',
+};
+constantSet.add('helium'); // 常量添加成员会报错
+
+//Set也可以像List一样支持使用扩展操作符...和...?
 </code></pre>
+<h4 id="3maps">3、Maps</h4>
+<pre><code>//Map字面量创建Map
+//Map对象中一个key只能出现一次，value可以出现多次
+var gifts = {
+  // 键:    值
+  'first': 'partridge',
+  'second': 'turtledoves',
+  'fifth': 'golden rings'
+};
 
-<pre><code>所有的 prop 都使得其父子 prop 之间形成了一个单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解。
+var nobleGases = {
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+//Dart 将 gifts 变量的类型推断为 Map&lt;String, String&gt;，而降 nobleGases 的类型推断为 Map&lt;int, String&gt;。如果你向这两个 Map 对象中添加不正确的类型值，将导致运行时异常
 
-额外的，每次父级组件发生更新时，子组件中所有的 prop 都将会刷新为最新的值。这意味着你不应该在一个子组件内部改变 prop。如果你这样做了，Vue 会在浏览器的控制台中发出警告。
+//构造器创建 Map
+//从 Dart2 开始，构造对象的 new 关键字可以被省略掉。
+var gifts = Map();
+gifts['first'] = 'partridge';
+gifts['second'] = 'turtledoves';
+gifts['fifth'] = 'golden rings';
 
-1.这里有两种常见的试图改变一个 prop 的情形：
+var nobleGases = Map();
+nobleGases[2] = 'helium';
+nobleGases[10] = 'neon';
+nobleGases[18] = 'argon'
 
-这个 prop 用来传递一个初始值；这个子组件接下来希望将其作为一个本地的 prop 数据来使用。在这种情况下，最好定义一个本地的 data 属性并将这个 prop 用作其初始值：
 
-props: ['initialCounter'],
-data: function () {
-  return {
-    counter: this.initialCounter
-  }
+var gifts = {'first': 'partridge'};
+gifts['fourth'] = 'calling birds'; // 添加键值对 
+print(gifts['first']);             // 获取键值对
+print(gifts['second']);            // 如果检索的 Key 不存在于 Map 中则会返回一个 null
+print(gifts.length);               //使用 .length 可以获取 Map 中键值对的数量
+
+final constantMap = const {        //在一个 Map 字面量前添加 const 关键字可以创建一个 Map 编译时常量
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+constantMap[2] = 'Helium';         // 报错
+//从 Dart 2.3 Map 可以像 List 一样支持使用扩展操作符（... 和 ...?）
+</code></pre>
+<h3 id="三functions">三、Functions</h3>
+<pre><code>bool isNoble() {           //定义函数
+    return true ;
 }
+enableFlags(bold: true, hidden: false); //当你调用函数时，可以使用 参数名: 参数值 的形式来指定命名参数
 
-2.这个 prop 以一种原始的值传入且需要进行转换。在这种情况下，最好使用这个 prop 的值来定义一个计算属性：
-
-props: ['size'],
-computed: {
-  normalizedSize: function () {
-    return this.size.trim().toLowerCase()
-  }
-}
-
-注意在 JavaScript 中对象和数组是通过引用传入的，所以对于一个数组或对象类型的 prop 来说，在子组件中改变这个对象或数组本身将会影响到父组件的状态。
 </code></pre>
-
 
    
             </div>
@@ -272,7 +320,7 @@ computed: {
                 <div class="next_page_box">
                   <div class="read_next">阅读下一篇文章</div>
                   <div class="next_page">
-                    <a class="" href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html" data-post-href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html">
+                    <a class="" href="http://localhost:4000/tec/2019/09/14/Vue%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9test.html" data-post-href="http://localhost:4000/tec/2019/09/14/Vue%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9test.html">
                       <h4>vue一些需要注意的点</h4>
                       <div></div>
                     </a>
@@ -283,7 +331,7 @@ computed: {
               <a class="" href="http://localhost:4000" data-post-href="http://localhost:4000">
               PREV
               </a>
-              <a class="" href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html" data-post-href="http://localhost:4000/tec/2019/09/14/Vue%E4%B8%80%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9.html">
+              <a class="" href="http://localhost:4000/tec/2019/09/14/Vue%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9test.html" data-post-href="http://localhost:4000/tec/2019/09/14/Vue%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9test.html">
                 NEXT
               </a>
           </div>
